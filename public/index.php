@@ -1,51 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+<?php
 
-    <link rel="stylesheet" href="../node_modules/gentelella/build/css/custom.css">
-    
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
 
-</head>
-<body>
-    <pre>
-<?php include("app.php"); 
-    
-    
-    ?>
-</pre>
-    
-    <div class="container-fluid">
-        <?php foreach($dados['categorias'] as $item){ ?>
-        <div class="col-md-2">
-            <div class="panel <?php echo $item["cor"]; ?>">
-                <div class="panel-heading text-center">
-                   <?php echo $item["nome"]; ?>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <tr>
-                            <td><div class="">TELEFONE</div></td>
-                            <td><div class="text-right">R$55,00</div></td>
-                        </tr>
-                        <tr>
-                                <td><div class="">TOTAL</div></td>
-                                <td><div class="text-right">R$55,00</div></td>
-                        </tr>
-                    </table>
-                </div>                
-            </div>
-        </div>
-        <?php } ?>
-    </div>
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
 
- 
+require __DIR__.'/../bootstrap/autoload.php';
 
- <!--   <script src="index.js"></script> -->
-   
-</body>
-</html>
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to illuminate PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
+
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
