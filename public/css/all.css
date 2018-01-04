@@ -1,0 +1,107 @@
+/* BOOTSTRAP */
+
+.table{
+    margin-bottom: 0rem;
+}
+ 
+.card-body {     
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding: 0.25rem;
+}   
+.card{
+    margin-top: 15px;
+}
+
+body{
+    font-size:0.7rem;
+}
+
+.table td, .table th {
+    padding: .2rem;
+}
+
+.card-header {
+    padding: 0.25rem 1.25rem;
+
+}
+
+/* FIM BOOTSTRAP */
+/*
+.tbody, .thead {
+    display: none;
+}
+*/
+
+.table-hover:hover{
+    cursor:pointer;
+}
+.col-painel {
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+}
+
+.categoria-somas{
+    background-color: rgb(238, 164, 27);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+
+.categoria-essenciais {
+    background-color: #0971B2;
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.categoria-compras {
+    background-color: #4C12B2;
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.categoria-urgencia {
+    background-color: #B21212;
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.categoria-guardar-poupanca {
+    background-color: rgb(136, 95, 68);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.categoria-lazer {
+    background-color: rgb(178, 18, 111);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.categoria-taxas {
+    background-color: rgb(18, 178, 125);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.categoria-receber {
+    background-color: rgb(208, 211, 15);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+.col-header-footer{
+    font-weight: bold;
+    text-align: left;
+    color:black;
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+
+.categoria-poupanca {
+    background-color: rgb(37, 210, 216);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}

@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('inicio');
-});
+Route::get('/', 'financeiroController@index')->name('financeiro');
+Route::get('/financeiro', 'financeiroController@index')->name('financeiro');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
