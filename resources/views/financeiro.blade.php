@@ -9,10 +9,66 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
       <link rel="stylesheet" href="{{url('/css/all.css')}}">
-      <title>Hello, world!</title>
+      <title>Financeiro</title>
    </head>
    <body>
       <div class="container-fluid">
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <ul class="nav nav-tabs">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle widcem" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <a href="#">Janeiro
+                                                    
+                                                <span class="caret"></span>
+                                            </a></button><a href="#">
+                                            </a><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><a href="#">
+                                                </a><li><a href="#">
+                                                    </a><a href="#" onclick="enviar('favorecido',01,2018,'Todos','Todos');">Janeiro</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" onclick="enviar('favorecido',02,2018,'Todos','Todos');">Fevereiro</a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </div>
+                            
+                                <div class="col-md-6">
+                                    <ul class="nav nav-tabs">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle widcem" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <a href="#">2018
+                                                    <span class="caret"></span>
+                                                </a></button><a href="#">
+                                                </a><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><a href="#">
+                                                    </a>
+                                                </ul>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <a class="btn btn-default btn-xs" href="#">
+                                                <p class="glyphicon glyphicon-menu-left"></p> Anterior </a>
+                                            <a class="btn btn-default btn-xs" href="#" >Atual</a>
+                                            <a class="btn btn-default btn-xs" href="#" > Próximo
+                                                <p class="glyphicon glyphicon-menu-right"></p>
+                                            </a>
+                                        </div>
+                                    </div>                        
+                                </div>
+                            </div>    
+        </div>
+    </div>
+
+
          <div class="row">
             <div class="col-md-6">
                <div class="row">
