@@ -13,7 +13,8 @@ class financeiroController extends Controller
         ->get();   
 
         $dados_contas = array();
-        
+        $dados_categorias = array();
+        $total_contas_a_pagar = 0;
        
         foreach($categoria_contas as $categoria){  
 
@@ -36,6 +37,8 @@ class financeiroController extends Controller
            $conta->valor = number_format($conta->valor,2, ',','.');         
            }
 
+           $total_contas_a_pagar += $categoriaTotal;
+
            $categoriaTotal = number_format($categoriaTotal,2, ',','.');
            
            $dados_categorias[$categoria->nome]['contas'] = $contas_a_pagar;
@@ -44,16 +47,29 @@ class financeiroController extends Controller
            $dados_categorias[$categoria->nome]['categoria_cor'] = $categoria->cor;
            
            
+           
 
           // $dados_contas['nome' => $categoria->nome]['contas'] = $contas_a_pagar; 
         }
+
         
+     
+
+        $total_contas_a_pagar = number_format($total_contas_a_pagar,2,',','.');
+        $total_contas_a_ganhar = number_format(4500,2,',','.');
+
+       
+
         array_push($dados_contas, $dados_categorias);
     
 
-        $dados = array('dados' => $dados_contas);
+        $dados = array(
+            'dados' => $dados_contas, 
+            'total_a_pagar' => $total_contas_a_pagar,
+            'total_a_ganhar' => $total_contas_a_ganhar,
+        );
 
-        
+       
 
         return view('financeiro')->with($dados);
     }

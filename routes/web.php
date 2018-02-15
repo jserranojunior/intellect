@@ -12,7 +12,8 @@
 */
 
 Route::get('/', 'financeiroController@index')->name('financeiro');
-Route::get('/financeiro', 'financeiroController@index')->name('financeiro');
+Route::get('/financeirold', 'financeiroController@index')->name('financeirold');
+
 
 Auth::routes();
 
