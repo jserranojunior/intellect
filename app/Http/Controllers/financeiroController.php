@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\financeiro;
 
 class financeiroController extends Controller
 {
     public function index()
     {
+
+        $financeiro = new financeiro();
+        $financeiro = $financeiro->index();
+
+        dd($financeiro);
+
         $categoria_contas = DB::table('categoria_contas')
         ->get();   
 
@@ -68,8 +75,6 @@ class financeiroController extends Controller
             'total_a_pagar' => $total_contas_a_pagar,
             'total_a_ganhar' => $total_contas_a_ganhar,
         );
-
-       
 
         return view('financeiro')->with($dados);
     }
