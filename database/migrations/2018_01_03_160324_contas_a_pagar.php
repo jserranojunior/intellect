@@ -16,8 +16,8 @@ class ContasAPagar extends Migration
         Schema::create('contas_a_pagar', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('valor');
-            $table->string('data_pagamento');
+            $table->string('inicio_data_pagamento');
+            $table->string('fim_data_pagamento');
             $table->string('categoria');    
         });
     }

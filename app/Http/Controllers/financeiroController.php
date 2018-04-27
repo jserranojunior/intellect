@@ -8,6 +8,17 @@ use App\Models\financeiro;
 
 class financeiroController extends Controller
 {
+    public function __construct(Financeiro $financeiro){
+        $this->financeiro = $financeiro;
+    }
+
+    public function allAccounts(){
+        $dados =  $this->financeiro->allAccounts();
+    
+        return view('financeiroapi')->with($dados); 
+    }
+
+    /*
     public function index()
     {
 
@@ -78,4 +89,5 @@ class financeiroController extends Controller
 
         return view('financeiro')->with($dados);
     }
+    */
 }

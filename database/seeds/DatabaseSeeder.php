@@ -12,9 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       
+       DB::table('valores_contas_a_pagar')
+       ->insert(['valor' => 13.56,
+       'data_pagamento' => "2018-02-05",
+       'contas_a_pagar_id' => 2
+       ]);
         
-
+/*
         DB::table('categoria_contas')
         ->insert(['nome' => 'Poupança',
         'tipo' => 'pagamento',        

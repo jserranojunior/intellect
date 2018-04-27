@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', 'financeiroController@index')->name('financeiro');
-Route::get('/financeirold', 'financeiroController@index')->name('financeirold');
+Route::get('/', 'financeiroController@allAccounts')->name('financeiro');
+Route::get('/financeirold', 'financeiroController@allAccounts')->name('financeirold');
+Route::get('/financeiro/json','financeiroController@json');
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@allAccounts')->name('home');
+
+/* API */
+
+Route::get('/api/financeiro', 'financeiroController@allAccounts');
