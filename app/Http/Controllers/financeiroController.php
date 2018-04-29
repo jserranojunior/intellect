@@ -13,81 +13,17 @@ class financeiroController extends Controller
     }
 
     public function allAccounts(){
-        $dados =  $this->financeiro->allAccounts();
-    
-        return view('financeiroapi')->with($dados); 
+        $dados =  $this->financeiro->allAccounts();    
+        return view('financeiro')->with($dados); 
     }
 
-    /*
-    public function index()
-    {
-
-        $financeiro = new financeiro();
-        $financeiro = $financeiro->index();
-
-        dd($financeiro);
-
-        $categoria_contas = DB::table('categoria_contas')
-        ->get();   
-
-        $dados_contas = array();
-        $dados_categorias = array();
-        $total_contas_a_pagar = 0;
-       
-        foreach($categoria_contas as $categoria){  
-
-            $categoriaTotal = 0;
-           $contas_a_pagar = DB::table('contas_a_pagar')
-           ->where('categoria', $categoria->id)
-           ->get();
-
-
-           //$dados_categorias = array('nome_categorias' => $categoria->nome, 'contas' => $contas_a_pagar);
-           foreach($contas_a_pagar as $conta){
-           $contas = array(
-               'id' => $conta->id,
-               'nome' => $conta->nome,
-               'data_pagamento' => $conta->data_pagamento,
-               'valor' => $conta->valor,
-           );
-
-           $categoriaTotal += $conta->valor; 
-           $conta->valor = number_format($conta->valor,2, ',','.');         
-           }
-
-           $total_contas_a_pagar += $categoriaTotal;
-
-           $categoriaTotal = number_format($categoriaTotal,2, ',','.');
-           
-           $dados_categorias[$categoria->nome]['contas'] = $contas_a_pagar;
-           $dados_categorias[$categoria->nome]['categoria_nome'] = $categoria->nome;
-           $dados_categorias[$categoria->nome]['categoria_total'] = $categoriaTotal;
-           $dados_categorias[$categoria->nome]['categoria_cor'] = $categoria->cor;
-           
-           
-           
-
-          // $dados_contas['nome' => $categoria->nome]['contas'] = $contas_a_pagar; 
-        }
-
-        
-     
-
-        $total_contas_a_pagar = number_format($total_contas_a_pagar,2,',','.');
-        $total_contas_a_ganhar = number_format(4500,2,',','.');
-
-       
-
-        array_push($dados_contas, $dados_categorias);
-    
-
-        $dados = array(
-            'dados' => $dados_contas, 
-            'total_a_pagar' => $total_contas_a_pagar,
-            'total_a_ganhar' => $total_contas_a_ganhar,
-        );
-
-        return view('financeiro')->with($dados);
+    public function create(){
+        return view('financeiro.novaconta');
     }
-    */
+
+    public function store(Request $request){
+        $request = $request->all();
+        $cadastrar = $this->financeiro->cadastrar($request);
+        return($cadastrar);
+    }
 }

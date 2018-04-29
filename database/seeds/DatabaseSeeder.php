@@ -12,7 +12,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('valores_contas_a_pagar')
+      
+    /* CATEGORIAS */
+
+    //ESSENCIAIS
+        DB::table('categoria_contas')
+        ->insert(['nome' => 'Essenciais',
+        'tipo' => 'pagamento',        
+        'cor' => 'categoria-essenciais']);
+
+    //COMPRAS 
+        DB::table('categoria_contas')
+        ->insert(['nome' => 'Compras',
+        'tipo' => 'pagamento',        
+        'cor' => 'categoria-compras']);
+
+    //URGENCIA
+        DB::table('categoria_contas')
+        ->insert(['nome' => 'Urgencias',
+        'tipo' => 'pagamento',        
+        'cor' => 'categoria-urgencia']);    
+
+
+        /*
+      
+        DB::table('valores_contas_a_pagar')
        ->insert(['valor' => 13.56,
        'data_pagamento' => "2018-02-05",
        'contas_a_pagar_id' => 2
@@ -44,11 +68,7 @@ class DatabaseSeeder extends Seeder
         'categoria' => 4]);
         
 
-/* COMPRAS 
-    DB::table('categoria_contas')
-    ->insert(['nome' => 'Compras',
-    'tipo' => 'pagamento',        
-    'cor' => 'categoria-compras']);
+/* 
 
     DB::table('contas_a_pagar')
     ->insert(['nome' => 'Tenis',
@@ -64,11 +84,7 @@ class DatabaseSeeder extends Seeder
 */
 
 
-/* URGENCIA
-    DB::table('categoria_contas')
-    ->insert(['nome' => 'Urgencias',
-    'tipo' => 'pagamento',        
-    'cor' => 'categoria-urgencia']);
+/* 
 
     DB::table('contas_a_pagar')
     ->insert(['nome' => 'Remédio',
@@ -84,11 +100,7 @@ class DatabaseSeeder extends Seeder
 */
 
 
-/* ESSENCIAIS
-    DB::table('categoria_contas')
-    ->insert(['nome' => 'Essenciais',
-    'tipo' => 'pagamento',        
-    'cor' => 'categoria-essenciais']);
+/* 
 
     DB::table('contas_a_pagar')
     ->insert(['nome' => 'ACADEMIA',
