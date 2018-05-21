@@ -15,10 +15,10 @@ Auth::routes();
 /* INICIO */
 Route::get('/', 'financeiroController@allAccounts')->name('financeiro');
 Route::get('/financeiro', 'financeiroController@allAccounts')->name('financeiro');
-Route::get('/financeiro/create', 'financeiroController@create')->name('financeiro.novo');
+Route::get('/financeiro/novo', 'financeiroController@create')->name('financeiro.novo');
 Route::post('/financeiro/store', 'financeiroController@store')->name('financeiro.adicionar');
 
 
 
 /* API */
-Route::get('/api/financeiro', 'financeiroController@allAccounts');
+Route::get('/api/financeiro', 'financeiroController@apiBillsMonth');

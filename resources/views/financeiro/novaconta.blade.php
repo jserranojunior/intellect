@@ -29,8 +29,8 @@
         </div>
 
          <div class="form-group">     
-            <label for="Descricao">Descrição</label>
-            <input type="text" class="form-control" name="Descricao">
+            <label for="descricao">Descrição</label>
+            <input type="text" class="form-control" name="descricao">
         </div>
 
         <div class="form-group">     
@@ -50,38 +50,40 @@
         <div class="form-group"> 
             <label for="Categoria" class="label">Categoria</label>
             <select name="categoria" id="" class="form-control">
-                <option value="1">Essenciais</option>
-                <option value="2">Urgencia</option>
+                @foreach($categorias as $categoria)
+                <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group"> 
             <label for="tipo_conta" class="label">Tipo de Conta</label>
             <select name="tipo_conta" id="" class="form-control">
-                <option value="1">Extra</option>
-                <option value="2">Fixa</option>
-                <option value="2">Parcelada</option>
+                <option value="Extra">Extra</option>
+                <option value="Fixa">Fixa</option>
+                <option value="Parcelada">Parcelada</option>
             </select>
         </div>
 
         <div class="form-group"> 
             <label for="forma_pagamento" class="label">Forma de Pagamento</label>
             <select name="forma_pagamento" id="" class="form-control">
-                <option value="1">Terceiro</option>
-                <option value="2">Cartão</option>
-                <option value="3">Dinheiro</option>
-                <option value="4">Débito</option>
-                <option value="5">Débito Automatico</option>
+                <option value="Terceiro">Terceiro</option>
+                <option value="Cartão">Cartão</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Débito">Débito</option>
+                <option value="Débito Automatico">Débito Automatico</option>
             </select>
         </div>
 
-    </form>
+   
     </div>
     <div class="card-footer text-center">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="submit" value="Cadastrar" class="btn btn-primary">
     </div>
 </div>
+</form>
 
 
      

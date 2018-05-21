@@ -33,21 +33,22 @@
               <div class="card-body table-responsive">
               <table class="table table-sm table-striped  table-hover">
                 <thead>
-                  <tr>
+                  <!-- <tr>
                       <th>CONTA </th>
                       <th class="text-right">VALOR</th>
                   </tr>
+                  -->
                 </thead>
                 <tbody>
                   @foreach($item['contas'] as $conta)
                     <tr>
-                        <td>{{ $conta->nome }}</td>
-                        <td class="text-right">{{$conta->valor}}</td>
+                        <td>{{ $conta->favorecido }}</td>
+                        <td class="text-right">{{number_format($conta->valor,2,',','.')}}</td>
                     </tr>
                   @endforeach
 
                     <th><span class="text-bold text-primary">TOTAL</span></th>
-                    <th  class="text-right"> <span class="text-bold text-primary"></span>   </th>
+                    <th  class="text-right"> {{number_format($item->soma,2,',','.')}} <span class="text-bold text-primary"></span></th>
                  </tr>
               </tbody>
               </table>
