@@ -39,7 +39,7 @@
         </div>
         <div class="form-group"> 
             <label for="inicio_data_pagamento">Inicio Pagamento</label>
-            <input type="date" class="form-control" name="inicio_data_pagamento">
+            <input type="date" class="form-control" value="{{$dataAtual}}" name="inicio_data_pagamento">
         </div>
 
         <div class="form-group"> 
@@ -68,11 +68,11 @@
         <div class="form-group"> 
             <label for="forma_pagamento" class="label">Forma de Pagamento</label>
             <select name="forma_pagamento" id="" class="form-control">
-                <option value="Terceiro">Terceiro</option>
-                <option value="Cartão">Cartão</option>
+            <option value="Cartão">Cartão</option>               
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Débito">Débito</option>
                 <option value="Débito Automatico">Débito Automatico</option>
+                <option value="Terceiro">Terceiro</option>
             </select>
         </div>
 

@@ -26,14 +26,19 @@ class financeiroController extends Controller
     }
 
     public function create(){
+        $this->dataAtual = date('Y-m-d');
         $this->categoria_contas = $this->categoria_contas->all();
-        $dados = array('categorias' => $this->categoria_contas);
+        $dados = array(
+            'categorias' => $this->categoria_contas,
+            'dataAtual' => $this->dataAtual,
+        );
+        
         return view('financeiro.novaconta')->with($dados);
     }
 
     public function store(Request $request){
         $request = $request->all();
         $cadastrar = $this->financeiro->cadastrar($request);
-       return($cadastrar);
+        return redirect('/financeiro/novo');
     }
 }
