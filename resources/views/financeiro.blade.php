@@ -132,7 +132,7 @@
               <span class="text-bold text-danger">TOTAL DE GASTOS</span>
             </th>
             <th  class="text-right"> 
-              <span class="text-bold text-danger"></span>   
+              <span class="text-bold text-danger">{{$totalContasAPagar}}</span>   
             </th>
           </tr>
        </tfoot>

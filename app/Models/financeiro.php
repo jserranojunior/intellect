@@ -16,7 +16,7 @@ class financeiro extends Model
 
     public function allAccounts(){  
          $categoriaContas = $this->categoriaContas::all();       
-
+        /* CORRIGIR MESES USANDO WHERE RAW */
         foreach($categoriaContas as $categoria){
             $contas = $this->contas::where('categoria', $categoria->id)
                                     ->whereMonth('inicio_data_pagamento','<=','01')
@@ -41,22 +41,19 @@ class financeiro extends Model
             }
         }
            // $contas = $contas->whereMounth('inicio_data_pagamento','02');           
-            // $contasCategoriaSoma = $contas->sum('valor');
+             $contasCategoriaSoma = $contas->sum('valor');
             $categoria->contas = $contas;   
-          //  $categoria->soma = $contasCategoriaSoma;        
+            $categoria->soma = $contasCategoriaSoma;        
         }
-       // $categoriaContasTotal = $categoriaContas->sum('soma');
+        $categoriaContasTotal = $categoriaContas->sum('soma');
         $dados = [
             "contasAPagar" => $categoriaContas,
-          //  "totalContasAPagar" => $categoriaContasTotal
+            "totalContasAPagar" => $categoriaContasTotal
         ];        
         return( $dados );
     }
 
     public function cadastrar($request){
-       //foreach($request as $dados){
-        //    dd($dados);
-        //}
        return($request);
     }
 
