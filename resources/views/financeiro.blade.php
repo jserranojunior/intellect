@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url('/css/all.css')}}">
+    <link rel="shortcut icon" href="{{{ url('/img/favicon.png') }}}">
     <title>Financeiro</title>
   </head>
   <body>
@@ -112,28 +113,62 @@
        </tr>
     </thead>
     <tbody>
-       <tr>
-          <td>VD Lap</td>
-          <td  class="text-right">1.700,00</td>
-       </tr>
+       
        
        </tbody>
        <tfoot class="foot-total">
-       <tr>
+
+         <tr>
             <th>
-              <span class="text-bold text-success">TOTAL DE GANHOS</span>
+              <span class="text-bold text-success">VALOR A RECEBER</span>
             </th>
             <th  class="text-right"> 
-              <span class="text-bold text-success"></span>   
+              <span class="text-bold text-success">2.694,00</span>   
             </th>
           </tr>
+
+          <tr>
+            <th>
+              <span class="text-bold text-primary">VALOR RECEBIDO</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-primary">2.694,00</span>   
+            </th>
+          </tr>
+
+       
 
           <tr>
             <th>
               <span class="text-bold text-danger">TOTAL DE GASTOS</span>
             </th>
             <th  class="text-right"> 
-              <span class="text-bold text-danger">{{$totalContasAPagar}}</span>   
+              <span class="text-bold text-danger">{{number_format($totalContasAPagar, 2, ',', '.')}}</span>   
+            </th>
+          </tr>
+
+          <tr>
+            <th>
+              <span class="text-bold text-warning">TOTAL PAGO</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-warning">1.000,00</span>   
+            </th>
+          </tr>
+
+          <tr>
+            <th>
+              <span class="text-bold text-danger">FALTA PAGAR</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-danger">1713.22</span>   
+            </th>
+          </tr>
+          <th>
+              <span class="text-bold text-success">SOBRA</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-success">2.694,00</span>   
             </th>
           </tr>
        </tfoot>

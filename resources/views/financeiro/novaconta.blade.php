@@ -44,7 +44,7 @@
 
         <div class="form-group"> 
             <label for="fim_data_pagamento">Fim Pagamento</label>
-            <input type="date" class="form-control" name="fim_data_pagamento">
+            <input type="date" class="form-control"  value="{{$dataAtual}}"  name="fim_data_pagamento">
         </div>
 
         <div class="form-group"> 

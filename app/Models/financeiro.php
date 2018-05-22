@@ -15,8 +15,9 @@ class financeiro extends Model
     }  
 
     public function allAccounts(){  
-        $this->data = "2018-05";
-         $categoriaContas = $this->categoriaContas::all();       
+        $this->data = "2018-06";
+         $categoriaContas = $this->categoriaContas::all();  
+   
         /* CORRIGIR MESES USANDO WHERE RAW */
         foreach($categoriaContas as $categoria){
             $contas = $this->contas::where('categoria', $categoria->id)
@@ -43,19 +44,16 @@ class financeiro extends Model
                     $conta->valor =  $valores->valor;
                 }                
             }
-        }
-           // $contas = $contas->whereMounth('inicio_data_pagamento','02');           
+        }         
              $contasCategoriaSoma = $contas->sum('valor');
             $categoria->contas = $contas;   
-            $categoria->soma = $contasCategoriaSoma;      
-            
+            $categoria->soma = $contasCategoriaSoma;  
         }
         $categoriaContasTotal = $categoriaContas->sum('soma');
         $dados = [
             "contasAPagar" => $categoriaContas,
             "totalContasAPagar" => $categoriaContasTotal
         ];        
-       // dd($categoria->soma );
         return( $dados );
     }
 
