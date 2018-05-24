@@ -25,7 +25,6 @@
          <div class="row">
 
 @foreach($contasAPagar as $item)
-
       <div class="col-4">
             <div class="card">
               <div class="card-header {{$item->cor}} text-center">
@@ -34,11 +33,6 @@
               <div class="card-body table-responsive">
               <table class="table table-sm table-striped  table-hover">
                 <thead>
-                  <!-- <tr>
-                      <th>CONTA </th>
-                      <th class="text-right">VALOR</th>
-                  </tr>
-                  -->
                 </thead>
                 <tbody>
                   @foreach($item['contas'] as $conta)
@@ -47,7 +41,6 @@
                         <td class="text-right">{{number_format($conta->valor,2,',','.')}}</td>
                     </tr>
                   @endforeach
-
                     <th><span class="text-bold text-primary">TOTAL</span></th>
                     <th  class="text-right"> {{number_format($item->soma,2,',','.')}} <span class="text-bold text-primary"></span></th>
                  </tr>
@@ -65,41 +58,42 @@
 </div>  <!-- ROW -->
 </div>  <!-- COL MEIO -->
 
+
+
 <div class="col-lg-6">
   <div class="row">
-  <div class="col-6">
-  <div class="card">
-    <div class="card-header text-center">
-   POUPANÇA
-    </div>
-    <div class="card-body table-responsive">
-    <table class="table table-sm table-striped  table-hover">
-    <thead>
-       <tr>
-          <th>CONTA </th>
-          <th class="text-right">VALOR</th>
-       </tr>
-    </thead>
-    <tbody>
-       <tr>
-          <td>TOTAL DE GANHOS</td>
-          <td  class="text-right">4.475,00</td>
-       </tr>
-       <tr>
-           <td>TOTAL DE GASTOS</td>
-               <td  class="text-right">4.260,00</td>
-           </tr>
-       <tr>
-          <th><span class="text-bold text-primary">SOBRA - POUPANÇA</span></th>
-          <th  class="text-right"> <span class="text-bold text-primary">215,00</span>   </th>
-       </tr>
-    </tbody>
- </table>
-    </div>
-  </div>
-</div>
 
-<div class="col-6">
+
+@foreach($contasAReceber as $item)
+      <div class="col-4">
+            <div class="card">
+              <div class="card-header {{$item->cor}} text-center">
+              {{$item->nome}}
+              </div>
+              <div class="card-body table-responsive">
+              <table class="table table-sm table-striped  table-hover">
+                <thead>
+                </thead>
+                <tbody>
+                  @foreach($item['contas'] as $conta)
+                    <tr>
+                        <td>{{ $conta->favorecedor }}</td>
+                        <td class="text-right">{{number_format($conta->valor,2,',','.')}}</td>
+                    </tr>
+                  @endforeach
+                    <th><span class="text-bold text-primary">TOTAL</span></th>
+                    <th  class="text-right"> {{number_format($item->soma,2,',','.')}} <span class="text-bold text-primary"></span></th>
+                 </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+ @endforeach
+
+
+
+<div class="col-4">
   <div class="card">
     <div class="card-header text-center">
       VALORES
@@ -118,25 +112,43 @@
        </tbody>
        <tfoot class="foot-total">
 
-         <tr>
-            <th>
-              <span class="text-bold text-success">VALOR A RECEBER</span>
-            </th>
-            <th  class="text-right"> 
-              <span class="text-bold text-success">2.694,00</span>   
-            </th>
-          </tr>
+
 
           <tr>
             <th>
               <span class="text-bold text-primary">VALOR RECEBIDO</span>
             </th>
             <th  class="text-right"> 
-              <span class="text-bold text-primary">2.694,00</span>   
+              <span class="text-bold text-primary">0</span>   
             </th>
           </tr>
 
-       
+          <tr>
+            <th>
+              <span class="text-bold text-warning">TOTAL PAGO</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-warning">0</span>   
+            </th>
+          </tr>
+
+          <tr>
+            <th>
+              <span class="text-bold text-danger">FALTA PAGAR</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-danger">0</span>   
+            </th>
+          </tr>
+
+                   <tr>
+            <th>
+              <span class="text-bold text-success">VALOR A RECEBER</span>
+            </th>
+            <th  class="text-right"> 
+              <span class="text-bold text-success">{{number_format($totalContasAReceber, 2, ',', '.')}}</span>   
+            </th>
+          </tr>
 
           <tr>
             <th>
@@ -148,27 +160,11 @@
           </tr>
 
           <tr>
-            <th>
-              <span class="text-bold text-warning">TOTAL PAGO</span>
-            </th>
-            <th  class="text-right"> 
-              <span class="text-bold text-warning">1.000,00</span>   
-            </th>
-          </tr>
-
-          <tr>
-            <th>
-              <span class="text-bold text-danger">FALTA PAGAR</span>
-            </th>
-            <th  class="text-right"> 
-              <span class="text-bold text-danger">1713.22</span>   
-            </th>
-          </tr>
           <th>
-              <span class="text-bold text-success">SOBRA</span>
+              <span class="text-bold text-primary">SOBRA</span>
             </th>
             <th  class="text-right"> 
-              <span class="text-bold text-success">2.694,00</span>   
+              <span class="text-bold text-primary">{{number_format($sobraDoPagamentoDeContas, 2, ',', '.')}}</span>   
             </th>
           </tr>
        </tfoot>
@@ -178,6 +174,41 @@
     </div>
   </div>
 </div>
+
+
+
+  <div class="col-4">
+  <div class="card">
+    <div class="card-header text-center">
+   POUPANÇA
+    </div>
+    <div class="card-body table-responsive">
+    <table class="table table-sm table-striped  table-hover">
+    <thead>
+       <tr>
+          <th>CONTA </th>
+          <th class="text-right">VALOR</th>
+       </tr>
+    </thead>
+    <tbody>
+       <tr>
+          <td>TOTAL DE GANHOS</td>
+          <td  class="text-right">0</td>
+       </tr>
+       <tr>
+           <td>TOTAL DE GASTOS</td>
+               <td  class="text-right">0</td>
+           </tr>
+       <tr>
+          <th><span class="text-bold text-primary">SOBRA - POUPANÇA</span></th>
+          <th  class="text-right"> <span class="text-bold text-primary">0</span>   </th>
+       </tr>
+    </tbody>
+ </table>
+    </div>
+  </div>
+</div>
+
 
 
   </div>  <!-- ROW -->

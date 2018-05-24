@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\valores_contas_a_pagar;
 use DB;
 
-class contas_a_pagar extends Model
+class contas_a_receber extends Model
 {
-    protected $table = "contas_a_pagar";
+    protected $table = "contas_a_receber";
 
     public function contasMensais($data, $categoriaId){
 
@@ -29,6 +28,4 @@ class contas_a_pagar extends Model
         return($this->contas);
             
     }
-
-   
 }

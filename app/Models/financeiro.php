@@ -7,52 +7,76 @@ use Illuminate\Database\Eloquent\Model;
 
 class financeiro extends Model
 {
+   
+    public function __construct( 
+        categorias_contas_receber $categoriaContasReceber, 
+        contas_a_receber $contasAReceber,         
+        valor_contas_a_receber $valoresContasAReceber,
 
-    public function __construct(categoria_contas $categoriaContas, contas_a_pagar $contasAPagar, valores_contas_a_pagar $valoresContasAPagar){
+        categoria_contas $categoriaContas, 
+        contas_a_pagar $contasAPagar, 
+        valores_contas_a_pagar $valoresContasAPagar
+        ){
+            /* RECEBER */
+        $this->categoriaContasReceber = $categoriaContasReceber;
+        $this->contasReceber = $contasAReceber;
+        $this->valoresContasAReceber = $valoresContasAReceber;
+
+            /* PAGAR*/
         $this->categoriaContas = $categoriaContas;
         $this->contas = $contasAPagar;
         $this->valoresContasAPagar = $valoresContasAPagar;
+
+        $this->data = "2018-06";
     }  
 
     public function allAccounts(){  
-        $this->data = "2018-06";
-         $categoriaContas = $this->categoriaContas::all();  
-   
-        /* CORRIGIR MESES USANDO WHERE RAW */
-        foreach($categoriaContas as $categoria){
-            $contas = $this->contas::where('categoria', $categoria->id)
-                                    ->where(DB::raw("SUBSTRING(inicio_data_pagamento,1,7)"), '<=', $this->data) 
-                                    ->where(DB::raw("SUBSTRING(fim_data_pagamento,1,7)"), '>=', $this->data)  
-                                    ->orWhere('categoria', $categoria->id)   
-                                    ->where(DB::raw("SUBSTRING(fim_data_pagamento,1,7)"), '=', null)                                
-                                    ->where(DB::raw("SUBSTRING(inicio_data_pagamento,1,7)"), '<=', $this->data) 
-                                    ->orWhere('categoria', $categoria->id)   
-                                    ->where(DB::raw("SUBSTRING(fim_data_pagamento,1,7)"), '=', '')                                
-                                    ->where(DB::raw("SUBSTRING(inicio_data_pagamento,1,7)"), '<=', $this->data) 
-                                    ->get();
-            
-        foreach($contas as $conta){
-            foreach($contas as $conta){
-                $valoresContasAPagar = $this->valoresContasAPagar::whereMonth('data_pagamento', '=' ,'01')
-                ->where('contas_a_pagar_id', $conta->id)                
-                ->orWhere('contas_a_pagar_id', $conta->id)
-                ->where(DB::raw("SUBSTRING(data_pagamento,1,7)"), '<=', $this->data) 
-                ->take(1)
-                ->get();
-                
-                foreach($valoresContasAPagar as $valores){
-                    $conta->valor =  $valores->valor;
-                }                
-            }
-        }         
-             $contasCategoriaSoma = $contas->sum('valor');
+              
+        /* CONTAS A PAGAR */
+        $categoriaContas = $this->categoriaContas::all(); 
+        foreach($categoriaContas as $categoria){          
+            $contas = $this->contas->contasMensais($this->data, $categoria->id);           
+            foreach($contas as $conta){              
+                $valoresContasAPagar = $this->valoresContasAPagar->valorParaPagar($this->data, $conta->id);
+                $conta->valor =  $valoresContasAPagar;                                 
+            }         
+
+            $contasCategoriaSoma = $contas->sum('valor');
             $categoria->contas = $contas;   
             $categoria->soma = $contasCategoriaSoma;  
         }
-        $categoriaContasTotal = $categoriaContas->sum('soma');
+
+        /* CONTAS A RECEBER */
+
+
+        $categoriaContasReceber = $this->categoriaContasReceber::all();         
+
+        foreach($categoriaContasReceber as $categoriaReceber){          
+            $contasReceber = $this->contasReceber->contasMensais($this->data, $categoriaReceber->id);           
+            foreach($contasReceber as $contaReceber){              
+                $valoresContasAPagar = $this->valoresContasAReceber->valorParaReceber($this->data, $contaReceber->id);
+                $contaReceber->valor =  $valoresContasAPagar;                                 
+            }         
+
+            $contasCategoriaReceberSoma = $contasReceber->sum('valor');
+            $categoriaReceber->contas = $contasReceber;   
+            $categoriaReceber->soma = $contasCategoriaReceberSoma;  
+        }
+//dd($valoresContasAPagar);
+
+
+/* FINAL */
+        $TotalContasAPagar = $categoriaContas->sum('soma');
+        $TotalContasAReceber = $categoriaContasReceber->sum('soma');
+
+        $sobraDoPagamentoDeContas = $TotalContasAReceber - $TotalContasAPagar;
+
         $dados = [
             "contasAPagar" => $categoriaContas,
-            "totalContasAPagar" => $categoriaContasTotal
+            "contasAReceber" => $categoriaContasReceber,
+            "totalContasAPagar" => $TotalContasAPagar,
+            "totalContasAReceber" => $TotalContasAReceber,
+            "sobraDoPagamentoDeContas" => $sobraDoPagamentoDeContas,
         ];        
         return( $dados );
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ContasAPagar extends Migration
+class ContasAReceber extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class ContasAPagar extends Migration
      */
     public function up()
     {
-        Schema::create('contas_a_pagar', function (Blueprint $table) {
+        Schema::create('contas_a_receber', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('favorecido');
+            $table->string('favorecedor');
             $table->string('inicio_data_pagamento');
             $table->string('fim_data_pagamento');
-            $table->string('categoria');  
-            $table->string('descricao');  
-            $table->string('forma_pagamento');
+            $table->string('categoria');    
             $table->string('tipo_conta');
+            $table->string('forma_pagamento');
+            $table->string('descricao');
             $table->string('parcelas');
         });
     }
@@ -33,6 +33,6 @@ class ContasAPagar extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contas_a_pagar');
+        //
     }
 }

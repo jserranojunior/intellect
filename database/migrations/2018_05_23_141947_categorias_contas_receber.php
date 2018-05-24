@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFormaPagamento extends Migration
+class CategoriasContasReceber extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddFormaPagamento extends Migration
      */
     public function up()
     {
-        Schema::table('contas_a_pagar', function (Blueprint $table) {
-            $table->string('forma_pagamento');
+        Schema::create('categoria_contas_receber', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nome');
+            $table->string('cor');
+            $table->string('tipo');   
         });
     }
 
@@ -25,8 +28,6 @@ class AddFormaPagamento extends Migration
      */
     public function down()
     {
-        Schema::table('contas_a_pagar', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }
