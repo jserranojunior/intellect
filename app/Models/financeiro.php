@@ -27,7 +27,7 @@ class financeiro extends Model
         $this->contas = $contasAPagar;
         $this->valoresContasAPagar = $valoresContasAPagar;
 
-        $this->data = "2018-06";
+        $this->data = "2018-07";
     }  
 
     public function allAccounts(){  
@@ -62,10 +62,10 @@ class financeiro extends Model
             $categoriaReceber->contas = $contasReceber;   
             $categoriaReceber->soma = $contasCategoriaReceberSoma;  
         }
-//dd($valoresContasAPagar);
 
 
-/* FINAL */
+
+
         $TotalContasAPagar = $categoriaContas->sum('soma');
         $TotalContasAReceber = $categoriaContasReceber->sum('soma');
 
@@ -95,17 +95,14 @@ class financeiro extends Model
         );
 
         DB::table('contas_a_pagar')->insert($dados_contas_a_pagar);
-
         $ultima_conta = DB::table('contas_a_pagar')
                         ->select('id')
                         ->orderBy('id', 'desc')
                         ->take(1)
                         ->get();
-
         foreach($ultima_conta as $item){
             $conta_a_pagar_id = $item->id;
-        }
-       
+        }      
 
         $dados_valor_contas_a_pagar = array(
             'contas_a_pagar_id' => $conta_a_pagar_id,
@@ -113,10 +110,47 @@ class financeiro extends Model
             'valor' => $request['valor'],
         );
 
-        DB::table('valores_contas_a_pagar')->insert($dados_valor_contas_a_pagar);
+        DB::table('valores_contas_a_pagar')->insert($dados_valor_contas_a_pagar);       
+       return("Cadastrado");       
+    }
+
+
+    public function cadastrarContaReceber($request){        
        
-       return("Cadastrado");
-       
+        $dados_contas_a_receber = array(
+            'favorecedor' => $request['favorecedor'],        
+            'inicio_data_pagamento' => $request['inicio_data_pagamento'],
+            'fim_data_pagamento' => $request['fim_data_pagamento'],
+            'categoria' => $request['categoria'],
+            'tipo_conta' => $request['tipo_conta'],
+            'parcelas' => '',
+            'forma_pagamento' => $request['forma_pagamento'],
+            'descricao' => $request['descricao'],
+        );
+
+        DB::table('contas_a_receber')->insert($dados_contas_a_receber);
+        $ultima_conta = DB::table('contas_a_receber')
+                        ->select('id')
+                        ->orderBy('id', 'desc')
+                        ->take(1)
+                        ->get();
+        foreach($ultima_conta as $item){
+            $conta_a_receber_id = $item->id;
+        }      
+
+        $dados_valor_contas_a_receber = array(
+            'contas_a_receber_id' => $conta_a_receber_id,
+            'data_pagamento' => $request['inicio_data_pagamento'],
+            'valor' => $request['valor'],
+        );
+
+        DB::table('valores_contas_a_receber')->insert($dados_valor_contas_a_receber);       
+       return("Cadastrado");       
+    }
+
+    public function editarContaPagar($id){
+        $editBills = $this->contas::where('id',$id)->get();
+        return $editBills; 
     }
 
 }

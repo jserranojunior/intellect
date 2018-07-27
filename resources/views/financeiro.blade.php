@@ -15,6 +15,14 @@
 
     <div class="container-fluid">
             <h1 class="text-center">Financeiro</h1>
+
+            <a href="{{Route('financeiro.novo.pagar')}}">
+              <div class="btn btn-danger">pagar</div>
+            </a>
+           
+            <a href="{{Route('financeiro.novo.receber')}}">
+              <div class="btn btn-primary">Receber</div>
+            </a>
     </div>
 
    
