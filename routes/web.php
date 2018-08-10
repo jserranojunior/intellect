@@ -23,5 +23,3 @@ Route::get('/financeiro/novoreceber', 'financeiroController@novaContaReceber')->
 Route::post('/financeiro/storecontasreceber', 'financeiroController@storecontasreceber')->name('financeiro.adicionar.receber');
 
 
-/* API */
-Route::get('/api/financeiro', 'financeiroController@apiBillsMonth');

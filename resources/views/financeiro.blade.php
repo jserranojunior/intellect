@@ -13,9 +13,11 @@
   </head>
   <body>
 
-    <div class="container-fluid">
-            <h1 class="text-center">Financeiro</h1>
+    <div class="container-fluid">  
 
+      
+        <div class="row">
+        <div class="col-sm">
             <a href="{{Route('financeiro.novo.pagar')}}">
               <div class="btn btn-danger">pagar</div>
             </a>
@@ -23,8 +25,61 @@
             <a href="{{Route('financeiro.novo.receber')}}">
               <div class="btn btn-primary">Receber</div>
             </a>
-    </div>
-
+        </div>
+          <div class="col-sm">
+              <div class="card" style="width: 18rem;">                 
+                  <div class="#"> 
+                      <div class="text-center">
+                          <h6>DATA</h6>
+                      </div>
+                    <div class="row">
+                      <div class="col-sm col-xs-6">                        
+                        <div class="btn-group">
+                            <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{$datas['mesAtualEscrito'] }}
+                            </button>
+                            <div class="dropdown-menu">
+                              @foreach($datas['meses'] as $meses)
+                                <a class="dropdown-item" href="?data={{$datas['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
+                              @endforeach                                        
+                            </div>
+                          </div>
+                      </div> 
+                        <div class="col-sm col-xs-6 float-right">
+                          <div class="btn-group  float-right">
+                            <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              {{$datas['anoAtual']}}
+                            </button>
+                            <div class="dropdown-menu">
+                              @foreach($datas['anos'] as $anos)
+                                <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$datas['mesAtual']}}">{{$anos['numero']}}</a>
+                              @endforeach           
+                            </div>                       
+                          </div>
+                        </div>    
+                    </div>  
+                    <div class="row row-space">
+                      <div class="col-md">
+                          <div class="input-group-sm">
+                              <input type="text" class="form-control col-sm-5 float-left" placeholder="1">                        
+                            </div>
+                            
+                            <div class="input-group-sm">
+                                <input type="text" class="form-control col-sm-5 float-right" placeholder="30">                        
+                            </div>
+                      </div>
+                    </div>
+                    <div class="row row-space">
+                      <div class="col-md text-center"> 
+                        <a class="btn btn-default btn-xs " href="/financeiro/?data={{$datas['dataAnterior'] }}">Anterior</a>    
+                        <a class="btn btn-default btn-xs float-center" href="/financeiro">Atual</a>
+                        <a class="btn btn-default btn-xs " href="/financeiro/?data={{$datas['dataPosterior'] }}">Pŕoximo</a>
+                      </div>  
+                    </div>                                    
+                  </div>                                   
+                </div>
+          </div>
+        </div>
    
 
 <div class="container-fluid">

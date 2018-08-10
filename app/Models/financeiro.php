@@ -3,12 +3,21 @@
 namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Functions\Data;
+use App\Models\Tables\categorias_contas_receber;
+use App\Models\Tables\contas_a_receber;
+use App\Models\Tables\valor_contas_a_receber;
+use App\Models\Tables\categoria_contas;
+use App\Models\Tables\contas_a_pagar;
+use App\Models\Tables\valores_contas_a_pagar;
 
 
 class financeiro extends Model
 {
    
     public function __construct( 
+        Data $Datas,
+
         categorias_contas_receber $categoriaContasReceber, 
         contas_a_receber $contasAReceber,         
         valor_contas_a_receber $valoresContasAReceber,
@@ -28,9 +37,19 @@ class financeiro extends Model
         $this->valoresContasAPagar = $valoresContasAPagar;
 
         $this->data = "2018-07";
+        $this->datas = $Datas;
     }  
 
-    public function allAccounts(){  
+    public function allAccounts($request){
+        
+        if($request->data > ''){
+            $this->data = $request->data;
+        }else{
+            $this->data = date('Y-m');
+        }
+
+        $datas = $this->datas->billsIndex($this->data, 1, 31);
+        
               
         /* CONTAS A PAGAR */
         $categoriaContas = $this->categoriaContas::all(); 
@@ -39,16 +58,13 @@ class financeiro extends Model
             foreach($contas as $conta){              
                 $valoresContasAPagar = $this->valoresContasAPagar->valorParaPagar($this->data, $conta->id);
                 $conta->valor =  $valoresContasAPagar;                                 
-            }         
-
+            }        
             $contasCategoriaSoma = $contas->sum('valor');
             $categoria->contas = $contas;   
             $categoria->soma = $contasCategoriaSoma;  
         }
 
         /* CONTAS A RECEBER */
-
-
         $categoriaContasReceber = $this->categoriaContasReceber::all();         
 
         foreach($categoriaContasReceber as $categoriaReceber){          
@@ -63,9 +79,6 @@ class financeiro extends Model
             $categoriaReceber->soma = $contasCategoriaReceberSoma;  
         }
 
-
-
-
         $TotalContasAPagar = $categoriaContas->sum('soma');
         $TotalContasAReceber = $categoriaContasReceber->sum('soma');
 
@@ -77,6 +90,7 @@ class financeiro extends Model
             "totalContasAPagar" => $TotalContasAPagar,
             "totalContasAReceber" => $TotalContasAReceber,
             "sobraDoPagamentoDeContas" => $sobraDoPagamentoDeContas,
+            "datas" => $datas,
         ];        
         return( $dados );
     }

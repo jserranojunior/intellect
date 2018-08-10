@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\financeiro;
-use App\Models\categoria_contas;
-use App\Models\categorias_contas_receber;
+use App\Models\Tables\categoria_contas;
+use App\Models\Tables\categorias_contas_receber;
 
 class financeiroController extends Controller
 {
@@ -33,8 +33,8 @@ class financeiroController extends Controller
         return view('financeiro.editarconta')->with($dados);
     }
 
-    public function allAccounts(){
-        $dados =  $this->financeiro->allAccounts();    
+    public function allAccounts(Request $request){
+        $dados =  $this->financeiro->allAccounts($request);    
         return view('financeiro')->with($dados); 
     }
 
