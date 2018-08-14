@@ -30,17 +30,17 @@
         </div>
 
          <div class="form-group">     
-            <label for="descricao">Descrição</label>
-            <input type="text" class="form-control" name="descricao">
+       
+            <input type="text" class="form-control" name="descricao" placeholder="Descrição">
         </div>
 
         <div class="form-group">     
-            <label for="valor">Valor</label>
-            <input type="text" class="form-control" name="valor">
+
+            <input type="text" class="form-control" name="valor" placeholder="Valor" required>
         </div>
         <div class="form-group"> 
             <label for="inicio_data_pagamento">Inicio Pagamento</label>
-            <input type="date" class="form-control" value="{{$dataAtual}}" name="inicio_data_pagamento">
+            <input type="date" class="form-control" value="{{$dataAtual}}" placeholder="Inicio Pagamento" name="inicio_data_pagamento">
         </div>
 
         <div class="form-group"> 
@@ -49,8 +49,8 @@
         </div>
 
         <div class="form-group"> 
-            <label for="Categoria" class="label">Categoria</label>
-            <select name="categoria" id="" class="form-control">
+            <select name="categoria" id="" class="form-control" required>
+                <option disabled selected value="Categoria">Categorias</option>
                 @foreach($categorias as $categoria)
                 <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
                 @endforeach
@@ -58,8 +58,8 @@
         </div>
 
         <div class="form-group"> 
-            <label for="tipo_conta" class="label">Tipo de Conta</label>
-            <select name="tipo_conta" id="" class="form-control">
+            <select name="tipo_conta" id="" class="form-control" required>
+                <option disabled selected value="Tipo de Conta">Tipo de Conta</option>
                 <option value="Extra">Extra</option>
                 <option value="Fixa">Fixa</option>
                 <option value="Parcelada">Parcelada</option>
@@ -67,8 +67,8 @@
         </div>
 
         <div class="form-group"> 
-            <label for="forma_pagamento" class="label">Forma de Pagamento</label>
-            <select name="forma_pagamento" id="" class="form-control">
+            <select name="forma_pagamento" id="" class="form-control" required>
+            <option disabled selected value="Forma de Pagamento">Forma de Pagamento</option>    
             <option value="Cartão">Cartão</option>               
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Débito">Débito</option>

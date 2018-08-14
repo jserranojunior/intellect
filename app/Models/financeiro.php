@@ -162,7 +162,7 @@ class financeiro extends Model
        return("Cadastrado");       
     }
 
-    public function editarContaPagar($id){
+    public function editarContaPagar($id, $data){
         $editBills = $this->contas::where('id',$id)->get();
         return $editBills; 
     }

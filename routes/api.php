@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /* API */
 Route::get('/financeiro', 'Api\Financial\ApiBillsToPay@index');
+Route::get('/financeiro/edit/{id}/{data}', 'Api\Financial\ApiBillsToPay@edit');
 //Route::get('/financeiro/{id}', 'Api\Financial\ApiBillsToPay@show');

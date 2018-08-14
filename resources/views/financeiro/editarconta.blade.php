@@ -35,7 +35,7 @@
 
          <div class="form-group">     
             <label for="descricao">Descrição</label>
-            <input type="text" class="form-control" name="descricao">
+            <input type="text" class="form-control" name="descricao" placeholder="Descrição">
         </div>
 
         <div class="form-group">     

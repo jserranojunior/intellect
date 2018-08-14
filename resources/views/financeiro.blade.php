@@ -1,73 +1,58 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.header')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url('/css/all.css')}}">
-    <link rel="shortcut icon" href="{{{ url('/img/favicon.png') }}}">
-    <title>Financeiro</title>
-  </head>
-  <body>
-
-    <div class="container-fluid">  
+@section('content')
 
       
-        <div class="row">
-        <div class="col-sm">
-            <a href="{{Route('financeiro.novo.pagar')}}">
-              <div class="btn btn-danger">pagar</div>
-            </a>
-           
-            <a href="{{Route('financeiro.novo.receber')}}">
-              <div class="btn btn-primary">Receber</div>
-            </a>
+        <div class="row justify-content-center">
+        <div class="col-sm-2">
+          <div class="card">
+            <div class="card-body">
+                <a href="{{Route('financeiro.novo.pagar')}}">
+                    <div class="btn btn-danger">pagar</div>
+                  </a>
+                 
+                  <a href="{{Route('financeiro.novo.receber')}}">
+                    <div class="btn btn-primary">Receber</div>
+                  </a>
+            </div>
+          
+          </div>
+            
         </div>
-          <div class="col-sm">
-              <div class="card" style="width: 18rem;">                 
+
+
+          <div class="col-sm-3">
+              <div class="card">                 
                   <div class="#"> 
                       <div class="text-center">
-                          <h6>DATA</h6>
+                          DATA
                       </div>
-                    <div class="row">
-                      <div class="col-sm col-xs-6">                        
-                        <div class="btn-group">
-                            <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{$datas['mesAtualEscrito'] }}
-                            </button>
-                            <div class="dropdown-menu">
-                              @foreach($datas['meses'] as $meses)
-                                <a class="dropdown-item" href="?data={{$datas['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
-                              @endforeach                                        
-                            </div>
-                          </div>
+                    <div class="row justify-content-center">
+                      <div class="col-sm text-center">  
+                        
+                          <div class="dropdown">
+                              <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  {{$datas['mesAtualEscrito'] }}
+                              </button>
+                              <div class="dropdown-menu">
+                                  @foreach($datas['meses'] as $meses)
+                                    <a class="dropdown-item" href="?data={{$datas['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
+                                  @endforeach                                        
+                                </div>
+                            </div>                        
                       </div> 
-                        <div class="col-sm col-xs-6 float-right">
-                          <div class="btn-group  float-right">
-                            <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              {{$datas['anoAtual']}}
-                            </button>
-                            <div class="dropdown-menu">
-                              @foreach($datas['anos'] as $anos)
-                                <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$datas['mesAtual']}}">{{$anos['numero']}}</a>
-                              @endforeach           
-                            </div>                       
-                          </div>
-                        </div>    
-                    </div>  
-                    <div class="row row-space">
-                      <div class="col-md">
-                          <div class="input-group-sm">
-                              <input type="text" class="form-control col-sm-5 float-left" placeholder="1">                        
-                            </div>
-                            
-                            <div class="input-group-sm">
-                                <input type="text" class="form-control col-sm-5 float-right" placeholder="30">                        
-                            </div>
-                      </div>
+                      <div class="col-sm text-center">
+                        <div class="btn-group">
+                          <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{$datas['anoAtual']}}
+                          </button>
+                          <div class="dropdown-menu">
+                            @foreach($datas['anos'] as $anos)
+                              <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$datas['mesAtual']}}">{{$anos['numero']}}</a>
+                            @endforeach           
+                          </div>                       
+                        </div>
+                      </div>    
                     </div>
                     <div class="row row-space">
                       <div class="col-md text-center"> 
@@ -282,16 +267,6 @@
 
 </div> <!-- COL CONTAS -->       
 </div> <!-- ROW -->
-</div>    <!-- CONTAINER-->
 
 
-
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/uxs/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection
