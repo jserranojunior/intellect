@@ -2,9 +2,14 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use database\seeds\categoriaContasSeeder;
 
 class DatabaseSeeder extends Seeder
 {
+
+    public function __construct(categoriaContasSeeder $categoriaContasSeeder){
+        $this->categoriaContasSeeder = $categoriaContasSeeder;
+    }
     /**
      * Run the database seeds.
      *
@@ -12,27 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-      
-    /* CATEGORIAS */
-
-    //ESSENCIAIS
-        DB::table('categoria_contas')
-        ->insert(['nome' => 'Essenciais',
-        'tipo' => 'pagamento',        
-        'cor' => 'categoria-essenciais']);
-
-    //COMPRAS 
-        DB::table('categoria_contas')
-        ->insert(['nome' => 'Compras',
-        'tipo' => 'pagamento',        
-        'cor' => 'categoria-compras']);
-
-    //URGENCIA
-        DB::table('categoria_contas')
-        ->insert(['nome' => 'Urgencias',
-        'tipo' => 'pagamento',        
-        'cor' => 'categoria-urgencia']);    
-
+        
+        $this->categoriaContasSeeder->run();
 
         /*
       
@@ -43,10 +29,7 @@ class DatabaseSeeder extends Seeder
        ]);
         
 /*
-        DB::table('categoria_contas')
-        ->insert(['nome' => 'Poupança',
-        'tipo' => 'pagamento',        
-        'cor' => 'categoria-poupanca']);
+
 
         DB::table('contas_a_pagar')
         ->insert(['nome' => 'Casa',

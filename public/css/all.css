@@ -80,12 +80,7 @@ body{
     font-weight: bold;
     font-size:14px;
 }
-.categoria-lazer {
-    background-color: rgb(178, 18, 111);
-    color:white;
-    font-weight: bold;
-    font-size:14px;
-}
+
 .categoria-taxas {
     background-color: rgb(18, 178, 125);
     color:white;
@@ -107,8 +102,39 @@ body{
     font-size:14px;
 }
 
+
+/* CATEGORIAS */
+
+.categoria-lazer {
+    background-color: rgb(178, 18, 111);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+
 .categoria-poupanca {
     background-color: rgb(37, 210, 216);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+
+.categoria-transporte{
+    background-color: rgb(80, 77, 74);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+ 
+.categoria-alimentacao{
+    background-color: rgb(44, 116, 29);
+    color:white;
+    font-weight: bold;
+    font-size:14px;
+}
+
+.categoria-avulsos{
+    background-color: rgb(29, 116, 104);
     color:white;
     font-weight: bold;
     font-size:14px;
