@@ -7,14 +7,26 @@ use DB;
 use App\Models\financeiro;
 use App\Models\Tables\categoria_contas;
 use App\Models\Tables\categorias_contas_receber;
+use App\Http\Controllers\Api\Financial\ApiBillsToPay;
 
 class financeiroController extends Controller
 {
-    public function __construct(Financeiro $financeiro, categoria_contas $categoria_contas, categorias_contas_receber $categorias_contas_receber){
+    public function __construct(Financeiro $financeiro, 
+    categoria_contas $categoria_contas, 
+    categorias_contas_receber $categorias_contas_receber,
+    ApiBillsToPay $ApiBillsToPay
+    ){
         $this->financeiro = $financeiro;
         $this->categoria_contas = $categoria_contas;
         $this->categorias_contas_receber = $categorias_contas_receber;
+        $this->apiBillsToPay = $ApiBillsToPay;
     }
+
+    public function edit(Request $request){
+        $data = $this->apiBillsToPay->edit($request->id, $request->data);
+        return view('financeiro.editarconta');
+    }
+
 
     public function editBillPay($id){
         $editBills = $this->financeiro->editarContaPagar($id);

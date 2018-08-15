@@ -7,9 +7,6 @@ use database\seeds\categoriaContasSeeder;
 class DatabaseSeeder extends Seeder
 {
 
-    public function __construct(categoriaContasSeeder $categoriaContasSeeder){
-        $this->categoriaContasSeeder = $categoriaContasSeeder;
-    }
     /**
      * Run the database seeds.
      *
@@ -17,9 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
-        $this->categoriaContasSeeder->run();
-
+    
         /*
       
         DB::table('valores_contas_a_pagar')

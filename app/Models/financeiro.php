@@ -163,8 +163,14 @@ class financeiro extends Model
     }
 
     public function editarContaPagar($id, $data){
-        $editBills = $this->contas::where('id',$id)->get();
-        return $editBills; 
+        $bills = $this->contas::where('id',$id)->get();
+
+        foreach($bills as $conta){              
+            $valoresContasAPagar = $this->valoresContasAPagar->valorParaPagar($this->data, $conta->id);
+            $conta->valor =  $valoresContasAPagar;                                 
+        }        
+
+        return $bills; 
     }
 
 }

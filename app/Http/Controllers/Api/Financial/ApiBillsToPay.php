@@ -65,7 +65,7 @@ class ApiBillsToPay extends Controller
     public function edit($id, $data)
     {
        // dd("$id, $data");
-       // return($this->financeiro->editarContaPagar($id, $data));
+       return($this->financeiro->editarContaPagar($id, $data));
     }
 
     /**
