@@ -84,7 +84,7 @@
                 </thead>
                 <tbody>
                   @foreach($item['contas'] as $conta)
-                    <tr>
+                    <tr onclick="window.location='edit/{{$conta->id}}/{{$datas['dataAtual']}}';">
                         <td>{{ $conta->favorecido }}</td>
                         <td class="text-right">{{number_format($conta->valor,2,',','.')}}</td>
                     </tr>

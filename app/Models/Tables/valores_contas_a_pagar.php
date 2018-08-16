@@ -21,8 +21,10 @@ class valores_contas_a_pagar extends Model
         ->take(1)
         ->get();   
 
-        foreach($this->valorParaPagar as $valor){
-            return $valor->valor;
+        
+
+        foreach($this->valorParaPagar as $item){
+            return ['valor' => $item->valor, 'data_pagamento' => $item->data_pagamento];
         }
    
     }

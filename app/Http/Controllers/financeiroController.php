@@ -24,7 +24,8 @@ class financeiroController extends Controller
 
     public function edit(Request $request){
         $data = $this->apiBillsToPay->edit($request->id, $request->data);
-        return view('financeiro.editarconta');
+       
+        return view('financeiro.editarconta')->with($data);
     }
 
 

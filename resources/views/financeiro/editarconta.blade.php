@@ -29,34 +29,31 @@
     <form action="{{Route('financeiro.adicionar')}}" method="post">
         <div class="form-group">     
             <!-- <label for="favorecido">Favorecido</label> -->
-            <input type="text" class="form-control" name="favorecido" placeholder="Favorecido">
+            <input type="text" class="form-control" value="{{$item->favorecido}}" name="favorecido" placeholder="Favorecido">
             <!-- COLOCAR SELECT COM OPÇÃO DE ADICIONAR CONTA -->
         </div>
 
          <div class="form-group">     
             <label for="descricao">Descrição</label>
-            <input type="text" class="form-control" name="descricao" placeholder="Descrição">
+            <input type="text" class="form-control" value="{{$item->descricao}}" name="descricao" placeholder="Descrição">
         </div>
 
         <div class="form-group">     
             <label for="valor">Valor</label>
-            <input type="text" class="form-control" name="valor">
+            <input type="text" class="form-control" value="{{$item->valor}}" name="valor">
         </div>
         <div class="form-group"> 
-            <label for="inicio_data_pagamento">Inicio Pagamento</label>
-            <input type="date" class="form-control" value="{{$dataAtual}}" name="inicio_data_pagamento">
+            <label for="data_pagamento">Data Pagamento</label>
+            <input type="date" class="form-control" value="{{$item->data_pagamento}}" name="data_pagamento">
         </div>
 
-        <div class="form-group"> 
-            <label for="fim_data_pagamento">Fim Pagamento</label>
-            <input type="date" class="form-control"  value="{{$dataAtual}}"  name="fim_data_pagamento">
-        </div>
+    
 
         <div class="form-group"> 
             <label for="Categoria" class="label">Categoria</label>
-            <select name="categoria" id="" class="form-control">
+            <select name="categoria" id="" class="form-control">               
                 @foreach($categorias as $categoria)
-                <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+                <option @if($item->categoria == $categoria->id) selected @endif value="{{$categoria->id}}">{{$categoria->nome}}</option>
                 @endforeach
             </select>
         </div>
@@ -64,20 +61,20 @@
         <div class="form-group"> 
             <label for="tipo_conta" class="label">Tipo de Conta</label>
             <select name="tipo_conta" id="" class="form-control">
-                <option value="Extra">Extra</option>
-                <option value="Fixa">Fixa</option>
-                <option value="Parcelada">Parcelada</option>
+                <option @if($item->tipo == "Extra") selected @endif value="Extra">Extra</option>
+                <option @if($item->tipo == "Fixa") selected @endif value="Fixa">Fixa</option>
+                <option @if($item->tipo == "Parcelada") selected @endif value="Parcelada">Parcelada</option>
             </select>
         </div>
 
         <div class="form-group"> 
             <label for="forma_pagamento" class="label">Forma de Pagamento</label>
             <select name="forma_pagamento" id="" class="form-control">
-            <option value="Cartão">Cartão</option>               
-                <option value="Dinheiro">Dinheiro</option>
-                <option value="Débito">Débito</option>
-                <option value="Débito Automatico">Débito Automatico</option>
-                <option value="Terceiro">Terceiro</option>
+                <option @if($item->forma_pagamento == "Cartão") selected @endif value="Cartão">Cartão</option>               
+                <option @if($item->forma_pagamento == "Dinheiro") selected @endif value="Dinheiro">Dinheiro</option>
+                <option @if($item->forma_pagamento == "Débito") selected @endif value="Débito">Débito</option>
+                <option @if($item->forma_pagamento == "Débito Automatico") selected @endif value="Débito Automatico">Débito Automatico</option>
+                <option @if($item->forma_pagamento == "Terceiro") selected @endif value="Terceiro">Terceiro</option>
             </select>
         </div>
 

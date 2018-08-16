@@ -57,7 +57,7 @@ class financeiro extends Model
             $contas = $this->contas->contasMensais($this->data, $categoria->id);           
             foreach($contas as $conta){              
                 $valoresContasAPagar = $this->valoresContasAPagar->valorParaPagar($this->data, $conta->id);
-                $conta->valor =  $valoresContasAPagar;                                 
+                $conta->valor =  $valoresContasAPagar['valor'];                                 
             }        
             $contasCategoriaSoma = $contas->sum('valor');
             $categoria->contas = $contas;   
@@ -163,14 +163,21 @@ class financeiro extends Model
     }
 
     public function editarContaPagar($id, $data){
-        $bills = $this->contas::where('id',$id)->get();
+        $this->data = $data;
+        $bills = $this->contas::where('id', $id)->get();
+        $datas = $this->datas->billsIndex($this->data, 1, 31);
+        $categoriaContas = $this->categoriaContas::all();   
 
         foreach($bills as $conta){              
             $valoresContasAPagar = $this->valoresContasAPagar->valorParaPagar($this->data, $conta->id);
-            $conta->valor =  $valoresContasAPagar;                                 
+            $conta->valor =  $valoresContasAPagar['valor'];
+            $mesAnoAtual = date("Y-m", strtotime($this->data));
+            $data_pagamento = date('d', strtotime($valoresContasAPagar['data_pagamento']));
+            $conta->data_pagamento =  "$mesAnoAtual-$data_pagamento";                                
         }        
-
-        return $bills; 
+        
+        $dados = ['conta' => $bills, 'datas' => $datas, 'categorias' =>$categoriaContas];
+        return $dados; 
     }
 
 }
