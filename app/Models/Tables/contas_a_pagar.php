@@ -10,6 +10,7 @@ class contas_a_pagar extends Model
 {
     protected $table = "contas_a_pagar";
 
+    
     public function contasMensais($data, $categoriaId){
 
         $this->data = $data;
@@ -29,6 +30,8 @@ class contas_a_pagar extends Model
         return($this->contas);
             
     }
+
+    
 
     
    

@@ -21,3 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/financeiro', 'Api\Financial\ApiBillsToPay@index');
 Route::get('/financeiro/edit/{id}/{data}', 'Api\Financial\ApiBillsToPay@edit');
 //Route::get('/financeiro/{id}', 'Api\Financial\ApiBillsToPay@show');
+
+/* v1 */
+
+Route::get('/v1/financeiro', 'Api\v1\Financial\BillsToPay@index');
+Route::post('/v1/financeiro', 'Api\v1\Financial\BillsToPay@store');
+Route::get('/v1/financeiro/{id}', 'Api\v1\Financial\BillsToPay@edit');
+Route::put('/v1/financeiro/{id}', 'Api\v1\Financial\BillsToPay@update');
