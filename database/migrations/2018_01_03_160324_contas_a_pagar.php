@@ -17,12 +17,12 @@ class ContasAPagar extends Migration
             $table->increments('id');
             $table->string('favorecido');
             $table->string('inicio_data_pagamento');
-            $table->string('fim_data_pagamento');
-            $table->string('categoria');  
-            $table->string('descricao');  
-            $table->string('forma_pagamento');
-            $table->string('tipo_conta');
-            $table->string('parcelas');
+            $table->string('fim_data_pagamento')->nullable();
+            $table->string('categoria')->nullable();  
+            $table->string('descricao')->nullable();  
+            $table->string('forma_pagamento')->nullable();
+            $table->string('tipo_conta')->nullable();
+            $table->string('parcelas')->nullable();
         });
     }
 

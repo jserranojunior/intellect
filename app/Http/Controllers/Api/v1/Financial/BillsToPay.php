@@ -22,8 +22,9 @@ class BillsToPay extends Controller
      */
     public function index()
     {
-        $this->billsToPay = $this->billsToPay::all();  
-        $data = ['data' => $this->billsToPay];
+        $data = $this->billsToPay->index();
+        // $this->billsToPay = $this->billsToPay::all();  
+        // $data = ['data' => $this->billsToPay];
         return response()->json($data, 200);
     }
 
