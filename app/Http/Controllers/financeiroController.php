@@ -4,22 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Models\financeiro;
+
 use App\Models\Tables\categoria_contas;
 use App\Models\Tables\categorias_contas_receber;
-use App\Http\Controllers\Api\Financial\ApiBillsToPay;
+use App\Http\Controllers\Api\v1\Financial\BillsToPay;
+use App\Http\Controllers\Api\v1\Financial\ApiFinancial;
 
 class financeiroController extends Controller
 {
-    public function __construct(Financeiro $financeiro, 
-    categoria_contas $categoria_contas, 
-    categorias_contas_receber $categorias_contas_receber,
-    ApiBillsToPay $ApiBillsToPay
-    ){
-        $this->financeiro = $financeiro;
+    public function __construct( 
+        ApiFinancial $ApiFinancial,
+        categoria_contas $categoria_contas, 
+        categorias_contas_receber $categorias_contas_receber,
+        BillsToPay $BillsToPay
+        ){
+   
+        $this->ApiFinancial = $ApiFinancial;    
         $this->categoria_contas = $categoria_contas;
         $this->categorias_contas_receber = $categorias_contas_receber;
-        $this->apiBillsToPay = $ApiBillsToPay;
+        $this->BillsToPay = $BillsToPay;
     }
 
     public function edit(Request $request){
@@ -47,8 +50,10 @@ class financeiroController extends Controller
     }
 
     public function allAccounts(Request $request){
-        $dados =  $this->financeiro->allAccounts($request);    
-        return view('financeiro')->with($dados); 
+             
+        $this->ApiFinancial = $this->ApiFinancial->index($request);
+        
+        return view('Financial.index')->with($this->ApiFinancial);
     }
 
     public function apiBillsMonth(){

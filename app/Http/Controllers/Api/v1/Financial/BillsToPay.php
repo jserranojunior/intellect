@@ -20,12 +20,13 @@ class BillsToPay extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->billsToPay->index();
+        $data = $this->billsToPay->index($request);
+        return $data;
         // $this->billsToPay = $this->billsToPay::all();  
         // $data = ['data' => $this->billsToPay];
-        return response()->json($data, 200);
+        //return response()->json($data, 200);
     }
 
     /**

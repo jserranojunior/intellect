@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\Financial;
+namespace App\Http\Controllers\Api\v1\Financial;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Api\v1\Tables\categoria_contas;
 
-class ApiContasAPagar extends Controller
+class ApiFinancial extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $this->categoriesAndBillsToPay = new categoria_contas;
+        $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->categoriesToPayWithBills($request);
+        
+        $data = ['data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
+        return($data);
     }
 
     /**
