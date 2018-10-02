@@ -25,7 +25,7 @@
                                             </thead>
                                             
                                             <tbody>
-                                                    @foreach($categorie->bills as $bill)
+                                                    @foreach($categorie->bills['bills'] as $bill)
 
                                                     
                                                     <tr >
@@ -34,7 +34,7 @@
                                                     </tr>
                                                     @endforeach
                                                     <th><span class="text-bold text-primary">TOTAL</span></th>
-                                                    <th class="text-right">  <span class="text-bold text-primary"></span></th>
+                                                    <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span class="text-bold text-primary"></span></th>
                                                     </tr>
                                                 </tbody>
 

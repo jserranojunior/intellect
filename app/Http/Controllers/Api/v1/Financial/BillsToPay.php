@@ -24,9 +24,7 @@ class BillsToPay extends Controller
     {
         $data = $this->billsToPay->index($request);
         return $data;
-        // $this->billsToPay = $this->billsToPay::all();  
-        // $data = ['data' => $this->billsToPay];
-        //return response()->json($data, 200);
+
     }
 
     /**
@@ -70,10 +68,17 @@ class BillsToPay extends Controller
      */
     public function edit($id)
     {
-        $this->billsToPay = $this->billsToPay::where('id',$id)->get();
+        $this->date = '2018-09-11';
+        $this->billsToPay = $this->billsToPay->getBill($id, $this->date);
+
+        //$this->billsToPay::where('id',$id)->get();
+        
         if($this->billsToPay->isEmpty()){
             return response()->json(['response' => 'Usuario não encontrado'], 400);           
         }
+
+        
+
         $data = ['data' => $this->billsToPay, 
         'response' => 'Usuario Encontrado', 
         'meta' => ['path' => '/financeiro/api/v1/financeiro']];
@@ -81,7 +86,8 @@ class BillsToPay extends Controller
         
         return response()->json($data, 200);        
      
-    }
+    
+}
 
     /**
      * Update the specified resource in storage.

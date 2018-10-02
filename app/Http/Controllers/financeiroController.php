@@ -70,7 +70,7 @@ class financeiroController extends Controller
             'dataAtual' => $this->dataAtual,
         );
         
-        return view('financeiro.novaconta')->with($dados);
+        return view('Financial.create')->with($dados);
     }
 
     public function novaContaReceber(){

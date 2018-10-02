@@ -14,13 +14,13 @@ class ApiFinancial extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $this->categoriesAndBillsToPay = new categoria_contas;
-        $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->categoriesToPayWithBills($request);
-        
-        $data = ['data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
-        return($data);
-    }
+        {
+            $this->categoriesAndBillsToPay = new categoria_contas;
+            $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->categoriesToPayWithBills($request);
+            
+            $data = ['data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
+            return($data);
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -28,9 +28,9 @@ class ApiFinancial extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
+        {
+            //
+        }
 
     /**
      * Store a newly created resource in storage.
