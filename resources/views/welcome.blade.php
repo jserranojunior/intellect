@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Seja bem vindo</a>
+                    <a href="/login">Seja bem vindo</a>
                     
                 </div>
             </div>
