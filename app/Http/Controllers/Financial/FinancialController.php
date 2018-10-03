@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Financial;
-
-use Illuminate\Http\Response;
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Financial;
 use App\Http\Controllers\Controller;
-use App\Models\Api\v1\Tables\contas_a_pagar;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Api\v1\Financial\ApiFinancial;
 
-class BillsToPay extends Controller
+
+
+class FinancialController extends Controller
 {
 
-    
-    public function __construct(contas_a_pagar $billsToPay){
-        $this->billsToPay = $billsToPay;
-    }
+    public function __construct(ApiFinancial $ApiFinancial){
+        $this->ApiFinancial = $ApiFinancial;
 
+ 
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +22,9 @@ class BillsToPay extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->billsToPay->index($request);
-        return $data;
-
+        $this->ApiFinancial = $this->ApiFinancial->index($request);
+        
+        return view('Financial.index')->with($this->ApiFinancial);
     }
 
     /**
@@ -34,7 +34,7 @@ class BillsToPay extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -45,8 +45,7 @@ class BillsToPay extends Controller
      */
     public function store(Request $request)
     {
-        $this->billsToPay = $this->billsToPay->store($request);
-        return($this->billsToPay);
+
     }
 
     /**
@@ -68,26 +67,8 @@ class BillsToPay extends Controller
      */
     public function edit($id)
     {
-        $this->date = '2018-09-11';
-        $this->billsToPay = $this->billsToPay->getBill($id, $this->date);
-
-        //$this->billsToPay::where('id',$id)->get();
-        
-        if($this->billsToPay->isEmpty()){
-            return response()->json(['response' => 'Usuario não encontrado'], 400);           
-        }
-
-        
-
-        $data = ['data' => $this->billsToPay, 
-        'response' => 'Usuario Encontrado', 
-        'meta' => ['path' => '/financeiro/api/v1/financeiro']];
-        
-        
-        return response()->json($data, 200);        
-     
-    
-}
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -97,9 +78,8 @@ class BillsToPay extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {       
-        $this->billsToPay = $this->billsToPay->put($request, $id);
-        return($this->billsToPay);
+    {
+        //
     }
 
     /**

@@ -22,7 +22,7 @@
         <h5>Nova Conta</h5>
     </div>
     <div class="card-body">
-    <form action="http://localhost/financeiro/api/v1/financeiro" method="post">
+    <form action="{{Route('financeiro.pagar.adicionar')}}" method="post">
         <div class="form-group">     
             <!-- <label for="favorecido">Favorecido</label> -->
             <input type="text" class="form-control" name="favorecido" placeholder="Favorecido">
@@ -40,19 +40,20 @@
         </div>
         <div class="form-group"> 
             <label for="inicio_data_pagamento">Inicio Pagamento</label>
-            <input type="date" class="form-control" value="" placeholder="Inicio Pagamento" name="inicio_data_pagamento">
+            <input type="date" class="form-control" value="{{$dataAtual}}"  placeholder="Inicio Pagamento" name="inicio_data_pagamento">
         </div>
 
         <div class="form-group"> 
             <label for="fim_data_pagamento">Fim Pagamento</label>
-            <input type="date" class="form-control"  value=""  name="fim_data_pagamento">
+            <input type="date" class="form-control"  value="{{$dataAtual}}"   name="fim_data_pagamento">
         </div>
 
         <div class="form-group"> 
             <select name="categoria" id="" class="form-control" required>
-                <option disabled selected value="Categoria">Categorias</option>
-              
-                <option value=""></option>
+               
+                @foreach($categorias as $categoria)
+                <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+                @endforeach
            
             </select>
         </div>

@@ -4,6 +4,7 @@ namespace App\Models\Api\v1\Tables;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use App\Models\Api\v1\Functions\FormatValue;
 
 class contas_a_pagar extends Model
 {
@@ -11,6 +12,7 @@ class contas_a_pagar extends Model
     protected $fillable = ['favorecido', 'inicio_data_pagamento', 'descricao', 'fim_data_pagamento', 'categoria', 'forma_pagamento', 'tipo_conta'];
 
     
+
     public function index($request){
 
           
@@ -52,7 +54,10 @@ class contas_a_pagar extends Model
     
     }
     
-    public function store($request){
+    public function store($request){         
+        $request['valor'] = str_replace(',','.',str_replace('.', '', $request->valor));
+ 
+
         $billsToPay = new contas_a_pagar;
         $billsToPay->fill($request->input());      
         $billsToPay->save();

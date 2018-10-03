@@ -49,12 +49,7 @@ class financeiroController extends Controller
         return view('financeiro.editarconta')->with($dados);
     }
 
-    public function allAccounts(Request $request){
-             
-        $this->ApiFinancial = $this->ApiFinancial->index($request);
-        
-        return view('Financial.index')->with($this->ApiFinancial);
-    }
+
 
     public function apiBillsMonth(){
         $dados =  $this->financeiro->allAccounts();    
