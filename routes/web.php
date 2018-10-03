@@ -12,10 +12,14 @@
 */
 Auth::routes();
 
-/* INICIO */
-Route::get('/', 'Financial\FinancialController@index')->name('financeiro');
-Route::get('/financeiro', 'Financial\FinancialController@index')->name('financeiro');
 
+/* INICIO */
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Financeiro
+Route::get('/financeiro', 'Financial\FinancialController@index')->name('financeiro');
 // Contas para pagar
 Route::get('/financeiro/novo/pagar', 'Financial\BillsToPayController@create')->name('financeiro.novo.pagar');
 Route::post('/financeiro/pagar/store', 'Financial\BillsToPayController@store')->name('financeiro.pagar.adicionar');
