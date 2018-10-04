@@ -1,5 +1,4 @@
 @extends('layouts.header')
-
 @section('content')
 
 
@@ -11,25 +10,26 @@
     <div class="row justify-content-center">
         <div class="col-3">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="text-center">DATA</h4>
-                </div>
+
                 <div class="card-footer">
-                    <a href="{{Route('financeiro.novo.pagar')}}">
-                        <div class="btn btn-primary">
-                            (+) NOVA CONTA
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="{{Route('financeiro.novo.pagar')}}">
+                                <div class="btn btn-sm  btn-block btn-outline-primary active">
+                                    (+) CONTA
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <div class="btn btn-primary btn-warning float-right">
-                        (+) NOVO PAGAMENTO
+                        <div class="col-6">
+                            <div class="btn btn-block btn-sm btn-outline-warning active float-right">
+                                (+) PAGAMENTO
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
@@ -38,11 +38,11 @@
                     @foreach($categories as $categorie)
 
                     <div class="card">
-                        <div class="card-header {{$categorie->cor}} text-center">
+                        <div class="card-header categoria-contas-pagar {{$categorie->cor}} text-center">
                             {{$categorie->nome}}
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table table-sm table-striped  table-hover">
+                            <table class="table table-sm table-financial table-striped  table-hover">
                                 <thead>
                                 </thead>
                                 <tbody>
@@ -53,21 +53,22 @@
                                     </tr>
                                     @endforeach
                                     <th><span class="text-bold text-primary">TOTAL</span></th>
-                                    <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span
-                                            class="text-bold text-primary"></span></th>
+                                    <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span class="text-bold text-primary"></span></th>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div>                       
                     </div>
                     @endforeach
                 </div>
                 @endforeach
                 <!-- não funciona -->
-            </div> <!-- ROW -->
-        </div> <!-- COL MEIO -->
+            </div>
+            <!-- ROW -->
+        </div>
+        <!-- COL MEIO -->
 
-        <div class="col-lg-6">
+        {{--  <div class="col-lg-6">
             <div class="row">
                 <div class="col-4">
                     <div class="card">
@@ -169,10 +170,12 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- ROW -->
-        </div> <!-- COL MEIO -->
-    </div> <!-- COL CONTAS -->
-</div> <!-- ROW -->
-
-
+            </div>
+            <!-- ROW -->
+        </div>  --}}
+        <!-- COL MEIO -->
+    </div>
+    <!-- COL CONTAS -->
+</div>
+<!-- ROW -->
 @endsection
