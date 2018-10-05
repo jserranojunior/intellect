@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\Financial;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Api\v1\Tables\categoria_contas;
+use App\Models\Api\v1\Functions\dateFunction;
 
 class ApiFinancial extends Controller
 {
@@ -15,10 +16,18 @@ class ApiFinancial extends Controller
      */
     public function index(Request $request)
         {
+            if($request->data == ''){
+                $request['data'] = date('Y-m-d');
+            }
+
+            $this->date = new dateFunction;
+            $this->date = $this->date->billsIndex($request->data,'01','31');
+            
+
             $this->categoriesAndBillsToPay = new categoria_contas;
             $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->categoriesToPayWithBills($request);
             
-            $data = ['data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
+            $data = ['dates' => $this->date, 'data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
             return($data);
         }
 

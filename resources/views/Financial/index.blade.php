@@ -29,6 +29,48 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-sm text-center">
+          
+                      <div class="dropdown">
+                        <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          {{$dates['mesAtualEscrito'] }}
+                        </button>
+                        <div class="dropdown-menu">
+                          @foreach($dates['meses'] as $meses)
+                          <a class="dropdown-item" href="?data={{$dates['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
+                          @endforeach
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm text-center">
+                      <div class="btn-group">
+                        <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          {{$dates['anoAtual']}}
+                        </button>
+                        <div class="dropdown-menu">
+                          @foreach($dates['anos'] as $anos)
+                          <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$dates['mesAtual']}}">{{$anos['numero']}}</a>
+                          @endforeach
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row row-space">
+                    <div class="col-md text-center">
+                      <a class="btn btn-default btn-xs " href="?data={{$dates['dataAnterior'] }}">Anterior</a>
+                      <a class="btn btn-default btn-xs float-center" href="financeiro">Atual</a>
+                      <a class="btn btn-default btn-xs " href="?data={{$dates['dataPosterior'] }}">Pŕoximo</a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
     </div>
     <div class="row">
         <div class="col-lg-6">

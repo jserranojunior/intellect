@@ -16,10 +16,7 @@
     padding: .2rem;
 }
 
-.card-header {
-    padding: 0.25rem 1.25rem;
 
-}
 
 .table-hover:hover{
     cursor:pointer;
@@ -52,6 +49,7 @@
         color:white;
         font-weight: bold;
         font-size:14px;
+        padding: 0.25rem 1.25rem;
     }
     /* Cores categorias */
     .categoria-essenciais {

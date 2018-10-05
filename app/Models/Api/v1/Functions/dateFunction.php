@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models\Functions;
+namespace App\Models\Api\v1\Functions;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Data extends Model
+class dateFunction extends Model
 {// MUDAR NOME DA FUNCTION
     public function billsIndex($data, $diaInicial, $diaFinal){
-
-
 
         $mesAtual = date('m',strtotime($data));
         $mesAtualEscrito = $this->mesEscrito($mesAtual);

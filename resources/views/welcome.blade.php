@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Intellect</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -74,6 +74,7 @@
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
                     @endif
+                    <a href="{{ url('/financeiro') }}">Financeiro</a>
                 </div>
             @endif
 
@@ -83,9 +84,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="/login">Seja bem vindo</a>
-                    
+                   Seja bem vindo                   
                 </div>
+            
             </div>
         </div>
     </body>

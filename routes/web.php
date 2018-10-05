@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // Financeiro
 Route::get('/financeiro', 'Financial\FinancialController@index')->name('financeiro');
 // Contas para pagar

@@ -16,7 +16,7 @@ class contas_a_pagar extends Model
     public function index($request){
 
           
-        $this->data = date('Y-m', strtotime('2018-10-10'));
+        $this->data = date('Y-m', strtotime($request->data));
          
         $this->contas = self::where(DB::raw("SUBSTRING(inicio_data_pagamento,1,7)"), '<=', $this->data) 
         ->where(DB::raw("SUBSTRING(fim_data_pagamento,1,7)"), '>=', $this->data)  
