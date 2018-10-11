@@ -11,7 +11,7 @@ class categoria_contas extends Model
 
     public function categoriesToPayWithBills($request){
 
-        
+        $categorieTotalBillsToPay = 0;
 
         $this->all = self::all();
 
@@ -20,10 +20,12 @@ class categoria_contas extends Model
         foreach($this->all as $categorie){
             $request->categoria_conta_id = $categorie->id;
             $data = $this->contas_a_pagar->index($request);
-            
+            $categorieTotalBillsToPay += $data['total'];
            $categorie->bills = $data;
-        }
+        }      
+
+        $data = ['billsToPay' => $this->all, 'categorieTotalBillsToPay' => $categorieTotalBillsToPay];
         
-        return $this->all;
+        return $data;
     }
 }

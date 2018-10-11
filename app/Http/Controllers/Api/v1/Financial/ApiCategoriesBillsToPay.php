@@ -18,7 +18,7 @@ class ApiCategoriesBillsToPay extends Controller
         $this->categoriesAndBillsToPay = new categoria_contas;
         $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->categoriesToPayWithBills($request);
         
-        $data = ['data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
+        $data = $this->categoriesAndBillsToPay;
         return($data);
     }
 

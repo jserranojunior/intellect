@@ -27,7 +27,8 @@ class ApiFinancial extends Controller
             $this->categoriesAndBillsToPay = new categoria_contas;
             $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->categoriesToPayWithBills($request);
             
-            $data = ['dates' => $this->date, 'data' => ['categoriesAndBillsToPay' => $this->categoriesAndBillsToPay]];
+            $data = ['dates' => $this->date, 'data' => $this->categoriesAndBillsToPay];
+            // dd($data);
             return($data);
         }
 

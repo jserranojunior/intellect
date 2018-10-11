@@ -31,53 +31,52 @@
         </div>
         <div class="col-sm-3">
             <div class="card">
-              <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col-sm text-center">
-          
-                      <div class="dropdown">
-                        <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          {{$dates['mesAtualEscrito'] }}
-                        </button>
-                        <div class="dropdown-menu">
-                          @foreach($dates['meses'] as $meses)
-                          <a class="dropdown-item" href="?data={{$dates['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
-                          @endforeach
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-sm text-center">
+
+                            <div class="dropdown">
+                                <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{$dates['mesAtualEscrito'] }}
+                                </button>
+                                <div class="dropdown-menu">
+                                    @foreach($dates['meses'] as $meses)
+                                    <a class="dropdown-item" href="?data={{$dates['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-sm text-center">
-                      <div class="btn-group">
-                        <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          {{$dates['anoAtual']}}
-                        </button>
-                        <div class="dropdown-menu">
-                          @foreach($dates['anos'] as $anos)
-                          <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$dates['mesAtual']}}">{{$anos['numero']}}</a>
-                          @endforeach
+                        <div class="col-sm text-center">
+                            <div class="btn-group">
+                                <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{$dates['anoAtual']}}
+                                </button>
+                                <div class="dropdown-menu">
+                                    @foreach($dates['anos'] as $anos)
+                                    <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$dates['mesAtual']}}">{{$anos['numero']}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <div class="row row-space">
-                    <div class="col-md text-center">
-                      <a class="btn btn-default btn-xs " href="?data={{$dates['dataAnterior'] }}">Anterior</a>
-                      <a class="btn btn-default btn-xs float-center" href="financeiro">Atual</a>
-                      <a class="btn btn-default btn-xs " href="?data={{$dates['dataPosterior'] }}">Pŕoximo</a>
+                    <div class="row row-space">
+                        <div class="col-md text-center">
+                            <a class="btn btn-default btn-xs " href="?data={{$dates['dataAnterior'] }}">Anterior</a>
+                            <a class="btn btn-default btn-xs float-center" href="financeiro">Atual</a>
+                            <a class="btn btn-default btn-xs " href="?data={{$dates['dataPosterior'] }}">Pŕoximo</a>
+                        </div>
                     </div>
-                  </div>
-              </div>
+                </div>
             </div>
-          </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
-                @foreach($data as $categories)
                 <div class="card-columns">
-                    @foreach($categories as $categorie)
+                    @foreach($data['billsToPay'] as $categorie)
 
                     <div class="card">
                         <div class="card-header categoria-contas-pagar {{$categorie->cor}} text-center">
@@ -95,22 +94,42 @@
                                     </tr>
                                     @endforeach
                                     <th><span class="text-bold text-primary">TOTAL</span></th>
-                                    <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span class="text-bold text-primary"></span></th>
+                                    <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span
+                                            class="text-bold text-primary"></span></th>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>                       
+                        </div>
                     </div>
                     @endforeach
                 </div>
-                @endforeach
-                <!-- não funciona -->
             </div>
-            <!-- ROW -->
         </div>
-        <!-- COL MEIO -->
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header categoria-contas-pagar categoria-lazer text-center">
+                            TOTAIS
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm table-financial table-striped  table-hover">
+                                <tr>
+                                    <td>
+                                        Contas a pagar
+                                    </td>
+                                    <td>
+                                        {{number_format($data['categorieTotalBillsToPay'])}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        {{--  <div class="col-lg-6">
+        {{-- <div class="col-lg-6">
             <div class="row">
                 <div class="col-4">
                     <div class="card">
@@ -214,7 +233,7 @@
                 </div>
             </div>
             <!-- ROW -->
-        </div>  --}}
+        </div> --}}
         <!-- COL MEIO -->
     </div>
     <!-- COL CONTAS -->
