@@ -8,19 +8,19 @@
 <div class="container-fluid">
 
     <div class="row justify-content-center">
-        <div class="col-3">
+        <div class="col-lg-3 col">
             <div class="card">
 
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <a href="{{Route('financeiro.novo.pagar')}}">
                                 <div class="btn btn-sm  btn-block btn-outline-primary active">
                                     (+) CONTA
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <div class="btn btn-block btn-sm btn-outline-warning active float-right">
                                 (+) PAGAMENTO
                             </div>
@@ -34,32 +34,10 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-sm text-center">
-
-                            <div class="dropdown">
-                                <button type="button" class="btn text-capitalize btn-sm btn-secondary dropdown-toggle"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{$dates['mesAtualEscrito'] }}
-                                </button>
-                                <div class="dropdown-menu">
-                                    @foreach($dates['meses'] as $meses)
-                                    <a class="dropdown-item" href="?data={{$dates['anoAtual']}}-{{$meses['numero']}}">{{$meses['nome']}}</a>
-                                    @endforeach
-                                </div>
-                            </div>
+                            {{$dates['mesAtualEscrito'] }}
+                            
                         </div>
-                        <div class="col-sm text-center">
-                            <div class="btn-group">
-                                <button type="button" class="float-right btn-sm btn btn-secondary dropdown-toggle"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{$dates['anoAtual']}}
-                                </button>
-                                <div class="dropdown-menu">
-                                    @foreach($dates['anos'] as $anos)
-                                    <a class="dropdown-item" href="?data={{$anos['numero']}}-{{$dates['mesAtual']}}">{{$anos['numero']}}</a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row row-space">
                         <div class="col-md text-center">
@@ -75,33 +53,35 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
-                <div class="card-columns">
-                    @foreach($data['billsToPay'] as $categorie)
-
-                    <div class="card">
-                        <div class="card-header categoria-contas-pagar {{$categorie->cor}} text-center">
-                            {{$categorie->nome}}
+                <div class="col">
+                    <div class="card-columns">
+                        @foreach($data['billsToPay'] as $categorie)
+    
+                        <div class="card">
+                            <div class="card-header categoria-contas-pagar {{$categorie->cor}} text-center">
+                                {{$categorie->nome}}
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-sm table-financial table-striped  table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($categorie->bills['bills'] as $bill)
+                                        <tr>
+                                            <td>{{ $bill->favorecido }}</td>
+                                            <td class="text-right">{{number_format($bill->valor,2,',','.')}}</td>
+                                        </tr>
+                                        @endforeach
+                                        <th><span class="text-bold text-primary">TOTAL</span></th>
+                                        <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span
+                                                class="text-bold text-primary"></span></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="card-body table-responsive">
-                            <table class="table table-sm table-financial table-striped  table-hover">
-                                <thead>
-                                </thead>
-                                <tbody>
-                                    @foreach($categorie->bills['bills'] as $bill)
-                                    <tr>
-                                        <td>{{ $bill->favorecido }}</td>
-                                        <td class="text-right">{{number_format($bill->valor,2,',','.')}}</td>
-                                    </tr>
-                                    @endforeach
-                                    <th><span class="text-bold text-primary">TOTAL</span></th>
-                                    <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span
-                                            class="text-bold text-primary"></span></th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>

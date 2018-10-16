@@ -16,7 +16,7 @@ class ApiFinancial extends Controller
      */
     public function index(Request $request)
         {
-            if($request->data == ''){
+            if($request->data == '' or $request->data == null){
                 $request['data'] = date('Y-m-d');
             }
 

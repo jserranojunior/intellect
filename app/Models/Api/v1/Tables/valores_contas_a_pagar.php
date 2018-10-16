@@ -20,7 +20,7 @@ class valores_contas_a_pagar extends Model
         ->where(DB::raw("SUBSTRING(data_pagamento,1,7)"), '<=', $this->data)
         ->orderBy('id', 'desc')
         ->take(1)
-        ->get();
+        ->get();     
 
         return $this->valorParaPagar;        
     }

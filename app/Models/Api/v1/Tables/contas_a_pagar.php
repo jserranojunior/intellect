@@ -27,15 +27,31 @@ class contas_a_pagar extends Model
         ->where(DB::raw("SUBSTRING(inicio_data_pagamento,1,7)"), '<=', $this->data) 
         ->get();
 
-        
-
+        $amountPaid = new conta_paga;       
+                
         $billsValue = new valores_contas_a_pagar;
        
         foreach($this->contas as $conta){
+            
+            
+            
+
             $this->values = $billsValue->pegarValor($this->data, $conta->id);
             
             foreach($this->values as $value){ 
-                $conta->valor = $value->valor;                
+                $conta->valor = $value->valor;
+                
+                $valuePaid = $amountPaid->getAmountPaid($this->data, $value->id);
+
+            if($valuePaid == ''){
+                 $this->contas->valor_pago = 0;
+            }else{
+          
+                foreach($valuePaid as $item){
+                    $conta->valor_pago = $item->valor;
+                }
+            }
+
             }
             
         }
