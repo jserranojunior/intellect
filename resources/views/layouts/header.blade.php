@@ -469,6 +469,8 @@
     <script src="{{url('/js/pace.min.js')}}"></script>
     <script src="{{url('/js/perfect-scrollbar.min.js')}}"></script>
     <script src="{{url('/js/coreui.js')}}"></script>
+
+    <script src="{{url('/js/main.js')}}"></script>
   </body>
 
 </html>

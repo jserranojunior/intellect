@@ -1,4 +1,5 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+require('laravel-elixir-vueify');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,18 +12,8 @@ let mix = require('laravel-mix');
  |
  */
 
-    mix.js('resources/assets/js/main.js','./public/js/all.js');
-//  mix.js('resources/assets/js/app.js', 'public/js');
-
-   /*
-mix.sass('resources/assets/sass/style.scss', 'public/css')
-.options({
-    processCssUrls: false
- });
- */
-
- mix.styles([
-    'resources/assets/css/style.css',
-], './public/css/all.css');
+mix.js('resources/js/app.js', 'public/js')
+.js('resources/js/main.js','public/js')
+   .sass('resources/sass/app.scss', 'public/css');
 
 
