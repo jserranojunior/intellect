@@ -5,16 +5,7 @@
 
 
 
-<div class="container-fluid">
-        <example-component></example-component>
-
-        <script>
-                Vue.component(
-                    'example-component',
-                    require('./components/ExampleComponent.vue')
-                );
-        </script>
-
+<div class="container-fluid"> 
     <div class="row justify-content-center">
         <div class="col-lg-3 col">
             <div class="card">

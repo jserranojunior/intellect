@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import users from './components/users';
-import axios from 'axios';
+import navBarMenu from './components/nav-bar-menu';
+// import axios from 'axios';
 
-Vue.use(axios)
+// Vue.use(axios)
  
 new Vue({
-    el:'#app',
+    el:'#appvue',
     components:{
         users,
+        navBarMenu,
     }
 })
