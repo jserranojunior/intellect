@@ -11,13 +11,14 @@ class valores_contas_a_pagar extends Model
 
 
     public function valorParaPagar($data, $contaId){
-        $this->data = $data; // validar data
+        $this->data = date('Y-m', strtotime($data)); // validar data
         $this->id = $contaId;
 
         $this->valorParaPagar = DB::table($this->table)->where('contas_a_pagar_id', $this->id)                
         ->where(DB::raw("SUBSTRING(data_pagamento,1,7)"), '=', $this->data) 
         ->orWhere('contas_a_pagar_id', $this->id)
         ->where(DB::raw("SUBSTRING(data_pagamento,1,7)"), '<=', $this->data) 
+        ->orderBy('id', 'desc')
         ->take(1)
         ->get();         
 
