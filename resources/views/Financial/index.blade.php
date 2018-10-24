@@ -1,10 +1,6 @@
 @extends('layouts.header')
 @section('content')
 
-
-
-
-
 <div class="container-fluid"> 
     <div class="row justify-content-center">
         <div class="col-lg-3 col">
@@ -98,7 +94,7 @@
                                         Contas a pagar
                                     </td>
                                     <td>
-                                        {{number_format($data['categorieTotalBillsToPay'])}}
+                                        {{number_format($data['categorieTotalBillsToPay'],2,',','.')}}
                                     </td>
                                 </tr>
                             </table>
