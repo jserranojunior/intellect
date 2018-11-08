@@ -24,7 +24,7 @@ Route::get('/financeiro/edit/{id}/{data}', 'Api\Financial\ApiBillsToPay@edit');
 
 /* v1 */
 
-Route::get('/v1/financeiro', 'Api\v1\Financial\ApiBillsToPay@index');
+Route::get('/v1/financeiro', 'Api\v1\Financial\ApiFinancial@index');
 Route::post('/v1/financeiro', 'Api\v1\Financial\ApiBillsToPay@store');
 Route::get('/v1/financeiro/{id}', 'Api\v1\Financial\ApiBillsToPay@edit');
 Route::put('/v1/financeiro/{id}', 'Api\v1\Financial\ApiBillsToPay@update');

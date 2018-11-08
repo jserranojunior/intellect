@@ -1,110 +1,70 @@
 @extends('layouts.header')
 @section('content')
 
-<div class="container-fluid"> 
-    <div class="row justify-content-center">
-        <div class="col-lg-3 col">
-            <div class="card">
+<div class="container-fluid">
+        <financial-index></financial-index>
 
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col">
-                            <a href="{{Route('financeiro.novo.pagar')}}">
-                                <div class="btn btn-sm  btn-block btn-outline-primary active">
-                                    (+) CONTA
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-columns">
+                            @foreach($data['billsToPay'] as $categorie)
+
+                            <div class="card">
+                                <div class="card-header categoria-contas-pagar {{$categorie->cor}} text-center">
+                                    {{$categorie->nome}}
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <div class="btn btn-block btn-sm btn-outline-warning active float-right">
-                                (+) PAGAMENTO
+                                <div class="card-body table-responsive">
+                                    <table class="table table-sm table-financial table-striped  table-hover">
+                                        <thead>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($categorie->bills['bills'] as $bill)
+                                            <tr>
+                                                <td>{{ $bill->favorecido }}</td>
+                                                <td class="text-right">{{number_format($bill->valor,2,',','.')}}</td>
+                                            </tr>
+                                            @endforeach
+                                            <th><span class="text-bold text-primary">TOTAL</span></th>
+                                            <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span
+                                                class="text-bold text-primary"></span></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                        <div class="col-sm text-center">
-                            {{$dates['mesAtualEscrito'] }}
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-md text-center">
-                            <a class="btn btn-default btn-xs " href="?data={{$dates['dataAnterior'] }}">Anterior</a>
-                            <a class="btn btn-default btn-xs float-center" href="financeiro">Atual</a>
-                            <a class="btn btn-default btn-xs " href="?data={{$dates['dataPosterior'] }}">Pŕoximo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="row">
-                <div class="col">
-                    <div class="card-columns">
-                        @foreach($data['billsToPay'] as $categorie)
-    
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-4">
                         <div class="card">
-                            <div class="card-header categoria-contas-pagar {{$categorie->cor}} text-center">
-                                {{$categorie->nome}}
+                            <div class="card-header categoria-contas-pagar categoria-lazer text-center">
+                                TOTAIS
                             </div>
                             <div class="card-body table-responsive">
                                 <table class="table table-sm table-financial table-striped  table-hover">
-                                    <thead>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($categorie->bills['bills'] as $bill)
-                                        <tr>
-                                            <td>{{ $bill->favorecido }}</td>
-                                            <td class="text-right">{{number_format($bill->valor,2,',','.')}}</td>
-                                        </tr>
-                                        @endforeach
-                                        <th><span class="text-bold text-primary">TOTAL</span></th>
-                                        <th class="text-right">{{number_format($categorie->bills['total'],2,',','.')}}<span
-                                                class="text-bold text-primary"></span></th>
-                                        </tr>
-                                    </tbody>
+                                    <tr>
+                                        <td>
+                                            Contas a pagar
+                                        </td>
+                                        <td>
+                                            {{number_format($data['categorieTotalBillsToPay'],2,',','.')}}
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="row">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-header categoria-contas-pagar categoria-lazer text-center">
-                            TOTAIS
-                        </div>
-                        <div class="card-body table-responsive">
-                            <table class="table table-sm table-financial table-striped  table-hover">
-                                <tr>
-                                    <td>
-                                        Contas a pagar
-                                    </td>
-                                    <td>
-                                        {{number_format($data['categorieTotalBillsToPay'],2,',','.')}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        {{-- <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
             <div class="row">
                 <div class="col-4">
                     <div class="card">
@@ -209,9 +169,10 @@
             </div>
             <!-- ROW -->
         </div> --}}
-        <!-- COL MEIO -->
+            <!-- COL MEIO -->
+        </div>
+        <!-- COL CONTAS -->
     </div>
-    <!-- COL CONTAS -->
-</div>
+
 <!-- ROW -->
 @endsection 

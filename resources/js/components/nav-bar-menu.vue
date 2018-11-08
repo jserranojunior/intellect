@@ -8,7 +8,10 @@
             <a class="nav-link" href="/intellect/financeiro">Financeiro</a>
         </li>
     </ul>
+    
 </div>
+
+
 </template>
 
 <script>
