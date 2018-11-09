@@ -32,7 +32,7 @@
                             <div class="col-md text-center">
                                 <a class="btn btn-default btn-xs " @click.stop="previousDate()" href="#">Anterior</a>
                                 <a class="btn btn-default btn-xs float-center" @click.stop="currentDate()" href="#">Atual</a>
-                                <a class="btn btn-default btn-xs" @click.stop="nextDate()" href="#">Pŕoximo</a>
+                                <a class="btn btn-default btn-xs" @click.stop="nextDate()" href="#">Proximo</a>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                                         <td>
                                             Contas a pagar
                                         </td>
-                                        <td v-money="money">
+                                        <td>
                                             {{billsToPayTotal}}
                                         </td>
                                     </tr>
@@ -114,14 +114,7 @@
                 dataAnterior: "",
                 categories: "",
                 billsToPayTotal: "",
-                money: {
-                    decimal: ',',
-                    thousands: '.',
-                    prefix: 'R$ ',
-                    suffix: ' #',
-                    precision: 2,
-                    masked: false
-                    }
+                
             }
         },
         methods: {
