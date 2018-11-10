@@ -2,7 +2,8 @@ import axios from "axios"
 
 export default{
     state:{
-      data:"",
+        data:[],
+      
       valor:0,
     },
     mutations:{

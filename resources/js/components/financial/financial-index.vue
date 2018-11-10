@@ -8,7 +8,7 @@
                             <div class="col">
                                 <a href="#">
                                     <div class="btn btn-sm  btn-block btn-outline-primary active">
-                                        (+) CONTA
+                                        (+) CONTA -- {{valor}}
                                     </div>
                                 </a>
                             </div>
@@ -113,7 +113,7 @@
                 dataPosterior: "",
                 dataAnterior: "",
                 categories: "",
-                billsToPayTotal: "",                
+                billsToPayTotal: "",         
             }
         },
         methods: {
@@ -156,14 +156,18 @@
         mounted() {
             this.getContasApagar();
             this.$store.dispatch('loadBillsToPay').then(() => {
-        });
-           
-            console.log(this.$store.state.financeiro.data.dates);
-             return this.$store.state.financeiro.valor;
+        });                   
+            console.log(this.$store.state.financeiro.data.dates);             
         },
         watch: {
-            dataAtual() {
+            dataAtual()  {
                 this.getContasApagar();
+            }
+        },
+        computed:{
+            valor(){
+                console.log(`${this.$store.state.financeiro.valor}`)
+                // return `${this.$store.state.financeiro.data.categorieTotalBillsToPay}`;
             }
         }
     };
