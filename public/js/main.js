@@ -48291,26 +48291,35 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
         data: "",
         valor: 0
     },
     mutations: {
-        LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state, valor) {
-            state.data = valor;
+        LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state) {
+            var url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
+                state.data = response.data;
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            }).then(function () {
+                // always executed
+            });
+
+            state.valor = 15;
         },
-        INCREMENT_VALOR: function INCREMENT_VALOR(state) {
-            state.valor++;
-        }
+        INCREMENT_VALOR: function INCREMENT_VALOR(state) {}
     },
 
     actions: {
         loadBillsToPay: function loadBillsToPay(context) {
-            context.commit('LOAD_BILLS_TO_PAY', 15);
-        },
-        incrementValor: function incrementValor(context) {
-            context.commit('INCREMENT_VALOR');
+            context.commit('LOAD_BILLS_TO_PAY');
         }
     }
 });
@@ -48500,14 +48509,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "nav-bar-menu",
-    methods: {
-        aumentarValor: function aumentarValor() {
-            this.$store.dispatch('incrementValor').then(function () {});
-        }
-    },
-    mounted: function mounted() {
-        this.$store.dispatch('loadBillsToPay').then(function () {});
-    }
+    methods: {},
+    mounted: function mounted() {}
 });
 
 /***/ }),
@@ -48741,7 +48744,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dataAnterior: "",
             categories: "",
             billsToPayTotal: ""
-
         };
     },
 
@@ -48780,6 +48782,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.getContasApagar();
+        this.$store.dispatch('loadBillsToPay').then(function () {});
+
+        console.log(this.$store.state.financeiro.data.dates);
+        return this.$store.state.financeiro.valor;
     },
 
     watch: {
@@ -48807,10 +48813,7 @@ var render = function() {
             _c("div", { staticClass: "row justify-content-center" }, [
               _c("div", { staticClass: "col-sm text-center" }, [
                 _vm._v(
-                  _vm._s(_vm.mesAtualEscrito) +
-                    " de " +
-                    _vm._s(_vm.anoAtual) +
-                    "\n                        "
+                  " de " + _vm._s(_vm.anoAtual) + "\n                        "
                 )
               ])
             ]),

@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="col-sm text-center">{{mesAtualEscrito}} de {{anoAtual}}
+                            <div class="col-sm text-center"> de {{anoAtual}}
                             </div>
                         </div>
                         <div class="row row-space">
@@ -113,8 +113,7 @@
                 dataPosterior: "",
                 dataAnterior: "",
                 categories: "",
-                billsToPayTotal: "",
-                
+                billsToPayTotal: "",                
             }
         },
         methods: {
@@ -153,9 +152,14 @@
             currentDate() {
                 this.dataAtual = "2018-11"
             }
-        },
+        }, 
         mounted() {
             this.getContasApagar();
+            this.$store.dispatch('loadBillsToPay').then(() => {
+        });
+           
+            console.log(this.$store.state.financeiro.data.dates);
+             return this.$store.state.financeiro.valor;
         },
         watch: {
             dataAtual() {

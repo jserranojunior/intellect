@@ -19,15 +19,11 @@
 export default {
     name: "nav-bar-menu", 
     methods:{
-        aumentarValor(){
-            this.$store.dispatch('incrementValor').then(() => {
-            })
-        }
+        
     },
     mounted (){
-     this.$store.dispatch('loadBillsToPay').then(() => {
-        })
-    }  
+     
+    } 
     
 };
 </script>
