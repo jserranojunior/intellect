@@ -7,31 +7,27 @@
         <li class="nav-item px-3">
             <a class="nav-link" href="/intellect/financeiro">Financeiro</a>
         </li>
+        <div class="btn" @click="aumentarValor()">+</div>
     </ul>
 
-    <input v-model="price" v-money="money" /> 
 </div>
 
 
 </template>
 
 <script>
-  import {VMoney} from 'v-money'
 export default {
-    name: "nav-bar-menu",
-     data () {
-      return {
-        price: 123.45,
-        money: {
-          decimal: ',',
-          thousands: '.',
-          prefix: 'R$',
-          suffix: '',
-          precision: 2,
-          masked: false
+    name: "nav-bar-menu", 
+    methods:{
+        aumentarValor(){
+            this.$store.dispatch('incrementValor').then(() => {
+            })
         }
-      }
     },
-    directives: {money: VMoney}
+    mounted (){
+     this.$store.dispatch('loadBillsToPay').then(() => {
+        })
+    }  
+    
 };
 </script>
