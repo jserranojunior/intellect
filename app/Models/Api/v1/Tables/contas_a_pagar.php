@@ -27,15 +27,11 @@ class contas_a_pagar extends Model
         ->where(DB::raw("SUBSTRING(inicio_data_pagamento,1,7)"), '<=', $this->data) 
         ->get();
 
-        $amountPaid = new conta_paga;       
-                
+        $amountPaid = new conta_paga;                       
         $billsValue = new valores_contas_a_pagar;
        
-        foreach($this->contas as $conta){
+        foreach($this->contas as $conta){           
             
-            
-            
-
             $this->values = $billsValue->pegarValor($this->data, $conta->id);
             
             foreach($this->values as $value){ 
@@ -64,8 +60,10 @@ class contas_a_pagar extends Model
 
         $sumValuesPay = $this->contas->sum('valor');
 
-        $data = ['total' => $sumValuesPay, 'bills' => $this->contas];
-     
+        // $this->contas = $this->contas->toJson();
+
+        $data = ['total' => $sumValuesPay, 'bills' => $this->contas];    
+       
         return($data);       
     
     }

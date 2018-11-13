@@ -8,7 +8,7 @@
                             <div class="col">
                                 <a href="#">
                                     <div class="btn btn-sm  btn-block btn-outline-primary active">
-                                        (+) CONTA -- {{valor}}
+                                        (+) CONTA -- {{financeiro.data.categorieTotalBillsToPay}}
                                     </div>
                                 </a>
                             </div>
@@ -53,14 +53,14 @@
                                         <thead>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="conta in categorie.bills.bills" :key="conta.id">
+                                            <tr v-for="conta in categorie.categories.bills" :key="conta.id">
                                                 <td>{{conta.favorecido}}</td>
                                                 <td class="text-right">{{conta.valor}}</td>
                                             </tr>
                                             <tr>
                                                 <th><span class="text-bold text-primary">TOTAL</span></th>
                                                 <th class="text-right"><span class="text-bold text-primary">
-                                                        {{categorie.bills.total}}
+                                                        {{categorie.categories.total}}
                                                     </span></th>
                                             </tr>
                                         </tbody>
@@ -84,7 +84,7 @@
                                 <table class="table table-sm table-financial table-striped  table-hover">
                                     <tr>
                                         <td>
-                                            Contas a pagar
+                                            Contas a pagar-- {{financeiro.data.dates.diaFinal}}
                                         </td>
                                         <td>
                                             {{billsToPayTotal}}
@@ -113,7 +113,7 @@
                 dataPosterior: "",
                 dataAnterior: "",
                 categories: "",
-                billsToPayTotal: "",         
+                billsToPayTotal: "",     
             }
         },
         methods: {
@@ -156,8 +156,10 @@
         mounted() {
             this.getContasApagar();
             this.$store.dispatch('loadBillsToPay').then(() => {
-        });                   
-            console.log(this.$store.state.financeiro.data.dates);             
+        });   
+        
+        // console.log(this.financeiro.data.categorieTotalBillsToPay)
+            
         },
         watch: {
             dataAtual()  {
@@ -165,9 +167,8 @@
             }
         },
         computed:{
-            valor(){
-                console.log(`${this.$store.state.financeiro.valor}`)
-                // return `${this.$store.state.financeiro.data.categorieTotalBillsToPay}`;
+            financeiro(){
+                return this.$store.state.financeiro
             }
         }
     };

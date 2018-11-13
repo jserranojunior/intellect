@@ -47038,14 +47038,14 @@ __webpack_require__(13);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_1_axios___default.a);
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    store: __WEBPACK_IMPORTED_MODULE_3__vuex_store__["a" /* default */],
-    el: '#appvue',
-    components: {
-        users: __WEBPACK_IMPORTED_MODULE_4__components_users___default.a,
-        navBarMenu: __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu___default.a,
-        formCreateBills: __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue___default.a,
-        financialIndex: __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index___default.a
-    }
+  store: __WEBPACK_IMPORTED_MODULE_3__vuex_store__["a" /* default */],
+  el: '#appvue',
+  components: {
+    users: __WEBPACK_IMPORTED_MODULE_4__components_users___default.a,
+    navBarMenu: __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu___default.a,
+    formCreateBills: __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue___default.a,
+    financialIndex: __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index___default.a
+  }
 });
 
 /***/ }),
@@ -48297,32 +48297,48 @@ var index_esm = {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
-        data: [],
-
+        data: '',
         valor: 0
     },
     mutations: {
-        LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state) {
-            var url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
-                state.data = response.data;
-            }).catch(function (error) {
-                // handle error
-                console.log(error);
-            }).then(function () {
-                // always executed
-            });
+        LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state, financeiro) {
 
-            state.valor = 15;
+            state.data = financeiro;
+            state.valor = 2;
         },
         INCREMENT_VALOR: function INCREMENT_VALOR(state) {}
     },
 
     actions: {
         loadBillsToPay: function loadBillsToPay(context) {
-            context.commit('LOAD_BILLS_TO_PAY');
+            var url = 'http://localhost/intellect/public/api/v1/financeiro';
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
+                return context.commit('LOAD_BILLS_TO_PAY', response.data);
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            }).then(function () {
+                // always executed
+            });
         }
     }
+
+    // let url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
+    // axios
+    //     .get(url)
+    //     .then(function (response) {
+    //         state.data = response.data; 
+
+    //         state.bills = state.data.data.billsToPay;             
+    //     })
+    //     .catch(function (error) {
+    //         // handle error
+    //         console.log(error);
+    //     })
+    //     .then(function () {
+    //         // always executed
+    //     });
+
 });
 
 /***/ }),
@@ -48784,7 +48800,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.getContasApagar();
         this.$store.dispatch('loadBillsToPay').then(function () {});
-        console.log(this.$store.state.financeiro.data.dates);
+
+        // console.log(this.financeiro.data.categorieTotalBillsToPay)
     },
 
     watch: {
@@ -48793,9 +48810,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
-        valor: function valor() {
-            console.log("" + this.$store.state.financeiro.data.data.categorieTotalBillsToPay);
-            // return `${this.$store.state.financeiro.data.categorieTotalBillsToPay}`;
+        financeiro: function financeiro() {
+            return this.$store.state.financeiro;
         }
     }
 });
@@ -48825,7 +48841,7 @@ var render = function() {
                     [
                       _vm._v(
                         "\n                                    (+) CONTA -- " +
-                          _vm._s(_vm.valor) +
+                          _vm._s(_vm.financeiro.data.categorieTotalBillsToPay) +
                           "\n                                "
                       )
                     ]
@@ -48944,7 +48960,9 @@ var render = function() {
                           _c(
                             "tbody",
                             [
-                              _vm._l(categorie.bills.bills, function(conta) {
+                              _vm._l(categorie.categories.bills, function(
+                                conta
+                              ) {
                                 return _c("tr", { key: conta.id }, [
                                   _c("td", [_vm._v(_vm._s(conta.favorecido))]),
                                   _vm._v(" "),
@@ -48964,7 +48982,7 @@ var render = function() {
                                     [
                                       _vm._v(
                                         "\n                                                    " +
-                                          _vm._s(categorie.bills.total) +
+                                          _vm._s(categorie.categories.total) +
                                           "\n                                                "
                                       )
                                     ]
@@ -49013,7 +49031,9 @@ var render = function() {
                     _c("tr", [
                       _c("td", [
                         _vm._v(
-                          "\n                                        Contas a pagar\n                                    "
+                          "\n                                        Contas a pagar-- " +
+                            _vm._s(_vm.financeiro.data.dates.diaFinal) +
+                            "\n                                    "
                         )
                       ]),
                       _vm._v(" "),
