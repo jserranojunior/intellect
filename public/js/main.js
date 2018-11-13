@@ -48754,38 +48754,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             data: "",
-            mesAtualEscrito: "",
             dataAtual: "",
             anoAtual: "",
             dataPosterior: "",
-            dataAnterior: "",
-            categories: "",
-            billsToPayTotal: ""
+            dataAnterior: ""
         };
     },
 
     methods: {
         click: function click() {
             console.log(funcionando);
-        },
-        getContasApagar: function getContasApagar() {
-            var url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
-            var objThis = this;
-            this.axios.get(url).then(function (response) {
-                objThis.data = response.data;
-                objThis.mesAtualEscrito = response.data.dates.mesAtualEscrito;
-                objThis.anoAtual = response.data.dates.anoAtual;
-                objThis.dataAtual = response.data.dates.dataAtual;
-                objThis.dataPosterior = response.data.dates.dataPosterior;
-                objThis.dataAnterior = response.data.dates.dataAnterior;
-                objThis.categories = response.data.data.billsToPay;
-                objThis.billsToPayTotal = response.data.data.categorieTotalBillsToPay;
-            }).catch(function (error) {
-                // handle error
-                console.log(error);
-            }).then(function () {
-                // always executed
-            });
         },
         nextDate: function nextDate() {
             this.dataAtual = this.dataPosterior;
@@ -48798,10 +48776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        this.getContasApagar();
         this.$store.dispatch('loadBillsToPay').then(function () {});
-
-        // console.log(this.financeiro.data.categorieTotalBillsToPay)
     },
 
     watch: {
@@ -48826,34 +48801,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-lg-3 col" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-footer" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "btn btn-sm  btn-block btn-outline-primary active"
-                    },
-                    [
-                      _vm._v(
-                        "\n                                    (+) CONTA -- " +
-                          _vm._s(_vm.financeiro.data.categorieTotalBillsToPay) +
-                          "\n                                "
-                      )
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
-          ])
-        ])
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-3" }, [
         _c("div", { staticClass: "card" }, [
@@ -48861,7 +48809,10 @@ var render = function() {
             _c("div", { staticClass: "row justify-content-center" }, [
               _c("div", { staticClass: "col-sm text-center" }, [
                 _vm._v(
-                  " de " + _vm._s(_vm.anoAtual) + "\n                        "
+                  _vm._s(_vm.financeiro.data.dates.mesAtualEscrito) +
+                    " de " +
+                    _vm._s(_vm.financeiro.data.dates.anoAtual) +
+                    "\n                        "
                 )
               ])
             ]),
@@ -48926,7 +48877,7 @@ var render = function() {
             _c(
               "div",
               { staticClass: "card-columns" },
-              _vm._l(_vm.categories, function(categorie) {
+              _vm._l(_vm.financeiro.data.data.billsToPay, function(categorie) {
                 return _c(
                   "div",
                   { key: categorie.id, staticClass: "card card-primary" },
@@ -49040,7 +48991,9 @@ var render = function() {
                       _c("td", [
                         _vm._v(
                           "\n                                        " +
-                            _vm._s(_vm.billsToPayTotal) +
+                            _vm._s(
+                              _vm.financeiro.data.data.categorieTotalBillsToPay
+                            ) +
                             "\n                                    "
                         )
                       ])
@@ -49060,19 +49013,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "btn btn-block btn-sm btn-outline-warning active float-right"
-        },
-        [
-          _vm._v(
-            "\n                                (+) PAGAMENTO\n                            "
-          )
-        ]
-      )
+    return _c("div", { staticClass: "col-lg-3 col" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-footer" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("a", { attrs: { href: "#" } }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "btn btn-sm  btn-block btn-outline-primary active"
+                  },
+                  [
+                    _vm._v(
+                      "\n                                    (+) CONTA \n                                "
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "btn btn-block btn-sm btn-outline-warning active float-right"
+                },
+                [
+                  _vm._v(
+                    "\n                                (+) PAGAMENTO\n                            "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
     ])
   },
   function() {

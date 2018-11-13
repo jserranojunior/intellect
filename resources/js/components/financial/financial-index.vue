@@ -8,7 +8,7 @@
                             <div class="col">
                                 <a href="#">
                                     <div class="btn btn-sm  btn-block btn-outline-primary active">
-                                        (+) CONTA -- {{financeiro.data.categorieTotalBillsToPay}}
+                                        (+) CONTA 
                                     </div>
                                 </a>
                             </div>
@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="col-sm text-center"> de {{anoAtual}}
+                            <div class="col-sm text-center">{{financeiro.data.dates.mesAtualEscrito}} de {{financeiro.data.dates.anoAtual}}
                             </div>
                         </div>
                         <div class="row row-space">
@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="card-columns">
-                            <div class="card card-primary" v-for="categorie in categories" :key="categorie.id">
+                            <div class="card card-primary" v-for="categorie in financeiro.data.data.billsToPay" :key="categorie.id">
                                 <div class="card-header categoria-contas-pagar text-center " v-bind:class="categorie.cor">
                                     {{categorie.nome}}
                                 </div>
@@ -87,7 +87,7 @@
                                             Contas a pagar-- {{financeiro.data.dates.diaFinal}}
                                         </td>
                                         <td>
-                                            {{billsToPayTotal}}
+                                            {{financeiro.data.data.categorieTotalBillsToPay}}
                                         </td>
                                     </tr>
                                 </table>
@@ -107,42 +107,16 @@
         data() {
             return {
                 data: "",
-                mesAtualEscrito: "",
                 dataAtual: "",
                 anoAtual: "",
                 dataPosterior: "",
-                dataAnterior: "",
-                categories: "",
-                billsToPayTotal: "",     
+                dataAnterior: "",  
             }
         },
         methods: {
             click() {
                 console.log(funcionando);
-            },
-            getContasApagar() {
-                let url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
-                let objThis = this;
-                this.axios
-                    .get(url)
-                    .then(function (response) {
-                        objThis.data = response.data;
-                        objThis.mesAtualEscrito = response.data.dates.mesAtualEscrito;
-                        objThis.anoAtual = response.data.dates.anoAtual;
-                        objThis.dataAtual = response.data.dates.dataAtual;
-                        objThis.dataPosterior = response.data.dates.dataPosterior;
-                        objThis.dataAnterior = response.data.dates.dataAnterior;
-                        objThis.categories = response.data.data.billsToPay
-                        objThis.billsToPayTotal = response.data.data.categorieTotalBillsToPay;
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-                    .then(function () {
-                        // always executed
-                    });
-            },
+            },            
             nextDate() {
                 this.dataAtual = this.dataPosterior
             },
@@ -153,13 +127,9 @@
                 this.dataAtual = "2018-11"
             }
         }, 
-        mounted() {
-            this.getContasApagar();
+        mounted() {          
             this.$store.dispatch('loadBillsToPay').then(() => {
-        });   
-        
-        // console.log(this.financeiro.data.categorieTotalBillsToPay)
-            
+            });   
         },
         watch: {
             dataAtual()  {
