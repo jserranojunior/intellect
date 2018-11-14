@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 export default {
     state: {
@@ -18,7 +18,7 @@ export default {
 
     actions: {
         loadBillsToPay(context, data) {
-            let url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + data;
+            let url = '../public/api/v1/financeiro?data=' + data;
             axios
                 .get(url)
                 .then(response => context.commit('LOAD_BILLS_TO_PAY', response.data))

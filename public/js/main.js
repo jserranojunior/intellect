@@ -48310,7 +48310,7 @@ var index_esm = {
 
     actions: {
         loadBillsToPay: function loadBillsToPay(context, data) {
-            var url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + data;
+            var url = '../public/api/v1/financeiro?data=' + data;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
                 return context.commit('LOAD_BILLS_TO_PAY', response.data);
             }).catch(function (error) {
