@@ -48297,12 +48297,11 @@ var index_esm = {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
-        data: '',
+        data: {},
         valor: 0
     },
     mutations: {
         LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state, financeiro) {
-
             state.data = financeiro;
             state.valor = 2;
         },
@@ -48310,15 +48309,15 @@ var index_esm = {
     },
 
     actions: {
-        loadBillsToPay: function loadBillsToPay(context) {
-            var url = 'http://localhost/intellect/public/api/v1/financeiro';
+        loadBillsToPay: function loadBillsToPay(context, data) {
+            var url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + data;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
                 return context.commit('LOAD_BILLS_TO_PAY', response.data);
             }).catch(function (error) {
                 // handle error
                 console.log(error);
             }).then(function () {
-                // always executed
+                / always executed/;
             });
         }
     }
@@ -48750,45 +48749,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "financial-index",
-    data: function data() {
-        return {
-            data: "",
-            dataAtual: "",
-            anoAtual: "",
-            dataPosterior: "",
-            dataAnterior: ""
-        };
-    },
+  name: "financial-index",
+  data: function data() {
+    return {
+      dataAtual: ''
+    };
+  },
 
-    methods: {
-        click: function click() {
-            console.log(funcionando);
-        },
-        nextDate: function nextDate() {
-            this.dataAtual = this.dataPosterior;
-        },
-        previousDate: function previousDate() {
-            this.dataAtual = this.dataAnterior;
-        },
-        currentDate: function currentDate() {
-            this.dataAtual = "2018-11";
-        }
+  methods: {
+    nextDate: function nextDate() {
+      this.dataAtual = this.$store.state.financeiro.data.dates.dataPosterior;
     },
-    mounted: function mounted() {
-        this.$store.dispatch('loadBillsToPay').then(function () {});
+    previousDate: function previousDate() {
+      this.dataAtual = this.$store.state.financeiro.data.dates.dataAnterior;
     },
-
-    watch: {
-        dataAtual: function dataAtual() {
-            this.getContasApagar();
-        }
+    currentDate: function currentDate() {
+      this.dataAtual = "2018-12";
     },
-    computed: {
-        financeiro: function financeiro() {
-            return this.$store.state.financeiro;
-        }
+    getContasAPagar: function getContasAPagar() {
+      this.$store.dispatch("loadBillsToPay", this.dataAtual);
     }
+  },
+  mounted: function mounted() {
+    this.currentDate();
+    this.getContasAPagar();
+  },
+
+  watch: {
+    dataAtual: function dataAtual() {
+      this.$store.dispatch("loadBillsToPay", this.dataAtual);
+    }
+  },
+  filters: {
+    money: function money(value) {
+      if (!value) return '0,00';
+      var val = (value / 1).toFixed(2).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+  },
+  computed: {
+    financeiro: function financeiro() {
+      return this.$store.state.financeiro;
+    }
+  }
 });
 
 /***/ }),
@@ -48918,7 +48921,7 @@ var render = function() {
                                   _c("td", [_vm._v(_vm._s(conta.favorecido))]),
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-right" }, [
-                                    _vm._v(_vm._s(conta.valor))
+                                    _vm._v(_vm._s(_vm._f("money")(conta.valor)))
                                   ])
                                 ])
                               }),
@@ -48933,7 +48936,11 @@ var render = function() {
                                     [
                                       _vm._v(
                                         "\n                                                    " +
-                                          _vm._s(categorie.categories.total) +
+                                          _vm._s(
+                                            _vm._f("money")(
+                                              categorie.categories.total
+                                            )
+                                          ) +
                                           "\n                                                "
                                       )
                                     ]
@@ -48982,9 +48989,7 @@ var render = function() {
                     _c("tr", [
                       _c("td", [
                         _vm._v(
-                          "\n                                        Contas a pagar-- " +
-                            _vm._s(_vm.financeiro.data.dates.diaFinal) +
-                            "\n                                    "
+                          "\n                                        Contas a pagar\n                                    "
                         )
                       ]),
                       _vm._v(" "),
@@ -48992,7 +48997,10 @@ var render = function() {
                         _vm._v(
                           "\n                                        " +
                             _vm._s(
-                              _vm.financeiro.data.data.categorieTotalBillsToPay
+                              _vm._f("money")(
+                                _vm.financeiro.data.data
+                                  .categorieTotalBillsToPay
+                              )
                             ) +
                             "\n                                    "
                         )

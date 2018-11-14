@@ -1,51 +1,45 @@
 import axios from "axios"
 
-export default{
-    state:{
-        data: '',      
-      valor:0,
+export default {
+    state: {
+        data: {},
+        valor: 0,
     },
-    mutations:{
+    mutations: {
 
 
-        LOAD_BILLS_TO_PAY(state, financeiro){  
-            
+        LOAD_BILLS_TO_PAY(state, financeiro) {
             state.data = financeiro
             state.valor = 2
         },
-        INCREMENT_VALOR(state){
-            
+        INCREMENT_VALOR(state) {
         }
     },
 
-    actions:{
-        loadBillsToPay(context){
-            let url = 'http://localhost/intellect/public/api/v1/financeiro';
+    actions: {
+        loadBillsToPay(context, data) {
+            let url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + data;
             axios
                 .get(url)
-                .then(response =>context.commit('LOAD_BILLS_TO_PAY',response.data))
-                
+                .then(response => context.commit('LOAD_BILLS_TO_PAY', response.data))
                 .catch(function (error) {
                     // handle error
                     console.log(error);
                 })
                 .then(function () {
-                    // always executed
+                    / always executed/
                 });
-           
-            
-                    
         },
-       
+
     }
-} 
+}
 
 // let url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
             // axios
             //     .get(url)
             //     .then(function (response) {
             //         state.data = response.data; 
-                    
+
             //         state.bills = state.data.data.billsToPay;             
             //     })
             //     .catch(function (error) {

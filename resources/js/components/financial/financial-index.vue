@@ -55,12 +55,12 @@
                                         <tbody>
                                             <tr v-for="conta in categorie.categories.bills" :key="conta.id">
                                                 <td>{{conta.favorecido}}</td>
-                                                <td class="text-right">{{conta.valor}}</td>
+                                                <td class="text-right">{{conta.valor | money }}</td>
                                             </tr>
                                             <tr>
                                                 <th><span class="text-bold text-primary">TOTAL</span></th>
                                                 <th class="text-right"><span class="text-bold text-primary">
-                                                        {{categorie.categories.total}}
+                                                        {{categorie.categories.total | money}}
                                                     </span></th>
                                             </tr>
                                         </tbody>
@@ -84,14 +84,14 @@
                                 <table class="table table-sm table-financial table-striped  table-hover">
                                     <tr>
                                         <td>
-                                            Contas a pagar-- {{financeiro.data.dates.diaFinal}}
+                                            Contas a pagar
                                         </td>
                                         <td>
-                                            {{financeiro.data.data.categorieTotalBillsToPay}}
+                                            {{financeiro.data.data.categorieTotalBillsToPay | money}}
                                         </td>
                                     </tr>
                                 </table>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -102,44 +102,47 @@
 </template>
 
 <script>
-    export default {
-        name: "financial-index",
-        data() {
-            return {
-                data: "",
-                dataAtual: "",
-                anoAtual: "",
-                dataPosterior: "",
-                dataAnterior: "",  
-            }
-        },
-        methods: {
-            click() {
-                console.log(funcionando);
-            },            
-            nextDate() {
-                this.dataAtual = this.dataPosterior
-            },
-            previousDate() {
-                this.dataAtual = this.dataAnterior
-            },
-            currentDate() {
-                this.dataAtual = "2018-11"
-            }
-        }, 
-        mounted() {          
-            this.$store.dispatch('loadBillsToPay').then(() => {
-            });   
-        },
-        watch: {
-            dataAtual()  {
-                this.getContasApagar();
-            }
-        },
-        computed:{
-            financeiro(){
-                return this.$store.state.financeiro
-            }
-        }
+export default {
+  name: "financial-index",
+  data() {
+    return {
+        dataAtual:'',
     };
+  },
+  methods: {
+    nextDate() {
+      this.dataAtual = this.$store.state.financeiro.data.dates.dataPosterior;
+    },
+    previousDate() {
+      this.dataAtual = this.$store.state.financeiro.data.dates.dataAnterior;
+    },
+    currentDate() {
+      this.dataAtual = "2018-12";       
+    },
+    getContasAPagar(){
+        this.$store.dispatch("loadBillsToPay", this.dataAtual);
+    },
+  },
+  mounted() {
+    this.currentDate();
+    this.getContasAPagar();    
+  },
+  watch: {
+    dataAtual() {
+      this.$store.dispatch("loadBillsToPay", this.dataAtual);
+    }
+  },
+  filters:{
+      money: function(value){
+        if (!value) return '0,00';
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      }
+  },
+  computed: {
+    financeiro() {
+      return this.$store.state.financeiro;
+    }
+  }
+};
 </script>
