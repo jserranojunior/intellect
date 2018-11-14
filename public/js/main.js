@@ -49214,7 +49214,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        this.axios.post('/intellect/public/api/v1/financeiro', this.fields).then(function (response) {
+        this.axios.post('../public/api/v1/financeiro', this.fields).then(function (response) {
           _this.fields = {}; //Clear input fields.
           _this.loaded = true;
           _this.success = true;

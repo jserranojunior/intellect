@@ -78,7 +78,7 @@
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        this.axios.post('/intellect/public/api/v1/financeiro', this.fields).then(response => {
+        this.axios.post('../public/api/v1/financeiro', this.fields).then(response => {
           this.fields = {}; //Clear input fields.
           this.loaded = true;
           this.success = true;
