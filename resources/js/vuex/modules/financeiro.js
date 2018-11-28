@@ -6,8 +6,6 @@ export default {
         valor: 0,
     },
     mutations: {
-
-
         LOAD_BILLS_TO_PAY(state, financeiro) {
             state.data = financeiro
             state.valor = 2
@@ -33,19 +31,3 @@ export default {
 
     }
 }
-
-// let url = 'http://localhost/intellect/public/api/v1/financeiro?data=' + this.dataAtual;
-            // axios
-            //     .get(url)
-            //     .then(function (response) {
-            //         state.data = response.data; 
-
-            //         state.bills = state.data.data.billsToPay;             
-            //     })
-            //     .catch(function (error) {
-            //         // handle error
-            //         console.log(error);
-            //     })
-            //     .then(function () {
-            //         // always executed
-            //     });

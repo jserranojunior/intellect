@@ -1,10 +1,11 @@
 <template>
     <div>
-       
-<form @submit.prevent.stop="submit" method="post">
+
+        <form @submit.prevent.stop="submit" method="post">
             <div class="form-group">
                 <!-- <label for="favorecido">Favorecido</label> -->
-                <input type="text" class="form-control" name="favorecido" v-model="fields.favorecido" required placeholder="Favorecido">
+                <input type="text" class="form-control" name="favorecido" v-model="fields.favorecido" required
+                    placeholder="Favorecido">
                 <!-- COLOCAR SELECT COM OPÇÃO DE ADICIONAR CONTA -->
             </div>
 
@@ -18,7 +19,8 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="date" class="form-control"  placeholder="Inicio Pagamento" required v-model="fields.inicio_data_pagamento" name="inicio_data_pagamento">
+                <input type="date" class="form-control" placeholder="Inicio Pagamento" required v-model="fields.inicio_data_pagamento"
+                    name="inicio_data_pagamento">
             </div>
 
             <div class="form-group">
@@ -27,17 +29,17 @@
             </div>
 
             <div class="form-group">
-                
-                <select name="categoria" id="" v-model="fields.categoria" required class="form-control">                   
-                    <option value="1">Essenciais</option> 
-                        <option value="2">Compras</option> 
-                        <option value="3">Urgencias</option> 
-                        <option value="4">Poupança</option> 
-                        <option value="5">Lazer</option> 
-                        <option value="6">Transporte</option> 
-                        <option value="7">Alimentação</option> 
-                        <option value="8">Estudos</option> 
-                        <option value="9">Avulsos</option>
+
+                <select name="categoria" id="" v-model="fields.categoria" required class="form-control">
+                    <option value="1">Essenciais</option>
+                    <option value="2">Compras</option>
+                    <option value="3">Urgencias</option>
+                    <option value="4">Poupança</option>
+                    <option value="5">Lazer</option>
+                    <option value="6">Transporte</option>
+                    <option value="7">Alimentação</option>
+                    <option value="8">Estudos</option>
+                    <option value="9">Avulsos</option>
                 </select>
             </div>
 
@@ -72,37 +74,39 @@
 <script>
     export default {
         name: "form-create-bills",
-        methods:{
-            submit(){
+        methods: {
+            submit() {
                 if (this.loaded) {
-        this.loaded = false;
-        this.success = false;
-        this.errors = {};
-        this.axios.post('../public/api/v1/financeiro', this.fields).then(response => {
-          this.fields = {}; //Clear input fields.
-          this.loaded = true;
-          this.success = true;
-        }).catch(error => {
-          this.loaded = true;
-          if (error.response.status === 422) {
-            this.errors = error.response.data.errors || {};
-          }
-        });
-      }
+                    this.loaded = false;
+                    this.success = false;
+                    this.errors = {};
+                    this.axios
+                        .post("../public/api/v1/financeiro", this.fields)
+                        .then(response => {
+                            this.fields = {}; //Clear input fields.
+                            this.loaded = true;
+                            this.success = true;
+                        })
+                        .catch(error => {
+                            this.loaded = true;
+                            if (error.response.status === 422) {
+                                this.errors = error.response.data.errors || {};
+                            }
+                        });
+                }
             }
-        },data(){
-            return{
-               fields: {},
-      errors: {},
-      success: false,
-      loaded: true,
-            }
-
+        },
+        data() {
+            return {
+                fields: {},
+                errors: {},
+                success: false,
+                loaded: true,
+            };
         }
-    }
-
+    };
 </script>
 
 
-/* 
+/*
 */
