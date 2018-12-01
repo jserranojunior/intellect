@@ -26,6 +26,10 @@ body{
 
 }
 
+.modal-body {
+    margin: 0px 0; 
+}
+
 /* FIM BOOTSTRAP */
 /*
 .tbody, .thead {

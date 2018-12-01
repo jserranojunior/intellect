@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col">
                                 <a href="#">
-                                    <div class="btn btn-sm  btn-block btn-outline-primary active" @click="showModal = true">
+                                    <div class="btn btn-sm  btn-block btn-outline-primary active" data-toggle="modal" data-target="#exampleModal">
                                         (+) CONTA
                                     </div>
                                 </a>
@@ -101,13 +101,24 @@
         </div>
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">NOVA CONTA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form-create-bills></form-create-bills>
+      </div>
+    </div>
+  </div>
+</div>
 
 
         <modal v-if="showModal" @close="showModal = false">
-            <!--
-      you can use custom content here to overwrite
-      default content
-    -->
             <transition name="modal">
                 <div class="modal-mask">
                     <div class="modal-wrapper">
@@ -115,13 +126,14 @@
 
                             <div class="modal-header">
                                 <slot name="header">
-                                    <h5 class="text-center">NOVA CONTA</h5>
+                                    <h5 class="text-center">NOVA CONTA</h5> 
                                 </slot>
+                                <span @click="showModal = false">X</span>
                             </div>
 
                             <div class="modal-body">
                                 <slot name="body">
-                                    <form-create-bills></form-create-bills>
+                                    
                                 </slot>
                             </div>
 
@@ -139,13 +151,17 @@
                     </div>
                 </div>
             </transition>
-
         </modal>
+
+
 
     </div>
 </template>
 
 <script>
+    import formCreateBills from './form-create-bills.vue';
+
+
     export default {
         name: "financial-index",
         components:{       

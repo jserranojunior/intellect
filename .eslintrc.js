@@ -5,8 +5,11 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 5
-    },
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true
+        }
+    }, 
     "rules": {
         "indent": [
             "error",

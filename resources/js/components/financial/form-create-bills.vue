@@ -97,7 +97,7 @@
             }
         },
         data() {
-            return {
+            return { 
                 fields: {},
                 errors: {},
                 success: false,
