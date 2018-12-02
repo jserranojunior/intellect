@@ -64,35 +64,32 @@
             </div>
 
             <div class="card-footer text-center">
-                <input type="submit" value="Cadastrar" class="btn btn-primary">
+    
+                <div class="btn btn-primary" data-dismiss="modal" @click="submit">Cadastrar</div>
             </div>
 
         </form>
     </div>
-</template>
+</template> 
 
 <script>
     export default {
         name: "form-create-bills",
         methods: {
+            teste(){
+                this.$store.dispatch("createBillsToPay", this.fields);
+                this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);
+            },
             submit() {
                 if (this.loaded) {
                     this.loaded = false;
                     this.success = false;
                     this.errors = {};
-                    this.axios
-                        .post("../public/api/v1/financeiro", this.fields)
-                        .then(response => {
-                            this.fields = {}; //Clear input fields.
-                            this.loaded = true;
-                            this.success = true;
-                        })
-                        .catch(error => {
-                            this.loaded = true;
-                            if (error.response.status === 422) {
-                                this.errors = error.response.data.errors || {};
-                            }
-                        });
+                    this.$store.dispatch("createBillsToPay", this.fields);                 
+                    this.fields = {}; 
+                    this.loaded = true;
+                    this.success = true;
+                    this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);                      
                 }
             }
         },
@@ -102,6 +99,7 @@
                 errors: {},
                 success: false,
                 loaded: true,
+                inicio_data_pagamento:'2018-12',
             };
         }
     };

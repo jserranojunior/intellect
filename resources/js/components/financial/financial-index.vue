@@ -191,13 +191,14 @@
                 this.$store.dispatch("loadBillsToPay", this.dataAtual);
             },
         },
-        mounted() {
-            this.currentDate();
-            this.getContasAPagar();
+        mounted() {  
+            this.currentDate()           
+            this.$store.dispatch("loadBillsToPay", "");    
+                     
         },
         watch: {
             dataAtual() {
-                this.$store.dispatch("loadBillsToPay", this.dataAtual);
+                this.getContasAPagar()
             }
         },
         filters: {
@@ -257,14 +258,7 @@
         float: right;
     }
 
-    /*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
+
 
     .modal-enter {
         opacity: 0;
