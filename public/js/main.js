@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -506,12 +506,6 @@ module.exports = defaults;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(17);
-
-/***/ }),
-/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3092,7 +3086,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13463,6 +13457,12 @@ return jQuery;
 
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(17);
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14034,7 +14034,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 window._ = __webpack_require__(14);
-window.Popper = __webpack_require__(4).default;
+window.Popper = __webpack_require__(3).default;
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -14042,7 +14042,7 @@ window.Popper = __webpack_require__(4).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(5);
+  window.$ = window.jQuery = __webpack_require__(4);
 
   __webpack_require__(16);
 } catch (e) {}
@@ -14053,7 +14053,7 @@ try {
  */
 
 
-window.axios = __webpack_require__(3);
+window.axios = __webpack_require__(5);
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -31234,7 +31234,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(4), __webpack_require__(3)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -47020,408 +47020,19 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(42).setImmediate))
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(12)
-/* script */
-var __vue_script__ = __webpack_require__(60)
-/* template */
-var __vue_template__ = __webpack_require__(61)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/financial/form-create-bills.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c32a54ba", Component.options)
-  } else {
-    hotAPI.reload("data-v-c32a54ba", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(40);
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_axios__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vuex_store__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_users__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_users___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_users__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue__);
-__webpack_require__(13);
-
-
-
-
-
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_1_axios___default.a);
-new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  store: __WEBPACK_IMPORTED_MODULE_3__vuex_store__["a" /* default */],
-  el: '#appvue',
-  components: {
-    users: __WEBPACK_IMPORTED_MODULE_4__components_users___default.a,
-    navBarMenu: __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu___default.a,
-    formCreateBills: __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue___default.a,
-    financialIndex: __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index___default.a
-  }
-});
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(42);
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
-    "use strict";
-
-    if (global.setImmediate) {
-        return;
-    }
-
-    var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
-    var currentlyRunningATask = false;
-    var doc = global.document;
-    var registerImmediate;
-
-    function setImmediate(callback) {
-      // Callback can either be a function or a string
-      if (typeof callback !== "function") {
-        callback = new Function("" + callback);
-      }
-      // Copy function arguments
-      var args = new Array(arguments.length - 1);
-      for (var i = 0; i < args.length; i++) {
-          args[i] = arguments[i + 1];
-      }
-      // Store and register the task
-      var task = { callback: callback, args: args };
-      tasksByHandle[nextHandle] = task;
-      registerImmediate(nextHandle);
-      return nextHandle++;
-    }
-
-    function clearImmediate(handle) {
-        delete tasksByHandle[handle];
-    }
-
-    function run(task) {
-        var callback = task.callback;
-        var args = task.args;
-        switch (args.length) {
-        case 0:
-            callback();
-            break;
-        case 1:
-            callback(args[0]);
-            break;
-        case 2:
-            callback(args[0], args[1]);
-            break;
-        case 3:
-            callback(args[0], args[1], args[2]);
-            break;
-        default:
-            callback.apply(undefined, args);
-            break;
-        }
-    }
-
-    function runIfPresent(handle) {
-        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-        // So if we're currently running a task, we'll need to delay this invocation.
-        if (currentlyRunningATask) {
-            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-            // "too much recursion" error.
-            setTimeout(runIfPresent, 0, handle);
-        } else {
-            var task = tasksByHandle[handle];
-            if (task) {
-                currentlyRunningATask = true;
-                try {
-                    run(task);
-                } finally {
-                    clearImmediate(handle);
-                    currentlyRunningATask = false;
-                }
-            }
-        }
-    }
-
-    function installNextTickImplementation() {
-        registerImmediate = function(handle) {
-            process.nextTick(function () { runIfPresent(handle); });
-        };
-    }
-
-    function canUsePostMessage() {
-        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
-        // where `global.postMessage` means something completely different and can't be used for this purpose.
-        if (global.postMessage && !global.importScripts) {
-            var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
-                postMessageIsAsynchronous = false;
-            };
-            global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
-            return postMessageIsAsynchronous;
-        }
-    }
-
-    function installPostMessageImplementation() {
-        // Installs an event handler on `global` for the `message` event: see
-        // * https://developer.mozilla.org/en/DOM/window.postMessage
-        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
-
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
-            if (event.source === global &&
-                typeof event.data === "string" &&
-                event.data.indexOf(messagePrefix) === 0) {
-                runIfPresent(+event.data.slice(messagePrefix.length));
-            }
-        };
-
-        if (global.addEventListener) {
-            global.addEventListener("message", onGlobalMessage, false);
-        } else {
-            global.attachEvent("onmessage", onGlobalMessage);
-        }
-
-        registerImmediate = function(handle) {
-            global.postMessage(messagePrefix + handle, "*");
-        };
-    }
-
-    function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
-            var handle = event.data;
-            runIfPresent(handle);
-        };
-
-        registerImmediate = function(handle) {
-            channel.port2.postMessage(handle);
-        };
-    }
-
-    function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        registerImmediate = function(handle) {
-            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
-            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
-            script.onreadystatechange = function () {
-                runIfPresent(handle);
-                script.onreadystatechange = null;
-                html.removeChild(script);
-                script = null;
-            };
-            html.appendChild(script);
-        };
-    }
-
-    function installSetTimeoutImplementation() {
-        registerImmediate = function(handle) {
-            setTimeout(runIfPresent, 0, handle);
-        };
-    }
-
-    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
-    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
-
-    // Don't get fooled by e.g. browserify environments.
-    if ({}.toString.call(global.process) === "[object process]") {
-        // For Node.js before 0.9
-        installNextTickImplementation();
-
-    } else if (canUsePostMessage()) {
-        // For non-IE10 modern browsers
-        installPostMessageImplementation();
-
-    } else if (global.MessageChannel) {
-        // For web workers, where supported
-        installMessageChannelImplementation();
-
-    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
-        // For IE 6–8
-        installReadyStateChangeImplementation();
-
-    } else {
-        // For older browsers
-        installSetTimeoutImplementation();
-    }
-
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
-}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(11)))
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o};!function(){function o(e,t){if(!o.installed){if(o.installed=!0,!t)return void console.error("You have to install axios");e.axios=t,Object.defineProperties(e.prototype,{axios:{get:function(){return t}},$http:{get:function(){return t}}})}}"object"==( false?"undefined":_typeof(exports))?module.exports=o: true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function(){return o}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):window.Vue&&window.axios&&Vue.use(o,window.axios)}();
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_financeiro__ = __webpack_require__(46);
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-  modules: {
-    financeiro: __WEBPACK_IMPORTED_MODULE_2__modules_financeiro__["a" /* default */]
-  }
-}));
-
-/***/ }),
-/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export Store */
 /* unused harmony export install */
-/* unused harmony export mapState */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapState; });
 /* unused harmony export mapMutations */
 /* unused harmony export mapGetters */
-/* unused harmony export mapActions */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
 /* unused harmony export createNamespacedHelpers */
 /**
  * vuex v3.0.1
@@ -48357,11 +47968,400 @@ var index_esm = {
 
 
 /***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(12)
+/* script */
+var __vue_script__ = __webpack_require__(60)
+/* template */
+var __vue_template__ = __webpack_require__(61)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/financial/form-create-bills.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c32a54ba", Component.options)
+  } else {
+    hotAPI.reload("data-v-c32a54ba", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 38 */,
+/* 39 */,
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(41);
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_axios__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vuex_store__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_users__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_users___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_users__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue__);
+__webpack_require__(13);
+
+
+
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_1_axios___default.a);
+new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+  store: __WEBPACK_IMPORTED_MODULE_3__vuex_store__["a" /* default */],
+  el: '#appvue',
+  components: {
+    users: __WEBPACK_IMPORTED_MODULE_4__components_users___default.a,
+    navBarMenu: __WEBPACK_IMPORTED_MODULE_5__components_nav_bar_menu___default.a,
+    formCreateBills: __WEBPACK_IMPORTED_MODULE_7__components_financial_form_create_bills_vue___default.a,
+    financialIndex: __WEBPACK_IMPORTED_MODULE_6__components_financial_financial_index___default.a
+  }
+});
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(43);
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(11)))
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o};!function(){function o(e,t){if(!o.installed){if(o.installed=!0,!t)return void console.error("You have to install axios");e.axios=t,Object.defineProperties(e.prototype,{axios:{get:function(){return t}},$http:{get:function(){return t}}})}}"object"==( false?"undefined":_typeof(exports))?module.exports=o: true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function(){return o}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):window.Vue&&window.axios&&Vue.use(o,window.axios)}();
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_financeiro__ = __webpack_require__(46);
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
+  modules: {
+    financeiro: __WEBPACK_IMPORTED_MODULE_2__modules_financeiro__["a" /* default */]
+  }
+}));
+
+/***/ }),
 /* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -48380,16 +48380,7 @@ var index_esm = {
   },
   actions: {
     loadBillsToPay: function loadBillsToPay(context, data) {
-      var url = '';
-
-      if (data > '') {
-        url = '../public/api/v1/financeiro?data=' + data;
-      } else {
-        var _url = '../public/api/v1/financeiro?data=' + '2018-12';
-
-        console.log(_url);
-      }
-
+      var url = '../public/api/v1/financeiro?data=' + data;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
         return context.commit('LOAD_BILLS_TO_PAY', response.data);
       }).catch(function (error) {
@@ -48398,6 +48389,12 @@ var index_esm = {
       }).then(function () {
         / always executed/;
       });
+    },
+    nextDateBillsToPay: function nextDateBillsToPay(state, dispatch) {
+      state.dispatch("loadBillsToPay", this.state.financeiro.data.dates.dataPosterior);
+    },
+    previousDateBillsToPay: function previousDateBillsToPay(state, dispatch) {
+      state.dispatch("loadBillsToPay", this.state.financeiro.data.dates.dataAnterior);
     },
     createBillsToPay: function createBillsToPay(context, fields) {
       var _this = this;
@@ -48467,7 +48464,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48665,10 +48662,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(54)
-}
 var normalizeComponent = __webpack_require__(12)
 /* script */
 var __vue_script__ = __webpack_require__(59)
@@ -48677,7 +48670,7 @@ var __vue_template__ = __webpack_require__(62)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -48712,396 +48705,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(55);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(57)("9223da5c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89a81d66\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./financial-index.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89a81d66\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./financial-index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(56)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.modal-mask {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    transition: opacity .3s ease;\n}\n.modal-wrapper {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container {\n    width: 30%;\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body {\n    margin: 20px 0;\n}\n.modal-default-button {\n    float: right;\n}\n.modal-enter {\n    opacity: 0;\n}\n.modal-leave-active {\n    opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(58)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
 /* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_create_bills_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_create_bills_vue__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_create_bills_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__form_create_bills_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(36);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -49222,46 +48842,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "financial-index",
@@ -49269,37 +48850,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     formCreateBills: __WEBPACK_IMPORTED_MODULE_0__form_create_bills_vue___default.a
   },
   data: function data() {
-    return {
-      dataAtual: '',
-      showModal: false,
-      fields: {},
-      errors: {},
-      success: false,
-      loaded: true
-    };
+    return {};
   },
-  methods: {
+  methods: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay']), {
     nextDate: function nextDate() {
-      this.dataAtual = this.$store.state.financeiro.data.dates.dataPosterior;
+      this.dataAtual = this.financeiro.data.dates.dataPosterior;
     },
     previousDate: function previousDate() {
-      this.dataAtual = this.$store.state.financeiro.data.dates.dataAnterior;
-    },
-    currentDate: function currentDate() {
-      this.dataAtual = "2018-12";
+      this.previousDateBillsToPay();
     },
     getContasAPagar: function getContasAPagar() {
-      this.$store.dispatch("loadBillsToPay", this.dataAtual);
+      this.loadBillsToPay(this.dataAtual);
+    },
+    nextBillsToPay: function nextBillsToPay() {
+      this.nextDateBillsToPay();
     }
-  },
+  }),
   mounted: function mounted() {
-    this.currentDate();
-    this.$store.dispatch("loadBillsToPay", "");
-  },
-  watch: {
-    dataAtual: function dataAtual() {
-      this.getContasAPagar();
-    }
+    this.loadBillsToPay("");
   },
   filters: {
     money: function money(value) {
@@ -49308,11 +48876,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   },
-  computed: {
-    financeiro: function financeiro() {
-      return this.$store.state.financeiro;
+  computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
+    financeiro: function financeiro(state) {
+      return state.financeiro;
     }
-  }
+  }))
 });
 
 /***/ }),
@@ -49321,6 +48889,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(36);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -49394,36 +48967,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "form-create-bills",
   methods: {
-    teste: function teste() {
-      this.$store.dispatch("createBillsToPay", this.fields);
-      this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);
-    },
     submit: function submit() {
       if (this.loaded) {
+        this.$store.dispatch("createBillsToPay", this.fields);
+        this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        this.$store.dispatch("createBillsToPay", this.fields);
-        this.fields = {};
-        this.loaded = true;
-        this.success = true;
-        this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);
       }
     }
+  },
+  mounted: function mounted() {
+    console.log('funcionando' + this.dataAtual); // this.fields.inicio_data_pagamento = '2018-02-02'
+    // this.dataAtual
+
+    console.log(this.fields.inicio_data_pagamento);
   },
   data: function data() {
     return {
       fields: {},
       errors: {},
       success: false,
-      loaded: true,
-      inicio_data_pagamento: '2018-12'
+      loaded: true
     };
-  }
+  },
+  computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])({
+    financeiro: function financeiro(state) {
+      return state.financeiro;
+    },
+    dataAtual: function dataAtual(state) {
+      return state.financeiro.data.dates.dataAtual;
+    }
+  }))
 });
 
 /***/ }),
@@ -49552,6 +49131,7 @@ var render = function() {
             attrs: {
               type: "date",
               placeholder: "Inicio Pagamento",
+              value: "2018-02-02",
               required: "",
               name: "inicio_data_pagamento"
             },
@@ -49802,359 +49382,251 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row justify-content-center" }, [
-                _c("div", { staticClass: "col-sm text-center" }, [
-                  _vm._v(
-                    _vm._s(_vm.financeiro.data.dates.mesAtualEscrito) +
-                      " de\n                                " +
-                      _vm._s(_vm.financeiro.data.dates.anoAtual) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row row-space" }, [
-                _c("div", { staticClass: "col-md text-center" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-default btn-xs ",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.previousDate()
-                        }
-                      }
-                    },
-                    [_vm._v("Anterior")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-default btn-xs float-center",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.currentDate()
-                        }
-                      }
-                    },
-                    [_vm._v("Atual")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-default btn-xs",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.nextDate()
-                        }
-                      }
-                    },
-                    [_vm._v("Proximo")]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c(
-                "div",
-                { staticClass: "card-columns" },
-                _vm._l(_vm.financeiro.data.data.billsToPay, function(
-                  categorie
-                ) {
-                  return _c(
-                    "div",
-                    { key: categorie.id, staticClass: "card card-primary" },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "card-header categoria-contas-pagar text-center ",
-                          class: categorie.cor
-                        },
-                        [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(categorie.nome) +
-                              "\n                                "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body table-responsive" }, [
-                        _c(
-                          "table",
-                          {
-                            staticClass:
-                              "table table-sm table-financial table-striped  table-hover"
-                          },
-                          [
-                            _c("thead"),
-                            _vm._v(" "),
-                            _c(
-                              "tbody",
-                              [
-                                _vm._l(categorie.categories.bills, function(
-                                  conta
-                                ) {
-                                  return _c("tr", { key: conta.id }, [
-                                    _c("td", [
-                                      _vm._v(_vm._s(conta.favorecido))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", { staticClass: "text-right" }, [
-                                      _vm._v(
-                                        _vm._s(_vm._f("money")(conta.valor))
-                                      )
-                                    ])
-                                  ])
-                                }),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _vm._m(1, true),
-                                  _vm._v(" "),
-                                  _c("th", { staticClass: "text-right" }, [
-                                    _c(
-                                      "span",
-                                      { staticClass: "text-bold text-primary" },
-                                      [
-                                        _vm._v(
-                                          "\n                                                        " +
-                                            _vm._s(
-                                              _vm._f("money")(
-                                                categorie.categories.total
-                                              )
-                                            ) +
-                                            "\n                                                    "
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ])
-                              ],
-                              2
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                })
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-4" }, [
-              _c("div", { staticClass: "card" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "card-header categoria-contas-pagar categoria-lazer text-center"
-                  },
-                  [
-                    _vm._v(
-                      "\n                                TOTAIS\n                            "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body table-responsive" }, [
-                  _c(
-                    "table",
-                    {
-                      staticClass:
-                        "table table-sm table-financial table-striped  table-hover"
-                    },
-                    [
-                      _c("tr", [
-                        _c("td", [
-                          _vm._v(
-                            "\n                                            Contas a pagar\n                                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                                            " +
-                              _vm._s(
-                                _vm._f("money")(
-                                  _vm.financeiro.data.data
-                                    .categorieTotalBillsToPay
-                                )
-                              ) +
-                              "\n                                        "
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "exampleModal",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-labelledby": "exampleModalLabel",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "modal-body" },
-                  [_c("form-create-bills")],
-                  1
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-sm text-center" }, [
+                _vm._v(
+                  _vm._s(_vm.financeiro.data.dates.mesAtualEscrito) +
+                    " de " +
+                    _vm._s(_vm.financeiro.data.dates.anoAtual) +
+                    "\n                        "
                 )
               ])
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _vm.showModal
-        ? _c(
-            "modal",
-            {
-              on: {
-                close: function($event) {
-                  _vm.showModal = false
-                }
-              }
-            },
-            [
-              _c("transition", { attrs: { name: "modal" } }, [
-                _c("div", { staticClass: "modal-mask" }, [
-                  _c("div", { staticClass: "modal-wrapper" }, [
-                    _c("div", { staticClass: "modal-container" }, [
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row row-space" }, [
+              _c("div", { staticClass: "col-md text-center" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-xs ",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.previousDate()
+                      }
+                    }
+                  },
+                  [_vm._v("Anterior")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-xs float-center",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.currentDate()
+                      }
+                    }
+                  },
+                  [_vm._v("Atual")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-xs",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.nextBillsToPay()
+                      }
+                    }
+                  },
+                  [_vm._v("Proximo")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "div",
+              { staticClass: "card-columns" },
+              _vm._l(_vm.financeiro.data.data.billsToPay, function(categorie) {
+                return _c(
+                  "div",
+                  { key: categorie.id, staticClass: "card card-primary" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "card-header categoria-contas-pagar text-center ",
+                        class: categorie.cor
+                      },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(categorie.nome) +
+                            "\n                            "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body table-responsive" }, [
                       _c(
-                        "div",
-                        { staticClass: "modal-header" },
+                        "table",
+                        {
+                          staticClass:
+                            "table table-sm table-financial table-striped  table-hover"
+                        },
                         [
-                          _vm._t("header", [
-                            _c("h5", { staticClass: "text-center" }, [
-                              _vm._v("NOVA CONTA")
-                            ])
-                          ]),
+                          _c("thead"),
                           _vm._v(" "),
                           _c(
-                            "span",
-                            {
-                              on: {
-                                click: function($event) {
-                                  _vm.showModal = false
-                                }
-                              }
-                            },
-                            [_vm._v("X")]
+                            "tbody",
+                            [
+                              _vm._l(categorie.categories.bills, function(
+                                conta
+                              ) {
+                                return _c("tr", { key: conta.id }, [
+                                  _c("td", [_vm._v(_vm._s(conta.favorecido))]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-right" }, [
+                                    _vm._v(_vm._s(_vm._f("money")(conta.valor)))
+                                  ])
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _vm._m(1, true),
+                                _vm._v(" "),
+                                _c("th", { staticClass: "text-right" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "text-bold text-primary" },
+                                    [
+                                      _vm._v(
+                                        "\n                                                        " +
+                                          _vm._s(
+                                            _vm._f("money")(
+                                              categorie.categories.total
+                                            )
+                                          ) +
+                                          "\n                                                    "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            ],
+                            2
                           )
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "modal-body" },
-                        [_vm._t("body")],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "modal-footer" },
-                        [
-                          _vm._t("footer", [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                on: {
-                                  click: function($event) {
-                                    _vm.showModal = false
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                        CADASTRAR\n                                    "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger",
-                                on: {
-                                  click: function($event) {
-                                    _vm.showModal = false
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                        FECHAR\n                                    "
-                                )
-                              ]
-                            )
-                          ])
-                        ],
-                        2
+                        ]
                       )
                     ])
-                  ])
-                ])
+                  ]
+                )
+              })
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card-header categoria-contas-pagar categoria-lazer text-center"
+                },
+                [
+                  _vm._v(
+                    "\n                            TOTAIS\n                        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-sm table-financial table-striped  table-hover"
+                  },
+                  [
+                    _c("tr", [
+                      _c("td", [
+                        _vm._v(
+                          "\n                                        Contas a pagar\n                                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(
+                              _vm._f("money")(
+                                _vm.financeiro.data.data
+                                  .categorieTotalBillsToPay
+                              )
+                            ) +
+                            "\n                                    "
+                        )
+                      ])
+                    ])
+                  ]
+                )
               ])
-            ],
-            1
-          )
-        : _vm._e()
-    ],
-    1
-  )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                [_c("form-create-bills")],
+                1
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -50179,7 +49651,7 @@ var staticRenderFns = [
                   },
                   [
                     _vm._v(
-                      "\n                                        (+) CONTA\n                                    "
+                      "\n                                    (+) CONTA\n                                "
                     )
                   ]
                 )
@@ -50195,7 +49667,7 @@ var staticRenderFns = [
                 },
                 [
                   _vm._v(
-                    "\n                                    (+) PAGAMENTO\n                                "
+                    "\n                                (+) PAGAMENTO\n                            "
                   )
                 ]
               )

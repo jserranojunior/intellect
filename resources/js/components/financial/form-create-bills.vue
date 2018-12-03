@@ -19,8 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="date" class="form-control" placeholder="Inicio Pagamento" required v-model="fields.inicio_data_pagamento"
-                    name="inicio_data_pagamento">
+                <input type="date" class="form-control" placeholder="Inicio Pagamento" value="2018-02-02" v-model="fields.inicio_data_pagamento" required name="inicio_data_pagamento">
             </div>
 
             <div class="form-group">
@@ -73,25 +72,25 @@
 </template> 
 
 <script>
+import {mapState, mapActions} from 'vuex'
     export default {
         name: "form-create-bills",
-        methods: {
-            teste(){
-                this.$store.dispatch("createBillsToPay", this.fields);
-                this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);
-            },
+        methods: {            
             submit() {
-                if (this.loaded) {
+                if (this.loaded) {                    
+                    this.$store.dispatch("createBillsToPay", this.fields);                    
+                    this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento); 
                     this.loaded = false;
                     this.success = false;
-                    this.errors = {};
-                    this.$store.dispatch("createBillsToPay", this.fields);                 
-                    this.fields = {}; 
-                    this.loaded = true;
-                    this.success = true;
-                    this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento);                      
+                    this.errors = {};                     
                 }
             }
+        },
+        mounted(){
+            console.log('funcionando' + this.dataAtual)
+            // this.fields.inicio_data_pagamento = '2018-02-02'
+            // this.dataAtual
+            console.log(this.fields.inicio_data_pagamento)
         },
         data() {
             return { 
@@ -99,9 +98,14 @@
                 errors: {},
                 success: false,
                 loaded: true,
-                inicio_data_pagamento:'2018-12',
             };
-        }
+        },
+        computed: {
+        ...mapState({
+            financeiro: state => state.financeiro,
+            dataAtual: state => state.financeiro.data.dates.dataAtual
+        }),    
+    }
     };
 </script>
 

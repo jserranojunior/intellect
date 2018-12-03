@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -506,12 +506,6 @@ module.exports = defaults;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(17);
-
-/***/ }),
-/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3092,7 +3086,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13463,6 +13457,12 @@ return jQuery;
 
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(17);
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13926,7 +13926,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 window._ = __webpack_require__(14);
-window.Popper = __webpack_require__(4).default;
+window.Popper = __webpack_require__(3).default;
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -13934,7 +13934,7 @@ window.Popper = __webpack_require__(4).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(5);
+  window.$ = window.jQuery = __webpack_require__(4);
 
   __webpack_require__(16);
 } catch (e) {}
@@ -13945,7 +13945,7 @@ try {
  */
 
 
-window.axios = __webpack_require__(3);
+window.axios = __webpack_require__(5);
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -31126,7 +31126,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(4), __webpack_require__(3)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -35951,14 +35951,15 @@ module.exports = function spread(callback) {
 /***/ }),
 /* 35 */,
 /* 36 */,
-/* 37 */
+/* 37 */,
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(38);
+module.exports = __webpack_require__(39);
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
