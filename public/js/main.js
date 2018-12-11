@@ -48387,6 +48387,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
   },
   actions: {
     loadBillsToPay: function loadBillsToPay(context, data) {
+      data = String(data);
+      console.log(data);
       var url = '../public/api/v1/financeiro?data=' + data;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
         return context.commit('LOAD_BILLS_TO_PAY', response.data);
@@ -48885,7 +48887,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     formCreateBills: __WEBPACK_IMPORTED_MODULE_0__form_create_bills_vue___default.a
   },
   data: function data() {
-    return {};
+    return {
+      dataAtualHoje: ''
+    };
   },
   methods: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay']), {
     nextDate: function nextDate() {
@@ -48895,11 +48899,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.previousDateBillsToPay();
     },
     getContasAPagar: function getContasAPagar() {
-      this.loadBillsToPay(this.dataAtual);
+      this.loadBillsToPay(this.dataAtualHoje);
     }
   }),
   mounted: function mounted() {
     this.loadBillsToPay("");
+    /* hora atual */
+
+    var hoy = new Date();
+    this.dataAtualHoje = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
   },
   filters: {
     money: function money(value) {
@@ -48911,6 +48919,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
     financeiro: function financeiro(state) {
       return state.financeiro;
+    },
+    dataAtual: function dataAtual(state) {
+      return state.financeiro.data.dates.dataAtual;
     }
   }))
 });
@@ -48996,26 +49007,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "form-create-bills",
   data: function data() {
     return {
+      dataAtualHoje: '',
       fields: {},
       errors: {},
       success: false,
       loaded: true,
-      minhadata: ''
+      minhadata: '',
+      inicio_data_pagamento: ''
     };
   },
-  methods: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay']), {
+  methods: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'createBillsToPay']), {
     submit: function submit() {
       if (this.loaded) {
         this.createBillsToPay(this.fields);
-        this.loadBillsToPay(this.inicio_data_pagamento);
+        this.loadBillsToPay(this.dataAtual);
         this.loaded = false;
         this.success = false;
         this.errors = {};
@@ -49023,7 +49033,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   mounted: function mounted() {
-    this.minhadata = this.dataAtual;
+    this.fields.inicio_data_pagamento = this.dataAtual;
+    this.inicio_data_pagamento = this.dataAtual;
+    /* hora atual */
+
+    var hoy = new Date();
+    this.dataAtualHoje = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+  },
+  watch: {
+    inicio_data_pagamento: function inicio_data_pagamento() {
+      this.fields.inicio_data_pagamento = this.inicio_data_pagamento;
+    }
   },
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])({
     dataAtual: function dataAtual(state) {
@@ -49150,8 +49170,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.minhadata,
-                expression: "minhadata"
+                value: _vm.inicio_data_pagamento,
+                expression: "inicio_data_pagamento"
               }
             ],
             staticClass: "form-control",
@@ -49161,13 +49181,13 @@ var render = function() {
               required: "",
               name: "inicio_data_pagamento"
             },
-            domProps: { value: _vm.minhadata },
+            domProps: { value: _vm.inicio_data_pagamento },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.minhadata = $event.target.value
+                _vm.inicio_data_pagamento = $event.target.value
               }
             }
           })
@@ -49200,8 +49220,6 @@ var render = function() {
             }
           })
         ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("meu " + _vm._s(_vm.fields.inicio_data_pagamento))]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c(

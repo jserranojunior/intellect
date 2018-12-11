@@ -18,6 +18,10 @@ export default {
 
     actions: {
         loadBillsToPay(context, data) {
+
+            data = String(data)
+
+            console.log(data)
         
         let url = '../public/api/v1/financeiro?data=' + data;
         

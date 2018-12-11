@@ -18,16 +18,13 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="date" class="form-control" placeholder="Inicio Pagamento" v-model="minhadata" required name="inicio_data_pagamento">
+                <input type="date" class="form-control" placeholder="Inicio Pagamento" v-model="inicio_data_pagamento" required name="inicio_data_pagamento">
             </div>
 
             <div class="form-group">
                 <label for="fim_data_pagamento">Fim Pagamento</label>
                 <input type="date" class="form-control" v-model="fields.fim_data_pagamento" name="fim_data_pagamento">
             </div>
-
-            <p>meu {{fields.inicio_data_pagamento}}</p>
-
             <div class="form-group">
 
                 <select name="categoria" id="" v-model="fields.categoria" required class="form-control">
@@ -77,24 +74,26 @@ import {mapState, mapActions} from 'vuex'
         name: "form-create-bills",   
         data() {
             return { 
+                dataAtualHoje: '',
                 fields: {},
                 errors: {},
                 success: false,
                 loaded: true,
                 minhadata:'',
+                inicio_data_pagamento:'',
             };
         },    
         methods: {
             ...mapActions([
             'loadBillsToPay',
             'nextDateBillsToPay',
-            'previousDateBillsToPay',           
+            'previousDateBillsToPay',  
+            'createBillsToPay'         
         ]),            
             submit() {
                 if (this.loaded) {                    
                     this.createBillsToPay(this.fields);  
-                    this.loadBillsToPay(this.inicio_data_pagamento);                  
-                    
+                    this.loadBillsToPay(this.dataAtual);                                   
                     this.loaded = false;
                     this.success = false;
                     this.errors = {};                     
@@ -102,9 +101,19 @@ import {mapState, mapActions} from 'vuex'
             }
         },
         mounted(){
-            this.minhadata = this.dataAtual              
-        },
+            this.fields.inicio_data_pagamento = this.dataAtual    
+            this.inicio_data_pagamento = this.dataAtual    
+            
+            /* hora atual */
+            var hoy = new Date();            	
+            this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
         
+        },
+        watch:{
+            inicio_data_pagamento: function(){
+                this.fields.inicio_data_pagamento = this.inicio_data_pagamento
+            }
+        },        
         computed: {
         ...mapState({           
             dataAtual: state => state.financeiro.data.dates.dataAtual

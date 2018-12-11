@@ -128,8 +128,8 @@ export default {
         formCreateBills,
     },
     data() {
-        return {
-        
+        return {    
+            dataAtualHoje: ''                  
         };
     },
     methods: {
@@ -145,14 +145,19 @@ export default {
             this.previousDateBillsToPay();
         },
         getContasAPagar() { 
-            this.loadBillsToPay(this.dataAtual);
+            this.loadBillsToPay(this.dataAtualHoje);
+         
         },
         
     },
     mounted() {
-        this.loadBillsToPay("");
-        
-    },
+        this.loadBillsToPay(""); 
+     
+         /* hora atual */
+            var hoy = new Date();            	
+            this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
+            
+   },
     filters: {
         money: function(value) {
             if (!value) return '0,00';
@@ -163,6 +168,7 @@ export default {
     computed: {
         ...mapState({
             financeiro: state => state.financeiro,
+            dataAtual: state => state.financeiro.data.dates.dataAtual
         }),    
     }
 };
