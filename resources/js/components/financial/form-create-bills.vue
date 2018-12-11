@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <form @submit.prevent.stop="submit" method="post">
             <div class="form-group">
                 <!-- <label for="favorecido">Favorecido</label> -->
@@ -19,13 +18,15 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="date" class="form-control" placeholder="Inicio Pagamento" value="2018-02-02" v-model="fields.inicio_data_pagamento" required name="inicio_data_pagamento">
+                <input type="date" class="form-control" placeholder="Inicio Pagamento" v-model="minhadata" required name="inicio_data_pagamento">
             </div>
 
             <div class="form-group">
                 <label for="fim_data_pagamento">Fim Pagamento</label>
                 <input type="date" class="form-control" v-model="fields.fim_data_pagamento" name="fim_data_pagamento">
             </div>
+
+            <p>meu {{fields.inicio_data_pagamento}}</p>
 
             <div class="form-group">
 
@@ -62,8 +63,7 @@
                 </select>
             </div>
 
-            <div class="card-footer text-center">
-    
+            <div class="card-footer text-center">    
                 <div class="btn btn-primary" data-dismiss="modal" @click="submit">Cadastrar</div>
             </div>
 
@@ -74,12 +74,27 @@
 <script>
 import {mapState, mapActions} from 'vuex'
     export default {
-        name: "form-create-bills",
-        methods: {            
+        name: "form-create-bills",   
+        data() {
+            return { 
+                fields: {},
+                errors: {},
+                success: false,
+                loaded: true,
+                minhadata:'',
+            };
+        },    
+        methods: {
+            ...mapActions([
+            'loadBillsToPay',
+            'nextDateBillsToPay',
+            'previousDateBillsToPay',           
+        ]),            
             submit() {
                 if (this.loaded) {                    
-                    this.$store.dispatch("createBillsToPay", this.fields);                    
-                    this.$store.dispatch("loadBillsToPay", this.inicio_data_pagamento); 
+                    this.createBillsToPay(this.fields);  
+                    this.loadBillsToPay(this.inicio_data_pagamento);                  
+                    
                     this.loaded = false;
                     this.success = false;
                     this.errors = {};                     
@@ -87,22 +102,11 @@ import {mapState, mapActions} from 'vuex'
             }
         },
         mounted(){
-            console.log('funcionando' + this.dataAtual)
-            // this.fields.inicio_data_pagamento = '2018-02-02'
-            // this.dataAtual
-            console.log(this.fields.inicio_data_pagamento)
+            this.minhadata = this.dataAtual              
         },
-        data() {
-            return { 
-                fields: {},
-                errors: {},
-                success: false,
-                loaded: true,
-            };
-        },
+        
         computed: {
-        ...mapState({
-            financeiro: state => state.financeiro,
+        ...mapState({           
             dataAtual: state => state.financeiro.data.dates.dataAtual
         }),    
     }

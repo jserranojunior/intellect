@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="financeiro.data.data">
         <div class="row justify-content-center">
             <div class="col-lg-3 col">
                 <div class="card">
@@ -25,14 +25,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="col-sm text-center">{{financeiro.data.dates.mesAtualEscrito}} de {{financeiro.data.dates.anoAtual}}
+                            <div class="col-sm text-center" v-if="financeiro">{{financeiro.data.dates.mesAtualEscrito}} de {{financeiro.data.dates.anoAtual}}
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-md text-center">
                                 <a class="btn btn-default btn-xs " @click.stop="previousDate()" href="#">Anterior</a>
-                                <a class="btn btn-default btn-xs float-center" @click.stop="currentDate()" href="#">Atual</a>
-                                <a class="btn btn-default btn-xs" @click.stop="nextBillsToPay()" href="#">Proximo</a>
+                                <a class="btn btn-default btn-xs float-center" @click.stop="getContasAPagar()" href="#">Atual</a>
+                                <a class="btn btn-default btn-xs" @click.stop="nextDate()" href="#">Proximo</a>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@ export default {
     },
     data() {
         return {
-           
+        
         };
     },
     methods: {
@@ -139,7 +139,7 @@ export default {
             'previousDateBillsToPay',           
         ]),
         nextDate() {
-            this.dataAtual = this.financeiro.data.dates.dataPosterior;
+            this.nextDateBillsToPay();            
         },
         previousDate() {
             this.previousDateBillsToPay();
@@ -147,12 +147,11 @@ export default {
         getContasAPagar() { 
             this.loadBillsToPay(this.dataAtual);
         },
-        nextBillsToPay(){
-            this.nextDateBillsToPay();
-        }
+        
     },
     mounted() {
         this.loadBillsToPay("");
+        
     },
     filters: {
         money: function(value) {

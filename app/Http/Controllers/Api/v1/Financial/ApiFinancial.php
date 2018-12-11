@@ -31,7 +31,7 @@ class ApiFinancial extends Controller
 
             $data = ['dates' => $this->date, 'data' => $this->categoriesAndBillsToPay];
             
-            // dd($data);
+            $data = json_encode($data);
             return($data);
         }
 
