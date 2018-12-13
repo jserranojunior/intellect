@@ -49029,6 +49029,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.loaded = false;
         this.success = false;
         this.errors = {};
+        this.fields = {};
       }
     }
   }),
@@ -49499,7 +49500,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-6" }, [
+          _c("div", { staticClass: "col-lg-7" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col" }, [
                 _c(
@@ -49605,7 +49606,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
+          _c("div", { staticClass: "col-lg-5" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-4" }, [
                 _c("div", { staticClass: "card" }, [

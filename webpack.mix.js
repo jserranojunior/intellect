@@ -12,8 +12,11 @@ require('laravel-elixir-vueify');
  |
  */
 
+
 mix.js('resources/js/app.js', 'public/js')
 .js('resources/js/main.js','public/js')
-
+.styles([
+    'resources/css/style.css',
+], 'public/css/all.css');
 
 

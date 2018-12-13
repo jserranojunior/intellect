@@ -92,11 +92,12 @@ import {mapState, mapActions} from 'vuex'
         ]),            
             submit() {
                 if (this.loaded) {                    
-                    this.createBillsToPay(this.fields);  
-                    this.loadBillsToPay(this.dataAtual);                                   
+                    this.createBillsToPay(this.fields);
+                    this.loadBillsToPay(this.dataAtual);
                     this.loaded = false;
                     this.success = false;
-                    this.errors = {};                     
+                    this.errors = {};
+                    this.fields = {};
                 }
             }
         },

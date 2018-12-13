@@ -38,9 +38,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="row">
                     <div class="col">
                         <div class="card-columns">
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="card-body table-responsive">
                                     <table class="table table-sm table-financial table-striped  table-hover">
-                                        <thead>
+                                        <thead> 
                                         </thead>
                                         <tbody>
                                             <tr v-for="conta in categorie.categories.bills" :key="conta.id">
@@ -73,7 +73,7 @@
                 </div>
             </div>
     
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="row">
                     <div class="col-4">
                         <div class="card">
