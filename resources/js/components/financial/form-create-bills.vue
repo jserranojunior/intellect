@@ -77,7 +77,6 @@ import {mapState, mapActions} from 'vuex'
                 dataAtualHoje: '',
                 fields: {},
                 errors: {},
-                success: false,
                 loaded: true,
                 minhadata:'',
                 inicio_data_pagamento:'',
@@ -91,19 +90,14 @@ import {mapState, mapActions} from 'vuex'
             'createBillsToPay'         
         ]),            
             submit() {
-                if (this.loaded) {                    
-                    this.createBillsToPay(this.fields);
-                    this.loadBillsToPay(this.dataAtual);
-                    this.loaded = false;
-                    this.success = false;
-                    this.errors = {};
-                    this.fields = {};
-                }
+                console.log(this.fields)                               
+                    this.createBillsToPay(this.fields);                
             }
         },
         mounted(){
             this.fields.inicio_data_pagamento = this.dataAtual    
             this.inicio_data_pagamento = this.dataAtual    
+        
             
             /* hora atual */
             var hoy = new Date();            	
@@ -117,7 +111,8 @@ import {mapState, mapActions} from 'vuex'
         },        
         computed: {
         ...mapState({           
-            dataAtual: state => state.financeiro.data.dates.dataAtual
+            dataAtual: state => state.financeiro.data.dates.dataAtual,
+ 
         }),    
     }
     };

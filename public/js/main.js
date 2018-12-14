@@ -48374,7 +48374,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = ({
   state: {
     data: {},
-    valor: 0
+    valor: 0,
+    success: false,
+    errors: ''
   },
   mutations: {
     LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state, financeiro) {
@@ -48388,12 +48390,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
   actions: {
     loadBillsToPay: function loadBillsToPay(context, data) {
       data = String(data);
-      console.log(data);
       var url = '../public/api/v1/financeiro?data=' + data;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (response) {
         return context.commit('LOAD_BILLS_TO_PAY', response.data);
       }).catch(function (error) {
-        // handle error
         console.log(error);
       }).then(function () {
         / always executed/;
@@ -48406,14 +48406,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
       state.dispatch("loadBillsToPay", this.state.financeiro.data.dates.dataAnterior);
     },
     createBillsToPay: function createBillsToPay(context, fields) {
-      var _this = this;
-
-      context.commit('CREATE_NEW_BILL', fields);
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("../public/api/v1/financeiro", fields).then(function (response) {}).catch(function (error) {
-        _this.loaded = true;
-
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("../public/api/v1/financeiro", fields).then(function (response) {
+        context.commit('CREATE_NEW_BILL', fields); // dispatch("loadBillsToPay", fields.inicio_data_pagamento); 
+      }).catch(function (error) {
         if (error.response.status === 422) {
-          _this.errors = error.response.data.errors || {};
+          var errors = error.response.data.errors || {};
+          console.log(errors);
         }
       });
     }
@@ -49015,7 +49013,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dataAtualHoje: '',
       fields: {},
       errors: {},
-      success: false,
       loaded: true,
       minhadata: '',
       inicio_data_pagamento: ''
@@ -49023,14 +49020,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'createBillsToPay']), {
     submit: function submit() {
-      if (this.loaded) {
-        this.createBillsToPay(this.fields);
-        this.loadBillsToPay(this.dataAtual);
-        this.loaded = false;
-        this.success = false;
-        this.errors = {};
-        this.fields = {};
-      }
+      console.log(this.fields);
+      this.createBillsToPay(this.fields);
     }
   }),
   mounted: function mounted() {
