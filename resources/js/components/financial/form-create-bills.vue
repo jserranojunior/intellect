@@ -14,7 +14,7 @@
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="valor" v-model="fields.valor" required placeholder="Valor">
+                <input type="text" class="form-control" v-mask="'money'" name="valor" v-model="fields.valor"  required placeholder="Valor">
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
@@ -70,6 +70,8 @@
 
 <script>
 import {mapState, mapActions} from 'vuex'
+import AwesomeMask from 'awesome-mask'
+
     export default {
         name: "form-create-bills",   
         data() {
@@ -80,8 +82,13 @@ import {mapState, mapActions} from 'vuex'
                 loaded: true,
                 minhadata:'',
                 inicio_data_pagamento:'',
+                
             };
         },    
+        directives: {
+            'mask': AwesomeMask
+        },
+    
         methods: {
             ...mapActions([
             'loadBillsToPay',

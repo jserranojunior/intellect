@@ -48931,6 +48931,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_awesome_mask__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_awesome_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_awesome_mask__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -49006,6 +49008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "form-create-bills",
   data: function data() {
@@ -49017,6 +49020,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       minhadata: '',
       inicio_data_pagamento: ''
     };
+  },
+  directives: {
+    'mask': __WEBPACK_IMPORTED_MODULE_1_awesome_mask___default.a
   },
   methods: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'createBillsToPay']), {
     submit: function submit() {
@@ -49126,6 +49132,12 @@ var render = function() {
         _c("div", { staticClass: "form-group" }, [
           _c("input", {
             directives: [
+              {
+                name: "mask",
+                rawName: "v-mask",
+                value: "money",
+                expression: "'money'"
+              },
               {
                 name: "model",
                 rawName: "v-model",
@@ -49901,6 +49913,400 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-b6f17f1e", module.exports)
   }
 }
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.VMasker = factory();
+  }
+}(this, function() {
+  var DIGIT = "9",
+      ALPHA = "A",
+      ALPHANUM = "S",
+      BY_PASS_KEYS = [9, 16, 17, 18, 36, 37, 38, 39, 40, 91, 92, 93],
+      isAllowedKeyCode = function(keyCode) {
+        for (var i = 0, len = BY_PASS_KEYS.length; i < len; i++) {
+          if (keyCode == BY_PASS_KEYS[i]) {
+            return false;
+          }
+        }
+        return true;
+      },
+      mergeMoneyOptions = function(opts) {
+        opts = opts || {};
+        opts = {
+          delimiter: opts.delimiter || ".",
+          lastOutput: opts.lastOutput,
+          precision: opts.hasOwnProperty("precision") ? opts.precision : 2,
+          separator: opts.separator || ",",
+          showSignal: opts.showSignal,
+          suffixUnit: opts.suffixUnit && (" " + opts.suffixUnit.replace(/[\s]/g,'')) || "",
+          unit: opts.unit && (opts.unit.replace(/[\s]/g,'') + " ") || "",
+          zeroCents: opts.zeroCents
+        };
+        opts.moneyPrecision = opts.zeroCents ? 0 : opts.precision;
+        return opts;
+      },
+      // Fill wildcards past index in output with placeholder
+      addPlaceholdersToOutput = function(output, index, placeholder) {
+        for (; index < output.length; index++) {
+          if(output[index] === DIGIT || output[index] === ALPHA || output[index] === ALPHANUM) {
+            output[index] = placeholder;
+          }
+        }
+        return output;
+      }
+  ;
+
+  var VanillaMasker = function(elements) {
+    this.elements = elements;
+  };
+
+  VanillaMasker.prototype.unbindElementToMask = function() {
+    for (var i = 0, len = this.elements.length; i < len; i++) {
+      this.elements[i].lastOutput = "";
+      this.elements[i].onkeyup = false;
+      this.elements[i].onkeydown = false;
+
+      if (this.elements[i].value.length) {
+        this.elements[i].value = this.elements[i].value.replace(/\D/g, '');
+      }
+    }
+  };
+
+  VanillaMasker.prototype.bindElementToMask = function(maskFunction) {
+    var that = this,
+        onType = function(e) {
+          e = e || window.event;
+          var source = e.target || e.srcElement;
+
+          if (isAllowedKeyCode(e.keyCode)) {
+            setTimeout(function() {
+              that.opts.lastOutput = source.lastOutput;
+              source.value = VMasker[maskFunction](source.value, that.opts);
+              source.lastOutput = source.value;
+              if (source.setSelectionRange && that.opts.suffixUnit) {
+                source.setSelectionRange(source.value.length, (source.value.length - that.opts.suffixUnit.length));
+              }
+            }, 0);
+          }
+        }
+    ;
+    for (var i = 0, len = this.elements.length; i < len; i++) {
+      this.elements[i].lastOutput = "";
+      this.elements[i].onkeyup = onType;
+      if (this.elements[i].value.length) {
+        this.elements[i].value = VMasker[maskFunction](this.elements[i].value, this.opts);
+      }
+    }
+  };
+
+  VanillaMasker.prototype.maskMoney = function(opts) {
+    this.opts = mergeMoneyOptions(opts);
+    this.bindElementToMask("toMoney");
+  };
+
+  VanillaMasker.prototype.maskNumber = function() {
+    this.opts = {};
+    this.bindElementToMask("toNumber");
+  };
+  
+  VanillaMasker.prototype.maskAlphaNum = function() {
+    this.opts = {};
+    this.bindElementToMask("toAlphaNumeric");
+  };
+
+  VanillaMasker.prototype.maskPattern = function(pattern) {
+    this.opts = {pattern: pattern};
+    this.bindElementToMask("toPattern");
+  };
+
+  VanillaMasker.prototype.unMask = function() {
+    this.unbindElementToMask();
+  };
+
+  var VMasker = function(el) {
+    if (!el) {
+      throw new Error("VanillaMasker: There is no element to bind.");
+    }
+    var elements = ("length" in el) ? (el.length ? el : []) : [el];
+    return new VanillaMasker(elements);
+  };
+
+  VMasker.toMoney = function(value, opts) {
+    opts = mergeMoneyOptions(opts);
+    if (opts.zeroCents) {
+      opts.lastOutput = opts.lastOutput || "";
+      var zeroMatcher = ("("+ opts.separator +"[0]{0,"+ opts.precision +"})"),
+          zeroRegExp = new RegExp(zeroMatcher, "g"),
+          digitsLength = value.toString().replace(/[\D]/g, "").length || 0,
+          lastDigitLength = opts.lastOutput.toString().replace(/[\D]/g, "").length || 0
+      ;
+      value = value.toString().replace(zeroRegExp, "");
+      if (digitsLength < lastDigitLength) {
+        value = value.slice(0, value.length - 1);
+      }
+    }
+    var number = value.toString().replace(/[\D]/g, ""),
+        clearDelimiter = new RegExp("^(0|\\"+ opts.delimiter +")"),
+        clearSeparator = new RegExp("(\\"+ opts.separator +")$"),
+        money = number.substr(0, number.length - opts.moneyPrecision),
+        masked = money.substr(0, money.length % 3),
+        cents = new Array(opts.precision + 1).join("0")
+    ;
+    money = money.substr(money.length % 3, money.length);
+    for (var i = 0, len = money.length; i < len; i++) {
+      if (i % 3 === 0) {
+        masked += opts.delimiter;
+      }
+      masked += money[i];
+    }
+    masked = masked.replace(clearDelimiter, "");
+    masked = masked.length ? masked : "0";
+    var signal = "";
+    if(opts.showSignal === true) {
+      signal = value < 0 || (value.startsWith && value.startsWith('-')) ? "-" :  "";
+    }
+    if (!opts.zeroCents) {
+      var beginCents = number.length - opts.precision,
+          centsValue = number.substr(beginCents, opts.precision),
+          centsLength = centsValue.length,
+          centsSliced = (opts.precision > centsLength) ? opts.precision : centsLength
+      ;
+      cents = (cents + centsValue).slice(-centsSliced);
+    }
+    var output = opts.unit + signal + masked + opts.separator + cents;
+    return output.replace(clearSeparator, "") + opts.suffixUnit;
+  };
+
+  VMasker.toPattern = function(value, opts) {
+    var pattern = (typeof opts === 'object' ? opts.pattern : opts),
+        patternChars = pattern.replace(/\W/g, ''),
+        output = pattern.split(""),
+        values = value.toString().replace(/\W/g, ""),
+        charsValues = values.replace(/\W/g, ''),
+        index = 0,
+        i,
+        outputLength = output.length,
+        placeholder = (typeof opts === 'object' ? opts.placeholder : undefined)
+    ;
+    
+    for (i = 0; i < outputLength; i++) {
+      // Reached the end of input
+      if (index >= values.length) {
+        if (patternChars.length == charsValues.length) {
+          return output.join("");
+        }
+        else if ((placeholder !== undefined) && (patternChars.length > charsValues.length)) {
+          return addPlaceholdersToOutput(output, i, placeholder).join("");
+        }
+        else {
+          break;
+        }
+      }
+      // Remaining chars in input
+      else{
+        if ((output[i] === DIGIT && values[index].match(/[0-9]/)) ||
+            (output[i] === ALPHA && values[index].match(/[a-zA-Z]/)) ||
+            (output[i] === ALPHANUM && values[index].match(/[0-9a-zA-Z]/))) {
+          output[i] = values[index++];
+        } else if (output[i] === DIGIT || output[i] === ALPHA || output[i] === ALPHANUM) {
+          if(placeholder !== undefined){
+            return addPlaceholdersToOutput(output, i, placeholder).join("");
+          }
+          else{
+            return output.slice(0, i).join("");
+          }
+        }
+      }
+    }
+    return output.join("").substr(0, i);
+  };
+
+  VMasker.toNumber = function(value) {
+    return value.toString().replace(/(?!^-)[^0-9]/g, "");
+  };
+  
+  VMasker.toAlphaNumeric = function(value) {
+    return value.toString().replace(/[^a-z0-9 ]+/i, "");
+  };
+
+  return VMasker;
+}));
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vanillaMasker = __webpack_require__(62);
+
+var _vanillaMasker2 = _interopRequireDefault(_vanillaMasker);
+
+var _vue = __webpack_require__(36);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _eventListener = __webpack_require__(64);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var applyMaskToDefault = function applyMaskToDefault(el, mask, isMoney) {
+  var inputText = getInputText(el);
+  if (isMoney && inputText.value.length > 0) {
+    inputText.value = _vanillaMasker2.default.toMoney(inputText.value, { showSignal: true });
+  } else {
+    inputText.value = mask && mask.length > 0 ? _vanillaMasker2.default.toPattern(inputText.value, mask) : inputText.value;
+  }
+};
+
+var getInputText = function getInputText(el) {
+  var isInputText = el instanceof HTMLInputElement;
+  var inputText = el;
+  if (!isInputText) {
+    inputText = el.querySelector('input');
+  }
+  return inputText;
+};
+
+exports.default = {
+  bind: function bind(el, binding) {
+    var isMoney = false;
+    if (binding.value.length < 1) return;
+    var inputText = getInputText(el);
+    inputText.setAttribute('data-mask', binding.value);
+    if (binding.value === 'money') {
+      isMoney = true;
+    } else {
+      var maskSize = inputText.getAttribute('data-mask').length;
+      inputText.setAttribute('maxlength', maskSize);
+    }
+    applyMaskToDefault(inputText, binding.value, isMoney);
+    inputText.addEventListener('keyup', _eventListener.inputHandler);
+  },
+  update: function update(el, binding) {
+    // this is only for v-model
+    if (binding.value.length < 1) return;
+    var inputText = getInputText(el);
+    if (binding.value === 'money') {
+      applyMaskToDefault(inputText, binding.value, true);
+      return;
+    }
+    inputText.setAttribute('data-mask', binding.value);
+    inputText.setAttribute('maxlength', inputText.getAttribute('data-mask').length);
+    applyMaskToDefault(inputText, binding.value);
+  },
+  unbind: function unbind(el, binding) {
+    if (binding.value.length < 1) return;
+    var inputText = getInputText(el);
+    inputText.removeAttribute('maxlength');
+    inputText.removeEventListener('keyup', _eventListener.inputHandler);
+  }
+};
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.inputHandler = exports.allowedKeys = undefined;
+
+var _isCharacterKeypress = __webpack_require__(65);
+
+var _vanillaMasker = __webpack_require__(62);
+
+var _vanillaMasker2 = _interopRequireDefault(_vanillaMasker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var allowedKeys = exports.allowedKeys = [9, // 'tab'
+37, // 'left'
+38, // 'up'
+39, // 'right'
+40];
+
+var inputHandler = exports.inputHandler = function inputHandler(ev) {
+  var mask = ev.target.getAttribute('data-mask');
+  var isCharacter = (0, _isCharacterKeypress.isCharacterKeyPress)(ev);
+  var isAllowedKey = allowedKeys.indexOf(ev.keyCode) > -1;
+  if (isAllowedKey) return;
+  if (isCharacter && ev.target.value.length >= mask.length) {
+    ev.preventDefault();
+  }
+  setTimeout(function () {
+    maskInput(mask, ev.target);
+    broadcast(ev);
+  }, 0);
+};
+
+var maskInput = function maskInput(mask, input) {
+  if (mask === 'money') {
+    input.value = _vanillaMasker2.default.toMoney(input.value, { showSignal: true });
+  } else {
+    input.value = mask && mask.length > 0 ? _vanillaMasker2.default.toPattern(input.value, mask) : input.value;
+  }
+};
+
+var broadcast = function broadcast(ev) {
+  var inputEvent = null;
+  var changeEvent = null;
+
+  try {
+    inputEvent = new Event('input');
+    changeEvent = new Event('change');
+  } catch (err) {
+    inputEvent = document.createEvent('Event');
+    changeEvent = document.createEvent('Event');
+
+    inputEvent.initEvent('input', false, false);
+    changeEvent.initEvent('change', false, false);
+  }
+
+  ev.target.dispatchEvent(inputEvent);
+  ev.target.dispatchEvent(changeEvent);
+};
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var isCharacterKeyPress = exports.isCharacterKeyPress = function isCharacterKeyPress(ev) {
+  if (typeof ev.which == 'undefined') {
+    return true;
+  } else if (typeof ev.which == 'number' && ev.which > 0) {
+    return !ev.ctrlKey && !ev.metaKey && !ev.altKey && ev.which != 8;
+  }
+  return false;
+};
 
 /***/ })
 /******/ ]);
