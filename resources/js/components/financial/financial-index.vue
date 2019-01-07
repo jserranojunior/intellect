@@ -13,9 +13,14 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <div class="btn btn-block btn-sm btn-outline-warning active float-right">
+                                                                <a href="#">
+                                    <div class="btn btn-sm  btn-block  btn-outline-warning active" data-toggle="modal" data-target="#EditexampleModal">
+                                        (=) EDITAR
+                                    </div>
+                                </a>
+                                <!-- <div class="btn btn-block btn-sm btn-outline-warning active float-right">
                                     (+) PAGAMENTO
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -115,17 +120,36 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="EditexampleModal" tabindex="-1" role="dialog" aria-labelledby="EditexampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="EditexampleModalLabel">Editar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    </div>
+                    <div class="modal-body">
+                        <form-edit-bills></form-edit-bills>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</template>
+</template> 
 
 <script>
 import formCreateBills from './form-create-bills.vue'
+import formEditBills from './form-edit-bills.vue'
 import {mapState, mapActions} from 'vuex'
 
 export default {
     name: "financial-index",
     components: {
         formCreateBills,
+        formEditBills
     },
     data() {
         return {    

@@ -2,8 +2,8 @@
 @section('content')
 
 <div class="container-fluid">
-    <financial-index></financial-index>
-
+    <app></app>
+  
 
     <!-- COL CONTAS -->
 </div>
