@@ -94,7 +94,7 @@ import AwesomeMask from 'awesome-mask'
             'loadBillsToPay',
             'nextDateBillsToPay',
             'previousDateBillsToPay',  
-            'createBillsToPay'         
+            'editBillsToPay'         
         ]),            
             submit() {
                 console.log(this.fields)                               
@@ -102,9 +102,13 @@ import AwesomeMask from 'awesome-mask'
             }
         },
         mounted(){
+
+
+
             this.fields.inicio_data_pagamento = this.dataAtual    
             this.inicio_data_pagamento = this.dataAtual    
         
+
             
             /* hora atual */
             var hoy = new Date();            	
@@ -119,6 +123,7 @@ import AwesomeMask from 'awesome-mask'
         computed: {
         ...mapState({           
             dataAtual: state => state.financeiro.data.dates.dataAtual,
+            editedbill: state=> state.financeiro.editedbill,
  
         }),    
     }

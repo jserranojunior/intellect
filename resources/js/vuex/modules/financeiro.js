@@ -6,6 +6,7 @@ export default {
         valor: 0,
         success: false,
         errors: '',
+        editedbill:{}
     },
     mutations: {
         LOAD_BILLS_TO_PAY(state, financeiro) {
@@ -15,6 +16,9 @@ export default {
         },
         CREATE_NEW_BILL(state, valor) {
             state.valor = valor
+        },
+        EDIT_BILL_TO_PAY(state, data){
+            state.editedbill = data
         }
     },
 
@@ -39,20 +43,34 @@ export default {
         },
 
 
-        createBillsToPay(context, fields) {            
+        createBillsToPay(context, fields) {
             axios
                 .post("../public/api/v1/financeiro", fields)
-                .then(response =>{             
-                    context.commit('CREATE_NEW_BILL', fields)                    
+                .then(response => {
+                    context.commit('CREATE_NEW_BILL', fields)
                     // dispatch("loadBillsToPay", fields.inicio_data_pagamento); 
                 })
                 .catch(error => {
-                        if (error.response.status === 422) {                       
+                    if (error.response.status === 422) {
                         let errors = error.response.data.errors || {};
                         console.log(errors)
-                    }                   
+                    }
                 })
-               
+        },
+        editBillsToPay(context, id, date) {         
+            let url = '../public/api/v1/financeiro/' + id + '/' + date;
+            console.log(date)
+            axios
+                .get(url)
+                .then(response => context.commit('EDIT_BILL_TO_PAY', response.data.data))                           
+                .catch(error => {
+                    if (error.response.status === 422) {
+                        let errors = error.response.data.errors || {};
+                        console.log(errors)
+                    }
+                })
         }
+
+
     }
 }

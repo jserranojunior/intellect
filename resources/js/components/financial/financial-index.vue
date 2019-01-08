@@ -58,7 +58,7 @@
                                         <thead> 
                                         </thead>
                                         <tbody>
-                                            <tr v-for="conta in categorie.categories.bills" :key="conta.id">
+                                            <tr @click="editBill(conta.id, financeiro.data.dates.dataAtual)" v-for="conta in categorie.categories.bills" :key="conta.id">
                                                 <td>{{conta.favorecido}}</td>
                                                 <td class="text-right">{{conta.valor | money }}</td>
                                             </tr>
@@ -160,7 +160,8 @@ export default {
         ...mapActions([
             'loadBillsToPay',
             'nextDateBillsToPay',
-            'previousDateBillsToPay',           
+            'previousDateBillsToPay',   
+            'editBillsToPay'        
         ]),
         nextDate() {
             this.nextDateBillsToPay();            
@@ -169,9 +170,12 @@ export default {
             this.previousDateBillsToPay();
         },
         getContasAPagar() { 
-            this.loadBillsToPay(this.dataAtualHoje);
-         
+            this.loadBillsToPay(this.dataAtualHoje);         
         },
+        editBill(id, date){
+            this.editBillsToPay(id, date); 
+            
+        }
         
     },
     mounted() {
