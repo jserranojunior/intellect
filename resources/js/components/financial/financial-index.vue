@@ -80,9 +80,9 @@
     
             <div class="col-lg-5">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-5">
                         <div class="card">
-                            <div class="card-header categoria-contas-pagar categoria-lazer text-center">
+                            <div class="card-header categoria-contas-pagar categoria-urgencia text-center">
                                 TOTAIS
                             </div>
                             <div class="card-body table-responsive">
@@ -93,6 +93,46 @@
                                         </td>
                                         <td>
                                             {{financeiro.data.data.categorieTotalBillsToPay | money}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="card">
+                            <div class="card-header categoria-contas-pagar categoria-estudos text-center">
+                                Caixa / Frelas
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-sm table-financial table-striped  table-hover">
+                                    <tr>
+                                        <td>
+                                            Santander
+                                        </td>
+                                        <td>
+                                            R$148,00
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-5">
+                        <div class="card">
+                            <div class="card-header categoria-contas-pagar categoria-lazer text-center">
+                                Poupança
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-sm table-financial table-striped  table-hover">
+                                    <tr>
+                                        <td>
+                                            ROUPA / HIGIENE
+                                        </td>
+                                        <td>
+                                            R$400,00
                                         </td>
                                     </tr>
                                 </table>

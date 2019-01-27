@@ -2112,6 +2112,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -37865,13 +37905,13 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-5" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-4" }, [
+              _c("div", { staticClass: "col-5" }, [
                 _c("div", { staticClass: "card" }, [
                   _c(
                     "div",
                     {
                       staticClass:
-                        "card-header categoria-contas-pagar categoria-lazer text-center"
+                        "card-header categoria-contas-pagar categoria-urgencia text-center"
                     },
                     [
                       _vm._v(
@@ -37912,7 +37952,11 @@ var render = function() {
                     )
                   ])
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
             ])
           ])
         ]),
@@ -37935,7 +37979,7 @@ var render = function() {
               { staticClass: "modal-dialog", attrs: { role: "document" } },
               [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(2),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -37967,7 +38011,7 @@ var render = function() {
               { staticClass: "modal-dialog", attrs: { role: "document" } },
               [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(3),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -38044,6 +38088,98 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("th", [
       _c("span", { staticClass: "text-bold text-primary" }, [_vm._v("TOTAL")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "card-header categoria-contas-pagar categoria-estudos text-center"
+          },
+          [
+            _vm._v(
+              "\n                            Caixa / Frelas\n                        "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive" }, [
+          _c(
+            "table",
+            {
+              staticClass:
+                "table table-sm table-financial table-striped  table-hover"
+            },
+            [
+              _c("tr", [
+                _c("td", [
+                  _vm._v(
+                    "\n                                        Santander\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                                        R$148,00\n                                    "
+                  )
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "card-header categoria-contas-pagar categoria-lazer text-center"
+          },
+          [
+            _vm._v(
+              "\n                            Poupança\n                        "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive" }, [
+          _c(
+            "table",
+            {
+              staticClass:
+                "table table-sm table-financial table-striped  table-hover"
+            },
+            [
+              _c("tr", [
+                _c("td", [
+                  _vm._v(
+                    "\n                                        ROUPA / HIGIENE\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                                        R$400,00\n                                    "
+                  )
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
     ])
   },
   function() {
