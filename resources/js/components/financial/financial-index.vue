@@ -8,7 +8,7 @@
                             <div class="col">
                                 <a href="#">
                                     <div class="btn btn-sm  btn-block btn-outline-primary active" data-toggle="modal" data-target="#exampleModal">
-                                        (+) CONTA
+                                        (+) CONTAS
                                     </div>
                                 </a>
                             </div>
