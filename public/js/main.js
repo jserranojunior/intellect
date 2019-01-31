@@ -2303,7 +2303,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: {},
       loaded: true,
       minhadata: '',
-      inicio_data_pagamento: ''
+      inicio_data_pagamento: '',
+      categoria: 1,
+      tipo_conta: 'Extra',
+      forma_pagamento: 'Cartão'
     };
   },
   directives: {
@@ -2318,6 +2321,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.fields.inicio_data_pagamento = this.dataAtual;
     this.inicio_data_pagamento = this.dataAtual;
+    this.fields.categoria = this.categoria;
+    this.fields.tipo_conta = this.tipo_conta;
+    this.fields.forma_pagamento = this.forma_pagamento;
     /* hora atual */
 
     var hoy = new Date();
@@ -2326,6 +2332,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     inicio_data_pagamento: function inicio_data_pagamento() {
       this.fields.inicio_data_pagamento = this.inicio_data_pagamento;
+    },
+    categoria: function categoria() {
+      this.fields.categoria = this.categoria;
+    },
+    tipo_conta: function tipo_conta() {
+      this.fields.tipo_conta = this.tipo_conta;
+    },
+    forma_pagamento: function forma_pagamento() {
+      this.fields.forma_pagamento = this.forma_pagamento;
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -38429,8 +38444,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.fields.categoria,
-                  expression: "fields.categoria"
+                  value: _vm.categoria,
+                  expression: "categoria"
                 }
               ],
               staticClass: "form-control",
@@ -38445,11 +38460,9 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.$set(
-                    _vm.fields,
-                    "categoria",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                  _vm.categoria = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },
@@ -38483,8 +38496,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.fields.tipo_conta,
-                  expression: "fields.tipo_conta"
+                  value: _vm.tipo_conta,
+                  expression: "tipo_conta"
                 }
               ],
               staticClass: "form-control",
@@ -38499,11 +38512,9 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.$set(
-                    _vm.fields,
-                    "tipo_conta",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                  _vm.tipo_conta = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },
@@ -38535,8 +38546,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.fields.forma_pagamento,
-                  expression: "fields.forma_pagamento"
+                  value: _vm.forma_pagamento,
+                  expression: "forma_pagamento"
                 }
               ],
               staticClass: "form-control",
@@ -38551,11 +38562,9 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.$set(
-                    _vm.fields,
-                    "forma_pagamento",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                  _vm.forma_pagamento = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },

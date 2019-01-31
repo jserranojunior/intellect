@@ -76,7 +76,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                             aria-expanded="false">
-                            <img class="img-avatar" src="https://scontent-sea1-1.cdninstagram.com/vp/e6114b0a8d79af43d778128de56a3c3a/5C3F670D/t51.2885-15/e35/36086527_481533192295561_6741739731362512896_n.jpg?se=7&ig_cache_key=MTgyMTIzMDIwMzYwNDAzNTcxNg%3D%3D.2"
+                            <img class="img-avatar" src="https://avatars2.githubusercontent.com/u/19535872?s=460&v=4"
                                 alt="jorge Serrano Junior">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

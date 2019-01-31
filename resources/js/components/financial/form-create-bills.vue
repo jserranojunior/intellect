@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
 
-                <select name="categoria" id="" v-model="fields.categoria" required class="form-control">
+                <select name="categoria" id="" v-model="categoria" required class="form-control">
                     <option value="1">Essenciais</option>
                     <option value="2">Compras</option>
                     <option value="3">Urgencias</option>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="form-group">
-                <select name="tipo_conta" id="" v-model="fields.tipo_conta" required class="form-control">
+                <select name="tipo_conta" id="" v-model="tipo_conta" required class="form-control">
                     <option disabled selected value="Tipo de Conta">Tipo de Conta</option>
                     <option value="Extra">Extra</option>
                     <option value="Fixa">Fixa</option>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="form-group">
-                <select name="forma_pagamento" v-model="fields.forma_pagamento" required id="" class="form-control">
+                <select name="forma_pagamento" v-model="forma_pagamento" required id="" class="form-control">
                     <option disabled selected value="Forma de Pagamento">Forma de Pagamento</option>
                     <option value="Cartão">Cartão</option>
                     <option value="Dinheiro">Dinheiro</option>
@@ -82,7 +82,9 @@ import AwesomeMask from 'awesome-mask'
                 loaded: true,
                 minhadata:'',
                 inicio_data_pagamento:'',
-                
+                categoria:1,
+                tipo_conta:'Extra',
+                forma_pagamento:'Cartão'                
             };
         },    
         directives: {
@@ -103,7 +105,12 @@ import AwesomeMask from 'awesome-mask'
         },
         mounted(){
             this.fields.inicio_data_pagamento = this.dataAtual    
-            this.inicio_data_pagamento = this.dataAtual    
+            this.inicio_data_pagamento = this.dataAtual             
+            
+                this.fields.categoria = this.categoria    
+                this.fields.tipo_conta = this.tipo_conta          
+                this.fields.forma_pagamento = this.forma_pagamento
+            
         
             
             /* hora atual */
@@ -114,7 +121,16 @@ import AwesomeMask from 'awesome-mask'
         watch:{
             inicio_data_pagamento: function(){
                 this.fields.inicio_data_pagamento = this.inicio_data_pagamento
-            }
+            },
+              categoria: function(){
+                this.fields.categoria = this.categoria
+            },
+              tipo_conta: function(){
+                this.fields.tipo_conta = this.tipo_conta
+            },
+              forma_pagamento: function(){
+                this.fields.forma_pagamento = this.forma_pagamento
+            }, 
         },        
         computed: {
         ...mapState({           
