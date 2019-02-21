@@ -213,7 +213,8 @@ export default {
             this.loadBillsToPay(this.dataAtualHoje);         
         },
         editBill(id, date){
-            this.editBillsToPay(id, date); 
+            // console.log('editando')
+            this.editBillsToPay(id, this.dataAtualHoje); 
             
         }
         

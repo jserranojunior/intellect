@@ -2177,7 +2177,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.loadBillsToPay(this.dataAtualHoje);
     },
     editBill: function editBill(id, date) {
-      this.editBillsToPay(id, date);
+      // console.log('editando')
+      this.editBillsToPay(id, this.dataAtualHoje);
     }
   }),
   mounted: function mounted() {
@@ -54719,9 +54720,11 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    editBillsToPay: function editBillsToPay(context, id, date) {
-      var url = '../public/api/v1/financeiro/' + id + '/' + date;
-      console.log(date);
+    editBillsToPay: function editBillsToPay(context, _ref) {
+      var id = _ref.id,
+          dataConta = _ref.dataConta;
+      console.log(id + dataConta);
+      var url = '../public/api/v1/financeiro/' + id + '/' + dataConta;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
         return context.commit('EDIT_BILL_TO_PAY', response.data.data);
       }).catch(function (error) {
