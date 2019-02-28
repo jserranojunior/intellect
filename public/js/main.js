@@ -2163,7 +2163,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      dataAtualHoje: ''
+      dataAtualHoje: '',
+      editIdDate: {}
     };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'editBillsToPay']), {
@@ -2176,9 +2177,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getContasAPagar: function getContasAPagar() {
       this.loadBillsToPay(this.dataAtualHoje);
     },
-    editBill: function editBill(id, date) {
-      // console.log('editando')
-      this.editBillsToPay(id, this.dataAtualHoje);
+    editBill: function editBill(id) {
+      // console.log(this.editIdDate)
+      this.editIdDate.id = id;
+      this.editIdDate.date = this.dataAtualHoje;
+      this.editBillsToPay(this.editIdDate);
     }
   }),
   mounted: function mounted() {
@@ -2473,6 +2476,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     inicio_data_pagamento: function inicio_data_pagamento() {
       this.fields.inicio_data_pagamento = this.inicio_data_pagamento;
+    },
+    editedbill: function editedbill() {
+      this.fields.favorecido = this.editedbill.favorecido;
+      console.log(this.fields.favorecido);
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -37851,11 +37858,7 @@ var render = function() {
                                           key: conta.id,
                                           on: {
                                             click: function($event) {
-                                              _vm.editBill(
-                                                conta.id,
-                                                _vm.financeiro.data.dates
-                                                  .dataAtual
-                                              )
+                                              _vm.editBill(conta.id)
                                             }
                                           }
                                         },
@@ -54720,13 +54723,11 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    editBillsToPay: function editBillsToPay(context, _ref) {
-      var id = _ref.id,
-          dataConta = _ref.dataConta;
-      console.log(id + dataConta);
-      var url = '../public/api/v1/financeiro/' + id + '/' + dataConta;
+    editBillsToPay: function editBillsToPay(context, edit) {
+      // console.log(edit.id + edit.date)                 
+      var url = '../public/api/v1/financeiro/' + edit.id + '/' + edit.date;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
-        return context.commit('EDIT_BILL_TO_PAY', response.data.data);
+        return context.commit('EDIT_BILL_TO_PAY', response.data.data[0]);
       }).catch(function (error) {
         if (error.response.status === 422) {
           var errors = error.response.data.errors || {};

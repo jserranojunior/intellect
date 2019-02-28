@@ -58,7 +58,7 @@
                                         <thead> 
                                         </thead>
                                         <tbody>
-                                            <tr @click="editBill(conta.id, financeiro.data.dates.dataAtual)" v-for="conta in categorie.categories.bills" :key="conta.id">
+                                            <tr @click="editBill(conta.id)" v-for="conta in categorie.categories.bills" :key="conta.id">
                                                 <td>{{conta.favorecido}}</td>
                                                 <td class="text-right">{{conta.valor | money }}</td>
                                             </tr>
@@ -193,7 +193,8 @@ export default {
     },
     data() {
         return {    
-            dataAtualHoje: ''                  
+            dataAtualHoje: '',
+            editIdDate:{},               
         };
     },
     methods: {
@@ -212,11 +213,13 @@ export default {
         getContasAPagar() { 
             this.loadBillsToPay(this.dataAtualHoje);         
         },
-        editBill(id, date){
-            // console.log('editando')
-            this.editBillsToPay(id, this.dataAtualHoje); 
+        editBill(id){
+            // console.log(this.editIdDate)
+            this.editIdDate.id = id
+            this.editIdDate.date = this.dataAtualHoje
+            this.editBillsToPay(this.editIdDate); 
             
-        }
+        } 
         
     },
     mounted() {

@@ -108,8 +108,6 @@ import AwesomeMask from 'awesome-mask'
             this.fields.inicio_data_pagamento = this.dataAtual    
             this.inicio_data_pagamento = this.dataAtual    
         
-
-            
             /* hora atual */
             var hoy = new Date();            	
             this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
@@ -118,7 +116,12 @@ import AwesomeMask from 'awesome-mask'
         watch:{
             inicio_data_pagamento: function(){
                 this.fields.inicio_data_pagamento = this.inicio_data_pagamento
+            },
+            editedbill: function(){
+                this.fields.favorecido = this.editedbill.favorecido;
+                console.log(this.fields.favorecido)
             }
+
         },        
         computed: {
         ...mapState({           

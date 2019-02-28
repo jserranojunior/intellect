@@ -57,13 +57,15 @@ export default {
                     }
                 })
         },
-        editBillsToPay(context, {id, dataConta}) { 
-            console.log(id + dataConta)                 
-            let url = '../public/api/v1/financeiro/' + id + '/' + dataConta;
+        editBillsToPay(context, edit) {  
+
+            
+            // console.log(edit.id + edit.date)                 
+            let url = '../public/api/v1/financeiro/' + edit.id + '/' + edit.date;
             
             axios
                 .get(url)
-                .then(response => context.commit('EDIT_BILL_TO_PAY', response.data.data))                           
+                .then(response => context.commit('EDIT_BILL_TO_PAY', response.data.data[0]))                           
                 .catch(error => {
                     if (error.response.status === 422) {
                         let errors = error.response.data.errors || {};

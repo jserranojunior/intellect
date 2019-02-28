@@ -75,15 +75,16 @@ class ApiBillsToPay extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $date)
     {
-        $this->date = '2018-09-11';
-        $this->billsToPay = $this->billsToPay->getBill($id, $this->date);
+
+       
+        $this->billsToPay = $this->billsToPay->getBill($id, $date);
 
         //$this->billsToPay::where('id',$id)->get();
         
         if($this->billsToPay->isEmpty()){
-            return response()->json(['response' => 'Usuario não encontrado'], 400);           
+            return response()->json(['response' => 'Valor não encontrado'], 400);           
         }
 
         
