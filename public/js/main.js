@@ -2442,6 +2442,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2453,7 +2458,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: {},
       loaded: true,
       minhadata: '',
-      inicio_data_pagamento: ''
+      inicio_data_pagamento: '',
+      favorecido: ''
     };
   },
   directives: {
@@ -2465,20 +2471,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.createBillsToPay(this.fields);
     }
   }),
-  mounted: function mounted() {
-    this.fields.inicio_data_pagamento = this.dataAtual;
-    this.inicio_data_pagamento = this.dataAtual;
-    /* hora atual */
-
-    var hoy = new Date();
-    this.dataAtualHoje = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+  mounted: function mounted() {// this.fields.inicio_data_pagamento = this.dataAtual    
+    // this.inicio_data_pagamento = this.dataAtual    
+    // /* hora atual */
+    // var hoy = new Date();            	
+    // this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
   },
   watch: {
     inicio_data_pagamento: function inicio_data_pagamento() {
       this.fields.inicio_data_pagamento = this.inicio_data_pagamento;
     },
     editedbill: function editedbill() {
+      this.favorecido = this.editedbill.favorecido; //valida
+
       this.fields.favorecido = this.editedbill.favorecido;
+      this.fields.valor = this.editedbill.valor;
+      this.fields.descricao = this.editedbill.descricao;
+      this.fields.inicio_data_pagamento = this.editedbill.inicio_data_pagamento;
+      this.fields.fim_data_pagamento = this.editedbill.fim_data_pagamento;
+      this.fields.parcelas = this.editedbill.parcelas;
+      this.fields.tipo_conta = this.editedbill.tipo_conta;
+      this.fields.forma_pagamento = this.editedbill.forma_pagamento;
+      this.fields.categoria = this.editedbill.categoria; // adicionar novos campos
+
       console.log(this.fields.favorecido);
     }
   },
@@ -37856,6 +37871,10 @@ var render = function() {
                                         "tr",
                                         {
                                           key: conta.id,
+                                          attrs: {
+                                            "data-toggle": "modal",
+                                            "data-target": "#EditexampleModal"
+                                          },
                                           on: {
                                             click: function($event) {
                                               _vm.editBill(conta.id)
@@ -38082,11 +38101,7 @@ var staticRenderFns = [
                   "div",
                   {
                     staticClass:
-                      "btn btn-sm  btn-block  btn-outline-warning active",
-                    attrs: {
-                      "data-toggle": "modal",
-                      "data-target": "#EditexampleModal"
-                    }
+                      "btn btn-sm  btn-block  btn-outline-warning active"
                   },
                   [
                     _vm._v(
@@ -38642,355 +38657,389 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        attrs: { method: "post" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            $event.stopPropagation()
-            return _vm.submit($event)
-          }
-        }
-      },
-      [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.fields.favorecido,
-                expression: "fields.favorecido"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "favorecido",
-              required: "",
-              placeholder: "Favorecido"
-            },
-            domProps: { value: _vm.fields.favorecido },
+    _vm.favorecido
+      ? _c(
+          "form",
+          {
+            attrs: { method: "post" },
             on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.fields, "favorecido", $event.target.value)
+              submit: function($event) {
+                $event.preventDefault()
+                $event.stopPropagation()
+                return _vm.submit($event)
               }
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.fields.descricao,
-                expression: "fields.descricao"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "descricao",
-              placeholder: "Descrição"
-            },
-            domProps: { value: _vm.fields.descricao },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.fields, "descricao", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "mask",
-                rawName: "v-mask",
-                value: "money",
-                expression: "'money'"
-              },
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.fields.valor,
-                expression: "fields.valor"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "valor",
-              required: "",
-              placeholder: "Valor"
-            },
-            domProps: { value: _vm.fields.valor },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.fields, "valor", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "inicio_data_pagamento" } }, [
-            _vm._v("Inicio Pagamento")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inicio_data_pagamento,
-                expression: "inicio_data_pagamento"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "date",
-              placeholder: "Inicio Pagamento",
-              required: "",
-              name: "inicio_data_pagamento"
-            },
-            domProps: { value: _vm.inicio_data_pagamento },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.inicio_data_pagamento = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "fim_data_pagamento" } }, [
-            _vm._v("Fim Pagamento")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.fields.fim_data_pagamento,
-                expression: "fields.fim_data_pagamento"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date", name: "fim_data_pagamento" },
-            domProps: { value: _vm.fields.fim_data_pagamento },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.fields, "fim_data_pagamento", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.fields.categoria,
-                  expression: "fields.categoria"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { name: "categoria", id: "", required: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.fields,
-                    "categoria",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "1" } }, [_vm._v("Essenciais")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("Compras")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("Urgencias")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "4" } }, [_vm._v("Poupança")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "5" } }, [_vm._v("Lazer")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "6" } }, [_vm._v("Transporte")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "7" } }, [_vm._v("Alimentação")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "8" } }, [_vm._v("Estudos")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "9" } }, [_vm._v("Avulsos")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.fields.tipo_conta,
-                  expression: "fields.tipo_conta"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { name: "tipo_conta", id: "", required: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.fields,
-                    "tipo_conta",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _c(
-                "option",
-                {
-                  attrs: { disabled: "", selected: "", value: "Tipo de Conta" }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.favorecido,
+                    expression: "fields.favorecido"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "favorecido",
+                  required: "",
+                  placeholder: "Favorecido"
                 },
-                [_vm._v("Tipo de Conta")]
-              ),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Extra" } }, [_vm._v("Extra")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Fixa" } }, [_vm._v("Fixa")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Parcelada" } }, [
-                _vm._v("Parcelada")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.fields.forma_pagamento,
-                  expression: "fields.forma_pagamento"
+                domProps: { value: _vm.fields.favorecido },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.fields, "favorecido", $event.target.value)
+                  }
                 }
-              ],
-              staticClass: "form-control",
-              attrs: { name: "forma_pagamento", required: "", id: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.fields,
-                    "forma_pagamento",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.descricao,
+                    expression: "fields.descricao"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "descricao",
+                  placeholder: "Descrição"
+                },
+                domProps: { value: _vm.fields.descricao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.fields, "descricao", $event.target.value)
+                  }
                 }
-              }
-            },
-            [
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "mask",
+                    rawName: "v-mask",
+                    value: "money",
+                    expression: "'money'"
+                  },
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.valor,
+                    expression: "fields.valor"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "valor",
+                  required: "",
+                  placeholder: "Valor"
+                },
+                domProps: { value: _vm.fields.valor },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.fields, "valor", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "inicio_data_pagamento" } }, [
+                _vm._v("Inicio Pagamento")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.inicio_data_pagamento,
+                    expression: "fields.inicio_data_pagamento"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "date",
+                  placeholder: "Inicio Pagamento",
+                  required: "",
+                  name: "inicio_data_pagamento"
+                },
+                domProps: { value: _vm.fields.inicio_data_pagamento },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.fields,
+                      "inicio_data_pagamento",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "fim_data_pagamento" } }, [
+                _vm._v("Fim Pagamento")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.fim_data_pagamento,
+                    expression: "fields.fim_data_pagamento"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date", name: "fim_data_pagamento" },
+                domProps: { value: _vm.fields.fim_data_pagamento },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.fields,
+                      "fim_data_pagamento",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
               _c(
-                "option",
+                "select",
                 {
-                  attrs: {
-                    disabled: "",
-                    selected: "",
-                    value: "Forma de Pagamento"
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.fields.categoria,
+                      expression: "fields.categoria"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "categoria", id: "", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.fields,
+                        "categoria",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
                   }
                 },
-                [_vm._v("Forma de Pagamento")]
-              ),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Cartão" } }, [_vm._v("Cartão")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Dinheiro" } }, [
-                _vm._v("Dinheiro")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Débito" } }, [_vm._v("Débito")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Débito Automatico" } }, [
-                _vm._v("Débito Automatico")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Terceiro" } }, [
-                _vm._v("Terceiro")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer text-center" }, [
-          _c(
-            "div",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { "data-dismiss": "modal" },
-              on: { click: _vm.submit }
-            },
-            [_vm._v("Cadastrar")]
-          )
-        ])
-      ]
-    )
+                [
+                  _c("option", { attrs: { value: "1" } }, [
+                    _vm._v("Essenciais")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("Compras")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [
+                    _vm._v("Urgencias")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [_vm._v("Poupança")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "5" } }, [_vm._v("Lazer")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "6" } }, [
+                    _vm._v("Transporte")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "7" } }, [
+                    _vm._v("Alimentação")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "8" } }, [_vm._v("Estudos")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "9" } }, [_vm._v("Avulsos")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.fields.tipo_conta,
+                      expression: "fields.tipo_conta"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "tipo_conta", id: "", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.fields,
+                        "tipo_conta",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    {
+                      attrs: {
+                        disabled: "",
+                        selected: "",
+                        value: "Tipo de Conta"
+                      }
+                    },
+                    [_vm._v("Tipo de Conta")]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Extra" } }, [
+                    _vm._v("Extra")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Fixa" } }, [_vm._v("Fixa")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Parcelada" } }, [
+                    _vm._v("Parcelada")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.fields.forma_pagamento,
+                      expression: "fields.forma_pagamento"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "forma_pagamento", required: "", id: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.fields,
+                        "forma_pagamento",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    {
+                      attrs: {
+                        disabled: "",
+                        selected: "",
+                        value: "Forma de Pagamento"
+                      }
+                    },
+                    [_vm._v("Forma de Pagamento")]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Cartão" } }, [
+                    _vm._v("Cartão")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Dinheiro" } }, [
+                    _vm._v("Dinheiro")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Débito" } }, [
+                    _vm._v("Débito")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Débito Automatico" } }, [
+                    _vm._v("Débito Automatico")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Terceiro" } }, [
+                    _vm._v("Terceiro")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-footer text-center" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { "data-dismiss": "modal" },
+                  on: { click: _vm.submit }
+                },
+                [_vm._v("Cadastrar")]
+              )
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

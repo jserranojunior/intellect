@@ -1,6 +1,11 @@
 <template>
     <div>
-        <form @submit.prevent.stop="submit" method="post">
+
+    
+       
+ 
+
+        <form v-if="favorecido" @submit.prevent.stop="submit" method="post">
             <div class="form-group">
                 <!-- <label for="favorecido">Favorecido</label> -->
                 <input type="text" class="form-control" name="favorecido" v-model="fields.favorecido" required
@@ -18,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="date" class="form-control" placeholder="Inicio Pagamento" v-model="inicio_data_pagamento" required name="inicio_data_pagamento">
+                <input type="date" class="form-control" placeholder="Inicio Pagamento" v-model="fields.inicio_data_pagamento" required name="inicio_data_pagamento">
             </div>
 
             <div class="form-group">
@@ -82,6 +87,7 @@ import AwesomeMask from 'awesome-mask'
                 loaded: true,
                 minhadata:'',
                 inicio_data_pagamento:'',
+                favorecido: '',
                 
             };
         },    
@@ -101,16 +107,14 @@ import AwesomeMask from 'awesome-mask'
                     this.createBillsToPay(this.fields);                
             }
         },
-        mounted(){
+        mounted(){            
 
-
-
-            this.fields.inicio_data_pagamento = this.dataAtual    
-            this.inicio_data_pagamento = this.dataAtual    
+            // this.fields.inicio_data_pagamento = this.dataAtual    
+            // this.inicio_data_pagamento = this.dataAtual    
         
-            /* hora atual */
-            var hoy = new Date();            	
-            this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
+            // /* hora atual */
+            // var hoy = new Date();            	
+            // this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
         
         },
         watch:{
@@ -118,7 +122,23 @@ import AwesomeMask from 'awesome-mask'
                 this.fields.inicio_data_pagamento = this.inicio_data_pagamento
             },
             editedbill: function(){
+                this.favorecido =  this.editedbill.favorecido 
+                //valida
+
                 this.fields.favorecido = this.editedbill.favorecido;
+                this.fields.valor = this.editedbill.valor;
+                this.fields.descricao = this.editedbill.descricao;
+                this.fields.inicio_data_pagamento = this.editedbill.inicio_data_pagamento;
+                this.fields.fim_data_pagamento = this.editedbill.fim_data_pagamento;
+                this.fields.parcelas = this.editedbill.parcelas;
+                this.fields.tipo_conta = this.editedbill.tipo_conta;
+                this.fields.forma_pagamento = this.editedbill.forma_pagamento;
+                this.fields.categoria = this.editedbill.categoria;
+
+                // adicionar novos campos
+
+               
+                
                 console.log(this.fields.favorecido)
             }
 

@@ -14,7 +14,7 @@
                             </div>
                             <div class="col">
                                                                 <a href="#">
-                                    <div class="btn btn-sm  btn-block  btn-outline-warning active" data-toggle="modal" data-target="#EditexampleModal">
+                                    <div class="btn btn-sm  btn-block  btn-outline-warning active" >
                                         (=) EDITAR
                                     </div>
                                 </a>
@@ -58,7 +58,7 @@
                                         <thead> 
                                         </thead>
                                         <tbody>
-                                            <tr @click="editBill(conta.id)" v-for="conta in categorie.categories.bills" :key="conta.id">
+                                            <tr data-toggle="modal" data-target="#EditexampleModal" @click="editBill(conta.id)" v-for="conta in categorie.categories.bills" :key="conta.id">
                                                 <td>{{conta.favorecido}}</td>
                                                 <td class="text-right">{{conta.valor | money }}</td>
                                             </tr>
