@@ -2459,23 +2459,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loaded: true,
       minhadata: '',
       inicio_data_pagamento: '',
-      favorecido: ''
+      favorecido: '',
+      editIdDateFields: {}
     };
   },
   directives: {
     'mask': awesome_mask__WEBPACK_IMPORTED_MODULE_1___default.a
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'editBillsToPay']), {
-    submit: function submit() {
-      console.log(this.fields);
-      this.createBillsToPay(this.fields);
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'editBillsToPay', 'updateBillsToPay']), {
+    submitUpdate: function submitUpdate() {
+      this.editIdDateFields.id = this.fields.id;
+      this.editIdDateFields.date = this.dataAtualHoje;
+      this.editIdDateFields.fields = this.fields;
+      console.log(this.editIdDateFields);
+      this.updateBillsToPay(this.editIdDateFields);
     }
   }),
-  mounted: function mounted() {// this.fields.inicio_data_pagamento = this.dataAtual    
+  mounted: function mounted() {
+    // this.fields.inicio_data_pagamento = this.dataAtual    
     // this.inicio_data_pagamento = this.dataAtual    
     // /* hora atual */
-    // var hoy = new Date();            	
-    // this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
+    var hoy = new Date();
+    this.dataAtualHoje = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
   },
   watch: {
     inicio_data_pagamento: function inicio_data_pagamento() {
@@ -2484,6 +2489,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     editedbill: function editedbill() {
       this.favorecido = this.editedbill.favorecido; //valida
 
+      this.fields.id = this.editedbill.id;
       this.fields.favorecido = this.editedbill.favorecido;
       this.fields.valor = this.editedbill.valor;
       this.fields.descricao = this.editedbill.descricao;
@@ -38105,7 +38111,7 @@ var staticRenderFns = [
                   },
                   [
                     _vm._v(
-                      "\n                                    (=) EDITAR\n                                "
+                      "\n                                    (+) RECEBER\n                                "
                     )
                   ]
                 )
@@ -39032,9 +39038,9 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { "data-dismiss": "modal" },
-                  on: { click: _vm.submit }
+                  on: { click: _vm.submitUpdate }
                 },
-                [_vm._v("Cadastrar")]
+                [_vm._v("Atualizar")]
               )
             ])
           ]
@@ -54730,7 +54736,8 @@ __webpack_require__.r(__webpack_exports__);
     valor: 0,
     success: false,
     errors: '',
-    editedbill: {}
+    editedbill: {},
+    updatebill: {}
   },
   mutations: {
     LOAD_BILLS_TO_PAY: function LOAD_BILLS_TO_PAY(state, financeiro) {
@@ -54742,6 +54749,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     EDIT_BILL_TO_PAY: function EDIT_BILL_TO_PAY(state, data) {
       state.editedbill = data;
+    },
+    UPDATE_BILL_TO_PAY: function UPDATE_BILL_TO_PAY(state, data) {
+      state.updatebill = data;
     }
   },
   actions: {
@@ -54782,6 +54792,17 @@ __webpack_require__.r(__webpack_exports__);
           var errors = error.response.data.errors || {};
           console.log(errors);
         }
+      });
+    },
+    updateBillsToPay: function updateBillsToPay(context, update) {
+      // console.log(edit.id + edit.date)                 
+      var url = '../public/api/v1/financeiro/' + update.id + '/' + update.date;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(url, update.fields).then(function (response) {
+        context.commit('EDIT_BILL_TO_PAY', response.data); //configurar o update //
+
+        state.dispatch("loadBillsToPay", update.date);
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }

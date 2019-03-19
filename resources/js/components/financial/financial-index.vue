@@ -15,7 +15,7 @@
                             <div class="col">
                                                                 <a href="#">
                                     <div class="btn btn-sm  btn-block  btn-outline-warning active" >
-                                        (=) EDITAR
+                                        (+) RECEBER
                                     </div>
                                 </a>
                                 <!-- <div class="btn btn-block btn-sm btn-outline-warning active float-right">

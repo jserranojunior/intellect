@@ -66,7 +66,7 @@
             </div>
 
             <div class="card-footer text-center">    
-                <div class="btn btn-primary" data-dismiss="modal" @click="submit">Cadastrar</div>
+                <div class="btn btn-primary" data-dismiss="modal" @click="submitUpdate">Atualizar</div>
             </div>
 
         </form>
@@ -88,6 +88,7 @@ import AwesomeMask from 'awesome-mask'
                 minhadata:'',
                 inicio_data_pagamento:'',
                 favorecido: '',
+                editIdDateFields:{},  
                 
             };
         },    
@@ -100,11 +101,16 @@ import AwesomeMask from 'awesome-mask'
             'loadBillsToPay',
             'nextDateBillsToPay',
             'previousDateBillsToPay',  
-            'editBillsToPay'         
+            'editBillsToPay',   
+            'updateBillsToPay',        
         ]),            
-            submit() {
-                console.log(this.fields)                               
-                    this.createBillsToPay(this.fields);                
+            submitUpdate() {
+                this.editIdDateFields.id = this.fields.id
+                this.editIdDateFields.date = this.dataAtualHoje
+                this.editIdDateFields.fields = this.fields
+
+                            console.log(this.editIdDateFields)
+                    this.updateBillsToPay(this.editIdDateFields);                
             }
         },
         mounted(){            
@@ -113,8 +119,8 @@ import AwesomeMask from 'awesome-mask'
             // this.inicio_data_pagamento = this.dataAtual    
         
             // /* hora atual */
-            // var hoy = new Date();            	
-            // this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
+            var hoy = new Date();            	
+            this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
         
         },
         watch:{
@@ -124,7 +130,7 @@ import AwesomeMask from 'awesome-mask'
             editedbill: function(){
                 this.favorecido =  this.editedbill.favorecido 
                 //valida
-
+                this.fields.id = this.editedbill.id;
                 this.fields.favorecido = this.editedbill.favorecido;
                 this.fields.valor = this.editedbill.valor;
                 this.fields.descricao = this.editedbill.descricao;
