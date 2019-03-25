@@ -47,12 +47,12 @@ export default {
         },
 
 
-        createBillsToPay(context, fields) {
+        createBillsToPay({ dispatch, commit}, fields) {
             axios
                 .post("../public/api/v1/financeiro", fields)
                 .then(response => {
-                    context.commit('CREATE_NEW_BILL', fields)
-                    // dispatch("loadBillsToPay", fields.inicio_data_pagamento); 
+                    commit('CREATE_NEW_BILL', fields)
+                    dispatch("loadBillsToPay", fields.inicio_data_pagamento); 
                 })
                 .catch(error => {
                     if (error.response.status === 422) {
@@ -74,16 +74,17 @@ export default {
                     }
                 })
         },
-        updateBillsToPay(context, update) {              
+        updateBillsToPay({ dispatch, commit} ,  update) {              
             // console.log(edit.id + edit.date)                 
             let url = '../public/api/v1/financeiro/' + update.id + '/' + update.date;            
             axios
                 .put(url, update.fields)
                 .then(response => {
-                    context.commit('EDIT_BILL_TO_PAY', response.data)
+                    commit('EDIT_BILL_TO_PAY', response.data)
 
                     //configurar o update //
-                    state.dispatch("loadBillsToPay", update.date);
+                    dispatch("loadBillsToPay", update.date);
+                   
                     
                 })                           
                 .catch(function (error) {

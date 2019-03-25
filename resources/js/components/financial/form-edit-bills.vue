@@ -109,7 +109,7 @@ import AwesomeMask from 'awesome-mask'
                 this.editIdDateFields.date = this.dataAtualHoje
                 this.editIdDateFields.fields = this.fields
 
-                            console.log(this.editIdDateFields)
+                            // console.log(this.editIdDateFields)
                     this.updateBillsToPay(this.editIdDateFields);                
             }
         },

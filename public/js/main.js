@@ -2470,8 +2470,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     submitUpdate: function submitUpdate() {
       this.editIdDateFields.id = this.fields.id;
       this.editIdDateFields.date = this.dataAtualHoje;
-      this.editIdDateFields.fields = this.fields;
-      console.log(this.editIdDateFields);
+      this.editIdDateFields.fields = this.fields; // console.log(this.editIdDateFields)
+
       this.updateBillsToPay(this.editIdDateFields);
     }
   }),
@@ -54772,9 +54772,12 @@ __webpack_require__.r(__webpack_exports__);
     previousDateBillsToPay: function previousDateBillsToPay(state, dispatch) {
       state.dispatch("loadBillsToPay", this.state.financeiro.data.dates.dataAnterior);
     },
-    createBillsToPay: function createBillsToPay(context, fields) {
+    createBillsToPay: function createBillsToPay(_ref, fields) {
+      var dispatch = _ref.dispatch,
+          commit = _ref.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("../public/api/v1/financeiro", fields).then(function (response) {
-        context.commit('CREATE_NEW_BILL', fields); // dispatch("loadBillsToPay", fields.inicio_data_pagamento); 
+        commit('CREATE_NEW_BILL', fields);
+        dispatch("loadBillsToPay", fields.inicio_data_pagamento);
       }).catch(function (error) {
         if (error.response.status === 422) {
           var errors = error.response.data.errors || {};
@@ -54794,13 +54797,15 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    updateBillsToPay: function updateBillsToPay(context, update) {
+    updateBillsToPay: function updateBillsToPay(_ref2, update) {
+      var dispatch = _ref2.dispatch,
+          commit = _ref2.commit;
       // console.log(edit.id + edit.date)                 
       var url = '../public/api/v1/financeiro/' + update.id + '/' + update.date;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(url, update.fields).then(function (response) {
-        context.commit('EDIT_BILL_TO_PAY', response.data); //configurar o update //
+        commit('EDIT_BILL_TO_PAY', response.data); //configurar o update //
 
-        state.dispatch("loadBillsToPay", update.date);
+        dispatch("loadBillsToPay", update.date);
       }).catch(function (error) {
         console.log(error);
       });
