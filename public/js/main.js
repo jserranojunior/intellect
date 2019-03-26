@@ -39038,7 +39038,11 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { "data-dismiss": "modal" },
-                  on: { click: _vm.submitUpdate }
+                  on: {
+                    click: function($event) {
+                      _vm.submitUpdate()
+                    }
+                  }
                 },
                 [_vm._v("Atualizar")]
               )
@@ -54803,6 +54807,7 @@ __webpack_require__.r(__webpack_exports__);
       // console.log(edit.id + edit.date)                 
       var url = '../public/api/v1/financeiro/' + update.id + '/' + update.date;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(url, update.fields).then(function (response) {
+        console.log('conta atualizada');
         commit('EDIT_BILL_TO_PAY', response.data); //configurar o update //
 
         dispatch("loadBillsToPay", update.date);

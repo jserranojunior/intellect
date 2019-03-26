@@ -66,7 +66,7 @@
             </div>
 
             <div class="card-footer text-center">    
-                <div class="btn btn-primary" data-dismiss="modal" @click="submitUpdate">Atualizar</div>
+                <div class="btn btn-primary" data-dismiss="modal" @click="submitUpdate()">Atualizar</div>
             </div>
 
         </form>
