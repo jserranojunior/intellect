@@ -80,11 +80,12 @@ export default {
             axios
                 .put(url, update.fields)
                 .then(response => {
+                    console.log('conta atualizada')
+
                     commit('EDIT_BILL_TO_PAY', response.data)
 
                     //configurar o update //
-                    dispatch("loadBillsToPay", update.date);
-                   
+                    dispatch("loadBillsToPay", update.date);                  
                     
                 })                           
                 .catch(function (error) {
