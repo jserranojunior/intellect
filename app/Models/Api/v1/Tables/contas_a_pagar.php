@@ -33,9 +33,12 @@ class contas_a_pagar extends Model
         foreach($this->contas as $conta){           
             
             $this->values = $billsValue->pegarValor($this->data, $conta->id);
-            
+                        
             foreach($this->values as $value){ 
+                
                 $conta->valor = $value->valor;
+
+                $conta->contas_a_pagar_id = $value->contas_a_pagar_id;
                 
                 $valuePaid = $amountPaid->getAmountPaid($this->data, $value->id);
 
@@ -93,6 +96,7 @@ class contas_a_pagar extends Model
     }
 
     public function put($request, $id){
+        
         $billsToPay = new contas_a_pagar;
         $billsToPay = $billsToPay::find($id);
         $billsToPay->fill($request->input());      
@@ -110,6 +114,8 @@ class contas_a_pagar extends Model
             $this->values = $billsValue->pegarValor($this->data, $conta->id);
             
             foreach($this->values as $value){ 
+
+                $conta->contas_a_pagar_id = $value->contas_a_pagar_id; 
                 $conta->valor = $value->valor; 
                 $conta->data_pagamento = $value->data_pagamento;               
             }

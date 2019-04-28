@@ -6,15 +6,17 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Api\v1\Tables\contas_a_pagar;
+use App\Models\Api\v1\Tables\valores_contas_a_pagar;
 use App\Models\Api\v1\Tables\categoria_contas;
 
 class ApiBillsToPay extends Controller
 {
 
     
-    public function __construct(contas_a_pagar $billsToPay, categoria_contas $categoria_contas){
+    public function __construct(contas_a_pagar $billsToPay, valores_contas_a_pagar $valores_contas_a_pagar, categoria_contas $categoria_contas){
         $this->billsToPay = $billsToPay;
         $this->categoria_contas = $categoria_contas;
+        $this->valores_contas_a_pagar = $valores_contas_a_pagar;
     }
 
     /**
@@ -46,35 +48,20 @@ class ApiBillsToPay extends Controller
         return $dados;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $store = $this->billsToPay->store($request);
         return $store;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit($id, $date)
     {
 
@@ -99,25 +86,17 @@ class ApiBillsToPay extends Controller
     
 }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {       
         $this->billsToPay = $this->billsToPay->put($request, $id);
-        return($this->billsToPay);
+
+        $this->valores_contas_a_pagar = $this->valores_contas_a_pagar->put($request, $id);
+
+        $data = ['contas' => $this->billsToPay, 'valor' => $this->valores_contas_a_pagar];
+        return($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

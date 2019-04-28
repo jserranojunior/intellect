@@ -2433,20 +2433,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2468,17 +2454,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['loadBillsToPay', 'nextDateBillsToPay', 'previousDateBillsToPay', 'editBillsToPay', 'updateBillsToPay']), {
     submitUpdate: function submitUpdate() {
+      // corrigir data de atualização 
       this.editIdDateFields.id = this.fields.id;
-      this.editIdDateFields.date = this.dataAtualHoje;
-      this.editIdDateFields.fields = this.fields; // console.log(this.editIdDateFields)
-
+      this.editIdDateFields.date = this.fields.inicio_data_pagamento;
+      this.editIdDateFields.fields = this.fields;
       this.updateBillsToPay(this.editIdDateFields);
     }
   }),
   mounted: function mounted() {
-    // this.fields.inicio_data_pagamento = this.dataAtual    
-    // this.inicio_data_pagamento = this.dataAtual    
-    // /* hora atual */
     var hoy = new Date();
     this.dataAtualHoje = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
   },
@@ -2498,9 +2481,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.fields.parcelas = this.editedbill.parcelas;
       this.fields.tipo_conta = this.editedbill.tipo_conta;
       this.fields.forma_pagamento = this.editedbill.forma_pagamento;
-      this.fields.categoria = this.editedbill.categoria; // adicionar novos campos
-
-      console.log(this.fields.favorecido);
+      this.fields.categoria = this.editedbill.categoria;
+      this.fields.contas_a_pagar_id = this.editedbill.contas_a_pagar_id;
+      this.fields.data_pagamento = this.dataAtual;
+      console.log(this.fields.data_pagamento);
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -38738,12 +38722,6 @@ var render = function() {
               _c("input", {
                 directives: [
                   {
-                    name: "mask",
-                    rawName: "v-mask",
-                    value: "money",
-                    expression: "'money'"
-                  },
-                  {
                     name: "model",
                     rawName: "v-model",
                     value: _vm.fields.valor,
@@ -54790,7 +54768,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editBillsToPay: function editBillsToPay(context, edit) {
-      // console.log(edit.id + edit.date)                 
       var url = '../public/api/v1/financeiro/' + edit.id + '/' + edit.date;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
         return context.commit('EDIT_BILL_TO_PAY', response.data.data[0]);
@@ -54804,13 +54781,12 @@ __webpack_require__.r(__webpack_exports__);
     updateBillsToPay: function updateBillsToPay(_ref2, update) {
       var dispatch = _ref2.dispatch,
           commit = _ref2.commit;
-      // console.log(edit.id + edit.date)                 
       var url = '../public/api/v1/financeiro/' + update.id + '/' + update.date;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(url, update.fields).then(function (response) {
         console.log('conta atualizada');
         commit('EDIT_BILL_TO_PAY', response.data); //configurar o update //
 
-        dispatch("loadBillsToPay", update.date);
+        dispatch("loadBillsToPay", update.fields.data_pagamento);
       }).catch(function (error) {
         console.log(error);
       });

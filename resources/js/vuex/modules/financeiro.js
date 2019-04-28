@@ -62,7 +62,7 @@ export default {
                 })
         },
         editBillsToPay(context, edit) {              
-            // console.log(edit.id + edit.date)                 
+                         
             let url = '../public/api/v1/financeiro/' + edit.id + '/' + edit.date;            
             axios
                 .get(url)
@@ -75,7 +75,7 @@ export default {
                 })
         },
         updateBillsToPay({ dispatch, commit} ,  update) {              
-            // console.log(edit.id + edit.date)                 
+                           
             let url = '../public/api/v1/financeiro/' + update.id + '/' + update.date;            
             axios
                 .put(url, update.fields)
@@ -85,7 +85,7 @@ export default {
                     commit('EDIT_BILL_TO_PAY', response.data)
 
                     //configurar o update //
-                    dispatch("loadBillsToPay", update.date);                  
+                    dispatch("loadBillsToPay", update.fields.data_pagamento);                  
                     
                 })                           
                 .catch(function (error) {
