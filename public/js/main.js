@@ -2474,7 +2474,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.fields.id = this.editedbill.id;
       this.fields.favorecido = this.editedbill.favorecido;
-      this.fields.valor = this.editedbill.valor;
       this.fields.descricao = this.editedbill.descricao;
       this.fields.inicio_data_pagamento = this.editedbill.inicio_data_pagamento;
       this.fields.fim_data_pagamento = this.editedbill.fim_data_pagamento;
@@ -2483,8 +2482,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.fields.forma_pagamento = this.editedbill.forma_pagamento;
       this.fields.categoria = this.editedbill.categoria;
       this.fields.contas_a_pagar_id = this.editedbill.contas_a_pagar_id;
-      this.fields.data_pagamento = this.dataAtual;
-      console.log(this.fields.data_pagamento);
+      this.fields.data_pagamento = this.dataAtual; // console.log(this.fields.data_pagamento)
+
+      var val = (this.editedbill.valor / 1).toFixed(2).replace(".", ",");
+      this.editedbill.valor = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      this.fields.valor = this.editedbill.valor;
+      console.log(this.editedbill.valor);
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -38721,6 +38724,12 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("input", {
                 directives: [
+                  {
+                    name: "mask",
+                    rawName: "v-mask",
+                    value: "money",
+                    expression: "'money'"
+                  },
                   {
                     name: "model",
                     rawName: "v-model",

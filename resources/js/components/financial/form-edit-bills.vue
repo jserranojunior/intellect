@@ -10,7 +10,7 @@
                 <input type="text" class="form-control" name="descricao" v-model="fields.descricao" placeholder="Descrição">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="valor" v-model="fields.valor" required placeholder="Valor">
+                <input type="text" class="form-control" v-mask="'money'" name="valor" v-model="fields.valor" required placeholder="Valor">
             </div>
             
             <div class="form-group">
@@ -80,6 +80,7 @@ export default {
     directives: {
         'mask': AwesomeMask
     },
+  
     methods: {
         ...mapActions([
             'loadBillsToPay',
@@ -111,7 +112,7 @@ export default {
             //valida
             this.fields.id = this.editedbill.id;
             this.fields.favorecido = this.editedbill.favorecido;
-            this.fields.valor = this.editedbill.valor;
+            
             this.fields.descricao = this.editedbill.descricao;
             this.fields.inicio_data_pagamento = this.editedbill.inicio_data_pagamento;
             this.fields.fim_data_pagamento = this.editedbill.fim_data_pagamento;
@@ -122,7 +123,14 @@ export default {
             this.fields.contas_a_pagar_id = this.editedbill.contas_a_pagar_id;
             this.fields.data_pagamento = this.dataAtual;
 
-            console.log(this.fields.data_pagamento)
+            // console.log(this.fields.data_pagamento)
+
+            
+            let val = (this.editedbill.valor / 1).toFixed(2).replace(".", ",");
+            this.editedbill.valor = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+            this.fields.valor = this.editedbill.valor
+            console.log(this.editedbill.valor)
         }
     },
     computed: {
