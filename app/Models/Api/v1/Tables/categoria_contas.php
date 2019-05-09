@@ -9,6 +9,23 @@ class categoria_contas extends Model
 {
     protected $table = "categoria_contas";
 
+    protected $fillable = ['nome', 'cor', 'tipo'];
+
+
+    public function store($request){
+        
+        try{
+            $categories = new categoria_contas;
+        $categories->fill($request->input());
+        $categories->save();
+        return("$categories cadastrado");
+        }catch(Error $e){
+            return $e;
+        }
+
+        
+    }
+
     public function categoriesToPayWithBills($request){
 
         $categorieTotalBillsToPay = 0;

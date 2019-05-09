@@ -31,3 +31,4 @@ Route::middleware('cors')->put('/v1/financeiro/{id}/{date}', 'Api\v1\Financial\A
 
 
 Route::get('/v1/categorias', 'Api\v1\Financial\ApiCategoriesBillsToPay@index');
+Route::post('/v1/categorias', 'Api\v1\Financial\ApiCategoriesBillsToPay@store');

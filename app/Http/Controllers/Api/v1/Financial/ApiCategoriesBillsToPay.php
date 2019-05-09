@@ -8,11 +8,9 @@ use App\Models\Api\v1\Tables\categoria_contas;
 
 class ApiCategoriesBillsToPay extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    // FAZER UM CONSTRUCT
+
     public function index(Request $request)
     {
         $this->categoriesAndBillsToPay = new categoria_contas;
@@ -27,9 +25,9 @@ class ApiCategoriesBillsToPay extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+      
     }
 
     /**
@@ -40,7 +38,9 @@ class ApiCategoriesBillsToPay extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->categoriesAndBillsToPay = new categoria_contas;
+        $this->categoriesAndBillsToPay = $this->categoriesAndBillsToPay->store($request);
+        return($this->categoriesAndBillsToPay);
     }
 
     /**
