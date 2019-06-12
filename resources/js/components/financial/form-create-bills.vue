@@ -104,6 +104,8 @@ import AwesomeMask from 'awesome-mask'
             }
         },
         mounted(){
+
+            
             this.fields.inicio_data_pagamento = this.dataAtual    
             this.inicio_data_pagamento = this.dataAtual             
             
