@@ -1,0 +1,13 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import Auth from '@/modules/auth/vuex/AuthIndex'
+import Financeiro from '@/modules/financeiro/vuex/FinanceiroIndex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  modules: {
+    Auth,
+    Financeiro,
+  }
+})
