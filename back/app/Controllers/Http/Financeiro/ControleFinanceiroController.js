@@ -25,53 +25,34 @@ class ControleFinanceiroController {
             // colocar para ordenar o valor que vem primeiro           
           })
          
-
-          // .with('total_valores_contas_a_pagars',(builder) => {           
-          //   builder.select(Database.raw('sum(valor) as sum'))
-          //   // .where('data_pagamento','<=', date) 
-          //   .select('id', 'contas_a_pagar_id', 'valor')
-          //   .groupBy('contas_a_pagar_id')   
-          // })     
+  
          
         })    
      
        
         .fetch();  
 
-        // ContasAPagar.toJSON()
-
-        // for (var categorias in ContasAPagar) {
-        //   // return ContasAPagar[p]
-        //   for (var contas in ContasAPagar[categorias]) {
-        //     for(var valores in ContasAPagar[categorias][contas]){
-        //       let conta = ContasAPagar[categorias][contas].toJSON();
-        //      return conta
-        //     }
-        //   }    
-     
-        // }
-
-        // ContasAPagar.forEach(function(valorAtual, index, array){
-        //   console.log(index + array)
-        //   let retorno = valorAtual;
-        // })
+    
 
         let Categorias = ContasAPagar.toJSON()
+
+        var totalGeralContasAPagar = 0
         
         for(var categorias in Categorias){
           let totalCategoria = 0
           for(var Contas in Categorias[categorias].contas_a_pagars){
             for(var valores in Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars){
               let valoresAPagar = Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars[valores].valor
-              totalCategoria = parseInt(totalCategoria) + parseInt(valoresAPagar) 
+              totalCategoria = parseFloat(totalCategoria) + parseFloat(valoresAPagar) 
             }
           }
           Categorias[categorias]['totalCategoria'] = totalCategoria
+          totalGeralContasAPagar = parseFloat(totalGeralContasAPagar) + parseFloat(totalCategoria)
         }
 
 
       
-        return {"contasAPagar": Categorias}
+        return {"contasAPagar": Categorias, "TotalGeralContasAPagar": totalGeralContasAPagar}
       }
 }
 

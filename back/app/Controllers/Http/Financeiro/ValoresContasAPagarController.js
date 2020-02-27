@@ -10,7 +10,7 @@ class ValoresContasAPagarController {
     .query()
     .fetch()
     
-    valoresContasAPagar = valoresContasAPagar.reduce((soma, valor) => soma + valor)
+    // valoresContasAPagar = valoresContasAPagar.reduce((soma, valor) => soma + valor)
     return valoresContasAPagar;
   }
 

@@ -60,11 +60,11 @@
                             <div class="card-body table-responsive">
                                 <table class="table table-sm table-financial table-striped  table-hover">
                                     <tr>
-                                        <td>
+                                        <td class="text-primary">
                                             Contas a pagar
                                         </td>
                                         <td>
-                                            613,50
+                                            {{categoriaContas.TotalGeralContasAPagar | money}}
                                         </td>
                                     </tr>
                                 </table>
@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import Main from '@/views/layouts/Main'
 import AddEditContas from '@/modules/financeiro/components/AddEditContas'
 import CategoriaContasAPagar from '@/modules/financeiro/components/CategoriaContasAPagar'
@@ -132,7 +133,26 @@ export default {
         AddEditContas,
         Main,
         Calendario,
-    }
+    },
+    computed:{
+        ...mapState({
+            categoriaContas: state => state.Financeiro.categoriaContas
+        })
+    },
+    filters: {
+        money: function(value) {
+            // console.log(value)
+            if (!value){
+                 return '0,00';
+            }
+            else{
+            let val = (value / 1).toFixed(2).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }
+          
+    
+        }
+    },
 
 }
 </script>
