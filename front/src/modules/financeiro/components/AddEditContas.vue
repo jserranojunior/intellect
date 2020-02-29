@@ -1,6 +1,7 @@
 <template>
     <div>
         <form @submit.prevent.stop="submit" method="post">
+
             <div class="form-group">
                 <!-- <label for="favorecido">Favorecido</label> -->
                 <input type="text" class="form-control" name="favorecido" v-model="fields.favorecido" required
@@ -18,12 +19,12 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="date" class="form-control" placeholder="Inicio Pagamento" v-model="inicio_data_pagamento" required name="inicio_data_pagamento">
+                <input type="text" class="form-control" v-mask="'99/99/9999'" placeholder="dd/mm/aaaa" v-model="inicio_data_pagamento" required >
             </div>
 
             <div class="form-group">
                 <label for="fim_data_pagamento">Fim Pagamento</label>
-                <input type="date" class="form-control" v-model="fields.fim_data_pagamento" name="fim_data_pagamento">
+                <input type="text" class="form-control" v-mask="'99/99/9999'" placeholder="dd/mm/aaaa" v-model="fields.fim_data_pagamento">
             </div>
             <div class="form-group">
 
@@ -61,7 +62,7 @@
             </div>
 
             <div class="card-footer text-center">    
-                <div class="btn btn-primary" data-dismiss="modal" @click="submit">Cadastrar</div>
+                <div class="btn btn-primary pointer" data-dismiss="modal" @click="submit">Cadastrar</div>
             </div>
 
         </form>
@@ -71,6 +72,8 @@
 <script>
 import {mapState, mapActions} from 'vuex'
 import AwesomeMask from 'awesome-mask'
+import moment from 'moment'
+
 
     export default {
         name: "AddEditContas",   
@@ -97,31 +100,11 @@ import AwesomeMask from 'awesome-mask'
         ]),            
             submit() {
                 this.ActionAddContasAPagar(this.fields)
-
-                
-        // let config = {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3OTAyNjc3M30.FcKNpIWWOa0cdkonc0r6_zcwX6Nmzu1FzGIrsbma8ws'
-        //     }
-        // }
-        // // let that = this;
-        // axios.post('http://127.0.0.1:3333/contasapagar', this.fields, config)
-        //     .then(function (response) {
-              
-        //        console.log(response)
-
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error)
-        //         console.log(error.response);
-        //     });                          
+                       
                              
             }
         },
-        mounted(){
-            
-            this.fields.inicio_data_pagamento = this.dataAtual    
-            this.inicio_data_pagamento = this.dataAtual             
+        beforeMount(){           
             
                 this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id    
                 this.fields.tipo_conta = this.tipo_conta          
@@ -147,12 +130,27 @@ import AwesomeMask from 'awesome-mask'
               forma_pagamento: function(){
                 this.fields.forma_pagamento = this.forma_pagamento
             }, 
+            editarContaAPagar: {
+      deep: true,
+
+      handler(){
+      console.log("ta funcioandno")
+      }
+        },
+            dataAtual(){
+                moment.locale('pt-BR');
+                var dataMoment = this.dataAtual + "-" + "01"
+                 this.inicio_data_pagamento =   moment(dataMoment).format('L');  
+                 this.fields.fim_data_pagamento =   moment(dataMoment).format('L');  
+            }
         },        
         computed: {
         ...mapState({           
-            // dataAtual: state => state.financeiro.data.dates.dataAtual,
+            dataAtual: state => state.Financeiro.dataSelecionada,
+            editarContaAPagar: state => state.Financeiro.editarContaAPagar,
  
         }),    
-    }
+    },
+        
     };
 </script>

@@ -24,15 +24,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="contas in categoria.contas_a_pagars" :key="contas.id">
+                                <tr class="pointer" v-for="contas in categoria.contas_a_pagars" :key="contas.id">
 
                                 
                                     <td>
                                         {{contas.favorecido}}
                                     </td>
-                                    <td class="text-center"> 
+                                    <td @click="editarContaAPagar(contas.id)" class="text-center" data-toggle="modal" data-target="#exampleModal"> 
                                         <p v-for="valores in contas.valores_contas_a_pagars" :key="valores.id">
-                                            {{valores.valor}}
+                                            {{valores.valor | money}}
                                         </p>
 
                                     </td>
@@ -68,6 +68,8 @@ export default {
     name: 'CategoriaContasAPagar',
     data() {
         return {
+            editandoContaAPagar: {},
+
             // categoriaContas: {},
         }
     },
@@ -77,8 +79,12 @@ export default {
         })
     },
     methods:{
+        editarContaAPagar(id){
+            this.ActionSetEditarContaAPagar(id)
+        },
         ...mapActions([
-            'ActionGetCategoriasContasAPagar'
+            'ActionGetCategoriasContasAPagar',
+            'ActionSetEditarContaAPagar',
         ])        
     },
     props: {

@@ -5,4 +5,7 @@ export default {
     SET_DATA_SELECIONADA(state, data){
         state.dataSelecionada = data 
     },
+    SET_EDITAR_CONTA_A_PAGAR(state, data){
+        state.editarContaAPagar = data
+    }
 }

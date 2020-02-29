@@ -4,7 +4,7 @@
 import store from '../store'
 
 export default async (to, from, next) => {
-  document.title = `${to.name} - Intellect`
+  document.title = `Intellect - ${to.name}`
 
   var token = store.getters['Auth/hasToken']
   

@@ -26,6 +26,11 @@ const routes = [
     component: AdicionarConta
   },
   {
+    path: '/financeiro/editarcontaapagar',
+    name: 'editarcontaapagar',
+    component: AdicionarConta
+  },
+  {
     path: '/financeiro',
     name: 'financeiro',
     component: FinanceiroIndex

@@ -1,8 +1,10 @@
+
+
 'use strict'
 const ContasAPagar = use ('App/Models/Financeiro/ContasAPagar')
 const ValoresAPagar = use ('App/Models/Financeiro/ValoresContasAPagar')
 const Database = use('Database')
-
+const moment = use ('moment')
 
 class ContasAPagarController {
 
@@ -36,21 +38,46 @@ class ContasAPagarController {
 
 
   async store ({ request, auth}) {
+
+    var valorFloat = request.input('valor')
+
+    if(valorFloat === ""){
+      valorFloat =  0;
+   }else{
+    valorFloat = valorFloat.replace(".","");
+    valorFloat = valorFloat.replace(",",".");
+    valorFloat = parseFloat(valorFloat);
+   }
+ 
+  
+
+
+    
+
+    moment.locale('pt-BR');
+    var dataInicioMoment = request.input('inicio_data_pagamento')
+    dataInicioMoment = moment(moment(dataInicioMoment, 'DD-MM-YYYY')).format('YYYY-MM-DD') 
+
+    var dataFimMoment = request.input('fim_data_pagamento')
+    dataFimMoment = moment(moment(dataFimMoment, 'DD-MM-YYYY')).format('YYYY-MM-DD') 
+
+
+    var datasFormatadas = {"inicio_data_pagamento": dataInicioMoment,
+    "fim_data_pagamento": dataFimMoment}
+
     const dataConta = request.only([   "favorecido",
-    "inicio_data_pagamento",
-    "fim_data_pagamento",
+    
     "categorias_contas_a_pagar_id",
     "descricao",
     "forma_pagamento",
     "tipo_conta",
     "parcelas",])
 
-    const dataValor = request.only(["valor"])
 
- 
+    var dataValor = {"valor": valorFloat}
 
 
-    const conta = await ContasAPagar.create({ user_id: auth.user.id, ...dataConta})
+    const conta = await ContasAPagar.create({ user_id: auth.user.id, ...dataConta, ...datasFormatadas})
 
   
     const valor = await ValoresAPagar.create({ contas_a_pagar_id: conta.id, data_pagamento:dataConta.inicio_data_pagamento, ...dataValor})

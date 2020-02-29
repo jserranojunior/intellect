@@ -83,3 +83,10 @@ export const ActionAddContasAPagar = ({dispatch}, dados) => {
       resolve()
     })
   }
+
+  export const ActionSetEditarContaAPagar = ({commit}, data) => {
+    return new Promise(async (resolve) => {      
+      commit('SET_EDITAR_CONTA_A_PAGAR', data)
+      resolve()
+    })
+  }

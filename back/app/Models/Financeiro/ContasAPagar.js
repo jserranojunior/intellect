@@ -10,6 +10,7 @@ class ContasAPagar extends Model {
   total_valores_contas_a_pagars(){
     return this.hasMany('App/Models/Financeiro/ValoresContasAPagar')    
   }
+ 
 }
 
 module.exports = ContasAPagar
