@@ -19,7 +19,8 @@
             </div>
             <div class="form-group">
                 <label for="inicio_data_pagamento">Inicio Pagamento</label>
-                <input type="text" class="form-control" v-mask="'99/99/9999'" placeholder="dd/mm/aaaa" v-model="inicio_data_pagamento" required >
+               
+                <input type="text" class="form-control" v-mask="'99/99/9999'" placeholder="dd/mm/aaaa" v-model="fields.inicio_data_pagamento" required >
             </div>
 
             <div class="form-group">
@@ -62,7 +63,9 @@
             </div>
 
             <div class="card-footer text-center">    
-                <div class="btn btn-primary pointer" data-dismiss="modal" @click="submit">Cadastrar</div>
+                <div v-if="!modoEdicao" class="btn btn-primary pointer" data-dismiss="modal" @click="submit">Cadastrar</div>
+             <div v-else class="btn btn-secondary pointer" data-dismiss="modal">Atualizar</div>
+
             </div>
 
         </form>
@@ -79,15 +82,15 @@ import moment from 'moment'
         name: "AddEditContas",   
         data() {
             return { 
-                dataAtualHoje: '',
+             
                 fields: {},
                 errors: {},
                 loaded: true,
                 minhadata:'',
-                inicio_data_pagamento:'',
                 categorias_contas_a_pagar_id:1,
                 tipo_conta:'Extra',
-                forma_pagamento:'Cartão'                
+                forma_pagamento:'Cartão'      ,
+                modoEdicao: false          
             };
         },    
         directives: {
@@ -109,18 +112,10 @@ import moment from 'moment'
                 this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id    
                 this.fields.tipo_conta = this.tipo_conta          
                 this.fields.forma_pagamento = this.forma_pagamento
+                
             
-        
-            
-            /* hora atual */
-            var hoy = new Date();            	
-            this.dataAtualHoje = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();  
-        
         },
-        watch:{
-            inicio_data_pagamento: function(){
-                this.fields.inicio_data_pagamento = this.inicio_data_pagamento
-            },
+        watch:{           
               categorias_contas_a_pagar_id: function(){
                 this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id
             },
@@ -131,17 +126,52 @@ import moment from 'moment'
                 this.fields.forma_pagamento = this.forma_pagamento
             }, 
             editarContaAPagar: {
-      deep: true,
+                deep: true,
+                handler(){
+                    if(this.editarContaAPagar){
+                        this.modoEdicao = true
 
-      handler(){
-      console.log("ta funcioandno")
-      }
+
+                        moment.locale('pt-BR');
+
+                        
+                        this.fields.inicio_data_pagamento = moment(this.editarContaAPagar.inicio_data_pagamento, 'YYYY/MM/DD').format('DD-MM-YYYY')
+                         this.fields.fim_data_pagamento = moment(this.editarContaAPagar.fim_data_pagamento, 'YYYY/MM/DD').format('DD-MM-YYYY')
+
+
+                        
+
+
+
+
+                        if(this.editarContaAPagar.valores_contas_a_pagars[0]){
+                            this.fields.valor = this.editarContaAPagar.valores_contas_a_pagars[0].valor
+                        }else{
+                            this.fields.valor = 0
+                        }
+                        
+                        this.fields.favorecido = this.editarContaAPagar.favorecido
+                        this.fields.descricao = this.editarContaAPagar.descricao
+
+                        this.categorias_contas_a_pagar_id = this.editarContaAPagar.categorias_contas_a_pagar_id
+                        this.tipo_conta = this.editarContaAPagar.tipo_conta
+                        this.forma_pagamento = this.editarContaAPagar.forma_pagamento
+
+                    }else{
+                        this.modoEdicao = false
+                    }
+            }
         },
             dataAtual(){
-                moment.locale('pt-BR');
-                var dataMoment = this.dataAtual + "-" + "01"
-                 this.inicio_data_pagamento =   moment(dataMoment).format('L');  
-                 this.fields.fim_data_pagamento =   moment(dataMoment).format('L');  
+                         
+                if(!this.fields.inicio_data_pagamento || !this.modoEdicao){
+                    moment.locale('pt-BR');
+                    var dataMoment = this.dataAtual + "-" + "07"
+                    this.fields.inicio_data_pagamento =   moment(dataMoment).format('L');  
+                
+                }
+               
+             
             }
         },        
         computed: {

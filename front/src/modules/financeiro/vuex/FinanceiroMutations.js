@@ -8,4 +8,5 @@ export default {
     SET_EDITAR_CONTA_A_PAGAR(state, data){
         state.editarContaAPagar = data
     }
+    
 }
