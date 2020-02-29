@@ -1,6 +1,7 @@
 'use strict'
 const CategoriasAPagar = use ('App/Models/Financeiro/CategoriasContasAPagar')
 const ContasAPagar = use ('App/Models/Financeiro/ContasAPagar')
+const ValoresContasAPagar = use ('App/Models/Financeiro/ValoresContasAPagar')
 const Database = use('Database')
 
 
@@ -18,19 +19,16 @@ class ControleFinanceiroController {
           .whereNull('fim_data_pagamento')
           .orWhereRaw('SUBSTRING(inicio_data_pagamento,1,7) <= ?', [date])
           .whereRaw('fim_data_pagamento = ""')
-         
+
           .with('valores_contas_a_pagars',(builder) => {
-            builder            
-            // .where('data_pagamento','<=', date)           
-            // colocar para ordenar o valor que vem primeiro           
-          })
-         
-  
-         
+            builder    
+            .orderBy('id', 'DESC')   
+            .whereRaw('SUBSTRING(data_pagamento,1,7) = ?', [date]) 
+          })    
         })    
-     
-       
         .fetch();  
+
+      
 
     
 
@@ -40,11 +38,31 @@ class ControleFinanceiroController {
         
         for(var categorias in Categorias){
           let totalCategoria = 0
+          var ValorAPagar = {}
           for(var Contas in Categorias[categorias].contas_a_pagars){
-            for(var valores in Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars){
-              let valoresAPagar = Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars[valores].valor
+
+            if(Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars == "" || Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars == null){
+
+               ValorAPagar = await ValoresContasAPagar
+               .query()
+               .where('contas_a_pagar_id', Categorias[categorias].contas_a_pagars[Contas].id)
+               .whereRaw('SUBSTRING(data_pagamento,1,7) < ?', [date]) 
+               .orderBy('id', 'desc')
+               .limit(1)
+               .fetch(); 
+
+               Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars = ValorAPagar
+           
+            }
+           
+              for(var valores in Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars){         
+                if(Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars[valores]){
+                var valoresAPagar = Categorias[categorias].contas_a_pagars[Contas].valores_contas_a_pagars[valores].valor             
+                    
               totalCategoria = parseFloat(totalCategoria) + parseFloat(valoresAPagar) 
             }
+            }
+            
           }
           Categorias[categorias]['totalCategoria'] = totalCategoria
           totalGeralContasAPagar = parseFloat(totalGeralContasAPagar) + parseFloat(totalCategoria)

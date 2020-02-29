@@ -99,16 +99,27 @@ class ContasAPagarController {
   async show ({ params, request, response, view }) {
   }
 
-  /**
-   * Render a form to update an existing contasapagar.
-   * GET contasapagars/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
+ 
   async edit ({ params, request, response, view }) {
+
+   
+    const Contas = await ContasAPagar
+
+    .query()
+
+    .where('id', '=', params.id)
+    .with('valores_contas_a_pagars', (builder) => {
+      builder.whereRaw('SUBSTRING(data_pagamento,1,7) <= ?', [params.data])
+          
+             .orderBy('id', 'desc')
+             .limit(1)
+            
+             
+    })
+  
+    .fetch();  
+
+    return Contas    
   }
 
   /**

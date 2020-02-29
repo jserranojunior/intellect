@@ -30,6 +30,7 @@ Route.group(()=>{
 
 Route.group(()=>{
   Route.resource('contasapagar', 'Financeiro/ContasAPagarController')
+  Route.get('contasapagar/:id/:data/edit', 'Financeiro/ContasAPagarController.edit')
 }).middleware('auth')
 
 Route.group(()=>{
