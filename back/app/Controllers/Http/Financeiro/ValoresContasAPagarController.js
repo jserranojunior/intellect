@@ -14,72 +14,48 @@ class ValoresContasAPagarController {
     return valoresContasAPagar;
   }
 
-  /**
-   * Render a form to be used for creating a new valorescontasapagar.
-   * GET valorescontasapagars/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
   async create ({ request, response, view }) {
   }
 
-  /**
-   * Create/save a new valorescontasapagar.
-   * POST valorescontasapagars
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
+ 
   async store ({ request, response }) {
   }
 
-  /**
-   * Display a single valorescontasapagar.
-   * GET valorescontasapagars/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
   async show ({ params, request, response, view }) {
   }
 
-  /**
-   * Render a form to update an existing valorescontasapagar.
-   * GET valorescontasapagars/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
   async edit ({ params, request, response, view }) {
   }
 
-  /**
-   * Update valorescontasapagar details.
-   * PUT or PATCH valorescontasapagars/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async update ({ params, request, response }) {
+
+
+ 
+
+    // Verifica se já tem o valor 
+    var procurarValorAPagar = await ValoresContasAPagar
+    .query()
+    .where('id', request.input('id'))
+    .fetch()
+    procurarValorAPagar = procurarValorAPagar.toJSON()
+
+    if(procurarValorAPagar > ""){
+      return(procurarValorAPagar)
+    }else{
+         const ValoresContasAPagar = new ValoresContasAPagar()
+          valoresContasAPagar.id = request.input('id')
+    valoresContasAPagar.contas_a_pagar_id = request.input('contas_a_pagar_id')
+    valoresContasAPagar.valor = request.input('valor')
+        await valoresContasAPagar.save()
+
+    }
+    
+
+
+
+
   }
 
-  /**
-   * Delete a valorescontasapagar with id.
-   * DELETE valorescontasapagars/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async destroy ({ params, request, response }) {
   }
 }

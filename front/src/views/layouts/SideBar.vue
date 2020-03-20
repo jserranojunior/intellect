@@ -54,6 +54,13 @@
                             </li>                           
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                                <router-link :to="{name:'editor'}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Editor</p>
+                                </router-link>
+                            </li>    
                 </ul>
              </nav>
 

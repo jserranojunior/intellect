@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Login from '../modules/auth/pages/Login.vue'
 import AdicionarConta from '@/modules/financeiro/pages/AdicionarConta'
 import FinanceiroIndex from '@/modules/financeiro/pages/FinanceiroIndex'
+import Editor from '@/modules/editor/pages/Editor'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/financeiro/adicionarcontaapagar',
     name: 'adicionarcontaapagar',
     component: AdicionarConta
+  },
+  {
+    path: '/editor',
+    name: 'editor',
+    component: Editor
   },
   {
     path: '/financeiro/editarcontaapagar',
