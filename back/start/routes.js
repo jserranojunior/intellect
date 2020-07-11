@@ -1,5 +1,6 @@
 'use strict'
 
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -15,10 +16,15 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+const Helpers = use('Helpers')
+
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.post('images/upload', 'Image/ImageController.store')
+  // .middleware('auth')
 
 Route.post('/register', 'AuthController.register')
 Route.post('/authenticate', 'AuthController.authenticate')
