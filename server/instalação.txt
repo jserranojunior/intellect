@@ -1,0 +1,13 @@
+Criar um subdominio apontando para o servidor backend
+Criar um subdominio apontando para a pasta DIST
+Mudar .env.production colocar o dominio do server
+Fazer yarn run build
+
+Consultar .htaccess da pasta public do laravel
+Rodar o comando 
+php artisan passport:client --personal
+
+Rodar seed niveis_de_acesso
+php artisan storage:link
+
+Copiar códigos para .passport na raiz do lavavel

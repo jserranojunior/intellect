@@ -1,2 +1,7 @@
 .env
-
+database/mysql
+node_modules
+node_modules
+back/node_modules
+quasar/node_modules
+vue/node_modules
