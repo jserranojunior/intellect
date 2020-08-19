@@ -3,5 +3,8 @@ database/mysql
 node_modules
 node_modules
 back/node_modules
+back/.env
+front/.env
+quasar/.env
 quasar/node_modules
 vue/node_modules
