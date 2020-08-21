@@ -1,29 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+/* eslint-disable */
+import Auth from "../modules/auth/vuex";
+import Financeiro from "../modules/financeiro/vuex";
 
-// import example from './module-example'
-
-Vue.use(Vuex)
-
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Store instance.
- */
-
-export default function (/* { ssrContext } */) {
+Vue.use(Vuex);
+export default function() {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      Auth,
+      Financeiro
     },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode only
     strict: process.env.DEV
-  })
-
-  return Store
+  });
+  return Store;
 }

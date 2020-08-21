@@ -1,8 +1,8 @@
 {
   "name": "intellect",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "Developer Alvitre <3",
+  "productName": "Intellect",
   "author": "Jorge Serrano Junior <jorgeserranojunior@hotmail.com>",
   "private": true,
   "scripts": {
@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "awesome-mask": "^1.1.1",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
+    "moment": "^2.27.0",
     "quasar": "^1.0.0",
-    "tailwindcss": "^1.6.2"
+    "tailwindcss": "^1.6.2",
+    "vue-functional-calendar": "^2.8.88"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
