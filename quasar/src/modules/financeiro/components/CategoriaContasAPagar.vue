@@ -2,11 +2,11 @@
   <div class="flex">
     <div class="w-3/12 p-1" v-for="categoria in categoriaContas.contasAPagar" :key="categoria.id">
       <div class="painel mt-1 shadow-md">
-        <div :class="categoria.cor + ' painel-header text-center'">
+        <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
           <p class="painel-title">{{categoria.nome}}</p>
-          <button type="button" class="togle" data-card-widget="collapse">
+          <!-- <button type="button" class="togle" data-card-widget="collapse">
             <i class="fas fa-minus"></i>
-          </button>
+          </button>-->
         </div>
         <div class="painel-body p-1">
           <div
@@ -14,27 +14,26 @@
             v-for="contas in categoria.contas_a_pagars"
             :key="contas.id"
           >
+            <div class="w-1/4">
+              <input class="mr-2 leading-tight" type="checkbox" :id="contas.id" />
+            </div>
             <div
-              class="w-1/3 pointer"
+              class="w-2/4 pointer"
               @click="editarContaAPagar(contas.id)"
               data-toggle="modal"
               data-target="#exampleModal"
             >{{contas.favorecido}}</div>
-            <div class="w-1/3">
+            <div class="w-1/4">
               <span
                 v-for="valores in contas.valores_contas_a_pagars"
                 :key="valores.id"
               >{{valores.valor | money}}</span>
             </div>
-            <div class="w-1/3">
-              <input type="checkbox" class="custom-control-input pointer" :id="contas.id" />
-              <label class="custom-control-label pointer" :for="contas.id"></label>
-            </div>
           </div>
         </div>
         <div class="painel-footer flex text-center justify-between border-t mt-1 p-2">
           <div class="w-1/3">Total</div>
-          <div class="w-1/3">{{categoria.totalCategoria | money}}</div>
+          <div class="w-1/3">{{categoria.totalCategoria}}</div>
         </div>
         <!-- /.card-body -->
       </div>

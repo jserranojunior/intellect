@@ -1,22 +1,18 @@
-'use strict'
-const CategoriasAPagar = use ('App/Models/Financeiro/CategoriasContasAPagar')
+"use strict";
+const CategoriasAPagar = use("App/Models/Financeiro/CategoriasContasAPagar");
 
 class CategoriasContasAPagarController {
-  
-  async index () {
-    const Categorias = await CategoriasAPagar.all()
-    return Categorias
+  async index() {
+    const Categorias = await CategoriasAPagar.all();
+    return Categorias;
   }
 
-  async create ({ request, response, view }) {
-  } 
+  async create({ request, response, view }) {}
 
-
-
-  async store ({ request}) {
-    const data = request.all()
-    const Categoria = await CategoriasAPagar.create({...data})
-    return Categoria
+  async store({ request }) {
+    const data = request.all();
+    const Categoria = await CategoriasAPagar.create({ ...data });
+    return Categoria;
   }
 
   /**
@@ -28,8 +24,7 @@ class CategoriasContasAPagarController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-  }
+  async show({ params, request, response, view }) {}
 
   /**
    * Render a form to update an existing categoriascontasapagar.
@@ -40,8 +35,7 @@ class CategoriasContasAPagarController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
-  }
+  async edit({ params, request, response, view }) {}
 
   /**
    * Update categoriascontasapagar details.
@@ -51,8 +45,7 @@ class CategoriasContasAPagarController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-  }
+  async update({ params, request, response }) {}
 
   /**
    * Delete a categoriascontasapagar with id.
@@ -62,8 +55,7 @@ class CategoriasContasAPagarController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
-  }
+  async destroy({ params, request, response }) {}
 }
 
-module.exports = CategoriasContasAPagarController
+module.exports = CategoriasContasAPagarController;

@@ -1,0 +1,19 @@
+// import Sequelize from "sequelize";
+
+// const sequelize = new Sequelize("intellect", "root", "intellect", {
+//   host: "mysqlintellect",
+//   dialect: "mysql",
+// });
+
+// const authenticate = async () => {
+//   try {
+//     await sequelize.authenticate();
+
+//     console.log("Conectado ao db.");
+//   } catch (error) {
+//     console.error("Problema na conexão com o DB:", error);
+//   }
+// };
+
+// authenticate();
+// export default sequelize;

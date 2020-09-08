@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="flex flex-wrap justify-center">
+    <div class="flex flex-wrap justify-center mt-1">
       <div class="w-6/12">
         <button
           type="button"
-          class="btn btn-sm btn-primary"
+          class="mr-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded"
           data-toggle="modal"
           data-target="#exampleModal"
         >Adicionar Conta</button>
@@ -36,7 +36,7 @@
     </div>-->
 
     <div class="flex">
-      <div class="w-8/12">
+      <div class="w-8/12 p-1">
         <CategoriaContasAPagar></CategoriaContasAPagar>
       </div>
 

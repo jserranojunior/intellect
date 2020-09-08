@@ -1,14 +1,11 @@
-
-
-'use strict'
-const ContasAPagar = use ('App/Models/Financeiro/ContasAPagar')
-const ValoresAPagar = use ('App/Models/Financeiro/ValoresContasAPagar')
-const Database = use('Database')
-const moment = use ('moment')
+"use strict";
+const ContasAPagar = use("App/Models/Financeiro/ContasAPagar");
+const ValoresAPagar = use("App/Models/Financeiro/ValoresContasAPagar");
+const Database = use("Database");
+const moment = use("moment");
 
 class ContasAPagarController {
-
-  async index ({auth}) {
+  async index({ auth }) {
     // const Contas = await Database.table('contas_a_pagars')
     // // .innerJoin('users', 'users.id', 'contas_a_pagars.user_id')
     // .innerJoin('users', function () {
@@ -16,75 +13,75 @@ class ContasAPagarController {
     //     .on('users.id', 'contas_a_pagars.user_id')
     // })
 
-    const Contas = await ContasAPagar
-    .query()
-    .with('valores_contas_a_pagars', (builder) => {
-      builder.select(Database.raw('sum(valor) as sum'))
-             .select('contas_a_pagar_id', 'id')
-             .groupBy('contas_a_pagar_id', 'id')
-    })
+    const Contas = await ContasAPagar.query()
+      .with("valores_contas_a_pagars", (builder) => {
+        builder
+          .select(Database.raw("sum(valor) as sum"))
+          .select("contas_a_pagar_id", "id")
+          .groupBy("contas_a_pagar_id", "id");
+      })
 
+      .fetch();
 
-    .fetch();  
-
-    return Contas
-
-    
+    return Contas;
   }
 
+  async create({ request, response, view }) {}
 
-  async create ({ request, response, view }) {
-  }
+  async store({ request, auth }) {
+    var valorFloat = request.input("valor");
 
+    if (valorFloat === "") {
+      valorFloat = 0;
+    } else {
+      valorFloat = valorFloat.replace(".", "");
+      valorFloat = valorFloat.replace(",", ".");
+      valorFloat = parseFloat(valorFloat);
+    }
 
-  async store ({ request, auth}) {
+    moment.locale("pt-BR");
+    var dataInicioMoment = request.input("inicio_data_pagamento");
+    dataInicioMoment = moment(moment(dataInicioMoment, "DD-MM-YYYY")).format(
+      "YYYY-MM-DD"
+    );
 
-    var valorFloat = request.input('valor')
+    var dataFimMoment = request.input("fim_data_pagamento");
+    dataFimMoment = moment(moment(dataFimMoment, "DD-MM-YYYY")).format(
+      "YYYY-MM-DD"
+    );
 
-    if(valorFloat === ""){
-      valorFloat =  0;
-   }else{
-    valorFloat = valorFloat.replace(".","");
-    valorFloat = valorFloat.replace(",",".");
-    valorFloat = parseFloat(valorFloat);
-   }
- 
-  
+    var datasFormatadas = {
+      inicio_data_pagamento: dataInicioMoment,
+      fim_data_pagamento: dataFimMoment,
+    };
 
+    const dataConta = request.only([
+      "favorecido",
 
-    
+      "categorias_contas_a_pagar_id",
+      "descricao",
+      "forma_pagamento",
+      "tipo_conta",
+      "parcelas",
+    ]);
 
-    moment.locale('pt-BR');
-    var dataInicioMoment = request.input('inicio_data_pagamento')
-    dataInicioMoment = moment(moment(dataInicioMoment, 'DD-MM-YYYY')).format('YYYY-MM-DD') 
+    var dataValor = { valor: valorFloat };
 
-    var dataFimMoment = request.input('fim_data_pagamento')
-    dataFimMoment = moment(moment(dataFimMoment, 'DD-MM-YYYY')).format('YYYY-MM-DD') 
+    const conta = await ContasAPagar.create({
+      user_id: auth.user.id,
+      ...dataConta,
+      ...datasFormatadas,
+    });
 
+    const valor = await ValoresAPagar.create({
+      contas_a_pagar_id: conta.id,
+      data_pagamento: dataConta.inicio_data_pagamento,
+      ...dataValor,
+    });
 
-    var datasFormatadas = {"inicio_data_pagamento": dataInicioMoment,
-    "fim_data_pagamento": dataFimMoment}
+    const contaValor = { conta: conta, valor: valor };
 
-    const dataConta = request.only([   "favorecido",
-    
-    "categorias_contas_a_pagar_id",
-    "descricao",
-    "forma_pagamento",
-    "tipo_conta",
-    "parcelas",])
-
-
-    var dataValor = {"valor": valorFloat}
-
-
-    const conta = await ContasAPagar.create({ user_id: auth.user.id, ...dataConta, ...datasFormatadas})
-
-  
-    const valor = await ValoresAPagar.create({ contas_a_pagar_id: conta.id, data_pagamento:dataConta.inicio_data_pagamento, ...dataValor})
-
-    const contaValor = {"conta": conta, "valor": valor}
-
-    return contaValor
+    return contaValor;
   }
 
   /**
@@ -96,30 +93,23 @@ class ContasAPagarController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-  }
+  async show({ params, request, response, view }) {}
 
- 
-  async edit ({ params, request, response, view }) {
+  async edit({ params, request, response, view }) {
+    const Contas = await ContasAPagar.query()
 
-   
-    const Contas = await ContasAPagar
+      .where("id", "=", params.id)
+      .with("valores_contas_a_pagars", (builder) => {
+        builder
+          .whereRaw("SUBSTRING(data_pagamento,1,7) <= ?", [params.data])
 
-    .query()
+          .orderBy("id", "desc")
+          .limit(1);
+      })
 
-    .where('id', '=', params.id)
-    .with('valores_contas_a_pagars', (builder) => {
-      builder.whereRaw('SUBSTRING(data_pagamento,1,7) <= ?', [params.data])
-          
-             .orderBy('id', 'desc')
-             .limit(1)
-            
-             
-    })
-  
-    .fetch();  
+      .fetch();
 
-    return Contas    
+    return Contas;
   }
 
   /**
@@ -130,8 +120,7 @@ class ContasAPagarController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-  }
+  async update({ params, request, response }) {}
 
   /**
    * Delete a contasapagar with id.
@@ -141,8 +130,7 @@ class ContasAPagarController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
-  }
+  async destroy({ params, request, response }) {}
 }
 
-module.exports = ContasAPagarController
+module.exports = ContasAPagarController;

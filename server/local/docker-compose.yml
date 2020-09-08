@@ -4,44 +4,40 @@ networks:
   intellect:
     driver: bridge
 
-
 services:
-  node_intellect:
-    container_name: "node_intellect"
-    build: 
-      context: "../../back"
+  api_intellect:
+    container_name: "api_intellect"
+    build:
+      context: "../../node"
     environment:
-      - HOST=0.0.0.0
-    working_dir: /app
+      PMA_HOST: mysqlintellect
     volumes:
-      - "../../back:/app"
+      - "../../node:/app"
     networks:
       - intellect
     depends_on:
       - mysqlintellect
     ports:
-      - "3333:3333"
+      - "4333:4333"
 
+  # quasar:
+  #   container_name: "quasar"
+  #   build:
+  #     context: "../../quasar"
+  #   environment:
+  #     - HOST=0.0.0.0
+  #   working_dir: /app
+  #   volumes:
+  #     - "../../quasar:/app"
+  #   networks:
+  #     - intellect
+  #   ports:
+  #     - "8888:8080"
 
-  quasar:
-    container_name: "quasar"
-    build: 
-      context: "../../quasar"
-    environment:
-      - HOST=0.0.0.0
-    working_dir: /app
-    volumes:
-      - "../../quasar:/app"
-    networks:
-      - intellect
-    ports:
-      - "8888:8080"
-  
-  
   mysqlintellect:
     container_name: mysqlintellect
-    build: 
-      context: ../../database    
+    build:
+      context: ../../database
     ports:
       - 3306:3306
     environment:
