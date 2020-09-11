@@ -1,27 +1,48 @@
-// import { createRequire } from "module";
-// const require = createRequire(import.meta.url);
-// const dbConnection = require("../../../db/database");
-// const { Sequelize, DataTypes, Model } = require("sequelize");
-// const sequelize = new Sequelize(dbConnection);
-// class CategoriasContasAPagar extends Model {}
+import knex from "../../../db/database.js";
+import ContasApagar from "./ContasAPagar.js";
+let CategoriasContasAPagar = {};
 
-// export default CategoriasContasAPagar.init(
-//   {
-//     nome: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     cor: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     tipo: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//   },
-//   {
-//     sequelize,
-//     modelName: "categorias_contas_a_pagar",
-//   }
-// );
+CategoriasContasAPagar.getCategoriasContasValores = async function (params) {
+  return await knex("categorias_contas_a_pagars").then((categorias) => {
+    let Categorias = categorias.map(async (categoria) => {
+      categoria.contas_a_pagars = await ContasApagar.getContasWithId(
+        categoria.id,
+        params
+      );
+      return categoria;
+    });
+
+    let newCategorias = Promise.all(Categorias);
+    let CategoriasSomadas = somarValoresCategorias(newCategorias);
+    let cat = CategoriasSomadas;
+
+    let data = cat;
+
+    return data;
+  });
+};
+
+async function somarValoresCategorias(Categorias) {
+  let totalCategorias = 0;
+  let ArrayCategorias = Array.from(await Categorias);
+
+  let newCategorias = ArrayCategorias.map((categoria) => {
+    let contas = categoria.contas_a_pagars;
+
+    let totalCategoria = contas.reduce((acumulador, conta) => {
+      if (conta.valores_contas_a_pagars) {
+        acumulador += +conta.valores_contas_a_pagars.valor;
+      }
+      return acumulador;
+    }, 0);
+    categoria.totalCategoria = totalCategoria;
+    totalCategorias += +totalCategoria;
+    return categoria;
+  });
+  let data = {};
+  data.categorias = await Promise.all(newCategorias);
+  data.totalCategorias = totalCategorias;
+  return data;
+}
+
+export default CategoriasContasAPagar;

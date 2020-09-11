@@ -28,37 +28,41 @@ export const ActionAddContasAPagar = ({ dispatch }, dados) => {
   });
 };
 
-export const ActionGetCategoriasContasAPagar = ({ commit, state }) => {
+export const ActionGetCategoriasContasAPagar = (
+  { commit, state },
+  dataSelecionada
+) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:3333",
-      timeout: 1000,
-      headers: {
-        Authorization: "Bearer " + token
-      }
+      baseURL: "http://localhost:4333",
+      timeout: 1000
+      // headers: {
+      //   Authorization: "Bearer " + token
+      // }
     };
 
-    let dataSelecionada;
-    if (state.dataSelecionada === "") {
-      var date = new Date();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
-      var formatterMonth;
-      if (month < 10) {
-        formatterMonth = "0" + month;
-      } else {
-        formatterMonth = month;
-      }
-      dataSelecionada = year + "-" + formatterMonth;
-    } else {
-      dataSelecionada = state.dataSelecionada;
-    }
+    // let dataSelecionada;
+    // if (state.dataSelecionada === "") {
+    //   var date = new Date();
+    //   var month = date.getMonth() + 1;
+    //   var year = date.getFullYear();
+    //   var formatterMonth;
+    //   if (month < 10) {
+    //     formatterMonth = "0" + month;
+    //   } else {
+    //     formatterMonth = month;
+    //   }
+    //   dataSelecionada = year + "-" + formatterMonth;
+    // } else {
+    //   dataSelecionada = state.dataSelecionada;
+    // }
 
-    const link = "/financeiro/" + dataSelecionada;
+    const link = `/financial/${dataSelecionada}`;
 
     axios
       .get(link, options)
       .then(function(response) {
+        console.log(response.data);
         commit("SET_CATEGORIA_CONTAS", response.data);
         resolve();
       })

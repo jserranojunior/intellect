@@ -1,0 +1,114 @@
+<template>
+  <div>
+    <VueTailwindPicker
+      :start-date="'2020-01-01'"
+      :selected-date="dataSelecionada"
+      @change="(v) => dataSelecionada = v"
+    >
+      <input
+        class="cursor-pointer bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+        type="date"
+        v-model="dataSelecionada"
+      />
+    </VueTailwindPicker>
+  </div>
+</template>
+
+<script>
+/* eslint-disable */
+
+import VueTailwindPicker from "./VueTailwindPicker";
+import dayjs from "dayjs";
+import { mapActions } from "vuex";
+var updateLocale = require("dayjs/plugin/updateLocale");
+dayjs.extend(updateLocale);
+
+dayjs.updateLocale("en", {
+  months: [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ],
+  monthsShort: [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ],
+  weekdays: [
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sábado",
+    "Domindo",
+  ],
+  weekdaysShort: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+});
+
+export default {
+  name: "Calendario",
+  methods: {
+    ...mapActions(["ActionSetDataSelecionada"]),
+  },
+  components: {
+    VueTailwindPicker,
+  },
+  data() {
+    return {
+      dataSelecionada: "",
+    };
+  },
+  beforeMount() {
+    this.dataSelecionada = "2020-09-11";
+    //    this.dataSelecionada = this.calendarData.currentDate
+  },
+  watch: {
+    dataSelecionada() {
+      this.ActionSetDataSelecionada(this.dataSelecionada);
+    },
+    // calendarData: {
+    //   handler: function () {
+    //     let mes = this.calendarData.currentDate.getMonth();
+    //     let mesEscrito = this.calendarConfigs.monthNames[mes];
+    //     let ano = this.calendarData.currentDate.getFullYear();
+    //     this.dataSelecionada = mesEscrito + " - " + ano;
+    //     let mesFormatado = mes;
+    //     if (mes < 10) {
+    //       mesFormatado = "0" + (mes + 1);
+    //     } else {
+    //       mesFormatado = mes + 1;
+    //     }
+    //     let dataAnoMes = ano + "-" + mesFormatado;
+    //     this.ActionSetDataSelecionada(dataAnoMes);
+    //     this.ActionGetCategoriasContasAPagar(dataAnoMes);
+    //   },
+    //   deep: true,
+    // },
+  },
+};
+</script>
+
+<style>
+.none {
+  display: none;
+}
+</style>

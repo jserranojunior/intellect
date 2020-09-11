@@ -20,10 +20,12 @@
     "awesome-mask": "^1.1.1",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
+    "dayjs": "^1.8.35",
     "moment": "^2.27.0",
     "quasar": "^1.0.0",
     "tailwindcss": "^1.6.2",
-    "vue-functional-calendar": "^2.8.88"
+    "vue-functional-calendar": "^2.8.88",
+    "vue-tailwind-picker": "^1.1.4"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

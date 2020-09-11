@@ -1,6 +1,6 @@
 <template>
-  <div class="flex">
-    <div class="w-3/12 p-1" v-for="categoria in categoriaContas.contasAPagar" :key="categoria.id">
+  <div class="flex flex-wrap">
+    <div class="w-3/12 p-1" v-for="categoria in categoriaContas" :key="categoria.id">
       <div class="painel mt-1 shadow-md">
         <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
           <p class="painel-title">{{categoria.nome}}</p>
@@ -10,7 +10,7 @@
         </div>
         <div class="painel-body p-1">
           <div
-            class="flex text-center mt-1"
+            class="flex flex-wrap text-center mt-1"
             v-for="contas in categoria.contas_a_pagars"
             :key="contas.id"
           >
@@ -23,75 +23,83 @@
               data-toggle="modal"
               data-target="#exampleModal"
             >{{contas.favorecido}}</div>
-            <div class="w-1/4">
-              <span
-                v-for="valores in contas.valores_contas_a_pagars"
-                :key="valores.id"
-              >{{valores.valor | money}}</span>
-            </div>
+            <div
+              class="w-1/4"
+              v-if="contas.valores_contas_a_pagars"
+            >{{contas.valores_contas_a_pagars.valor | money}}</div>
+            <div v-else class="w-1/4">0</div>
           </div>
         </div>
         <div class="painel-footer flex text-center justify-between border-t mt-1 p-2">
           <div class="w-1/3">Total</div>
-          <div class="w-1/3">{{categoria.totalCategoria}}</div>
+          <div class="w-1/3">{{categoria.totalCategoria | money}}</div>
         </div>
-        <!-- /.card-body -->
       </div>
-      <!-- /.card -->
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from "vuex";
 export default {
-    name: 'CategoriaContasAPagar',
-    data() {
-        return {
-            editandoContaAPagar: {},
-
-            // categoriaContas: {},
+  name: "CategoriaContasAPagar",
+  data() {
+    return {
+      editandoContaAPagar: {},
+      categoriaContas: {},
+    };
+  },
+  computed: {
+    ...mapState({
+      categoriaContasVuex: (state) =>
+        state.Financeiro.categoriaContas.categorias,
+      totalCategoriaContasVuex: (state) =>
+        state.Financeiro.categoriaContas.totalCategorias,
+      dataSelecionada: (state) => state.Calendario.dataSelecionada,
+    }),
+  },
+  methods: {
+    editarContaAPagar(id) {
+      this.ActionGetEditarContaAPagar(id);
+    },
+    ...mapActions([
+      "ActionGetCategoriasContasAPagar",
+      "ActionGetEditarContaAPagar",
+    ]),
+    getCategoriaContasVuex() {
+      this.ActionGetCategoriasContasAPagar(this.dataSelecionada);
+    },
+  },
+  props: {
+    msg: String,
+  },
+  beforeMount() {},
+  watch: {
+    dataSelecionada() {
+      this.getCategoriaContasVuex();
+    },
+    categoriaContasVuex: {
+      handler() {
+        if (this.categoriaContasVuex) {
+          this.categoriaContas = this.categoriaContasVuex;
         }
+      },
+      deep: true,
     },
-    computed:{
-        ...mapState({
-            categoriaContas: state => state.Financeiro.categoriaContas
-        })
-    },
-    methods:{
-        editarContaAPagar(id){
-            this.ActionGetEditarContaAPagar(id)
-        },
-        ...mapActions([
-            'ActionGetCategoriasContasAPagar',
-            'ActionGetEditarContaAPagar',
-        ])        
-    },
-    props: {
-        msg: String
-    },
-    beforeMount(){
-        this.ActionGetCategoriasContasAPagar()
-    },
+  },
 
-    filters: {
-        money: function(value) {
-            // console.log(value)
-            if (!value){
-                 return '0,00';
-            }
-            else{
-            let val = (value / 1).toFixed(2).replace('.', ',')
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-            }
-          
-    
-        }
+  filters: {
+    money: function (value) {
+      if (!value) {
+        return "0,00";
+      } else {
+        let val = (value / 1).toFixed(2).replace(".", ",");
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
     },
-    
-
-}
+  },
+};
 </script>
 
 <style>

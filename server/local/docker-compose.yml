@@ -20,19 +20,19 @@ services:
     ports:
       - "4333:4333"
 
-  # quasar:
-  #   container_name: "quasar"
-  #   build:
-  #     context: "../../quasar"
-  #   environment:
-  #     - HOST=0.0.0.0
-  #   working_dir: /app
-  #   volumes:
-  #     - "../../quasar:/app"
-  #   networks:
-  #     - intellect
-  #   ports:
-  #     - "8888:8080"
+  quasar:
+    container_name: "quasar"
+    build:
+      context: "../../quasar"
+    environment:
+      - HOST=0.0.0.0
+    working_dir: /app
+    volumes:
+      - "../../quasar:/app"
+    networks:
+      - intellect
+    ports:
+      - "8888:8080"
 
   mysqlintellect:
     container_name: mysqlintellect
