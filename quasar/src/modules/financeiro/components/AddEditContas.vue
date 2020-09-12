@@ -1,113 +1,112 @@
 <template>
   <div>
-    <form @submit.prevent.stop="submit" method="post">
-      <div class="form-group">
-        <!-- <label for="favorecido">Favorecido</label> -->
-        <input
-          type="text"
-          class="form-control"
-          name="favorecido"
-          v-model="fields.favorecido"
-          required
-          placeholder="Favorecido"
-        />
-        <!-- COLOCAR SELECT COM OPÇÃO DE ADICIONAR CONTA -->
-      </div>
+    <div class="flex-col flex">
+      <!-- <label class="pb-2 text-gray-700 font-semibold">Favorecido</label> -->
+      <input
+        type="text"
+        class="form-tail w-full"
+        name="favorecido"
+        v-model="fields.favorecido"
+        required
+        placeholder="Favorecido"
+      />
+    </div>
+    <div class="flex-col flex pt-2">
+      <!-- <label class="pb-2 text-gray-700 font-semibold"  >Descrição</label> -->
+      <input
+        type="text"
+        class="form-tail"
+        name="descricao"
+        v-model="fields.descricao"
+        placeholder="Descrição"
+      />
+    </div>
 
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          name="descricao"
-          v-model="fields.descricao"
-          placeholder="Descrição"
-        />
-      </div>
+    <div class="flex-col flex pt-2">
+      <!-- <label class="pb-2 text-gray-700 font-semibold">Valor</label> -->
+      <input
+        type="text"
+        class="form-tail"
+        v-mask="'money'"
+        name="valor"
+        v-model="fields.valor"
+        required
+        placeholder="Valor"
+      />
+    </div>
 
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          v-mask="'money'"
-          name="valor"
-          v-model="fields.valor"
-          required
-          placeholder="Valor"
-        />
-      </div>
-      <div class="form-group">
-        <label for="inicio_data_pagamento">Inicio Pagamento</label>
+    <div class="flex-col flex pt-2">
+      <label for="inicio_data_pagamento" class="pb-2 text-gray-700 font-semibold">Inicio Pagamento</label>
 
-        <input
-          type="text"
-          class="form-control"
-          v-mask="'99/99/9999'"
-          placeholder="dd/mm/aaaa"
-          v-model="fields.inicio_data_pagamento"
-          required
-        />
-      </div>
+      <input
+        type="text"
+        class="form-tail"
+        v-mask="'99/99/9999'"
+        placeholder="dd/mm/aaaa"
+        v-model="fields.inicio_data_pagamento"
+        required
+      />
+    </div>
 
-      <div class="form-group">
-        <label for="fim_data_pagamento">Fim Pagamento</label>
-        <input
-          type="text"
-          class="form-control"
-          v-mask="'99/99/9999'"
-          placeholder="dd/mm/aaaa"
-          v-model="fields.fim_data_pagamento"
-        />
-      </div>
-      <div class="form-group">
-        <select
-          name="categorias_contas_a_pagar_id"
-          id
-          v-model="categorias_contas_a_pagar_id"
-          required
-          class="form-control"
-        >
-          <option value="1">Essenciais</option>
-          <option value="2">Compras</option>
-          <option value="3">Urgencias</option>
+    <div class="flex-col flex pt-2">
+      <label for="fim_data_pagamento" class="pb-2 text-gray-700 font-semibold">Fim Pagamento</label>
+      <input
+        type="text"
+        class="form-tail"
+        v-mask="'99/99/9999'"
+        placeholder="dd/mm/aaaa"
+        v-model="fields.fim_data_pagamento"
+      />
+    </div>
+    <div class="flex-col flex pt-2">
+      <select
+        name="categorias_contas_a_pagar_id"
+        id
+        v-model="fields.categorias_contas_a_pagar_id"
+        required
+        class="form-tail"
+      >
+        <option value="1">Essenciais</option>
+        <option value="2">Compras</option>
+        <option value="3">Urgencias</option>
 
-          <option value="4">Lazer</option>
-          <option value="5">Transporte</option>
-          <option value="6">Alimentação</option>
-          <option value="7">Estudos</option>
-          <option value="8">Avulsos</option>
-        </select>
-      </div>
+        <option value="4">Lazer</option>
+        <option value="5">Transporte</option>
+        <option value="6">Alimentação</option>
+        <option value="7">Estudos</option>
+        <option value="8">Avulsos</option>
+      </select>
+    </div>
 
-      <div class="form-group">
-        <select name="tipo_conta" v-model="tipo_conta" required class="form-control">
-          <option disabled selected value="Tipo de Conta">Tipo de Conta</option>
-          <option value="Extra">Extra</option>
-          <option value="Fixa">Fixa</option>
-          <option value="Parcelada">Parcelada</option>
-        </select>
-      </div>
+    <div class="flex-col flex pt-2">
+      <select name="tipo_conta" v-model="fields.tipo_conta" required class="form-tail">
+        <option disabled selected value="Tipo de Conta">Tipo de Conta</option>
+        <option value="Extra">Extra</option>
+        <option value="Fixa">Fixa</option>
+        <option value="Parcelada">Parcelada</option>
+      </select>
+    </div>
 
-      <div class="form-group">
-        <select name="forma_pagamento" v-model="forma_pagamento" required class="form-control">
-          <option disabled selected value="Forma de Pagamento">Forma de Pagamento</option>
-          <option value="Cartão">Cartão</option>
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Débito">Débito</option>
-          <option value="Débito Automatico">Débito Automatico</option>
-          <option value="Terceiro">Terceiro</option>
-        </select>
-      </div>
+    <div class="flex-col flex pt-2">
+      <select name="forma_pagamento" v-model="fields.forma_pagamento" required class="form-tail">
+        <option disabled selected value="Forma de Pagamento">Forma de Pagamento</option>
+        <option value="Cartão">Cartão</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Débito">Débito</option>
+        <option value="Débito Automatico">Débito Automatico</option>
+        <option value="Terceiro">Terceiro</option>
+      </select>
+    </div>
 
-      <div class="card-footer text-center">
-        <div
-          v-if="!modoEdicao"
-          class="btn btn-primary pointer"
-          data-dismiss="modal"
-          @click="submit"
-        >Cadastrar</div>
-        <div v-else class="btn btn-secondary pointer" data-dismiss="modal">Atualizar</div>
-      </div>
-    </form>
+    <div class="mt-1">
+      <div
+        v-if="!modoEdicao"
+        class="btn-primary-tail-rounded"
+        data-dismiss="modal"
+        @click="cadastrar()"
+      >Cadastrar</div>
+      <div v-else class="cursor-pointer btn-primary-tail" data-dismiss="modal">Atualizar</div>
+    </div>
   </div>
 </template>
 
@@ -124,31 +123,31 @@ export default {
       errors: {},
       loaded: true,
       minhadata: "",
-      categorias_contas_a_pagar_id: 1,
-      tipo_conta: "Extra",
-      forma_pagamento: "Cartão",
-      modoEdicao: false
+
+      modoEdicao: false,
     };
   },
   methods: {
     ...mapActions(["ActionAddContasAPagar"]),
-    submit() {
+
+    cadastrar() {
       this.ActionAddContasAPagar(this.fields);
-    }
+    },
   },
   beforeMount() {
-    this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
-    this.fields.tipo_conta = this.tipo_conta;
-    this.fields.forma_pagamento = this.forma_pagamento;
+    // this.fields.categorias_contas_a_pagar_id = 1;
+    // this.fields.tipo_conta = "Extra";
+    // this.fields.forma_pagamento = "Terceiro";
+    this.fields.user_id = 1;
   },
   watch: {
-    categorias_contas_a_pagar_id: function() {
+    categorias_contas_a_pagar_id: function () {
       this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
     },
-    tipo_conta: function() {
+    tipo_conta: function () {
       this.fields.tipo_conta = this.tipo_conta;
     },
-    forma_pagamento: function() {
+    forma_pagamento: function () {
       this.fields.forma_pagamento = this.forma_pagamento;
     },
     editarContaAPagar: {
@@ -180,7 +179,7 @@ export default {
         } else {
           this.modoEdicao = false;
         }
-      }
+      },
     },
     dataAtual() {
       if (!this.fields.inicio_data_pagamento || !this.modoEdicao) {
@@ -188,13 +187,16 @@ export default {
         var dataMoment = this.dataAtual + "-" + "07";
         this.fields.inicio_data_pagamento = moment(dataMoment).format("L");
       }
-    }
+    },
   },
   computed: {
     ...mapState({
-      dataAtual: state => state.Financeiro.dataSelecionada,
-      editarContaAPagar: state => state.Financeiro.editarContaAPagar
-    })
-  }
+      dataAtual: (state) => state.Financeiro.dataSelecionada,
+      editarContaAPagar: (state) => state.Financeiro.editarContaAPagar,
+    }),
+  },
+  directives: {
+    mask: AwesomeMask,
+  },
 };
 </script>

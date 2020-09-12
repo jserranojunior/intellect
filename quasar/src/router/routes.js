@@ -11,6 +11,15 @@ const routes = [
         component: () =>
           import("../modules/financeiro/pages/FinanceiroIndex.vue")
       },
+      {
+        path: "financeiro/adicionarconta",
+        component: () =>
+          import("../modules/financeiro/pages/AdicionarConta.vue")
+      },
+      {
+        path: "",
+        component: () => import("../modules/auth/pages/Login.vue")
+      },
       { path: "", component: () => import("../modules/auth/pages/Login.vue") }
     ]
   },

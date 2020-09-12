@@ -1,44 +1,47 @@
 <template>
   <div>
-    <div class="flex">
-      <div class="flex">
-        <div class="card">
-          <div class="card-header categoria-contas-pagar categoria-urgencia text-center">TOTAIS</div>
-          <div class="card-body table-responsive">
-            <table class="table table-sm table-financial table-striped table-hover">
-              <tr>
-                <td class="text-primary">Contas a pagar</td>
-                <td>{{ totalCategoriaContasVuex | money }}</td>
-              </tr>
-            </table>
+    <div class="flex flex-wrap">
+      <div class="w-1/4 p-1 shadow-lg">
+        <div class="painel mt-1 shadow-md">
+          <div class="painel-header text-center p-1 rounded-lg text-white bg-red-500">
+            <p class="painel-title">TOTAIS</p>
+          </div>
+          <div class="painel-body p-1">
+            <div class="flex flex-wrap justify-between text-center mt-1 p-1">
+              <div>Contas a pagar</div>
+              <div v-if="totalCategoriaContasVuex">{{totalCategoriaContasVuex | money}}</div>
+              <div v-else class="w-1/4">0</div>
+            </div>
+            <div class="flex flex-wrap justify-between text-center mt-1 p-1">
+              <div>Santander</div>
+              <div class="w-1/4">140,00</div>
+            </div>
+          </div>
+          <div class="painel-footer flex text-center justify-between border-t mt-1 p-2">
+            <div class="w-1/3">Total</div>
+            <div class="w-1/3">000</div>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card">
-          <div
-            class="card-header categoria-contas-pagar categoria-estudos text-center"
-          >Caixa / Frelas</div>
-          <div class="card-body table-responsive">
-            <table class="table table-sm table-financial table-striped table-hover">
-              <tr>
-                <td>Santander</td>
-                <td>R$148,00</td>
-              </tr>
-            </table>
+
+      <div class="w-1/4 p-1 shadow-lg">
+        <div class="painel mt-1 shadow-md">
+          <div class="painel-header text-center p-1 rounded-lg text-white bg-green-500">
+            <p class="painel-title">CAIXA / FREELAS</p>
           </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <div class="card-header categoria-contas-pagar categoria-lazer text-center">Poupança</div>
-          <div class="card-body table-responsive">
-            <table class="table table-sm table-financial table-striped table-hover">
-              <tr>
-                <td>ROUPA / HIGIENE</td>
-                <td>R$400,00</td>
-              </tr>
-            </table>
+          <div class="painel-body p-1">
+            <div class="flex flex-wrap justify-between text-center mt-1 p-1">
+              <div>Ls Star</div>
+              <div>750,00</div>
+            </div>
+            <div class="flex flex-wrap justify-between text-center mt-1 p-1">
+              <div>Acolher</div>
+              <div>1.400,00</div>
+            </div>
+          </div>
+          <div class="painel-footer flex text-center justify-between border-t mt-1 p-2">
+            <div class="w-1/3">Total</div>
+            <div class="w-1/3">000</div>
           </div>
         </div>
       </div>

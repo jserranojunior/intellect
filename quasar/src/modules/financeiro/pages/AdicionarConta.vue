@@ -1,26 +1,20 @@
 <template>
-<div>
-    <Main>
-        <template v-slot:mainpage>
-        <AddEditContas></AddEditContas>
-        </template>
- </Main>
-</div>
+  <div class="flex justify-center mt-1 mx-4">
+    <div class="w-full sm:w-6/12 md:w-6/12 painel-tail my-4">
+      <AddEditContas></AddEditContas>
+    </div>
+  </div>
 </template>
 <script>
-import Main from '@/views/layouts/Main'
-
-import AddEditContas from '@/modules/financeiro/components/AddEditContas'
+/* eslint-disable */
+import AddEditContas from "../components/AddEditContas";
 export default {
-  name: 'AdicionarConta',
-  data () {
-    return {
-
-    }
+  name: "AdicionarConta",
+  data() {
+    return {};
   },
   components: {
     AddEditContas,
-    Main
-  }
-}
+  },
+};
 </script>

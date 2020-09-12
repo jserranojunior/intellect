@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-3/12 p-1" v-for="categoria in categoriaContas" :key="categoria.id">
+    <div class="w-1/4 p-1" v-for="categoria in categoriaContas" :key="categoria.id">
       <div class="painel mt-1 shadow-md">
         <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
           <p class="painel-title">{{categoria.nome}}</p>

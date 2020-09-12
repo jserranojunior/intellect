@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="flex flex-wrap justify-center mt-1">
-      <div class="w-6/12">
+    <div class="flex flex-wrap justify-between mt-1">
+      <div class="w-1/4 mt-1">
+        <Calendario></Calendario>
+      </div>
+      <div class="w-4/12">
         <button
           type="button"
           class="mr-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded"
           data-toggle="modal"
           data-target="#exampleModal"
         >Adicionar Conta</button>
-      </div>
-      <div class="w-4/12">
-        <Calendario></Calendario>
       </div>
     </div>
     <!-- <div
@@ -36,11 +36,12 @@
     </div>-->
 
     <div class="flex">
-      <div class="w-8/12 p-1">
+      <div class="w-6/12 p-1">
         <CategoriaContasAPagar></CategoriaContasAPagar>
       </div>
-      <FeedbackFinanceiro />
-      <div class="w-4/12"></div>
+      <div class="w-6/12">
+        <FeedbackFinanceiro />
+      </div>
     </div>
   </div>
 </template>

@@ -1,16 +1,38 @@
 <template>
   <div>
-    <VueTailwindPicker
-      :start-date="'2020-01-01'"
-      :selected-date="dataSelecionada"
-      @change="(v) => dataSelecionada = v"
-    >
-      <input
-        class="cursor-pointer bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        type="date"
-        v-model="dataSelecionada"
-      />
-    </VueTailwindPicker>
+    <div class="painel">
+      <div class="painel-body">
+        <div class="flex">
+          <div class="w-full">
+            <VueTailwindPicker
+              :start-date="'2020-01-01'"
+              :selected-date="dataSelecionada"
+              @change="(v) => dataSelecionada = v"
+            >
+              <input
+                class="cursor-pointer w-full bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                type="date"
+                v-model="dataSelecionada"
+              />
+            </VueTailwindPicker>
+          </div>
+        </div>
+        <div class="flex mt-1 justify-between">
+          <div class="w-1/2">
+            <button
+              class="cursor-pointer text-center border border-teal-500 bg-teal-500 text-white rounded-sm font-bold py-1 px-6 ml-2"
+              @click="changeMonth('previous')"
+            >Anterior</button>
+          </div>
+          <div class="w-1/2">
+            <button
+              class="cursor-pointer text-center border border-teal-500 bg-teal-500 text-white rounded-sm font-bold py-1 px-6"
+              @click="changeMonth('next')"
+            >Próximo</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -64,10 +86,38 @@ dayjs.updateLocale("en", {
   weekdaysShort: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
 });
 
+function dateJstoUs(value) {
+  var d = new Date(value),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
 export default {
   name: "Calendario",
   methods: {
     ...mapActions(["ActionSetDataSelecionada"]),
+    changeMonth(type) {
+      let alterMonth;
+      let alterDays;
+      let atual = new Date(...this.dataSelecionada.split());
+
+      if (type == "previous") {
+        alterMonth = atual.getMonth() - 1;
+        alterDays = atual.getDate() + 1;
+      } else if (type == "next") {
+        alterMonth = atual.getMonth() + 1;
+        alterDays = atual.getDate() + 1;
+      }
+      atual = new Date(atual.setMonth(alterMonth));
+      atual = new Date(atual.setDate(alterDays));
+      this.dataSelecionada = atual.toLocaleDateString("fr-CA");
+    },
   },
   components: {
     VueTailwindPicker,

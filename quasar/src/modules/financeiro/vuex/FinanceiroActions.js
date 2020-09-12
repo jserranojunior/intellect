@@ -2,27 +2,24 @@
 import axios from "axios";
 import store from "../../../store";
 const token = localStorage.getItem("token");
-export const ActionAddContasAPagar = ({ dispatch }, dados) => {
+
+export const ActionAddContasAPagar = ({ commit }, data) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:3333",
-      timeout: 1000,
-      headers: {
-        Authorization: "Bearer " + token
-      }
+      baseURL: "http://localhost:4333"
+      // timeout: 1000
     };
 
-    const link = "/contasapagar";
-
+    const link = "/financial/contasapagar";
+    // console.log(data);
     axios
-      .post(link, dados, options)
-      .then(function() {
-        dispatch("ActionGetCategoriasContasAPagar");
+      .post(link, data, options)
+      .then(result => {
+        console.log(result);
         resolve();
       })
       .catch(function(error) {
         console.log(error);
-        console.log(error.response);
         reject(error);
       });
   });
