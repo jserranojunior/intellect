@@ -1,0 +1,23 @@
+# Feature #
+Add "selectedDate" props to display selected date
+If "startDate" is earlier than "selectedDate", it enables the option to navigate between these dates without disabling.
+
+# Example of use: #
+<VueTailwindPicker
+  :start-date="startDate"
+  :selected-date="selectedDate"
+  @change="(v) => selectedDate = v"
+>
+</VueTailwindPicker>
+
+data(){
+  return:{
+    startDate: "2020-01-01",
+    selectedDate: "2020-05-01",
+  }
+}
+
+
+I'm working on it to make a commit
+__________________
+Thanks for everything <3
