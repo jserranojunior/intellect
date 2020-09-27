@@ -25,6 +25,28 @@ export const ActionAddContasAPagar = ({ commit }, data) => {
   });
 };
 
+export const ActionAtualizarContasAPagar = ({ commit }, data) => {
+  return new Promise(async (resolve, reject) => {
+    const options = {
+      baseURL: "http://localhost:4333"
+      // timeout: 1000
+    };
+
+    const link = `/financial/billstopay/${data.id}/${data.data_pagamento}`;
+    console.log(data);
+    axios
+      .put(link, data, options)
+      .then(result => {
+        console.log(result);
+        resolve();
+      })
+      .catch(function(error) {
+        console.log(error);
+        reject(error);
+      });
+  });
+};
+
 export const ActionGetCategoriasContasAPagar = (
   { commit, state },
   dataSelecionada
@@ -33,33 +55,13 @@ export const ActionGetCategoriasContasAPagar = (
     const options = {
       baseURL: "http://localhost:4333",
       timeout: 1000
-      // headers: {
-      //   Authorization: "Bearer " + token
-      // }
     };
-
-    // let dataSelecionada;
-    // if (state.dataSelecionada === "") {
-    //   var date = new Date();
-    //   var month = date.getMonth() + 1;
-    //   var year = date.getFullYear();
-    //   var formatterMonth;
-    //   if (month < 10) {
-    //     formatterMonth = "0" + month;
-    //   } else {
-    //     formatterMonth = month;
-    //   }
-    //   dataSelecionada = year + "-" + formatterMonth;
-    // } else {
-    //   dataSelecionada = state.dataSelecionada;
-    // }
 
     const link = `/financial/${dataSelecionada}`;
 
     axios
       .get(link, options)
       .then(function(response) {
-        console.log(response.data);
         commit("SET_CATEGORIA_CONTAS", response.data);
         resolve();
       })
@@ -78,42 +80,21 @@ export const ActionSetDataSelecionada = ({ commit }, data) => {
   });
 };
 
-export const ActionGetEditarContaAPagar = ({ commit, state }, id) => {
+export const ActionGetContasAPagarId = ({ commit }, data) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:3333",
-      timeout: 1000,
-      headers: {
-        Authorization: "Bearer " + token
-      }
+      baseURL: "http://localhost:4333"
+      // timeout: 1000
     };
-
-    let dataSelecionada;
-    if (state.dataSelecionada === "") {
-      var date = new Date();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
-      var formatterMonth;
-      if (month < 10) {
-        formatterMonth = "0" + month;
-      } else {
-        formatterMonth = month;
-      }
-      dataSelecionada = year + "-" + formatterMonth;
-    } else {
-      dataSelecionada = state.dataSelecionada;
-    }
-
-    const link = "/contasapagar/" + id + "/" + dataSelecionada + "/edit";
+    const link = `/financial/billstopay/${data.id}/${data.dataselecionada}`;
     axios
       .get(link, options)
-      .then(function(response) {
-        commit("SET_EDITAR_CONTA_A_PAGAR", response.data[0]);
-        resolve();
+      .then(result => {
+        commit("SET_EDITAR_CONTA_A_PAGAR", result.data);
+        resolve(result.data);
       })
       .catch(function(error) {
         console.log(error);
-        console.log(error.response);
         reject(error);
       });
   });

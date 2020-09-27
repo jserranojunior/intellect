@@ -5,7 +5,7 @@ let CategoriasContasAPagar = {};
 CategoriasContasAPagar.getCategoriasContasValores = async function (params) {
   return await knex("categorias_contas_a_pagars").then((categorias) => {
     let Categorias = categorias.map(async (categoria) => {
-      categoria.contas_a_pagars = await ContasApagar.getContasWithId(
+      categoria.contas_a_pagars = await ContasApagar.getContasWithIdCategoria(
         categoria.id,
         params
       );

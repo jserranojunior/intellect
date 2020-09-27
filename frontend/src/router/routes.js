@@ -14,7 +14,13 @@ const routes = [
       {
         path: "financeiro/adicionarconta",
         component: () =>
-          import("../modules/financeiro/pages/AdicionarConta.vue")
+          import("../modules/financeiro/pages/AdicionarConta.vue"),
+        name: "financeiroadicionarconta"
+      },
+      {
+        path: "financeiro/editarconta",
+        component: () => import("../modules/financeiro/pages/EditarConta.vue"),
+        name: "financeiroeditarconta"
       },
       {
         path: "",

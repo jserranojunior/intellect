@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
+    "dev": "quasar dev",
     "test": "jest",
     "test:unit": "jest --updateSnapshot",
     "test:unit:coverage": "jest --coverage",
@@ -19,6 +20,7 @@
     "@quasar/extras": "^1.0.0",
     "awesome-mask": "^1.1.1",
     "axios": "^0.18.1",
+    "birthdays": "git+https://github.com/jserranojunior/birthdays.git",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.35",
     "moment": "^2.27.0",

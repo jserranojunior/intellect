@@ -45,7 +45,9 @@
                   id="login"
                   class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded"
                   @click="logar()"
-                >LOGAR</button>
+                >
+                  LOGAR
+                </button>
               </div>
               <!-- /.col -->
             </div>
@@ -76,56 +78,56 @@
 
 <script>
 /* eslint-disable */
-import {mapActions, mapState} from 'vuex'
+import VerifyBirthdays from "birthdays";
+import { mapActions, mapState } from "vuex";
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
-        return {
-            fields:{}
-        }
-    },
-    beforeMount(){
-      //  this.fields.email = "jorgeserranojunior@gmail.com"
-      //  this.fields.password = "carro"
-      if(this.Auth.token > ""){
-                  this.$router.go('financeiro')
-                }
-    },
+    return {
+      fields: {},
+    };
+  },
+  beforeMount() {
+    console.log(VerifyBirthdays.month("2020-09-15"));
+    //  this.fields.email = "jorgeserranojunior@gmail.com"
+    //  this.fields.password = "carro"
+    if (this.Auth.token > "") {
+      this.$router.go("financeiro");
+    }
+  },
 
-    computed:{        
-          ...mapState('Auth', {
-             Auth: state => state,
-            })
-    },
-    methods:{
-        ...mapActions('Auth', ['authenticate']),
-        logar(){ 
-             this.authenticate(this.fields).then((response) => {
-               console.log('response')
-               if(response){
-                 
-               }  
-             })             
-        },
-        validation(){
-          if((this.fields.email) && (this.fields.password)){
-            return true
-          }else{
-            return false
-          }
+  computed: {
+    ...mapState("Auth", {
+      Auth: (state) => state,
+    }),
+  },
+  methods: {
+    ...mapActions("Auth", ["authenticate"]),
+    logar() {
+      this.authenticate(this.fields).then((response) => {
+        console.log("response");
+        if (response) {
         }
+      });
     },
-    watch:
-       {
-            Auth: {
-            handler: function () {
-                if(this.Auth.token > ""){
-                  this.$router.push({ name: 'financeiro' });
-                }
-            },
-            deep: true
-        },
-       }
-}
+    validation() {
+      if (this.fields.email && this.fields.password) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  watch: {
+    Auth: {
+      handler: function () {
+        if (this.Auth.token > "") {
+          this.$router.push({ name: "financeiro" });
+        }
+      },
+      deep: true,
+    },
+  },
+};
 </script>
 

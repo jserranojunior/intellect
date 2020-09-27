@@ -34,6 +34,20 @@ services:
     ports:
       - "8080:8080"
 
+  frontend:
+    container_name: "frontend"
+    image: "node:lts-alpine"
+    environment:
+      - HOST=0.0.0.0
+    working_dir: /app
+    volumes:
+      - "../../frontend:/app"
+    command: "npm run dev"
+    networks:
+      - intellect
+    ports:
+      - "8080:8080"
+
   mysqlintellect:
     container_name: mysqlintellect
     build:

@@ -1,6 +1,11 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-1/4 p-1" v-for="categoria in categoriaContas" :key="categoria.id">
+    <!-- w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-1/4 -->
+    <div
+      class="w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-1/4 p-1"
+      v-for="categoria in categoriaContas"
+      :key="categoria.id"
+    >
       <div class="painel mt-1 shadow-md">
         <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
           <p class="painel-title">{{categoria.nome}}</p>
@@ -10,9 +15,10 @@
         </div>
         <div class="painel-body p-1">
           <div
-            class="flex flex-wrap text-center mt-1"
+            class="flex flex-wrap text-center mt-1 cursor-pointer"
             v-for="contas in categoria.contas_a_pagars"
             :key="contas.id"
+            @click="editarContaAPagar(contas.id)"
           >
             <div class="w-1/4">
               <input class="mr-2 leading-tight" type="checkbox" :id="contas.id" />
@@ -61,20 +67,32 @@ export default {
   },
   methods: {
     editarContaAPagar(id) {
-      this.ActionGetEditarContaAPagar(id);
+      const dataEdit = {
+        id: id,
+        dataselecionada: this.dataSelecionada,
+      };
+      this.ActionGetContasAPagarId(dataEdit).then((result) => {
+        // this.$router.push({ name: "financeiroeditarconta" });
+
+        this.$router.push("/financeiro/editarconta").catch((err) => {});
+      });
     },
     ...mapActions([
       "ActionGetCategoriasContasAPagar",
-      "ActionGetEditarContaAPagar",
+      "ActionGetContasAPagarId",
     ]),
     getCategoriaContasVuex() {
-      this.ActionGetCategoriasContasAPagar(this.dataSelecionada);
+      if (this.dataSelecionada) {
+        this.ActionGetCategoriasContasAPagar(this.dataSelecionada);
+      }
     },
   },
   props: {
     msg: String,
   },
-  beforeMount() {},
+  beforeMount() {
+    this.getCategoriaContasVuex();
+  },
   watch: {
     dataSelecionada() {
       this.getCategoriaContasVuex();

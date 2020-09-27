@@ -13,12 +13,12 @@ export default {
   name: "MainLayout",
   data() {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
     };
   },
   components: {
-    NavBar
-  }
+    NavBar,
+  },
 };
 </script>
 <style>
@@ -37,6 +37,13 @@ export default {
 }
 .btn-primary-tail-rounded:hover {
   @apply bg-blue-400 text-white;
+}
+
+.btn-warning-tail-rounded {
+  @apply cursor-pointer text-white text-center font-semibold py-2 px-4 border  bg-yellow-500  rounded-full mr-2;
+}
+.btn-warning-tail-rounded:hover {
+  @apply bg-yellow-400 text-white;
 }
 
 .painel-tail {
