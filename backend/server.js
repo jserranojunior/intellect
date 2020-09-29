@@ -4,7 +4,6 @@ import router from "./routes/routes.js";
 import cors from "cors";
 const app = express();
 dotenv.config();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

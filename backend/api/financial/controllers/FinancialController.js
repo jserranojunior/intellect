@@ -1,7 +1,11 @@
-import CategoriasContas from "../modals/CategoriasContasAPagar.js";
-import ContasApagar from "../modals/ContasAPagar.js";
-import ValoresContasAPagar from "../modals/ValoresContasAPagar.js";
-import ValoresContasApagar from "../modals/ValoresContasAPagar.js";
+import CategoriasContasAPagar from "../modals/CategoriasContasAPagar.js";
+import Contas from "../modals/ContasAPagar.js";
+import Valores from "../modals/ValoresContasAPagar.js";
+
+const ContasAPagar = new Contas();
+const ValoresContasAPagar = new Valores();
+let CategoriasContas = new CategoriasContasAPagar();
+
 export default {
   async get(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -38,8 +42,8 @@ export default {
       req.body.data_pagamento = req.body.inicio_data_pagamento;
     }
 
-    let idContaInserida = await ContasApagar.storeContasAPagar(req.body);
-    let idValorInserido = await ValoresContasApagar.storeValoresContasAPagar(
+    let idContaInserida = await ContasAPagar.storeContasAPagar(req.body);
+    let idValorInserido = await ValoresContasAPagar.storeValoresContasAPagar(
       idContaInserida,
       req.body
     );
@@ -79,7 +83,7 @@ export default {
       req.body.data_pagamento = req.params.dataselecionada;
     }
 
-    let Contas = await ContasApagar.updateContasAPagar(req.params.id, req.body)
+    let Contas = await ContasAPagar.updateContasAPagar(req.params.id, req.body)
       .then(() => true)
       .catch((erro) => {
         console.log(Error(erro));
@@ -98,7 +102,7 @@ export default {
         req.body
       );
     } else {
-      Valor = await ValoresContasApagar.storeValoresContasAPagar(
+      Valor = await ValoresContasAPagar.storeValoresContasAPagar(
         req.params.id,
         req.body
       ).then(() => {
@@ -119,7 +123,7 @@ export default {
     // try {
     const id = req.params.id;
 
-    let contas = await ContasApagar.getContasWithIdAndDataSelecionada(
+    let contas = await ContasAPagar.getContasWithIdAndDataSelecionada(
       id,
       req.params
     );

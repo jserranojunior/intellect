@@ -1,26 +1,31 @@
-import knex from "../../../db/database.js";
-import ContasApagar from "./ContasAPagar.js";
-let CategoriasContasAPagar = {};
+import Modal from "../../../db/Modal.js";
+import ContasAPagar from "./ContasAPagar.js";
 
-CategoriasContasAPagar.getCategoriasContasValores = async function (params) {
-  return await knex("categorias_contas_a_pagars").then((categorias) => {
-    let Categorias = categorias.map(async (categoria) => {
-      categoria.contas_a_pagars = await ContasApagar.getContasWithIdCategoria(
-        categoria.id,
-        params
-      );
-      return categoria;
+class CategoriasContasAPagar extends Modal {
+  constructor() {
+    super();
+    this.ContasAPagar = new ContasAPagar();
+  }
+  async getCategoriasContasValores(params) {
+    return await this.knex("categorias_contas_a_pagars").then((categorias) => {
+      let Categorias = categorias.map(async (categoria) => {
+        categoria.contas_a_pagars = await this.ContasAPagar.getContasWithIdCategoria(
+          categoria.id,
+          params
+        );
+        return categoria;
+      });
+
+      let newCategorias = Promise.all(Categorias);
+      let CategoriasSomadas = somarValoresCategorias(newCategorias);
+      let cat = CategoriasSomadas;
+
+      let data = cat;
+
+      return data;
     });
-
-    let newCategorias = Promise.all(Categorias);
-    let CategoriasSomadas = somarValoresCategorias(newCategorias);
-    let cat = CategoriasSomadas;
-
-    let data = cat;
-
-    return data;
-  });
-};
+  }
+}
 
 async function somarValoresCategorias(Categorias) {
   let totalCategorias = 0;
