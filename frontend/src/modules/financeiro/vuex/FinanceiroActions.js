@@ -6,7 +6,7 @@ const token = localStorage.getItem("token");
 export const ActionAddContasAPagar = ({ commit }, data) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:4333"
+      baseURL: "http://backend.localhost",
       // timeout: 1000
     };
 
@@ -14,11 +14,11 @@ export const ActionAddContasAPagar = ({ commit }, data) => {
     // console.log(data);
     axios
       .post(link, data, options)
-      .then(result => {
+      .then((result) => {
         console.log(result);
         resolve();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         reject(error);
       });
@@ -28,7 +28,7 @@ export const ActionAddContasAPagar = ({ commit }, data) => {
 export const ActionAtualizarContasAPagar = ({ commit }, data) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:4333"
+      baseURL: "http://backend.localhost",
       // timeout: 1000
     };
 
@@ -36,11 +36,11 @@ export const ActionAtualizarContasAPagar = ({ commit }, data) => {
     console.log(data);
     axios
       .put(link, data, options)
-      .then(result => {
+      .then((result) => {
         console.log(result);
         resolve();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         reject(error);
       });
@@ -53,19 +53,19 @@ export const ActionGetCategoriasContasAPagar = (
 ) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:4333",
-      timeout: 1000
+      baseURL: "http://backend.localhost",
+      timeout: 1000,
     };
 
     const link = `/financial/${dataSelecionada}`;
 
     axios
       .get(link, options)
-      .then(function(response) {
+      .then(function (response) {
         commit("SET_CATEGORIA_CONTAS", response.data);
         resolve();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         console.log(error.response);
         reject(error);
@@ -74,7 +74,7 @@ export const ActionGetCategoriasContasAPagar = (
 };
 
 export const ActionSetDataSelecionada = ({ commit }, data) => {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve) => {
     commit("SET_DATA_SELECIONADA", data);
     resolve();
   });
@@ -83,17 +83,17 @@ export const ActionSetDataSelecionada = ({ commit }, data) => {
 export const ActionGetContasAPagarId = ({ commit }, data) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      baseURL: "http://localhost:4333"
+      baseURL: "http://backend.localhost",
       // timeout: 1000
     };
     const link = `/financial/billstopay/${data.id}/${data.dataselecionada}`;
     axios
       .get(link, options)
-      .then(result => {
+      .then((result) => {
         commit("SET_EDITAR_CONTA_A_PAGAR", result.data);
         resolve(result.data);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         reject(error);
       });

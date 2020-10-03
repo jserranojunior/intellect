@@ -20,8 +20,9 @@
     "sequelize-cli": "^6.2.0"
   },
   "scripts": {
+    "debug": "NODE_ENV=debug nodemon --inspect server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
+    "dev": "nodemon --inspect=0.0.0.0:9229 server.js",
     "start-dev": "node_modules/babel-watch/babel-watch.js server.js",
     "db:migration": "npx knex --esm  migrate:make",
     "migrate": "knex --esm  migrate:latest",

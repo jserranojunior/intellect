@@ -3,7 +3,11 @@ import dotenv from "dotenv";
 import router from "./routes/routes.js";
 import cors from "cors";
 const app = express();
-dotenv.config();
+
+dotenv.config({
+  path: process.env.NODE_ENV === "debug" ? ".env.debug" : ".env",
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

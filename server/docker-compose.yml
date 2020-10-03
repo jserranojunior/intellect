@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 
 networks:
   intellect:
@@ -8,17 +8,18 @@ services:
   backend:
     container_name: "api_intellect"
     build:
-      context: "../../backend"
+      context: "../backend"
     environment:
       PMA_HOST: mysqlintellect
     volumes:
-      - "../../backend:/app"
+      - "../backend:/app"
     networks:
       - intellect
     depends_on:
       - mysqlintellect
     ports:
       - 4333:4333
+      - 9229:9229
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.backend.rule=Host(`backend.${DOMAIN}`)
@@ -28,24 +29,24 @@ services:
     container_name: "frontend"
     image: "node:lts-alpine"
     environment:
-      - HOST=0.0.0.0
+      - HOST=frontend.${DOMAIN}
     working_dir: /app
     volumes:
-      - "../../frontend:/app"
+      - "../frontend:/app"
     command: "npm run dev"
+    ports:
+      - 8000:8000
     networks:
       - intellect
-    ports:
-      - "8070:8080"
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.frontend.rule=Host(`frontend.${DOMAIN}`)
-      - traefik.http.services.frontend.loadbalancer.server.port=8080
+      - traefik.http.services.frontend.loadbalancer.server.port=8000
 
   mysqlintellect:
     container_name: mysqlintellect
     build:
-      context: ../../database
+      context: ../database
     ports:
       - 3306:3306
     environment:
@@ -55,7 +56,7 @@ services:
       MYSQL_PASSWORD: intellect
       SERVICE_NAME: mysqlintellect
     volumes:
-      - ../../database/mysql:/var/lib/mysql
+      - ../database/mysql:/var/lib/mysql
     networks:
       - intellect
 

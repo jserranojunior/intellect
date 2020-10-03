@@ -1,0 +1,9 @@
+{
+  "env": {
+    "TZ": "UTC",
+    "LOG_LEVEL": "debug"
+  },
+  "watch": ["./"],
+  "ext": "js",
+  "signal": "SIGTERM"
+}

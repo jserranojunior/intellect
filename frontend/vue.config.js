@@ -1,20 +1,20 @@
 const webpack = require("webpack");
 const host = "0.0.0.0";
-const port = 8080;
+const port = 8000;
 
 module.exports = {
   baseUrl: `http://${host}:${port}/`,
   pluginOptions: {
     quasar: {
-      treeShake: true
-    }
+      treeShake: true,
+    },
   },
   css: { extract: false },
   transpileDependencies: [/[\\\/]node_modules[\\\/]quasar[\\\/]/],
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const types = ["vue-modules", "vue", "normal-modules", "normal"];
-    types.forEach(type => {
+    types.forEach((type) => {
       addStyleResource(config.module.rule("stylus").oneOf(type));
     });
-  }
+  },
 };
