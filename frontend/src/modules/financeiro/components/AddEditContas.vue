@@ -168,7 +168,7 @@ export default {
         this.fields.favorecido = "";
         this.fields.descricao = "";
         this.fields.valor = "";
-        console.log(result);
+        this.$router.push({ name: "financeiro" });
       });
     },
     atualizar() {

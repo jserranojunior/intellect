@@ -1,4 +1,4 @@
 
 cd server/local;
+docker-compose up -d
 
-sudo docker-compose build && docker-compose up -d

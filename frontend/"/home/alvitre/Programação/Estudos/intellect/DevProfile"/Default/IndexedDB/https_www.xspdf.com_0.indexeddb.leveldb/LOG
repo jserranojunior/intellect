@@ -1,0 +1,5 @@
+2020/09/29-02:22:41.585 572a Reusing MANIFEST /home/alvitre/Programação/Estudos/intellect/frontend/"/home/alvitre/Programação/Estudos/intellect/DevProfile"/Default/IndexedDB/https_www.xspdf.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/09/29-02:22:59.320 5527 Level-0 table #5: started
+2020/09/29-02:22:59.323 5527 Level-0 table #5: 336 bytes OK
+2020/09/29-02:22:59.326 5527 Delete type=0 #3
+2020/09/29-02:22:59.326 5527 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

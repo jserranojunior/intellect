@@ -1,0 +1,20 @@
+## STATIC CONFIGURATION
+log:
+  level: INFO
+
+defaultEntryPoints: ["http", "https"]
+
+"--api.insecure=true"
+"--api.dashboard=true"
+"--api.debug=true"
+  debug: True
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers.docker.exposedByDefault=false
+    network: "intellect"
+    : false

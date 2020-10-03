@@ -1,0 +1,5 @@
+2020/09/28-21:54:25.220 20ea Reusing MANIFEST /home/alvitre/Programação/Estudos/intellect/frontend/"/home/alvitre/Programação/Estudos/intellect/DevProfile"/Default/IndexedDB/https_tpc.googlesyndication.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/09/28-21:54:30.206 20ea Level-0 table #5: started
+2020/09/28-21:54:30.209 20ea Level-0 table #5: 360 bytes OK
+2020/09/28-21:54:30.212 20ea Delete type=0 #3
+2020/09/28-21:54:30.212 20ea Manual compaction at level-0 from (begin) .. (end); will stop at (end)

@@ -1,48 +1,87 @@
 <template>
-  <div class="flex flex-wrap">
+  <section class="grid grid-cols-3 grid-flow-row gap-1">
     <!-- w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-1/4 -->
     <div
-      class="w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-1/4 p-1"
+      class="painel w-full"
       v-for="categoria in categoriaContas"
       :key="categoria.id"
     >
-      <div class="painel mt-1 shadow-md">
-        <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
-          <p class="painel-title">{{categoria.nome}}</p>
-          <!-- <button type="button" class="togle" data-card-widget="collapse">
+      <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
+        <p class="painel-title">{{ categoria.nome }}</p>
+        <!-- <button type="button" class="togle" data-card-widget="collapse">
             <i class="fas fa-minus"></i>
           </button>-->
-        </div>
-        <div class="painel-body p-1">
+      </div>
+      <div class="painel-body p-1 mb-auto">
+        <div
+          class="flex flex-wrap text-center mt-1 cursor-pointer hover:bg-gray-900 text-gray-100"
+          v-for="contas in categoria.contas_a_pagars"
+          :key="contas.id"
+        >
+          <div class="w-1/4">
+            <div
+              class="relative inline-block w-8 mr-2 align-middle select-none transition duration-200 ease-in"
+            >
+              <span v-if="contas.contas_pagas && contas.contas_pagas.id">
+                <input
+                  type="checkbox"
+                  name="toggle"
+                  :id="contas.id"
+                  checked
+                  class="toggle-checkbox absolute block w-4 h-4 rounded-full border-4 appearance-none cursor-pointer outline-none"
+                />
+
+                <label
+                  for="toggle"
+                  class="toggle-label block overflow-hidden h-4 rounded-full bg-red-800 cursor-pointer"
+                ></label>
+              </span>
+              <span v-else>
+                <input
+                  type="checkbox"
+                  name="toggle"
+                  :id="contas.id"
+                  class="toggle-checkbox absolute block w-4 h-4 rounded-full border-4 appearance-none cursor-pointer outline-none"
+                />
+
+                <label
+                  for="toggle"
+                  class="toggle-label block overflow-hidden h-4 rounded-full bg-red-800 cursor-pointer"
+                ></label>
+              </span>
+            </div>
+            <!-- <input
+                class="mr-2 leading-tight"
+                type="checkbox"
+                :id="contas.id"
+              /> -->
+          </div>
           <div
-            class="flex flex-wrap text-center mt-1 cursor-pointer"
-            v-for="contas in categoria.contas_a_pagars"
-            :key="contas.id"
+            class="w-2/4 pointer"
+            @click="editarContaAPagar(contas.id)"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            {{ contas.favorecido }}
+          </div>
+          <div
+            class="w-1/4"
+            v-if="contas.valores_contas_a_pagars"
             @click="editarContaAPagar(contas.id)"
           >
-            <div class="w-1/4">
-              <input class="mr-2 leading-tight" type="checkbox" :id="contas.id" />
-            </div>
-            <div
-              class="w-2/4 pointer"
-              @click="editarContaAPagar(contas.id)"
-              data-toggle="modal"
-              data-target="#exampleModal"
-            >{{contas.favorecido}}</div>
-            <div
-              class="w-1/4"
-              v-if="contas.valores_contas_a_pagars"
-            >{{contas.valores_contas_a_pagars.valor | money}}</div>
-            <div v-else class="w-1/4">0</div>
+            {{ contas.valores_contas_a_pagars.valor | money }}
           </div>
-        </div>
-        <div class="painel-footer flex text-center justify-between border-t mt-1 p-2">
-          <div class="w-1/3">Total</div>
-          <div class="w-1/3">{{categoria.totalCategoria | money}}</div>
+          <div v-else class="w-1/4">0</div>
         </div>
       </div>
+      <div
+        class="painel-footer flex text-center justify-between border-t mt-1 p-2 text-gray-300 pt-auto"
+      >
+        <div class="w-1/3">Total</div>
+        <div class="w-1/3">{{ categoria.totalCategoria | money }}</div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

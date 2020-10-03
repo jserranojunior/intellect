@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="bg-gray-700">
     <NavBar></NavBar>
     <q-page-container>
       <router-view />
@@ -25,6 +25,14 @@ export default {
 @import "tailwindcss/base";
 
 @import "tailwindcss/components";
+.toggle-checkbox:checked {
+  @apply: right-0 border-blue-500 bg-blue-400 r-0;
+  right: 0;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply: bg-blue-400;
+  background-color: #23487d;
+}
 .form-tail {
   @apply p-2 shadow rounded-lg bg-gray-100 outline-none cursor-pointer;
 }
@@ -46,8 +54,8 @@ export default {
   @apply bg-yellow-400 text-white;
 }
 
-.painel-tail {
-  @apply m-0 p-5 bg-white w-full shadow rounded-lg;
+.painel {
+  @apply bg-gray-800 shadow rounded-lg;
 }
 
 @import "tailwindcss/utilities";

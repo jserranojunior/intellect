@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-wrap">
       <div class="w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-2/4 p-1">
-        <div class="painel mt-1 shadow-md">
+        <div class="painel mt-1 shadow-md text-white">
           <div
             class="painel-header text-center p-1 rounded-lg text-white bg-red-500"
           >
@@ -31,7 +31,7 @@
       </div>
 
       <div class="w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-2/4 p-1">
-        <div class="painel mt-1 shadow-md">
+        <div class="painel mt-1 shadow-md text-white">
           <div
             class="painel-header text-center p-1 rounded-lg text-white bg-green-500"
           >

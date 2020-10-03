@@ -1,6 +1,6 @@
 import { dateUStoJs } from "../../../helpers/helpersDates.js";
 
-export const verificarAniversarios = dataInserida => {
+export const verificarAniversarios = (dataInserida) => {
   const dataFormatada = dateUStoJs(dataInserida);
   const date = new Date();
   const primeiroDia = new Date(date.getFullYear(), date.getMonth(), 1);

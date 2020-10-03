@@ -1,11 +1,13 @@
 import Modal from "../../../db/Modal.js";
 import ValoresContasAPagar from "./ValoresContasAPagar.js";
+import ContasPagas from "../modals/ContasPagas.js";
 
 class ContasAPagar extends Modal {
   constructor() {
     super();
     if (!(this instanceof ContasAPagar)) return new ContasAPagar();
     this.ValoresContasAPagar = new ValoresContasAPagar();
+    this.ContasPagas = new ContasPagas();
   }
 
   async getContasWithIdCategoria(id, params) {
@@ -36,6 +38,11 @@ class ContasAPagar extends Modal {
             conta.id,
             params
           );
+
+          conta.contas_pagas = await this.ContasPagas.getContasPagas(
+            conta.id,
+            params
+          );
           return conta;
         });
 
@@ -45,7 +52,7 @@ class ContasAPagar extends Modal {
   }
   async getContasWithIdAndDataSelecionada(id, params) {
     const anoMesSelecionado = params.dataselecionada.substring(0, 7);
-
+    console.log("erro");
     return await this.knex("contas_a_pagars")
       .where("id", id)
       .whereRaw(
