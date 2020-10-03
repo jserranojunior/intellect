@@ -12,7 +12,7 @@
     {
       "label": "docker local",
       "type": "shell",
-      "command": "cd server/local/ && ./start.sh"
+      "command": "cd server/ && ./start.sh"
     }
   ]
 }
