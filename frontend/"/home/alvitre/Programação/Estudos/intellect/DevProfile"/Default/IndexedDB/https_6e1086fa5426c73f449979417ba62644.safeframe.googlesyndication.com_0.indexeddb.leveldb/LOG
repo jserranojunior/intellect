@@ -1,5 +1,0 @@
-2020/09/29-03:01:06.253 5bc1 Reusing MANIFEST /home/alvitre/Programação/Estudos/intellect/frontend/"/home/alvitre/Programação/Estudos/intellect/DevProfile"/Default/IndexedDB/https_6e1086fa5426c73f449979417ba62644.safeframe.googlesyndication.com_0.indexeddb.leveldb/MANIFEST-000001
-2020/09/29-03:01:15.704 5b8d Level-0 table #5: started
-2020/09/29-03:01:15.706 5b8d Level-0 table #5: 460 bytes OK
-2020/09/29-03:01:15.709 5b8d Delete type=0 #3
-2020/09/29-03:01:15.710 5b8d Manual compaction at level-0 from (begin) .. (end); will stop at (end)

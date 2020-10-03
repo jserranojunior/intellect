@@ -1,6 +1,0 @@
-2020/10/02-14:33:28.373 15ab Reusing MANIFEST /home/alvitre/Programação/Pessoal/intellect/frontend/"/home/alvitre/Programação/Pessoal/intellect/DevProfile"/Default/Local Storage/leveldb/MANIFEST-000001
-2020/10/02-14:33:28.373 15ab Recovering log #4
-2020/10/02-14:33:28.373 15ab Reusing old log /home/alvitre/Programação/Pessoal/intellect/frontend/"/home/alvitre/Programação/Pessoal/intellect/DevProfile"/Default/Local Storage/leveldb/000004.log 
-2020/10/02-15:43:59.531 39bb Level-0 table #8: started
-2020/10/02-15:43:59.534 39bb Level-0 table #8: 16211 bytes OK
-2020/10/02-15:43:59.537 39bb Delete type=0 #4
