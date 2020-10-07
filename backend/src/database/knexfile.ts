@@ -1,14 +1,16 @@
+import path from "path";
+
 let connection = {
   client: "mysql",
   connection: {
-    host: "mysqlintellect",
+    host: "mysql_local",
     user: "root",
-    password: "intellect",
+    password: "123",
     database: "intellect",
     charset: "utf8",
   },
   migrations: {
-    directory: "./db/migrations",
+    directory: "./migrations",
     tableName: "migrations",
   },
 };

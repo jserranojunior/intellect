@@ -138,101 +138,119 @@
 </template>
 
 <script>
-/* eslint-disable */
-import { mapState, mapActions } from "vuex";
-import AwesomeMask from "awesome-mask";
-import moment from "moment";
-export default {
-  name: "AddEditContas",
-  data() {
-    return {
-      fields: {},
-      errors: {},
-      loaded: true,
-      minhadata: "",
-      dataAtual: this.dataAtualFinanceiro
-        ? this.dataAtualFinanceiro
-        : new Date().toLocaleDateString("pt-BR", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          }),
-      modoEdicao: false,
-    };
-  },
-  methods: {
-    ...mapActions(["ActionAddContasAPagar", "ActionAtualizarContasAPagar"]),
-
-    cadastrar() {
-      this.ActionAddContasAPagar(this.fields).then((result) => {
-        this.fields.favorecido = "";
-        this.fields.descricao = "";
-        this.fields.valor = "";
-        this.$router.push({ name: "financeiro" });
-      });
+  /* eslint-disable */
+  import { mapState, mapActions } from "vuex";
+  import AwesomeMask from "awesome-mask";
+  import moment from "moment";
+  export default {
+    name: "AddEditContas",
+    data() {
+      return {
+        fields: {},
+        errors: {},
+        loaded: true,
+        minhadata: "",
+        dataAtual: this.dataAtualFinanceiro
+          ? this.dataAtualFinanceiro
+          : new Date().toLocaleDateString("pt-BR", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            }),
+        modoEdicao: false,
+      };
     },
-    atualizar() {
-      this.ActionAtualizarContasAPagar(this.fields).then((result) => {
-        this.$router.push({ name: "financeiro" });
-      });
-    },
-    setFields() {
-      if (this.mode === "add") {
-        this.fields.user_id = 1;
-        this.fields.inicio_data_pagamento = this.dataAtual;
-        this.fields.fim_data_pagamento = this.dataAtual;
-        this.fields.forma_pagamento = "Cartão";
-        this.fields.tipo_conta = "Extra";
-        this.fields.categorias_contas_a_pagar_id = "2";
-      } else if (this.mode === "edit") {
-        if (this.editarContaAPagar[0]) {
-          this.fields = this.editarContaAPagar[0];
-          this.fields.valor = this.editarContaAPagar[0].valores_contas_a_pagars.valor;
-          this.fields.inicio_data_pagamento = this.fields.inicio_data_pagamento
-            .split("-")
-            .reverse()
-            .join("/");
+    methods: {
+      ...mapActions(["ActionStoreFinancial", "ActionUpdateFinancial"]),
 
-          this.fields.fim_data_pagamento = this.fields.fim_data_pagamento
-            .split("-")
-            .reverse()
-            .join("/");
-          this.fields.data_pagamento = this.dataAtualFinanceiro;
-        } else {
+      cadastrar() {
+        this.ActionStoreFinancial(this.fields).then((result) => {
+          this.fields.favorecido = "";
+          this.fields.descricao = "";
+          this.fields.valor = "";
           this.$router.push({ name: "financeiro" });
-        }
-      }
-    },
-  },
-  beforeMount() {
-    this.setFields();
-  },
-  props: {
-    mode: {
-      type: String,
-      required: true,
-    },
-  },
-  watch: {
-    fields: {
-      handler() {
-        // console.log(this.fields);
+        });
       },
-      deep: true,
-    },
-    categorias_contas_a_pagar_id: function () {
-      this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
-    },
-  },
-  computed: {
-    ...mapState({
-      dataAtualFinanceiro: (state) => state.Financeiro.dataSelecionada,
-      editarContaAPagar: (state) => state.Financeiro.editarContaAPagar,
-    }),
-  },
+      atualizar() {
+        this.ActionUpdateFinancial(this.fields).then((result) => {
+          this.$router.push({ name: "financeiro" });
+        });
+      },
+      setFields() {
+        if (this.mode === "add") {
+          this.fields.user_id = 1;
+          this.fields.inicio_data_pagamento = this.dataAtual;
+          this.fields.fim_data_pagamento = this.dataAtual;
+          this.fields.forma_pagamento = "Cartão";
+          this.fields.tipo_conta = "Extra";
+          this.fields.categorias_contas_a_pagar_id = "2";
+        } else if (this.mode === "edit") {
+          if (this.editarContaAPagar[0]) {
+            this.fields.id = this.editarContaAPagar[0].id;
+            this.fields.favorecido = this.editarContaAPagar[0].favorecido;
+            this.fields.descricao = this.editarContaAPagar[0].descricao;
 
-  directives: {
-    mask: AwesomeMask,
-  },
-};
+            this.fields.user_id = this.editarContaAPagar[0].user_id;
+            this.fields.inicio_data_pagamento = this.editarContaAPagar[0].inicio_data_pagamento;
+
+            this.fields.forma_pagamento = this.editarContaAPagar[0].forma_pagamento;
+            this.fields.tipo_conta = this.editarContaAPagar[0].tipo_conta;
+            this.fields.categorias_contas_a_pagar_id = this.editarContaAPagar[0].categorias_contas_a_pagar_id;
+            this.fields.valor = this.editarContaAPagar[0].valores_contas_a_pagars.valor;
+
+            // const ContasAPagar = Array.from(this.editarContaAPagar[0]).slice();
+            // this.fields = Array.from(ContasAPagar[0]).slice();
+            // this.fields.valor = this.fields.valores_contas_a_pagars.valor;
+
+            this.fields.inicio_data_pagamento = this.editarContaAPagar[0].inicio_data_pagamento
+              .split("-")
+              .reverse()
+              .join("/");
+
+            if (this.editarContaAPagar[0].fim_data_pagamento) {
+              this.fields.fim_data_pagamento = this.editarContaAPagar[0].fim_data_pagamento
+                .split("-")
+                .reverse()
+                .join("/");
+            } else {
+              this.fields.fim_data_pagamento = "";
+            }
+            this.fields.data_pagamento = this.dataAtualFinanceiro;
+          } else {
+            this.$router.push({ name: "financeiro" });
+          }
+        }
+      },
+    },
+    beforeMount() {
+      this.setFields();
+    },
+    props: {
+      mode: {
+        type: String,
+        required: true,
+      },
+    },
+    watch: {
+      fields: {
+        handler() {
+          // console.log(this.fields);
+        },
+        deep: true,
+      },
+      categorias_contas_a_pagar_id: function () {
+        this.fields.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
+      },
+    },
+    computed: {
+      ...mapState({
+        dataAtualFinanceiro: (state) => state.Financeiro.dataSelecionada,
+        editarContaAPagar: (state) => state.Financeiro.editarContaAPagar,
+      }),
+    },
+
+    directives: {
+      mask: AwesomeMask,
+    },
+  };
 </script>

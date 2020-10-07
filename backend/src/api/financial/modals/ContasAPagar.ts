@@ -1,16 +1,17 @@
-import Modal from "../../../db/Modal.js";
-import ValoresContasAPagar from "./ValoresContasAPagar.js";
-import ContasPagas from "../modals/ContasPagas.js";
+import Modal from "../../../database/Modal";
+import ValoresContasAPagar from "./ValoresContasAPagar";
+import ContasPagas from "./ContasPagas";
+import { any } from "sequelize/types/lib/operators";
 
 class ContasAPagar extends Modal {
   constructor() {
     super();
     if (!(this instanceof ContasAPagar)) return new ContasAPagar();
-    this.ValoresContasAPagar = new ValoresContasAPagar();
-    this.ContasPagas = new ContasPagas();
   }
 
   async getContasWithIdCategoria(id, params) {
+    let Valores = new ValoresContasAPagar();
+    let Pagas = new ContasPagas();
     const anoMesSelecionado = params.dataselecionada.substring(0, 7);
 
     return await this.knex("contas_a_pagars")
@@ -34,15 +35,12 @@ class ContasAPagar extends Modal {
 
       .then((contas) => {
         let Contas = contas.map(async (conta) => {
-          conta.valores_contas_a_pagars = await this.ValoresContasAPagar.getValoresContasAPagar(
+          conta.valores_contas_a_pagars = await Valores.getValoresContasAPagar(
             conta.id,
             params
           );
 
-          conta.contas_pagas = await this.ContasPagas.getContasPagas(
-            conta.id,
-            params
-          );
+          conta.contas_pagas = await Pagas.getContasPagas(conta.id, params);
           return conta;
         });
 
@@ -52,7 +50,7 @@ class ContasAPagar extends Modal {
   }
   async getContasWithIdAndDataSelecionada(id, params) {
     const anoMesSelecionado = params.dataselecionada.substring(0, 7);
-    console.log("erro");
+    let Valores = new ValoresContasAPagar();
     return await this.knex("contas_a_pagars")
       .where("id", id)
       .whereRaw(
@@ -74,7 +72,7 @@ class ContasAPagar extends Modal {
 
       .then((contas) => {
         let Contas = contas.map(async (conta) => {
-          conta.valores_contas_a_pagars = await this.ValoresContasAPagar.getValoresContasAPagar(
+          conta.valores_contas_a_pagars = await Valores.getValoresContasAPagar(
             conta.id,
             params
           );
@@ -103,7 +101,7 @@ class ContasAPagar extends Modal {
     return data;
   }
   async updateContasAPagar(id, body) {
-    const dataUpdate = {};
+    const dataUpdate: any = {};
     body.user_id ? (dataUpdate.user_id = body.user_id) : "";
     body.favorecido ? (dataUpdate.favorecido = body.favorecido) : "";
     body.categorias_contas_a_pagar_id

@@ -73,10 +73,6 @@
         open: false,
       };
     },
-    beforeMount() {
-      const oi = "oi";
-      console.log(`funcionand o ${oi}`);
-      console.log("funcionando");
-    },
+    beforeMount() {},
   };
 </script>

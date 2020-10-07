@@ -85,82 +85,79 @@
 </template>
 
 <script>
-/* eslint-disable */
-import { mapActions, mapState } from "vuex";
-export default {
-  name: "CategoriaContasAPagar",
-  data() {
-    return {
-      editandoContaAPagar: {},
-      categoriaContas: {},
-    };
-  },
-  computed: {
-    ...mapState({
-      categoriaContasVuex: (state) =>
-        state.Financeiro.categoriaContas.categorias,
-      totalCategoriaContasVuex: (state) =>
-        state.Financeiro.categoriaContas.totalCategorias,
-      dataSelecionada: (state) => state.Calendario.dataSelecionada,
-    }),
-  },
-  methods: {
-    editarContaAPagar(id) {
-      const dataEdit = {
-        id: id,
-        dataselecionada: this.dataSelecionada,
+  /* eslint-disable */
+  import { mapActions, mapState } from "vuex";
+  export default {
+    name: "CategoriaContasAPagar",
+    data() {
+      return {
+        editandoContaAPagar: {},
+        categoriaContas: {},
       };
-      this.ActionGetContasAPagarId(dataEdit).then((result) => {
-        // this.$router.push({ name: "financeiroeditarconta" });
+    },
+    computed: {
+      ...mapState({
+        categoriaContasVuex: (state) =>
+          state.Financeiro.categoriaContas.categorias,
+        totalCategoriaContasVuex: (state) =>
+          state.Financeiro.categoriaContas.totalCategorias,
+        dataSelecionada: (state) => state.Calendario.dataSelecionada,
+      }),
+    },
+    methods: {
+      editarContaAPagar(id) {
+        const dataEdit = {
+          id: id,
+          dataselecionada: this.dataSelecionada,
+        };
+        this.ActionEditFinancial(dataEdit).then((result) => {
+          // this.$router.push({ name: "financeiroeditarconta" });
 
-        this.$router.push("/financeiro/editarconta").catch((err) => {});
-      });
-    },
-    ...mapActions([
-      "ActionGetCategoriasContasAPagar",
-      "ActionGetContasAPagarId",
-    ]),
-    getCategoriaContasVuex() {
-      if (this.dataSelecionada) {
-        this.ActionGetCategoriasContasAPagar(this.dataSelecionada);
-      }
-    },
-  },
-  props: {
-    msg: String,
-  },
-  beforeMount() {
-    this.getCategoriaContasVuex();
-  },
-  watch: {
-    dataSelecionada() {
-      this.getCategoriaContasVuex();
-    },
-    categoriaContasVuex: {
-      handler() {
-        if (this.categoriaContasVuex) {
-          this.categoriaContas = this.categoriaContasVuex;
+          this.$router.push("/financeiro/editarconta").catch((err) => {});
+        });
+      },
+      ...mapActions(["ActionGetFinancial", "ActionEditFinancial"]),
+      getCategoriaContasVuex() {
+        if (this.dataSelecionada) {
+          this.ActionGetFinancial(this.dataSelecionada);
         }
       },
-      deep: true,
     },
-  },
+    props: {
+      msg: String,
+    },
+    beforeMount() {
+      this.getCategoriaContasVuex();
+    },
+    watch: {
+      dataSelecionada() {
+        this.getCategoriaContasVuex();
+      },
+      categoriaContasVuex: {
+        handler() {
+          if (this.categoriaContasVuex) {
+            this.categoriaContas = this.categoriaContasVuex;
+          }
+        },
+        deep: true,
+      },
+    },
 
-  filters: {
-    money: function (value) {
-      if (!value) {
-        return "0,00";
-      } else {
-        let val = (value / 1).toFixed(2).replace(".", ",");
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
+    filters: {
+      money: function (value) {
+        if (!value) {
+          return "0,00";
+        } else {
+          let val = (value / 1).toFixed(2).replace(".", ",");
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+      },
     },
-  },
-};
+  };
 </script>
 
 <style>
-/* .custom-switch {
+  /* .custom-switch {
   padding-left: 0px;
 }
 .custom-control-label {
@@ -177,7 +174,7 @@ export default {
 .pointer {
   cursor: pointer;
 } */
-/* .card-body {
+  /* .card-body {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding: 0.25rem;
@@ -191,77 +188,77 @@ export default {
   padding: 0.25rem 1.25rem;
 } */
 
-.categoria-essenciais {
-  background-color: #0971b2;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-essenciais {
+    background-color: #0971b2;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-compras {
-  background-color: #4c12b2;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-compras {
+    background-color: #4c12b2;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-urgencia {
-  background-color: #b21212;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-urgencia {
+    background-color: #b21212;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-essenciais {
-  background-color: #0971b2;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-essenciais {
+    background-color: #0971b2;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-estudos {
-  background-color: #ff8507;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-estudos {
+    background-color: #ff8507;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-lazer {
-  background-color: rgb(178, 18, 111);
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-lazer {
+    background-color: rgb(178, 18, 111);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-poupanca {
-  background-color: rgb(37, 210, 216);
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-poupanca {
+    background-color: rgb(37, 210, 216);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-transporte {
-  background-color: rgb(80, 77, 74);
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-transporte {
+    background-color: rgb(80, 77, 74);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-alimentacao {
-  background-color: rgb(44, 116, 29);
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-alimentacao {
+    background-color: rgb(44, 116, 29);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-.categoria-avulsos {
-  background-color: rgb(29, 116, 104);
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+  .categoria-avulsos {
+    background-color: rgb(29, 116, 104);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-/* .table {
+  /* .table {
   margin-bottom: 0rem;
 }
 

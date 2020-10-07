@@ -1,29 +1,27 @@
 version: "3"
 
 networks:
-  intellect:
+  internal:
     driver: bridge
 
 services:
   backend:
     container_name: "api_intellect"
-    build:
-      context: "../backend"
-    environment:
-      PMA_HOST: mysqlintellect
+    image: "node:lts-alpine"
+    working_dir: /app
     volumes:
       - "../backend:/app"
     networks:
-      - intellect
-    depends_on:
-      - mysqlintellect
+      - internal
+    command: "npm run ts"
     ports:
-      - 4333:4333
+      - 4444:4333
       - 9229:9229
+      - 7001:7001
     labels:
       - "traefik.enable=true"
-      - traefik.http.routers.backend.rule=Host(`backend.${DOMAIN}`)
-      - traefik.http.services.backend.loadbalancer.server.port=4333
+      - traefik.http.routers.backintellect.rule=Host(`backintellect.${DOMAIN}`)
+      - traefik.http.services.backintellect.loadbalancer.server.port=4333
 
   frontend:
     container_name: "frontend"
@@ -37,59 +35,59 @@ services:
     ports:
       - 8000:8000
     networks:
-      - intellect
+      - internal
     labels:
       - "traefik.enable=true"
-      - traefik.http.routers.frontend.rule=Host(`frontend.${DOMAIN}`)
-      - traefik.http.services.frontend.loadbalancer.server.port=8000
+      - traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`)
+      - traefik.http.services.frontintellect.loadbalancer.server.port=8000
 
-  mysqlintellect:
-    container_name: mysqlintellect
-    build:
-      context: ../database
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_DATABASE: intellect
-      MYSQL_USER: intellect
-      MYSQL_ROOT_PASSWORD: intellect
-      MYSQL_PASSWORD: intellect
-      SERVICE_NAME: mysqlintellect
-    volumes:
-      - ../database/mysql:/var/lib/mysql
-    networks:
-      - intellect
+  # mysqlintellect:
+  #   container_name: ${HOST}
+  #   build:
+  #     context: ../database
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_DATABASE: intellect
+  #     MYSQL_USER: intellect
+  #     MYSQL_ROOT_PASSWORD: intellect
+  #     MYSQL_PASSWORD: intellect
+  #     SERVICE_NAME: ${HOST}
+  #   volumes:
+  #     - ../database/mysql:/var/lib/mysql
+  #   networks:
+  #     - intellect
 
-  phpmyadmin_intellect:
-    container_name: "phpmyadmin_intellect"
-    image: phpmyadmin/phpmyadmin:latest
-    environment:
-      PMA_HOST: mysqlintellect
-    depends_on:
-      - mysqlintellect
-    ports:
-      - 2050:80
-    networks:
-      - intellect
-    labels:
-      - "traefik.enable=true"
-      - traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.${DOMAIN}`)
-      - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
+  # phpmyadmin_intellect:
+  #   container_name: "phpmyadmin_intellect"
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   environment:
+  #     PMA_HOST: mysqlintellect
+  #   depends_on:
+  #     - mysqlintellect
+  #   ports:
+  #     - 2050:80
+  #   networks:
+  #     - intellect
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.${DOMAIN}`)
+  #     - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
 
-  traefik_acolher:
-    image: "traefik"
-    command:
-      - "--api.insecure=true"
-      - "--api.dashboard=true"
-      - "--api.debug=true"
-      - "--providers.docker"
-      - "--providers.docker.exposedByDefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - intellect
+  # traefik_acolher:
+  #   image: "traefik"
+  #   command:
+  #     - "--api.insecure=true"
+  #     - "--api.dashboard=true"
+  #     - "--api.debug=true"
+  #     - "--providers.docker"
+  #     - "--providers.docker.exposedByDefault=false"
+  #     - "--entrypoints.web.address=:80"
+  #     - "--entrypoints.websecure.address=:443"
+  #   ports:
+  #     - "80:80"
+  #     - "8080:8080"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - intellect

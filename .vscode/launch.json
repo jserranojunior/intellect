@@ -4,8 +4,12 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach",
+      "name": "Attach Ts",
       "protocol": "inspector",
+      "port": 9229,
+      "address": "0.0.0.0",
+      "sourceMaps": true,
+      "timeout": 10000,
       "skipFiles": [
         "${workspaceFolder}/backend/node_modules/**/*.js",
         "<node_internals>/**/*.js",
@@ -17,17 +21,18 @@
       "restart": true
     },
     {
+      "name": "Debug index.ts",
       "type": "node",
-
-      "request": "attach",
-
-      "name": "Attach by Process ID",
-
-      "processId": "${command:PickProcess}",
-
-      "protocol": "inspector",
-
-      "restart": true
+      "request": "launch",
+      "cwd": "${workspaceRoot}/backend",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${workspaceRoot}/backend/src/server.ts"],
+      "skipFiles": [
+        "${workspaceFolder}/backend/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "${workspaceFolder}/backend/<node_internals>/**/*.js",
+        "<node_internals>"
+      ]
     }
   ]
 }
