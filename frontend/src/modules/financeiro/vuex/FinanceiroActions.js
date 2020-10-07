@@ -30,3 +30,15 @@ export const ActionSetDataSelecionada = ({ commit }, data) => {
     resolve(true);
   });
 };
+
+export const ActionStoreFinancialBillPayment = ({ commit }, data) => {
+  Financial.storeContaPaga(data).then((res) => {
+    return res;
+  });
+};
+
+export const ActionDeleteFinancialBillPayment = ({ commit }, data) => {
+  return Financial.deleteContaPaga(data).then((res) => {
+    return res;
+  });
+};

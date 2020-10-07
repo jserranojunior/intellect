@@ -83,4 +83,42 @@ export default class ApiFinancial {
         });
     });
   }
+
+  storeContaPaga(data) {
+    return new Promise(async (resolve, reject) => {
+      const options = {
+        baseURL: "http://backintellect.localhost",
+        timeout: 1000,
+      };
+      const link = "/financial/contapaga";
+      return axios
+        .post(link, data, options)
+        .then((result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(result);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          reject(false);
+        });
+    });
+  }
+
+  deleteContaPaga(data) {
+    return new Promise(async (resolve, reject) => {
+      const link = `http://backintellect.localhost/financial/contapaga/${data.contas_a_pagar_id}/${data.data_pagamento}`;
+      return axios
+        .delete(link)
+        .then((result) => {
+          resolve(result.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+          reject(false);
+        });
+    });
+  }
 }

@@ -160,19 +160,21 @@ export default {
     res.header("Access-Control-Allow-Methods", "DELETE");
 
     try {
-      if (req.body.data_pagamento.includes("/")) {
-        req.body.data_pagamento = req.body.data_pagamento
+      let contaDeletada = {};
+      if (req.params.data_pagamento.includes("/")) {
+        req.params.data_pagamento = req.params.data_pagamento
           .split("/")
           .reverse()
           .join("-");
       }
 
-      let ContaPagaDeletada = await ContasPagas.delete(req.body);
+      let ContaPagaDeletada = await ContasPagas.delete(req.params);
 
-      const contaDeletada = ContaPagaDeletada;
+      contaDeletada = ContaPagaDeletada;
 
       res.json(contaDeletada);
     } catch (erro) {
+      res.json(erro);
       console.log(erro);
     }
   },

@@ -1,82 +1,47 @@
 <template>
   <section class="grid grid-cols-3 grid-flow-row gap-1">
-    <!-- w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-1/4 -->
-    <div
-      class="painel w-full"
-      v-for="categoria in categoriaContas"
-      :key="categoria.id"
-    >
+    <div class="painel w-full" v-for="categoria in categoriaContas" :key="categoria.id">
       <div :class="categoria.cor + ' painel-header text-center p-1 rounded-lg'">
         <p class="painel-title">{{ categoria.nome }}</p>
-        <!-- <button type="button" class="togle" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>-->
       </div>
       <div class="painel-body p-1 mb-auto">
-        <div
-          class="flex flex-wrap text-center mt-1 cursor-pointer hover:bg-gray-900 text-gray-100"
-          v-for="contas in categoria.contas_a_pagars"
-          :key="contas.id"
-        >
+        <div class="flex flex-wrap text-center mt-1 cursor-pointer hover:bg-gray-900 text-gray-100"
+          v-for="contas in categoria.contas_a_pagars" :key="contas.id">
           <div class="w-1/4">
-            <div
-              class="relative inline-block w-8 mr-2 align-middle select-none transition duration-200 ease-in"
-            >
-              <span v-if="contas.contas_pagas && contas.contas_pagas.id">
-                <input
-                  type="checkbox"
-                  name="toggle"
-                  :id="contas.id"
-                  checked
-                  class="toggle-checkbox absolute block w-4 h-4 rounded-full border-4 appearance-none cursor-pointer outline-none"
-                />
-
-                <label
-                  for="toggle"
-                  class="toggle-label block overflow-hidden h-4 rounded-full bg-red-800 cursor-pointer"
-                ></label>
-              </span>
-              <span v-else>
-                <input
-                  type="checkbox"
-                  name="toggle"
-                  :id="contas.id"
-                  class="toggle-checkbox absolute block w-4 h-4 rounded-full border-4 appearance-none cursor-pointer outline-none"
-                />
-
-                <label
-                  for="toggle"
-                  class="toggle-label block overflow-hidden h-4 rounded-full bg-red-800 cursor-pointer"
-                ></label>
-              </span>
+            <div class="relative" v-if="contas.contas_pagas && contas.contas_pagas.id">
+              <label for="checked" class="cursor-pointer" @click="deleteBillPayment({
+                    contas_a_pagar_id: contas.id, data_pagamento: dataSelecionada})">
+                <span>
+                  <span class="block w-10 h-6 bg-blue-800 rounded-full shadow-inner"></span>
+                  <span
+                    class="absolute block w-4 h-4 mt-1 ml-1 rounded-full shadow inset-y-0 left-0 focus-within:shadow-outline transition-transform duration-300 ease-in-out bg-blue-300 transform translate-x-full">
+                  </span>
+                </span>
+              </label>
             </div>
-            <!-- <input
-                class="mr-2 leading-tight"
-                type="checkbox"
-                :id="contas.id"
-              /> -->
+            <div class="relative" v-else>
+              <label for="unchecked" class="cursor-pointer" @click="makeBillPayment({
+                    contas_a_pagar_id: contas.id, data_pagamento: dataSelecionada})">
+                <span>
+                  <span class="block w-10 h-6 bg-red-800 rounded-full shadow-inner"></span>
+                  <span
+                    class="absolute block w-4 h-4 mt-1 ml-1  rounded-full shadow inset-y-0 left-0 focus-within:shadow-outline transition-transform duration-300 ease-in-out  bg-red-300">
+                  </span>
+                </span>
+              </label>
+            </div>
           </div>
-          <div
-            class="w-2/4 pointer"
-            @click="editarContaAPagar(contas.id)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
+          <div class="w-2/4 pointer" @click="editarContaAPagar(contas.id)" data-toggle="modal"
+            data-target="#exampleModal">
             {{ contas.favorecido }}
           </div>
-          <div
-            class="w-1/4"
-            v-if="contas.valores_contas_a_pagars"
-            @click="editarContaAPagar(contas.id)"
-          >
+          <div class="w-1/4" v-if="contas.valores_contas_a_pagars" @click="editarContaAPagar(contas.id)">
             {{ contas.valores_contas_a_pagars.valor | money }}
           </div>
           <div v-else class="w-1/4">0</div>
         </div>
       </div>
-      <div
-        class="painel-footer flex text-center justify-between border-t mt-1 p-2 text-gray-300 pt-auto"
-      >
+      <div class="painel-footer flex text-center justify-between border-t mt-1 p-2 text-gray-300 pt-auto">
         <div class="w-1/3">Total</div>
         <div class="w-1/3">{{ categoria.totalCategoria | money }}</div>
       </div>
@@ -105,6 +70,16 @@
       }),
     },
     methods: {
+      makeBillPayment(data) {
+        this.ActionStoreFinancialBillPayment(data).then(
+          this.getCategoriaContasVuex()
+        );
+      },
+      deleteBillPayment(data) {
+        this.ActionDeleteFinancialBillPayment(data).then(
+          this.getCategoriaContasVuex()
+        );
+      },
       editarContaAPagar(id) {
         const dataEdit = {
           id: id,
@@ -113,10 +88,15 @@
         this.ActionEditFinancial(dataEdit).then((result) => {
           // this.$router.push({ name: "financeiroeditarconta" });
 
-          this.$router.push("/financeiro/editarconta").catch((err) => {});
+          this.$router.push("/financeiro/editarconta").catch((err) => { });
         });
       },
-      ...mapActions(["ActionGetFinancial", "ActionEditFinancial"]),
+      ...mapActions([
+        "ActionGetFinancial",
+        "ActionEditFinancial",
+        "ActionStoreFinancialBillPayment",
+        "ActionDeleteFinancialBillPayment"
+      ]),
       getCategoriaContasVuex() {
         if (this.dataSelecionada) {
           this.ActionGetFinancial(this.dataSelecionada);
@@ -157,37 +137,6 @@
 </script>
 
 <style>
-  /* .custom-switch {
-  padding-left: 0px;
-}
-.custom-control-label {
-  float: right;
-  margin-right: -22px;
-}
-.custom-control-input {
-  position: fixed;
-  z-index: 0;
-  opacity: 0;
-  display: none;
-}
-
-.pointer {
-  cursor: pointer;
-} */
-  /* .card-body {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding: 0.25rem;
-}
-
-.card {
-  margin-top: 15px;
-}
-
-.card-header {
-  padding: 0.25rem 1.25rem;
-} */
-
   .categoria-essenciais {
     background-color: #0971b2;
     color: white;
@@ -257,16 +206,4 @@
     font-weight: bold;
     font-size: 14px;
   }
-
-  /* .table {
-  margin-bottom: 0rem;
-}
-
-body {
-  font-size: 0.7rem;
-}
-.table td,
-.table th {
-  padding: 0.2rem;
-} */
 </style>
