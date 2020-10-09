@@ -12,7 +12,7 @@ class ContasPagas extends Modal {
     let Pagas = await this.knex("contas_pagas")
       .whereRaw(queryRaw)
       .andWhere("contas_a_pagar_id", id)
-      .orderBy("id", "desc")
+      // .orderBy("id", "asc")
       .first()
       .then(function (result) {
         return result;

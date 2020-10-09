@@ -16,7 +16,7 @@
                   <label for="checked" class="cursor-pointer" @click="
                                                                             deleteBillPayment({
                                                                               contas_a_pagar_id: contas.id,
-                                                                              data_pagamento: dataSelecionada,
+                                                                              data_pagamento: contas.contas_pagas.data_pagamento,
                                                                             })
                                                                           ">
                     <span>

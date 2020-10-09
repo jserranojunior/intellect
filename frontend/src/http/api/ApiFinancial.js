@@ -108,6 +108,7 @@ export default class ApiFinancial {
   }
 
   deleteContaPaga(data) {
+    console.log(data);
     return new Promise(async (resolve, reject) => {
       const link = `http://backintellect.localhost/financial/contapaga/${data.contas_a_pagar_id}/${data.data_pagamento}`;
       return axios
