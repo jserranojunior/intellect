@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-wrap">
-      <div class="w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-2/4 p-1">
+      <div class="w-full sm:w-full md:w-full lg:w-2/4 xl:w-2/4 p-1">
         <div class="painel mt-1 shadow-md text-white">
           <div
             class="painel-header text-center p-1 rounded-lg text-white bg-red-500"
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="w-full sm:w-full md:w-2/4 lg:w-2/4 xl:w-2/4 p-1">
+      <div class="w-full sm:w-full md:w-full lg:w-2/4 xl:w-2/4 p-1">
         <div class="painel mt-1 shadow-md text-white">
           <div
             class="painel-header text-center p-1 rounded-lg text-white bg-green-500"
@@ -60,27 +60,26 @@
 </template>
 
 <script>
-/* eslint-disable */
-import { mapState } from "vuex";
-export default {
-  name: "FeedbackFinanceiro",
-  computed: {
-    ...mapState({
-      totalCategoriaContasVuex: (state) =>
-        state.Financeiro.categoriaContas.totalCategorias,
-    }),
-  },
-  filters: {
-    money: function (value) {
-      // console.log(value)
-      if (!value) {
-        return "0,00";
-      } else {
-        let val = (value / 1).toFixed(2).replace(".", ",");
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
+  /* eslint-disable */
+  import { mapState } from "vuex";
+  export default {
+    name: "FeedbackFinanceiro",
+    computed: {
+      ...mapState({
+        totalCategoriaContasVuex: (state) =>
+          state.Financeiro.categoriaContas.totalCategorias,
+      }),
     },
-  },
-};
+    filters: {
+      money: function (value) {
+        // console.log(value)
+        if (!value) {
+          return "0,00";
+        } else {
+          let val = (value / 1).toFixed(2).replace(".", ",");
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+      },
+    },
+  };
 </script>
-
