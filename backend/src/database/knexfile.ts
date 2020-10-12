@@ -13,5 +13,6 @@ let connection = {
     directory: "./migrations",
     tableName: "migrations",
   },
+   timezone: 'UTC'
 };
 export default connection;

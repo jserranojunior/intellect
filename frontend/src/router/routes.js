@@ -1,4 +1,3 @@
-
 const routes = [
   {
     path: "/",
@@ -9,23 +8,28 @@ const routes = [
         path: "financeiro",
         name: "financeiro",
         component: () =>
-          import("../modules/financeiro/pages/FinanceiroIndex.vue")
+          import("../modules/financeiro/pages/FinanceiroIndex.vue"),
       },
       {
         path: "financeiro/adicionarconta",
         component: () =>
           import("../modules/financeiro/pages/AdicionarConta.vue"),
-        name: "financeiroadicionarconta"
+        name: "financeiroadicionarconta",
       },
       {
         path: "financeiro/editarconta",
         component: () => import("../modules/financeiro/pages/EditarConta.vue"),
-        name: "financeiroeditarconta"
+        name: "financeiroeditarconta",
       },
       {
-        path: "",
+        path: "/",
         component: () => import("../modules/auth/pages/Login.vue"),
-        name: "login"
+        name: "login",
+      },
+      {
+        path: "/cadastro",
+        component: () => import("../modules/auth/pages/register/Register.vue"),
+        name: "cadastro",
       },
       // {
       //   path: "",
@@ -34,14 +38,14 @@ const routes = [
       {
         path: "/aniversariosmensais",
         component: () =>
-          import("../modules/aniversarios/pages/AniversariosMensais")
-      }
-    ]
+          import("../modules/aniversarios/pages/AniversariosMensais"),
+      },
+    ],
   },
   {
     path: "*",
-    component: () => import("pages/Error404.vue")
-  }
+    component: () => import("pages/Error404.vue"),
+  },
 ];
 export default routes;
 

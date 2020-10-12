@@ -1,10 +1,9 @@
 /* eslint-disable */
 export default {
-    AUTHENTICATE(state, data) {
-        state.token = data
-    },
-    USER(state, data) {
-        state.user = data
-    }
-
-}
+  SET_ERRO(state, data) {
+    state.erro = data;
+  },
+  SET_TOKEN(state, data) {
+    state.token = data;
+  },
+};

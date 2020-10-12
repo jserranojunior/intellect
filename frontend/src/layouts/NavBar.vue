@@ -38,27 +38,40 @@
             { flex: open, hidden: !open }
           "
         >
-          <a
-            class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 focus:text-white hover:text-white text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-            href="#"
-            >Home</a
-          >
           <router-link
+            v-if="!auth.token"
             :to="{ name: 'login' }"
-            class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg bg-transparent hover:bg-gray-600 focus:bg-gray-600 focus:text-white hover:text-white text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+            class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
             href="#"
-            >Login</router-link
-          >
+            >Login
+          </router-link>
           <router-link
-            :to="{ name: 'financeiro' }"
-            class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg bg-transparent hover:bg-gray-600 focus:bg-gray-600 focus:text-white hover:text-white text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+            v-if="!auth.token"
+            :to="{ name: 'cadastro' }"
+            class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
             href="#"
-            >Financeiro</router-link
+            >Cadastro
+          </router-link>
+          <router-link
+            v-if="auth.token"
+            :to="{ name: 'financeiro' }"
+            class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            href="#"
+          >
+            Financeiro</router-link
           >
           <a
-            class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg bg-transparent hover:bg-gray-600 focus:bg-gray-600 focus:text-white hover:text-white text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+            v-if="auth.token"
+            class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
             href="#"
             >Adicionar Conta
+          </a>
+          <a
+            v-if="auth.token"
+            @click="logout()"
+            class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            href="#"
+            >Sair
           </a>
         </nav>
       </div>
@@ -67,11 +80,25 @@
 </template>
 
 <script>
+  import { mapActions, mapState } from "vuex";
   export default {
     data() {
       return {
         open: false,
       };
+    },
+    computed: {
+      ...mapState({
+        auth: (state) => state.Auth,
+      }),
+    },
+    methods: {
+      ...mapActions(["ActionLogout"]),
+      logout() {
+        this.ActionLogout().then(() => {
+          this.$router.push("/");
+        });
+      },
     },
     beforeMount() {},
   };

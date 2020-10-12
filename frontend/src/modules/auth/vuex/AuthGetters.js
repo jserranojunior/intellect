@@ -1,6 +1,5 @@
 /* eslint-disable */
 export const hasToken = () => {
-    const token = localStorage.getItem('token')
-
-    return token
-}
+  const token = localStorage.getItem("token");
+  return token;
+};

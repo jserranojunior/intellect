@@ -29,22 +29,22 @@
 </template>
 
 <script>
-/* eslint-disable */
+  /* eslint-disable */
 
-import AddEditContas from "../components/AddEditContas";
-import CategoriaContasAPagar from "../components/CategoriaContasAPagar";
-import FeedbackFinanceiro from "../components/FeedbackFinanceiro";
-import Calendario from "../components/calendario/Calendario";
-export default {
-  name: "FinanceiroIndex",
-  data() {
-    return {};
-  },
-  components: {
-    CategoriaContasAPagar,
-    AddEditContas,
-    FeedbackFinanceiro,
-    Calendario,
-  },
-};
+  import AddEditContas from "../components/AddEditContas";
+  import CategoriaContasAPagar from "../components/CategoriaContasAPagar";
+  import FeedbackFinanceiro from "../components/FeedbackFinanceiro";
+  import Calendario from "../components/calendario/Calendario";
+  export default {
+    name: "FinanceiroIndex",
+    data() {
+      return {};
+    },
+    components: {
+      CategoriaContasAPagar,
+      AddEditContas,
+      FeedbackFinanceiro,
+      Calendario,
+    },
+  };
 </script>

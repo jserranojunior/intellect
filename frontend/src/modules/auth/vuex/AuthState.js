@@ -1,5 +1,6 @@
 /* eslint-disable */
 export default {
-        token: '',
-        user: {},
-}
+  user: {},
+  token: false,
+  erro: false,
+};

@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { resolve } from "path";
 import bodyParser from "body-parser";
 import cors from "cors";
+
+
 dotenv.config();
 let pathEnv: string;
 switch (process.env.NODE_ENV) {
