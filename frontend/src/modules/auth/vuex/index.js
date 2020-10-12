@@ -5,6 +5,7 @@ import * as actions from "./AuthActions";
 import * as getters from "./AuthGetters";
 
 export default {
+  namespaced: true,
   state,
   actions,
   getters,

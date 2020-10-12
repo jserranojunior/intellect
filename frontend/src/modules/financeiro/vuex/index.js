@@ -6,5 +6,5 @@ import * as actions from "./FinanceiroActions";
 export default {
   state,
   actions,
-  mutations
+  mutations,
 };

@@ -6,23 +6,32 @@
           <div class="p-6 max-w-sm w-full bg-gray-800 shadow rounded-md">
             <h3 class="text-white text-xl text-center">Cadastro</h3>
             <span>
-              <!-- <div
+              <div
                 v-if="auth.erro"
                 class="my-1 block text-sm text-left text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 flex items-center p-2 rounded-sm"
                 role="alert"
               >
                 {{ auth.erro }}
-              </div> -->
-              <!-- <div
+              </div>
+              <div
                 v-if="auth.token"
                 class="my-1 block text-sm text-left text-gray-300 text-center bg-green-800 border border-green-900 h-8 flex items-center p-2 rounded-sm"
                 role="alert"
               >
-                Logado com sucesso!
-              </div> -->
+                Cadastrado com sucesso!
+              </div>
             </span>
             <div class="mt-2">
               <label class="block">
+                <input
+                  type="name"
+                  id="name"
+                  class="focus:outline-none focus:shadow-outline border border-gray-800 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-gray-200 focus:bg-gray-800 bg-gray-900"
+                  placeholder="Nome"
+                  v-model="fields.name"
+                />
+              </label>
+              <label class="block mt-2">
                 <input
                   type="email"
                   id="email"
@@ -45,6 +54,7 @@
                   <button
                     id="login"
                     class="w-full py-2 px-4 text-center bg-blue-800 rounded-md text-white text-sm hover:bg-blue-800 focus:outline-none"
+                    @click="register()"
                   >
                     Cadastrar
                   </button>
@@ -59,6 +69,7 @@
 </template>
 
 <script>
+  import { mapActions, mapState } from "vuex";
   export default {
     name: "Register",
     data() {
@@ -66,7 +77,20 @@
         fields: {},
       };
     },
+    computed: {
+      ...mapState({
+        auth: (state) => state.Auth,
+      }),
+    },
+    methods: {
+      ...mapActions("Users", ["ActionUsersStore"]),
+      register() {
+        this.ActionUsersStore(this.fields).then((res) => {
+          if (res.data.auth) {
+            this.$router.push("financeiro");
+          }
+        });
+      },
+    },
   };
 </script>
-
-<style></style>

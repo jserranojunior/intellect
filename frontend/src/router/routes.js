@@ -28,7 +28,7 @@ const routes = [
       },
       {
         path: "/cadastro",
-        component: () => import("../modules/auth/pages/register/Register.vue"),
+        component: () => import("../modules/users/pages/register/Register.vue"),
         name: "cadastro",
       },
       // {
