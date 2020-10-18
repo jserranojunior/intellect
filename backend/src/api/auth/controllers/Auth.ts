@@ -1,41 +1,51 @@
 
 import { Request, Response } from "express";
-import UsersModal from "../../users/modals/Users";
+
 import {IMsgs, authPtBr} from "../lang/authPtBr"
 import TokenHelpers from "../../../helpers/TokenHelpers"
+import UsersModal from "../../users/modals/Users";
 
-//Declared with any for injection empty
-interface IInjection { tokenHelpers?: any, usersModal?: any, msgs?: any }
+interface IInjection {
+  tokenHelpers?: any, usersModal?: any, msgs?: any 
+}
 
 class Auth{
   token: TokenHelpers;
   users: UsersModal;
   msgs: IMsgs;
+  req: any;
+  res: any;
+ 
 
 
-  constructor(injection:IInjection){
+
+  constructor(req: Request, res: Response, injection:IInjection){
     injection.tokenHelpers ? this.token = injection.tokenHelpers : this.token = new TokenHelpers();
-    injection.usersModal ? this.users = injection.usersModal : this.users = new UsersModal();
+    injection.usersModal ? this.users = new injection.usersModal() : this.users = new UsersModal();
+
     injection.msgs ? this.msgs = injection.msgs :  this.msgs = authPtBr;
+        this.req = req;
+        this.res = res;
+        
   }
-    async verifyUser(req:Request){
+    async verifyUser(){
       const userId:Number = await this.users.getUserId(
-      req.body
+      this.req.body
     );
     if(userId){
       return userId
     }
     }
-    async login(req: Request, res: Response) {
-    if(!req.body.email || !req.body.password){
-      res.status(401).send({erro: this.msgs.erro.empty})
+    async login() {
+    if(!this.req.body.email || !this.req.body.password){  
+      return this.res.status(401).send({erro: this.msgs.erro.empty})
     }else{
-      const userId = await this.verifyUser(req)    
+      const userId = await this.verifyUser()    
       if (userId > 0) {
         const userToken = this.token.generateToken(userId)
-        res.json({ auth: true, token: userToken} )
+        return this.res.json({ auth: true, token: userToken})
       }else{ 
-         res.status(401).send({erro: this.msgs.erro.invalid});
+        return  this.res.status(401).send({erro: this.msgs.erro.invalid});
       }  
     }    
   }
