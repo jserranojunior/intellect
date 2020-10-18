@@ -9,25 +9,29 @@ class ContasAPagar extends Modal {
     if (!(this instanceof ContasAPagar)) return new ContasAPagar();
   }
 
-  async getContasWithIdCategoria(id, params) {
+  async getContasWithIdCategoria(id, params) {  
     let Valores = new ValoresContasAPagar();
     let Pagas = new ContasPagas();
     const anoMesSelecionado = params.dataselecionada.substring(0, 7);
 
     return await this.knex("contas_a_pagars")
       .where("categorias_contas_a_pagar_id", id)
+      .where("user_id", params.userId)
       .whereRaw(
         `SUBSTRING(inicio_data_pagamento,1,7) <= "${anoMesSelecionado}"`
       )
       .whereRaw(`SUBSTRING(fim_data_pagamento,1,7) >= "${anoMesSelecionado}"`)
 
       .orWhere("categorias_contas_a_pagar_id", id)
+            .where("user_id", params.userId)
+
       .whereRaw(
         `SUBSTRING(inicio_data_pagamento,1,7) <= "${anoMesSelecionado}"`
       )
       .whereNull("fim_data_pagamento")
 
       .orWhere("categorias_contas_a_pagar_id", id)
+            .where("user_id", params.userId)
       .whereRaw(
         `SUBSTRING(inicio_data_pagamento,1,7) <= "${anoMesSelecionado}"`
       )
@@ -84,25 +88,34 @@ class ContasAPagar extends Modal {
       });
   }
   async storeContasAPagar(body) {
-    const dataInsert = {
-      user_id: body.user_id,
-      favorecido: body.favorecido,
-      categorias_contas_a_pagar_id: body.categorias_contas_a_pagar_id,
-      inicio_data_pagamento: body.inicio_data_pagamento,
-      fim_data_pagamento: body.fim_data_pagamento,
-      descricao: body.descricao,
-      forma_pagamento: body.forma_pagamento,
-      tipo_conta: body.tipo_conta,
-      parcelas: body.parcelas,
-    };
 
-    const newInsert = await this.knex("contas_a_pagars").insert(dataInsert);
-    let data = Promise.all(newInsert);
+        const dataInsert: any = {};
+
+    body.userId ? (dataInsert.user_id = body.userId) : "";
+    body.favorecido ? (dataInsert.favorecido = body.favorecido) : "";
+    body.categorias_contas_a_pagar_id ? (dataInsert.categorias_contas_a_pagar_id = body.categorias_contas_a_pagar_id) : "";
+    body.inicio_data_pagamento ? (dataInsert.inicio_data_pagamento = body.inicio_data_pagamento) : "";
+    body.fim_data_pagamento ? (dataInsert.fim_data_pagamento = body.fim_data_pagamento) : "";
+    body.descricao ? (dataInsert.descricao = body.descricao) : "";
+    body.forma_pagamento ? (dataInsert.forma_pagamento = body.forma_pagamento) : "";
+    body.tipo_conta ? (dataInsert.tipo_conta = body.tipo_conta) : "";
+    body.parcelas ? (dataInsert.parcelas = body.parcelas) : "";
+
+    const newInsert = await this.knex("contas_a_pagars").insert(dataInsert).then(res => {
+      return res
+    }).catch(err => {
+      console.log(err)
+    }); 
+    let data = Promise.all(newInsert).then(res =>{
+      return res
+    }).catch(err => {
+      console.log(err)
+    });
     return data;
   }
   async updateContasAPagar(id, body) {
     const dataUpdate: any = {};
-    body.user_id ? (dataUpdate.user_id = body.user_id) : "";
+    body.userId ? (dataUpdate.user_id = body.userId) : "";
     body.favorecido ? (dataUpdate.favorecido = body.favorecido) : "";
     body.categorias_contas_a_pagar_id
       ? (dataUpdate.categorias_contas_a_pagar_id =

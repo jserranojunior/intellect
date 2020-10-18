@@ -178,7 +178,6 @@
       },
       setFields() {
         if (this.mode === "add") {
-          this.fields.user_id = 1;
           this.fields.inicio_data_pagamento = this.dataAtual;
           this.fields.fim_data_pagamento = this.dataAtual;
           this.fields.forma_pagamento = "Cartão";
@@ -189,10 +188,7 @@
             this.fields.id = this.editarContaAPagar[0].id;
             this.fields.favorecido = this.editarContaAPagar[0].favorecido;
             this.fields.descricao = this.editarContaAPagar[0].descricao;
-
-            this.fields.user_id = this.editarContaAPagar[0].user_id;
             this.fields.inicio_data_pagamento = this.editarContaAPagar[0].inicio_data_pagamento;
-
             this.fields.forma_pagamento = this.editarContaAPagar[0].forma_pagamento;
             this.fields.tipo_conta = this.editarContaAPagar[0].tipo_conta;
             this.fields.categorias_contas_a_pagar_id = this.editarContaAPagar[0].categorias_contas_a_pagar_id;

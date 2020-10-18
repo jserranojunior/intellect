@@ -4,6 +4,7 @@ export default {
     state.erro = data;
   },
   SET_TOKEN(state, data) {
+    localStorage.setItem("token", data.token);
     state.token = data;
   },
 };

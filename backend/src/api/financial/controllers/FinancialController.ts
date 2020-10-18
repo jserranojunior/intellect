@@ -16,6 +16,8 @@ export default {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET");
 
+    req.params.userId = req.body.userId
+
     let categorias = await CategoriasContas.getCategoriasContasValores(
       req.params
     );
@@ -26,7 +28,6 @@ export default {
   async store(req: Request, res: Response) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "POST");
-
     if (req.body.inicio_data_pagamento.includes("/")) {
       req.body.inicio_data_pagamento = req.body.inicio_data_pagamento
         .split("/")

@@ -1,44 +1,51 @@
-import UsersModal from "../../users/modals/Users";
-import jwt from "jsonwebtoken";
+
 import { Request, Response } from "express";
+import UsersModal from "../../users/modals/Users";
+import {IMsgs, authPtBr} from "../lang/authPtBr"
+import TokenHelpers from "../../../helpers/TokenHelpers"
 
-let Users = new UsersModal();
+//Declared with any for injection empty
+interface IInjection { tokenHelpers?: any, usersModal?: any, msgs?: any }
 
-async function verifyUser(req: Request){
-  return await Users.getUserId(
+class Auth{
+  token: TokenHelpers;
+  users: UsersModal;
+  msgs: IMsgs;
+
+
+  constructor(injection:IInjection){
+    injection.tokenHelpers ? this.token = injection.tokenHelpers : this.token = new TokenHelpers();
+    injection.usersModal ? this.users = injection.usersModal : this.users = new UsersModal();
+    injection.msgs ? this.msgs = injection.msgs :  this.msgs = authPtBr;
+  }
+    async verifyUser(req:Request){
+      const userId:Number = await this.users.getUserId(
       req.body
     );
+    if(userId){
+      return userId
+    }
+    }
+    async login(req: Request, res: Response) {
+    if(!req.body.email || !req.body.password){
+      res.status(401).send({erro: this.msgs.erro.empty})
+    }else{
+      const userId = await this.verifyUser(req)    
+      if (userId > 0) {
+        const userToken = this.token.generateToken(userId)
+        res.json({ auth: true, token: userToken} )
+      }else{ 
+         res.status(401).send({erro: this.msgs.erro.invalid});
+      }  
+    }    
   }
-
-export default {
-   async login(req: Request, res: Response) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "POST"); 
-
-    if(!req.body.email){
-      res.status(401).send({erro: 'Email invalido!'})
-    }
-    if(!req.body.password){
-      res.status(401).send({erro: 'Senha invalida!'})
-    }   
-    const userId = await verifyUser(req)
-    if(!userId){
-      res.status(401).send({erro: 'Email ou senhas invalidas'})
-    }
-      if (userId > 0) {        
-        var token = jwt.sign({ id:userId }, "secret", {
-          expiresIn: '365d',
-        });
-        res.json({ auth: true, token: token } )
-    }else{ 
-        res.status(401).send({ erro: "Login invalido!" });
-    }  
-  },
-  async logout(req: Request, res: Response) {
+    async logout(req: Request, res: Response) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Methods", "GET");
     res.json({ auth: false, token: null });
-  },
+  }
   async verify(req: Request, res: Response) {
     res.json('Auth okaiiu ' + req.body.userId);
-  },
-};
-
+  }
+  }
+  export default Auth

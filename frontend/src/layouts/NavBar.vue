@@ -93,13 +93,15 @@
       }),
     },
     methods: {
-      ...mapActions(["ActionLogout"]),
+      ...mapActions("Auth", ["ActionLogout"]),
       logout() {
         this.ActionLogout().then(() => {
           this.$router.push("/");
         });
       },
     },
-    beforeMount() {},
+    beforeMount() {
+      console.log(this.auth.token);
+    },
   };
 </script>

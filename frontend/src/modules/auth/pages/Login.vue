@@ -116,7 +116,7 @@
       }),
     },
     methods: {
-      ...mapActions(Auth, ["ActionLogin"]),
+      ...mapActions("Auth", ["ActionLogin"]),
       login() {
         this.ActionLogin(this.fields).then((res) => {
           if (res.data.auth) {

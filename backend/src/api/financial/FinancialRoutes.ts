@@ -7,15 +7,15 @@ export default class FinancialRoutes extends RouterClass{
     }
     routes(){
      return [
-        this.app.get("/financial/:dataselecionada", financial.get),
-        this.app.post("/financial/billstopay", financial.store),
+        this.app.get("/financial/:dataselecionada", this.middlewares.auth, financial.get),
+        this.app.post("/financial/billstopay",  this.middlewares.auth, financial.store),
         this.app.post("/financial/contapaga", financial.storeContasPagas),
         this.app.delete(
           "/financial/contapaga/:contas_a_pagar_id/:data_pagamento",
           financial.deleteContasPagas
         ),
         this.app.get("/financial/billstopay/:id/:dataselecionada", financial.edit),
-        this.app.put("/financial/billstopay/:id/:dataselecionada", financial.update),
+        this.app.put("/financial/billstopay/:id/:dataselecionada", this.middlewares.auth, financial.update),
         ]
       }
 }

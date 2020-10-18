@@ -5,7 +5,7 @@ export const ActionLogin = ({ commit }, data) => {
   return Auth.login(data)
     .then((res) => {
       commit("SET_ERRO", "");
-      commit("SET_TOKEN", res.data.auth);
+      commit("SET_TOKEN", res.data);
       return res;
     })
     .catch((erro) => {
@@ -17,7 +17,7 @@ export const ActionLogin = ({ commit }, data) => {
 
 export const ActionLogout = ({ commit }, data) => {
   return Auth.logout().then(() => {
-    commit("SET_ERRO", false);
-    commit("SET_TOKEN", false);
+    commit("SET_ERRO", "");
+    commit("SET_TOKEN", "");
   });
 };

@@ -2,10 +2,12 @@ import axios from "axios";
 
 export default class ApiFinancial {
   get(dataSelecionada) {
+    const token = localStorage.getItem("token");
     return new Promise(async (resolve, reject) => {
       const options = {
         baseURL: "http://backintellect.localhost",
         timeout: 1000,
+        headers: { Authorization: `Bearer ${token}` },
       };
       const link = `/financial/${dataSelecionada}`;
       return axios
@@ -22,10 +24,12 @@ export default class ApiFinancial {
   }
 
   store(data) {
+    const token = localStorage.getItem("token");
     return new Promise(async (resolve, reject) => {
       const options = {
         baseURL: "http://backintellect.localhost",
         timeout: 1000,
+        headers: { Authorization: `Bearer ${token}` },
       };
       const link = "/financial/billstopay";
       return axios
@@ -45,9 +49,11 @@ export default class ApiFinancial {
   }
 
   update(data) {
+    const token = localStorage.getItem("token");
     return new Promise(async (resolve, reject) => {
       const options = {
         baseURL: "http://backintellect.localhost",
+        headers: { Authorization: `Bearer ${token}` },
       };
       const link = `/financial/billstopay/${data.id}/${data.data_pagamento}`;
       return axios

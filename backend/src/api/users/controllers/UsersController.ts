@@ -49,12 +49,7 @@ export default {
 
       }
     });
-
     res.json(user)
-
-    
-
-
   },
 
 };
