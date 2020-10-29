@@ -100,8 +100,5 @@
         });
       },
     },
-    beforeMount() {
-      console.log(this.auth.token);
-    },
   };
 </script>

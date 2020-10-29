@@ -1,3 +1,6 @@
+import VueRouterMultiguard from "vue-router-multiguard";
+import middlewares from "./middlewares/middlewares";
+
 const routes = [
   {
     path: "/",
@@ -9,6 +12,7 @@ const routes = [
         name: "financeiro",
         component: () =>
           import("../modules/financeiro/pages/FinanceiroIndex.vue"),
+        beforeEnter: VueRouterMultiguard([middlewares.auth]),
       },
       {
         path: "financeiro/adicionarconta",
@@ -24,6 +28,7 @@ const routes = [
       {
         path: "/",
         component: () => import("../modules/auth/pages/Login.vue"),
+        beforeEnter: VueRouterMultiguard([middlewares.auth]),
         name: "login",
       },
       {
@@ -48,21 +53,3 @@ const routes = [
   },
 ];
 export default routes;
-
-// const routes = [
-//   {
-//     path: "/",
-//     name: "home",
-//     component: Home,
-//   },
-//   {
-//     path: "/editor",
-//     name: "editor",
-//     component: Editor,
-//   },
-//   {
-//     path: "/financeiro/editarcontaapagar",
-//     name: "editarcontaapagar",
-//     component: AdicionarConta,
-//   },
-// ];

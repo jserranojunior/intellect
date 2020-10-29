@@ -14,7 +14,6 @@ export const ActionStoreFinancial = ({ commit }, data) => {
 };
 
 export const ActionUpdateFinancial = ({ commit }, data) => {
-  console.log("vuex " + data.id);
   return Financial.update(data);
 };
 

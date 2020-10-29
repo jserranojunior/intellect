@@ -20,31 +20,29 @@ class ValoresContasAPagar extends Modal {
     return data;
   }
 
-  async updateValoresContasAPagar(id, body) {
-    try {
+  async updateValoresContasAPagar(id:string, body:any) {
+  
       const dataUpdate: any = {};
-      body.data_pagamento
-        ? (dataUpdate.data_pagamento = body.data_pagamento)
-        : "";
-      body.valor ? (dataUpdate.valor = body.valor) : "";
+      dataUpdate.data_pagamento = body.data_pagamento 
+      dataUpdate.contas_a_pagar_id = id      
+      body.valor ? (dataUpdate.valor = body.valor) : 0;
+
+
       const anoMesSelecionado = dataUpdate.data_pagamento.substring(0, 7);
 
       await this.knex("valores_contas_a_pagars")
         .where({ contas_a_pagar_id: id })
         .whereRaw(`SUBSTRING(data_pagamento,1,7) = "${anoMesSelecionado}"`)
         .update(dataUpdate)
-        .then((result) => {
-          console.log(result);
-          return result;
-        })
-        .catch((erro) => {
-          console.log(Error(erro));
-          return erro;
-        });
-    } catch (erro) {
-      console.log(Error(erro));
-      return erro;
-    }
+              .then((result) => {
+        console.log(result);
+        return result;
+      })
+      .catch((erro) => {
+        console.log(Error(erro));
+        return erro;
+      });
+   
   }
 
   async getCountIdValorContaAPagarWithIdContas(

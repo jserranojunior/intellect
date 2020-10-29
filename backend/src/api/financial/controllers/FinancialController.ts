@@ -3,6 +3,7 @@ import Contas from "../modals/ContasAPagar";
 import Valores from "../modals/ValoresContasAPagar";
 import Pagas from "../modals/ContasPagas";
 import { Request, Response } from "express";
+import { promises } from "fs";
 
 const ContasPagas = new Pagas();
 const ContasAPagar = new Contas();
@@ -63,6 +64,8 @@ export default {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "PUT");
 
+    
+
     if (req.body.inicio_data_pagamento) {
       if (req.body.inicio_data_pagamento.includes("/")) {
         req.body.inicio_data_pagamento = req.body.inicio_data_pagamento
@@ -95,30 +98,47 @@ export default {
         res.json(erro);
       });
 
-    let verifyExistValueBillsToPay = await ValoresContasAPagar.getCountIdValorContaAPagarWithIdContas(
+    let Valor:any;
+
+   async function verifyExistValueBillsToPay(){
+     await ValoresContasAPagar.getCountIdValorContaAPagarWithIdContas(
       req.params.id,
       req.params.dataselecionada
-    );
-
-    let Valor = {};
-    if (verifyExistValueBillsToPay) {
-      Valor = await ValoresContasAPagar.updateValoresContasAPagar(
-        req.params.id,
-        req.body
-      );
-    } else {
-      Valor = await ValoresContasAPagar.storeValoresContasAPagar(
-        req.params.id,
-        req.body
-      ).then(() => {
-        return true;
-      });
+    ).then(result => {     
+      if (result > 0) {      
+        Update()
+    } else {     
+      Store
     }
-    if (Contas && Valor) {
+    });
+   }
+
+async function Update(){
+  return await ValoresContasAPagar.updateValoresContasAPagar(
+        req.params.id,
+        req.body
+      )
+}
+    async function Store(){
+      return await ValoresContasAPagar.storeValoresContasAPagar(
+        req.params.id,
+        req.body
+      )
+    }
+
+    
+
+    
+
+verifyExistValueBillsToPay().then(() => {
+   if (Contas) {
       res.json(true);
     } else {
-      res.json(false);
+      res.status(500).send(false);
     }
+})
+
+
   },
 
   async edit(req: Request, res: Response) {

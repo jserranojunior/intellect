@@ -5,16 +5,16 @@
         <div class="flex items-center justify-center mt-16">
           <div class="p-6 max-w-sm w-full bg-gray-800 shadow rounded-md">
             <h3 class="text-white text-xl text-center">Login</h3>
-            <span v-if="auth">
+            <span v-if="Auth">
               <div
-                v-if="auth.erro"
+                v-if="Auth.erro"
                 class="my-1 block text-sm text-left text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 flex items-center p-2 rounded-sm"
                 role="alert"
               >
-                {{ auth.erro }}
+                {{ Auth.erro }}
               </div>
               <div
-                v-if="auth.token"
+                v-if="Auth.token"
                 class="my-1 block text-sm text-left text-gray-300 text-center bg-green-800 border border-green-900 h-8 flex items-center p-2 rounded-sm"
                 role="alert"
               >
@@ -101,28 +101,22 @@
         fields: {},
       };
     },
-    beforeMount() {
-      // console.log(VerifyBirthdays.month("2020-09-15"));
-      //  this.fields.email = "jorgeserranojunior@gmail.com"
-      //  this.fields.password = "carro"
-      // if (this.Auth.token > "") {
-      //   this.$router.go("financeiro");
-      // }
-    },
-
     computed: {
-      ...mapState({
-        auth: (state) => state.Auth,
-      }),
+      ...mapState({ Auth: "Auth" }),
     },
     methods: {
       ...mapActions("Auth", ["ActionLogin"]),
       login() {
         this.ActionLogin(this.fields).then((res) => {
           if (res.data.auth) {
-            this.$router.push("financeiro");
+            this.logado();
           }
         });
+      },
+      logado() {
+        if (this.Auth.token && this.Auth.token > "") {
+          this.$router.go("financeiro");
+        }
       },
       validation() {
         if (this.fields.email && this.fields.password) {
@@ -131,16 +125,6 @@
           return false;
         }
       },
-    },
-    watch: {
-      // Auth: {
-      //   handler: function () {
-      //     if (this.Auth.token > "") {
-      //       this.$router.push({ name: "financeiro" });
-      //     }
-      //   },
-      //   deep: true,
-      // },
     },
   };
 </script>

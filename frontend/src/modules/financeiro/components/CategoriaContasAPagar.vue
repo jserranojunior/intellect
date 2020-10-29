@@ -105,7 +105,7 @@
 
 <script>
   /* eslint-disable */
-  import { mapActions, mapState } from "vuex";
+  import { mapActions, mapState, mapGetters } from "vuex";
   export default {
     name: "CategoriaContasAPagar",
     data() {
@@ -162,16 +162,10 @@
       msg: String,
     },
     beforeMount() {
-      if (!this.token || this.token == "") {
-        this.$router.push("/").catch((err) => {});
-      }
       this.getCategoriaContasVuex();
     },
     watch: {
       $route(to, from) {
-        if (!this.token || this.token == "") {
-          this.$router.push("/").catch((err) => {});
-        }
         this.getCategoriaContasVuex();
       },
 

@@ -27,6 +27,7 @@
     "quasar": "^1.0.0",
     "tailwindcss": "^1.6.2",
     "vue-functional-calendar": "^2.8.88",
+    "vue-router-multiguard": "^1.0.3",
     "vue-tailwind-picker": "^1.1.4"
   },
   "devDependencies": {

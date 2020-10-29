@@ -5,7 +5,7 @@ export const ActionLogin = ({ commit }, data) => {
   return Auth.login(data)
     .then((res) => {
       commit("SET_ERRO", "");
-      commit("SET_TOKEN", res.data);
+      commit("SET_TOKEN", res.data.token);
       return res;
     })
     .catch((erro) => {
@@ -20,4 +20,22 @@ export const ActionLogout = ({ commit }, data) => {
     commit("SET_ERRO", "");
     commit("SET_TOKEN", "");
   });
+};
+
+export const ActionAuthenticated = ({ commit }) => {
+  const token = localStorage.getItem("token");
+
+  if (
+    !token ||
+    token == "" ||
+    token == undefined ||
+    token == "undefined" ||
+    token == false
+  ) {
+    commit("SET_ERRO", "");
+    commit("SET_TOKEN", "");
+  } else {
+    commit("SET_ERRO", "");
+    commit("SET_TOKEN", token);
+  }
 };

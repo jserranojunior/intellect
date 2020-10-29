@@ -59,7 +59,8 @@ export default class ApiFinancial {
       return axios
         .put(link, data, options)
         .then((result) => {
-          if (result) {
+          if (result.data) {
+            console.log(result);
             resolve(result);
           } else {
             reject(result);

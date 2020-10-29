@@ -7,7 +7,6 @@ import Users from "../modules/users/vuex";
 import Financeiro from "../modules/financeiro/vuex";
 import Calendario from "../modules/financeiro/components/calendario/vuex";
 
-Vue.use(Vuex);
 export default function () {
   const Store = new Vuex.Store({
     modules: {
@@ -20,3 +19,4 @@ export default function () {
   });
   return Store;
 }
+Vue.use(Vuex);

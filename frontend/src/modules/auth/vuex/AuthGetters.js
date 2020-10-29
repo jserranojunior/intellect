@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const hasToken = () => {
-  const token = localStorage.getItem("token");
-  return token;
+import store from "../../../store/index";
+export const getToken = () => {
+  return "noting";
 };
