@@ -168,7 +168,6 @@
         } else {
           let val = (value / 1).toFixed(2).replace(".", ",");
           val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-          console.log(val);
           return val;
         }
       },
@@ -205,7 +204,6 @@
             this.fields.valor = this.toMoney(
               this.editarContaAPagar[0].valores_contas_a_pagars.valor
             );
-            console.log(this.fields.valor);
 
             // const ContasAPagar = Array.from(this.editarContaAPagar[0]).slice();
             // this.fields = Array.from(ContasAPagar[0]).slice();

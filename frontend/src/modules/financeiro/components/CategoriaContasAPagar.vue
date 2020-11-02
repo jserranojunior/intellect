@@ -68,22 +68,18 @@
                   </label>
                 </div>
               </div>
-              <div
-                class="w-2/4 pointer"
-                @click="editarContaAPagar(contas.id)"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              >
-                {{ contas.favorecido }}
-              </div>
-              <div
-                class="w-1/4 text-right"
-                v-if="contas.valores_contas_a_pagars"
-                @click="editarContaAPagar(contas.id)"
-              >
-                {{ contas.valores_contas_a_pagars.valor | money }}
-              </div>
-              <div v-else class="w-1/4">0</div>
+              <span @click="editarContaAPagar(contas.id)">
+                <div class="w-2/4 pointer">
+                  {{ contas.favorecido }}
+                </div>
+                <div
+                  class="w-1/4 text-right"
+                  v-if="contas.valores_contas_a_pagars"
+                >
+                  {{ contas.valores_contas_a_pagars.valor | money }}
+                </div>
+                <div v-else class="w-1/4">0</div>
+              </span>
             </div>
           </div>
 
@@ -135,15 +131,13 @@
           this.getCategoriaContasVuex()
         );
       },
-      editarContaAPagar(id) {
+      async editarContaAPagar(id) {
         const dataEdit = {
           id: id,
           dataselecionada: this.dataSelecionada,
         };
-        this.ActionEditFinancial(dataEdit).then((result) => {
-          // this.$router.push({ name: "financeiroeditarconta" });
-
-          this.$router.push("/financeiro/editarconta").catch((err) => {});
+        await this.ActionEditFinancial(dataEdit).then((result) => {
+          this.$router.push({ name: "financeiroeditarconta" });
         });
       },
       ...mapActions([
