@@ -33,10 +33,10 @@ services:
       - "../frontend:/app"
     command: "npm run dev"
     ports:
-      - 8000:8000
+      - 6000:6000
     networks:
       - internal
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`)
-      - traefik.http.services.frontintellect.loadbalancer.server.port=8000
+      - traefik.http.services.frontintellect.loadbalancer.server.port=6000
