@@ -81,6 +81,7 @@
         <option value="6">Alimentação</option>
         <option value="7">Estudos</option>
         <option value="8">Avulsos</option>
+        <option value="9">Empresa</option>
       </select>
     </div>
 
