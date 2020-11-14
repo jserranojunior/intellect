@@ -16,16 +16,12 @@
               </div>
               <div v-else class="w-1/4">0</div>
             </div>
-            <div class="flex flex-wrap justify-between text-center mt-1 p-1">
-              <div>Santander</div>
-              <div class="w-1/4">140,00</div>
-            </div>
           </div>
           <div
-            class="painel-footer flex text-center justify-between border-t mt-1 p-2"
+            class="painel-footer flex flez-wrap text-center justify-between border-t mt-1 p-1"
           >
-            <div class="w-1/3">Total</div>
-            <div class="w-1/3">000</div>
+            <div class="w-1/4">Total</div>
+            <div class="w-1/4">{{ totalCategoriaContasVuex | money }}</div>
           </div>
         </div>
       </div>
