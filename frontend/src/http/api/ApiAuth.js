@@ -1,12 +1,13 @@
 import axios from "axios";
+const url = "http://backintellect." + window.location.host;
+const options = {
+  baseURL: url,
+  timeout: 1000,
+};
 
 export default class ApiAuth {
   login(data) {
     return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: "http://backintellect.localhost",
-        timeout: 1000,
-      };
       const link = `/login`;
       return axios
         .post(link, data, options)
@@ -20,10 +21,6 @@ export default class ApiAuth {
   }
   logout() {
     return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: "http://backintellect.localhost",
-        timeout: 1000,
-      };
       const link = `/logout`;
       return axios
         .get(link, options)

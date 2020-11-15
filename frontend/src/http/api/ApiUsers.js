@@ -1,10 +1,10 @@
 import axios from "axios";
-
+const url = "http://backintellect." + window.location.host;
 export default class ApiUsers {
   store(data) {
     return new Promise(async (resolve, reject) => {
       const options = {
-        baseURL: "http://backintellect.localhost",
+        baseURL: url,
         timeout: 1000,
       };
       const link = `/users`;

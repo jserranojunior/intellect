@@ -1,11 +1,11 @@
 import axios from "axios";
-
+const url = "http://backintellect." + window.location.host;
 export default class ApiFinancial {
   get(dataSelecionada) {
     const token = localStorage.getItem("token");
     return new Promise(async (resolve, reject) => {
       const options = {
-        baseURL: "http://backintellect.localhost",
+        baseURL: url,
         timeout: 1000,
         headers: { Authorization: `Bearer ${token}` },
       };
@@ -27,7 +27,7 @@ export default class ApiFinancial {
     const token = localStorage.getItem("token");
     return new Promise(async (resolve, reject) => {
       const options = {
-        baseURL: "http://backintellect.localhost",
+        baseURL: url,
         timeout: 1000,
         headers: { Authorization: `Bearer ${token}` },
       };
@@ -52,7 +52,7 @@ export default class ApiFinancial {
     const token = localStorage.getItem("token");
     return new Promise(async (resolve, reject) => {
       const options = {
-        baseURL: "http://backintellect.localhost",
+        baseURL: url,
         headers: { Authorization: `Bearer ${token}` },
       };
       const link = `/financial/billstopay/${data.id}/${data.data_pagamento}`;
@@ -75,7 +75,7 @@ export default class ApiFinancial {
   edit(data) {
     return new Promise(async (resolve, reject) => {
       const options = {
-        baseURL: "http://backintellect.localhost",
+        baseURL: url,
         // timeout: 1000
       };
       const link = `/financial/billstopay/${data.id}/${data.dataselecionada}`;
@@ -94,7 +94,7 @@ export default class ApiFinancial {
   storeContaPaga(data) {
     return new Promise(async (resolve, reject) => {
       const options = {
-        baseURL: "http://backintellect.localhost",
+        baseURL: url,
         timeout: 1000,
       };
       const link = "/financial/contapaga";
@@ -117,7 +117,7 @@ export default class ApiFinancial {
   deleteContaPaga(data) {
     console.log(data);
     return new Promise(async (resolve, reject) => {
-      const link = `http://backintellect.localhost/financial/contapaga/${data.contas_a_pagar_id}/${data.data_pagamento}`;
+      const link = `${url}/financial/contapaga/${data.contas_a_pagar_id}/${data.data_pagamento}`;
       return axios
         .delete(link)
         .then((result) => {
