@@ -3,6 +3,7 @@
     <div class="columns mt-2">
       <div
         v-for="categoria in categoriaContas"
+        :key="categoria.id"
         class="mt-2 w-full"
         style="width: 100%"
       >
@@ -136,7 +137,8 @@
           id: id,
           dataselecionada: this.dataSelecionada,
         };
-        await this.ActionEditFinancial(dataEdit).then((result) => {
+        await this.ActionEditFinancial(dataEdit).then(() => {
+          console.log(id);
           this.$router.push({ name: "financeiroeditarconta" });
         });
       },

@@ -18,7 +18,7 @@ export const ActionUpdateFinancial = ({ commit }, data) => {
 };
 
 export const ActionEditFinancial = async ({ commit }, data) => {
-  Financial.edit(data).then((res) => {
+  return Financial.edit(data).then((res) => {
     commit("SET_EDITAR_CONTA_A_PAGAR", res.data);
   });
 };

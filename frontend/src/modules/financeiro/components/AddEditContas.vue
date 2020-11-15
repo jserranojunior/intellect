@@ -240,6 +240,14 @@
       },
     },
     watch: {
+      editarContaAPagar: {
+        handler() {
+          console.log(this.editarContaAPagar);
+          this.setFields();
+        },
+        deep: true,
+      },
+
       fields: {
         handler() {
           // console.log(this.fields);

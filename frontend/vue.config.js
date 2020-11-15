@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const host = "0.0.0.0";
-const port = 8000;
+const port = 6000;
 
 module.exports = {
   baseUrl: `http://${host}:${port}/`,
