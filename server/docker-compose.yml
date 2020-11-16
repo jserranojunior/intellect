@@ -28,10 +28,11 @@ services:
     image: "node:lts-alpine"
     environment:
       - HOST=frontend.${DOMAIN}
+      - HOST_API=backend.${DOMAIN}
     working_dir: /app
     volumes:
       - "../frontend:/app"
-    command: "npm run dev"
+    command: "npm run dev --host=frontend.${DOMAIN}"
     ports:
       - 6000:6000
     networks:

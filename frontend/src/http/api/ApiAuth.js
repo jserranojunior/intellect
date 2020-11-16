@@ -1,5 +1,6 @@
 import axios from "axios";
-const url = "http://backintellect." + window.location.host;
+const url = "http://backintellect." + process.env.DOMAIN;
+
 const options = {
   baseURL: url,
   timeout: 1000,

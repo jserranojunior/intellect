@@ -3,6 +3,8 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
+const envparser = require("./config/envparser");
+
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
@@ -40,7 +42,7 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
-
+      env: envparser(),
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -73,7 +75,8 @@ module.exports = function (/* ctx */) {
       disableHostCheck: true,
       https: false,
       port: 6000,
-      open: true, // opens browser window automatically
+      public: "0.0.0.0:6000",
+      open: false, // opens browser window automatically
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework

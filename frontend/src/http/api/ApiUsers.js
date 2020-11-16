@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://backintellect." + window.location.host;
+const url = "http://backintellect." + process.env.DOMAIN;
 export default class ApiUsers {
   store(data) {
     return new Promise(async (resolve, reject) => {

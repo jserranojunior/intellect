@@ -1,26 +1,13 @@
 import axios from "axios";
-const url = "http://backintellect." + window.location.host;
+import ApiConnect from "./ApiConnect";
+const apiConnect = new ApiConnect();
+
+const url = "http://backintellect." + process.env.DOMAIN;
+
 export default class ApiFinancial {
-  get(dataSelecionada) {
-    const token = localStorage.getItem("token");
-    return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: url,
-        timeout: 1000,
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const link = `/financial/${dataSelecionada}`;
-      return axios
-        .get(link, options)
-        .then(function (response) {
-          resolve(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-          console.log(error.response);
-          reject(error);
-        });
-    });
+  async get(dataSelecionada) {
+    const link = `/financial/${dataSelecionada}`;
+    return await apiConnect.get(link);
   }
 
   store(data) {
