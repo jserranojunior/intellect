@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://backintellect." + process.env.DOMAIN;
+const url = process.env.API_URL;
 console.log(url);
 const token = localStorage.getItem("token");
 

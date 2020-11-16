@@ -1,6 +1,5 @@
 import axios from "axios";
-const url = "http://backintellect." + process.env.DOMAIN;
-
+const url = process.env.API_URL;
 const options = {
   baseURL: url,
   timeout: 1000,

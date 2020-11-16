@@ -2,8 +2,7 @@ import axios from "axios";
 import ApiConnect from "./ApiConnect";
 const apiConnect = new ApiConnect();
 
-const url = "http://backintellect." + process.env.DOMAIN;
-
+const url = process.env.API_URL;
 export default class ApiFinancial {
   async get(dataSelecionada) {
     const link = `/financial/${dataSelecionada}`;
