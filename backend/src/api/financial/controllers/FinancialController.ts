@@ -40,6 +40,8 @@ class FinancialController {
     this.res = res
   }
   async get(req: Request, res: Response) {
+        res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET')
     req.params.userId = req.body.userId
     let categorias = await this.CategoriasContas.getCategoriasContasValores(
       req.params
