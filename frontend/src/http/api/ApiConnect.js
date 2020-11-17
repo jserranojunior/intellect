@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.API_URL;
+const url = `${process.env.DOMAIN_SECURE}://${process.env.API_URL}`;
 console.log(url);
 const token = localStorage.getItem("token");
 

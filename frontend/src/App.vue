@@ -9,6 +9,7 @@
   export default {
     name: "App",
     beforeMount() {
+      console.log(process.env.NAME);
       this.ActionAuthenticated();
     },
     methods: {
