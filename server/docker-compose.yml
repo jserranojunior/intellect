@@ -29,12 +29,12 @@ services:
     working_dir: /app
     volumes:
       - "../frontend:/app"
-    command: "npm run dev --host=frontend.${DOMAIN}"
+    command: "yarn run dev"
     ports:
-      - 6000:80
+      - 2083:2083
     networks:
       - internal
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`)
-      - traefik.http.services.frontintellect.loadbalancer.server.port=80
+      - traefik.http.services.frontintellect.loadbalancer.server.port=2083
