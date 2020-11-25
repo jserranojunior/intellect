@@ -26,18 +26,15 @@ services:
   frontend:
     container_name: "frontend_intellect"
     image: "node:lts-alpine"
-    environment:
-      - HOST=frontend.${DOMAIN}
-      - HOST_API=backend.${DOMAIN}
     working_dir: /app
     volumes:
       - "../frontend:/app"
     command: "npm run dev --host=frontend.${DOMAIN}"
     ports:
-      - 6000:6000
+      - 6000:80
     networks:
       - internal
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`)
-      - traefik.http.services.frontintellect.loadbalancer.server.port=6000
+      - traefik.http.services.frontintellect.loadbalancer.server.port=80

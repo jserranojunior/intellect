@@ -2,7 +2,8 @@ import axios from "axios";
 import ApiConnect from "./ApiConnect";
 const apiConnect = new ApiConnect();
 
-const url = `${process.env.DOMAIN_SECURE}://${process.env.API_URL}`;
+const url = `${process.env.API_URL}`;
+
 export default class ApiFinancial {
   async get(dataSelecionada) {
     const link = `/financial/${dataSelecionada}`;
