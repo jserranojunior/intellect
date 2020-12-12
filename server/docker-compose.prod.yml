@@ -4,7 +4,7 @@ networks:
   internal:
     driver: bridge
 services:
-  apache:
+  frontend_intellect:
     container_name: "prod_front_intellect"
     image: "webdevops/apache"
     volumes:
@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.frontintellect.rule=Host(`frontintellect.alvitre.com.br`,`www.frontintellect.alvitre.com.br`)"
       - "traefik.http.services.frontintellect.loadbalancer.server.port=80"
 
-  backend:
+  backend_intellect:
     container_name: "prod_api_intellect"
     image: "node:lts-alpine"
     working_dir: /app
