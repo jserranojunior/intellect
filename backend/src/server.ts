@@ -1,11 +1,11 @@
 import express from "express";
 import routes from "./routes/routes";
-import { resolve } from "path";
+// import path from "path";
 import bodyParser from "body-parser";
 import cors from "cors";
 
 import dotenv from "dotenv"; 
-dotenv.config();
+dotenv.config({path:__dirname + '/.env'});
 
 
 console.log(process.env.DATABASE + " banco de dados") 
@@ -20,5 +20,5 @@ app.use(routes);
 
 let port: string;
 process.env.PORT ? (port = process.env.PORT) : (port = "8081");
-app.listen(port);
+app.listen(port); 
 console.log(process.env.DOMAIN + port);

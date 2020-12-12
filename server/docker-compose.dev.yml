@@ -20,7 +20,7 @@ services:
       - 7001:7001
     labels:
       - "traefik.enable=true"
-      - traefik.http.routers.backintellect.rule=Host(`backintellect.${DOMAIN}`)
+      - traefik.http.routers.backintellect.rule=Host(`backintellect.localhost`)
       - traefik.http.services.backintellect.loadbalancer.server.port=4333
 
   frontend:
@@ -36,5 +36,5 @@ services:
       - internal
     labels:
       - "traefik.enable=true"
-      - traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`)
+      - traefik.http.routers.frontintellect.rule=Host(`frontintellect.localhost`)
       - traefik.http.services.frontintellect.loadbalancer.server.port=2083

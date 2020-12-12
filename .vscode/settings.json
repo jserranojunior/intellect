@@ -8,12 +8,12 @@
       "command": "ls"
     },
     {
-      "name": "Docker UP",
-      "command": "cd server/ && docker-compose up -d"
+      "name": "Docker dev",
+      "command": "cd server/ && docker-compose -f docker-compose.dev.yml up -d"
     },
     {
-      "name": "Docker Restart",
-      "command": "cd server/ && docker-compose down && docker-compose up -d"
+      "name": "Docker prod",
+      "command": "cd server/ && docker-compose -f docker-compose.prod.yml up -d"
     },
     {
       "name": "Docker Down",

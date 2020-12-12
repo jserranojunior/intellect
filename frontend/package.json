@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "dev": "quasar dev",
+    "build": "quasar build",
     "test": "jest",
     "test:unit": "jest --updateSnapshot",
     "test:unit:coverage": "jest --coverage",
@@ -46,7 +47,8 @@
     "eslint-plugin-quasar": "^1.0.0",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "workbox-webpack-plugin": "^5.0.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

@@ -39,6 +39,11 @@
           "
         >
           <router-link
+            :to="{ name: 'home' }"
+            class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            >Home
+          </router-link>
+          <router-link
             v-if="!auth.token"
             :to="{ name: 'login' }"
             class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"

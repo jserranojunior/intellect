@@ -9,6 +9,14 @@
     "baseUrl": "./src",
     "sourceMap": true
   },
-  "include": ["./src"],
+  "include": ["src"],
+  "exclude": [
+    "./node_modules",
+    "lib",
+    "typings/**",
+    "src/api/*/*/__test__",
+    "node_modules/@types",
+    "node_modules/@types/mocha/**"
+  ],
   "allowSyntheticDefaultImports": true
 }
