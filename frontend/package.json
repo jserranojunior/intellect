@@ -7,8 +7,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
-    "dev": "quasar dev",
-    "build": "quasar build",
+    "dev": "QENV=development quasar dev",
+    "build": "QENV=production quasar build",
     "test": "jest",
     "test:unit": "jest --updateSnapshot",
     "test:unit:coverage": "jest --coverage",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
+    "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "@quasar/quasar-app-extension-testing": "^1.0.0",
     "@quasar/quasar-app-extension-testing-unit-jest": "^1.0.1",
     "eslint": "^7.10.0",
