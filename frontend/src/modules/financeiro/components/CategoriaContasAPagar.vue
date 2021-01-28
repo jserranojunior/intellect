@@ -17,13 +17,13 @@
           <div class="painel-body w-full p-1">
             <div
               class="text-center cursor-pointer hover:bg-gray-700 text-gray-100 w-full"
-              v-for="contas in categoria.contas_a_pagars"
+              v-for="contas in categoria.ContasAPagar"
               :key="contas.id"
             >
               <div class="w-1/4 text-left">
                 <div
                   class="relative"
-                  v-if="contas.contas_pagas && contas.contas_pagas.id"
+                  v-if="contas.contasPagas && contas.contasPagas.id"
                 >
                   <label
                     for="checked"
@@ -73,11 +73,8 @@
                 <div class="w-2/4 pointer">
                   {{ contas.favorecido }}
                 </div>
-                <div
-                  class="w-1/4 text-right"
-                  v-if="contas.valores_contas_a_pagars"
-                >
-                  {{ contas.valores_contas_a_pagars.valor | money }}
+                <div class="w-1/4 text-right" v-if="contas.ValoresContasAPagar">
+                  {{ contas.ValoresContasAPagar.valor | money }}
                 </div>
                 <div v-else class="w-1/4">0</div>
               </span>
@@ -90,7 +87,7 @@
             <div class="border-t w-full h-1">
               <div class="w-1/2 text-left">Total</div>
               <div class="w-1/2 text-right">
-                {{ categoria.totalCategoria | money }}
+                {{ categoria.Soma | money }}
               </div>
             </div>
           </div>
@@ -114,9 +111,8 @@
     computed: {
       ...mapState({
         categoriaContasVuex: (state) =>
-          state.Financeiro.categoriaContas.categorias,
-        totalCategoriaContasVuex: (state) =>
-          state.Financeiro.categoriaContas.totalCategorias,
+          state.Financeiro.categoriaContas.CategoriasContasAPagars,
+
         dataSelecionada: (state) => state.Calendario.dataSelecionada,
         token: (state) => state.Auth.token,
       }),

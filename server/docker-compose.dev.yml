@@ -5,23 +5,36 @@ networks:
     driver: bridge
 
 services:
-  backend:
-    container_name: "api_intellect"
-    image: "node:lts-alpine"
-    working_dir: /app
+  golang_service_golang_4:
+    build: "../backgo"
     volumes:
-      - "../backend:/app"
+      - ../backgo:/app
+    ports: 
+      - 4000:4000
     networks:
-      - internal
-    command: "npm run ts"
-    ports:
-      - 4444:4333
-      - 9229:9229
-      - 7001:7001
+        - internal
     labels:
       - "traefik.enable=true"
-      - traefik.http.routers.backintellect.rule=Host(`backintellect.localhost`)
-      - traefik.http.services.backintellect.loadbalancer.server.port=4333
+      - "traefik.http.routers.golang.rule=Host(`golang.localhost`)"
+      - "traefik.http.services.golang.loadbalancer.server.port=4000"
+        
+  # backend:
+  #   container_name: "api_intellect"
+  #   image: "node:lts-alpine"
+  #   working_dir: /app
+  #   volumes:
+  #     - "../backend:/app"
+  #   networks:
+  #     - internal
+  #   command: "npm run ts"
+  #   ports:
+  #     - 4444:4333
+  #     - 9229:9229
+  #     - 7001:7001
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - traefik.http.routers.backintellect.rule=Host(`backintellect.localhost`)
+  #     - traefik.http.services.backintellect.loadbalancer.server.port=4333
 
   frontend:
     container_name: "frontend_intellect"

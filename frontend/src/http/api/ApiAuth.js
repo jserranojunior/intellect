@@ -4,6 +4,9 @@ const url = `${process.env.API_URL}`;
 const options = {
   baseURL: url,
   timeout: 1000,
+  headers: {
+    "Content-Type": "application/json",
+  },
 };
 
 export default class ApiAuth {

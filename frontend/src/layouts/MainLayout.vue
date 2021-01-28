@@ -1,7 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="bg-gray-700">
     <NavBar></NavBar>
-    <q-page-container>
+    <Sidebar></Sidebar>
+    <q-page-container class="z-20">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -9,6 +10,7 @@
 
 <script>
   import NavBar from "./NavBar";
+  import Sidebar from "./Sidebar";
   export default {
     name: "MainLayout",
     data() {
@@ -18,6 +20,7 @@
     },
     components: {
       NavBar,
+      Sidebar,
     },
   };
 </script>

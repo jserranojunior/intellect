@@ -108,7 +108,7 @@
       ...mapActions("Auth", ["ActionLogin"]),
       login() {
         this.ActionLogin(this.fields).then((res) => {
-          if (res.data.auth) {
+          if (res && res.data && res.data.auth) {
             this.logado();
           }
         });

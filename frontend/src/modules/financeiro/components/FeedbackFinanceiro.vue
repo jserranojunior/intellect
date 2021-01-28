@@ -63,7 +63,7 @@
     computed: {
       ...mapState({
         totalCategoriaContasVuex: (state) =>
-          state.Financeiro.categoriaContas.totalCategorias,
+          state.Financeiro.categoriaContas.TotalCategories,
       }),
     },
     filters: {

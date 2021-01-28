@@ -3,7 +3,8 @@ const Financial = new ApiFinancial();
 
 export const ActionGetFinancial = ({ commit }, dataSelecionada) => {
   Financial.get(dataSelecionada).then((res) => {
-    commit("SET_CATEGORIA_CONTAS", res.data);
+    console.log(res);
+    commit("SET_CATEGORIA_CONTAS", res.data.data);
   });
 };
 

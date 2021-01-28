@@ -2,10 +2,21 @@
   <div>
     <div class="w-full text-gray-700 text-gray-200 bg-gray-800">
       <div
-        x-data="{ open: false }"
-        class="flex flex-col max-w-screen-xl px-2 mx-auto md:items-center md:justify-between md:flex-row md:px-2 lg:px-2"
+        class="flex max-w-screen px-2 mx-auto md:items-center md:justify-between md:flex-row md:px-2 lg:px-2 flex-col items-center"
       >
         <div class="p-4 flex flex-row items-center justify-between">
+          <button @click="closeSidebar()" class="mr-4">
+            <svg
+              viewBox="0 0 100 80"
+              width="20"
+              height="20"
+              class="fill-current hover:text-gray-600 text-gray-500"
+            >
+              <rect width="100" height="20"></rect>
+              <rect y="30" width="100" height="20"></rect>
+              <rect y="60" width="100" height="20"></rect>
+            </svg>
+          </button>
           <a
             href="#"
             class="text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline"
@@ -93,6 +104,11 @@
       }),
     },
     methods: {
+      closeSidebar() {
+        const Sidebar = document.getElementById("sidebar");
+        Sidebar.classList.toggle("hidden");
+        console.log(Sidebar);
+      },
       ...mapActions("Auth", ["ActionLogout"]),
       logout() {
         this.ActionLogout().then(() => {

@@ -6,6 +6,7 @@ export const ActionLogin = ({ commit }, data) => {
     .then((res) => {
       commit("SET_ERRO", "");
       commit("SET_TOKEN", res.data.token);
+      console.log(res);
       return res;
     })
     .catch((erro) => {

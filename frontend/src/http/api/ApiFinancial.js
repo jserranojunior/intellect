@@ -6,7 +6,7 @@ const url = `${process.env.API_URL}`;
 
 export default class ApiFinancial {
   async get(dataSelecionada) {
-    const link = `/financial/${dataSelecionada}`;
+    const link = `/financial/viewcategories/${dataSelecionada}`;
     return await apiConnect.get(link);
   }
 
