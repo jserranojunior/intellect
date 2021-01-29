@@ -242,7 +242,6 @@
     watch: {
       editarContaAPagar: {
         handler() {
-          console.log(this.editarContaAPagar);
           this.setFields();
         },
         deep: true,

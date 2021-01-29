@@ -247,7 +247,7 @@
     },
     beforeMount() {
       this.sidebarHeight = window.innerHeight - 60;
-      console.log(this.sidebarHeight);
+      // console.log(this.sidebarHeight);
     },
   };
 </script>

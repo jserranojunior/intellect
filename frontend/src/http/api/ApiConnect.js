@@ -2,7 +2,6 @@ import axios from "axios";
 
 const url = `${process.env.API_URL}`;
 
-console.log(url);
 const token = localStorage.getItem("token");
 
 const options = {
@@ -13,7 +12,6 @@ const options = {
 
 class ApiConnect {
   async get(link) {
-    console.log(url + link);
     return axios
       .get(link, options)
       .then((response) => response)

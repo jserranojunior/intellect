@@ -134,7 +134,6 @@
           dataselecionada: this.dataSelecionada,
         };
         await this.ActionEditFinancial(dataEdit).then(() => {
-          console.log(id);
           this.$router.push({ name: "financeiroeditarconta" });
         });
       },

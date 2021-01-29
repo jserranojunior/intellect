@@ -1,6 +1,13 @@
 function validationToken() {
   const token = localStorage.getItem("token");
-  if (!token || token == "" || token == undefined || token == "undefined") {
+  if (
+    !token ||
+    token == "" ||
+    token == undefined ||
+    token == "undefined" ||
+    token == null ||
+    token.length == 0
+  ) {
     return false;
   } else {
     return true;

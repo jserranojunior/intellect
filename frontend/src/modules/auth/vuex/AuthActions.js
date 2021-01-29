@@ -6,21 +6,18 @@ export const ActionLogin = ({ commit }, data) => {
     .then((res) => {
       commit("SET_ERRO", "");
       commit("SET_TOKEN", res.data.token);
-      console.log(res);
       return res;
     })
     .catch((erro) => {
-      console.log("contem erro " + erro.data.erro);
       commit("SET_ERRO", erro.data.erro);
       commit("SET_TOKEN", "");
     });
 };
 
 export const ActionLogout = ({ commit }, data) => {
-  return Auth.logout().then(() => {
-    commit("SET_ERRO", "");
-    commit("SET_TOKEN", "");
-  });
+  localStorage.setItem("token", "");
+  commit("SET_ERRO", "");
+  commit("SET_TOKEN", "");
 };
 
 export const ActionAuthenticated = ({ commit }) => {

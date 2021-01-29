@@ -3,6 +3,7 @@ import(
 		"github.com/gin-gonic/gin"
 		db "../../../config"
 						"../categoriesbillstopay"
+						"fmt"
 )
 
 //GetCategoriesAndBillsMonth return Categories, Bills, Values, Paid
@@ -10,7 +11,11 @@ func GetCategoriesAndBillsMonth(c *gin.Context){
 	tokenID := c.GetUint64("id")
 	somaValoresCategories := 0.0
 	totalCategories := 0.0
-	var dateStart = "2020-11"
+	dateandname := c.Param("dataanomes")
+	dateStartRune := []rune(dateandname)
+	dateStart := string(dateStartRune[0:7])
+
+	fmt.Println(dateStart)
 	var viewCategories = ViewCategoriesAndBillsMonth{}
 	var categories = []categoriesbillstopay.CategoriasContasAPagars{}
 	queryValores := "SUBSTRING(data_pagamento,1,7) = (?)  OR SUBSTRING(data_pagamento,1,7) < ?"
@@ -25,7 +30,7 @@ func GetCategoriesAndBillsMonth(c *gin.Context){
 			categories[indexCategories].Soma = somaValoresAPagar
 			totalCategories += somaValoresAPagar
 			somaValoresCategories += somaValoresAPagar
-	}
+	} 
 	viewCategories.CategoriasContasAPagars = categories
 	viewCategories.TotalCategories = totalCategories
 		c.JSON(200, gin.H{

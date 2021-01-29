@@ -108,13 +108,13 @@
       ...mapActions("Auth", ["ActionLogin"]),
       login() {
         this.ActionLogin(this.fields).then((res) => {
-          if (res && res.data && res.data.auth) {
+          if (res && res.data && res.data.token) {
             this.logado();
           }
         });
       },
       logado() {
-        if (this.Auth.token && this.Auth.token > "") {
+        if (this.Auth.token && this.Auth.token !== "") {
           this.$router.go("financeiro");
         }
       },

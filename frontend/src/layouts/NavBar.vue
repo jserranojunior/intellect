@@ -107,7 +107,6 @@
       closeSidebar() {
         const Sidebar = document.getElementById("sidebar");
         Sidebar.classList.toggle("hidden");
-        console.log(Sidebar);
       },
       ...mapActions("Auth", ["ActionLogout"]),
       logout() {

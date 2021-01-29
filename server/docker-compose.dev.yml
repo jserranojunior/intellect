@@ -5,14 +5,15 @@ networks:
     driver: bridge
 
 services:
-  golang_service_golang_4:
-    build: "../backgo"
+  goback:
+    container_name: "goback"
+    image: golang:1.15.7
     volumes:
       - ../backgo:/app
-    ports: 
-      - 4000:4000
+      - ../backgo/go_modules:/go
     networks:
         - internal
+    command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'" 
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.golang.rule=Host(`golang.localhost`)"

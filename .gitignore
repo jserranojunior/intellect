@@ -2,7 +2,7 @@ database/mysql
 
 backend/node_modules
 backend/.env
-
+backgo/go_modules
 frontend/.env
 frontend/node_modules
 frontend/"
