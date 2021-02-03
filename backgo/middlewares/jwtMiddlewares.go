@@ -7,6 +7,8 @@ import (
 	"time"
 	jwt "github.com/gbrlsnchs/jwt"
 	"github.com/gin-gonic/gin"
+	"fmt"
+	// "reflect"
 )
 
 // VerifyJwt verify jwt is valid
@@ -26,9 +28,16 @@ func VerifyJwt() gin.HandlerFunc {
 					})
 					c.Abort() 
 				}else{
-					tokenInt, _ := strconv.ParseUint(hd.KeyID, 10, 64)	
-					c.Set("id", tokenInt)
-					c.Next()   			
+					
+					tokenInt, err := strconv.Atoi(hd.KeyID)
+					if err != nil{
+						fmt.Println(err)
+					}
+						tokenUint := uint(tokenInt)
+		
+
+					c.Set("id", tokenUint);
+					c.Next() ;  			
 				}				
 			}else{
 					c.JSON(401, gin.H{

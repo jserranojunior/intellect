@@ -4,10 +4,10 @@
     {
       "type": "npm",
       "script": "serve",
-      "path": "frontend/",
+      "path": "./",
       "problemMatcher": [],
       "label": "npm: serve - front",
-      "detail": "quasar serve"
+      "detail": "docker"
     },
     {
       "label": "docker local",

@@ -29,7 +29,7 @@
         class="form-tail"
         v-mask="'money'"
         name="valor"
-        v-model="fields.valor"
+        v-model="fields.ValoresContasAPagar.valor"
         required
         placeholder="Valor"
       />
@@ -140,14 +140,19 @@
 
 <script>
   /* eslint-disable */
+  import { datePtBrToUs, dateUsToPtBr } from "../../../helpers/helpersDates";
   import { mapState, mapActions } from "vuex";
   import AwesomeMask from "awesome-mask";
-  import moment from "moment";
+  // import moment from "moment";
   export default {
     name: "AddEditContas",
     data() {
       return {
-        fields: {},
+        fields: {
+          ValoresContasAPagar: {
+            valor: 0,
+          },
+        },
         errors: {},
         loaded: true,
         minhadata: "",
@@ -172,15 +177,57 @@
           return val;
         }
       },
+
       cadastrar() {
+        this.fields.categorias_contas_a_pagar_id = parseInt(
+          this.fields.categorias_contas_a_pagar_id
+        );
+        this.fields.ValoresContasAPagar.valor = parseFloat(
+          this.fields.ValoresContasAPagar.valor
+        );
+
+        this.fields.inicio_data_pagamento = datePtBrToUs(
+          this.fields.inicio_data_pagamento
+        );
+
+        this.fields.fim_data_pagamento = datePtBrToUs(
+          this.fields.fim_data_pagamento
+        );
+
+        console.log(this.fields.inicio_data_pagamento);
+
+        this.fields.ValoresContasAPagar.data_pagamento = this.fields.inicio_data_pagamento;
+
         this.ActionStoreFinancial(this.fields).then((result) => {
           this.fields.favorecido = "";
           this.fields.descricao = "";
-          this.fields.valor = "";
+          this.fields.ValoresContasAPagar.valor = "";
           this.$router.push({ name: "financeiro" });
+
+          this.fields.inicio_data_pagamento = dateUsToPtBr(
+            this.fields.inicio_data_pagamento
+          );
+
+          this.fields.fim_data_pagamento = dateUsToPtBr(
+            this.fields.fim_data_pagamento
+          );
         });
       },
       atualizar() {
+        this.fields.ValoresContasAPagar.valor = parseFloat(
+          this.fields.ValoresContasAPagar.valor
+        );
+
+        this.fields.inicio_data_pagamento = datePtBrToUs(
+          this.fields.inicio_data_pagamento
+        );
+
+        this.fields.fim_data_pagamento = datePtBrToUs(
+          this.fields.fim_data_pagamento
+        );
+        this.fields.ValoresContasAPagar.data_pagamento = this.fields.inicio_data_pagamento;
+
+        // console.log(this.fields);
         this.ActionUpdateFinancial(this.fields).then((result) => {
           this.$router.push({ name: "financeiro" });
         });
@@ -193,30 +240,28 @@
           this.fields.tipo_conta = "Extra";
           this.fields.categorias_contas_a_pagar_id = "2";
         } else if (this.mode === "edit") {
-          if (this.editarContaAPagar[0]) {
-            this.fields.id = this.editarContaAPagar[0].id;
-            this.fields.favorecido = this.editarContaAPagar[0].favorecido;
-            this.fields.descricao = this.editarContaAPagar[0].descricao;
-            this.fields.inicio_data_pagamento = this.editarContaAPagar[0].inicio_data_pagamento;
-            this.fields.forma_pagamento = this.editarContaAPagar[0].forma_pagamento;
-            this.fields.tipo_conta = this.editarContaAPagar[0].tipo_conta;
-            this.fields.categorias_contas_a_pagar_id = this.editarContaAPagar[0].categorias_contas_a_pagar_id;
+          if (this.editarContaAPagar && this.editarContaAPagar) {
+            this.fields.id = this.editarContaAPagar.ID;
+            this.fields.favorecido = this.editarContaAPagar.favorecido;
+            this.fields.descricao = this.editarContaAPagar.descricao;
+            this.fields.inicio_data_pagamento = this.editarContaAPagar.inicio_data_pagamento;
+            this.fields.ValoresContasAPagar.data_pagamento = this.fields.inicio_data_pagamento;
 
-            this.fields.valor = this.toMoney(
-              this.editarContaAPagar[0].valores_contas_a_pagars.valor
+            this.fields.forma_pagamento = this.editarContaAPagar.forma_pagamento;
+            this.fields.tipo_conta = this.editarContaAPagar.tipo_conta;
+            this.fields.categorias_contas_a_pagar_id = this.editarContaAPagar.categorias_contas_a_pagar_id;
+
+            this.fields.ValoresContasAPagar.valor = this.toMoney(
+              this.editarContaAPagar.ValoresContasAPagar.valor
             );
 
-            // const ContasAPagar = Array.from(this.editarContaAPagar[0]).slice();
-            // this.fields = Array.from(ContasAPagar[0]).slice();
-            // this.fields.valor = this.fields.valores_contas_a_pagars.valor;
-
-            this.fields.inicio_data_pagamento = this.editarContaAPagar[0].inicio_data_pagamento
+            this.fields.inicio_data_pagamento = this.editarContaAPagar.inicio_data_pagamento
               .split("-")
               .reverse()
               .join("/");
 
-            if (this.editarContaAPagar[0].fim_data_pagamento) {
-              this.fields.fim_data_pagamento = this.editarContaAPagar[0].fim_data_pagamento
+            if (this.editarContaAPagar.fim_data_pagamento) {
+              this.fields.fim_data_pagamento = this.editarContaAPagar.fim_data_pagamento
                 .split("-")
                 .reverse()
                 .join("/");

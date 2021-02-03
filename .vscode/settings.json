@@ -8,8 +8,8 @@
       "command": "ls"
     },
     {
-      "name": "Docker dev",
-      "command": "cd server/ && docker-compose -f docker-compose.dev.yml up -d"
+      "name": "Docker Dev",
+      "command": "cd server/ && ./dev-start.sh"
     },
     {
       "name": "Docker prod",

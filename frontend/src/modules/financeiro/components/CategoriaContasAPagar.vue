@@ -18,22 +18,17 @@
             <div
               class="text-center cursor-pointer hover:bg-gray-700 text-gray-100 w-full"
               v-for="contas in categoria.ContasAPagar"
-              :key="contas.id"
+              :key="contas.ID"
             >
               <div class="w-1/4 text-left">
                 <div
                   class="relative"
-                  v-if="contas.contasPagas && contas.contasPagas.id"
+                  v-if="contas.ContasPagas && contas.ContasPagas.ID > 0"
                 >
                   <label
                     for="checked"
                     class="cursor-pointer"
-                    @click="
-                      deleteBillPayment({
-                        contas_a_pagar_id: contas.id,
-                        data_pagamento: contas.contas_pagas.data_pagamento,
-                      })
-                    "
+                    @click="deleteBillPayment(contas.ContasPagas.ID)"
                   >
                     <span>
                       <span
@@ -52,7 +47,7 @@
                     class="cursor-pointer"
                     @click="
                       makeBillPayment({
-                        contas_a_pagar_id: contas.id,
+                        contas_a_pagar_id: contas.ID,
                         data_pagamento: dataSelecionada,
                       })
                     "
@@ -69,7 +64,7 @@
                   </label>
                 </div>
               </div>
-              <span @click="editarContaAPagar(contas.id)">
+              <span @click="editarContaAPagar(contas.ID)">
                 <div class="w-2/4 pointer">
                   {{ contas.favorecido }}
                 </div>
@@ -123,8 +118,8 @@
           this.getCategoriaContasVuex()
         );
       },
-      deleteBillPayment(data) {
-        this.ActionDeleteFinancialBillPayment(data).then(
+      deleteBillPayment(id) {
+        this.ActionDeleteFinancialBillPayment(id).then(
           this.getCategoriaContasVuex()
         );
       },

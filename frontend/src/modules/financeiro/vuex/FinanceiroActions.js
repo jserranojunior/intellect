@@ -2,13 +2,14 @@ import ApiFinancial from "../../../http/api/ApiFinancial.js";
 const Financial = new ApiFinancial();
 
 export const ActionGetFinancial = ({ commit }, dataSelecionada) => {
-  Financial.get(dataSelecionada).then((res) => {
+  return Financial.get(dataSelecionada).then((res) => {
     commit("SET_CATEGORIA_CONTAS", res.data.data);
   });
 };
 
 export const ActionStoreFinancial = ({ commit }, data) => {
-  Financial.store(data).then((res) => {
+  return Financial.store(data).then((res) => {
+    console.log(res);
     return res;
   });
 };
@@ -19,7 +20,7 @@ export const ActionUpdateFinancial = ({ commit }, data) => {
 
 export const ActionEditFinancial = async ({ commit }, data) => {
   return Financial.edit(data).then((res) => {
-    commit("SET_EDITAR_CONTA_A_PAGAR", res.data);
+    commit("SET_EDITAR_CONTA_A_PAGAR", res);
   });
 };
 
@@ -31,7 +32,7 @@ export const ActionSetDataSelecionada = ({ commit }, data) => {
 };
 
 export const ActionStoreFinancialBillPayment = ({ commit }, data) => {
-  Financial.storeContaPaga(data).then((res) => {
+  return Financial.storeContaPaga(data).then((res) => {
     return res;
   });
 };
