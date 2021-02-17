@@ -3,11 +3,12 @@ package financialviews
 import (
 	// "../billstopay"
 	// "gorm.io/gorm"
-			"../categoriesbillstopay"
+	"../categoriesbillstopay"
 )
 
-//CategoriesAndBillsMonth struct export
+//ViewCategoriesAndBillsMonth struct export
 type ViewCategoriesAndBillsMonth struct {
 	CategoriasContasAPagars []categoriesbillstopay.CategoriasContasAPagars
-	TotalCategories float64
+	TotalCategories         float64
+	SomaFormaPagamento      map[string]float64
 }

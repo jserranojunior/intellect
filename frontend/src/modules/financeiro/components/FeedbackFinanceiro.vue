@@ -8,20 +8,24 @@
           >
             <p class="painel-title">TOTAIS</p>
           </div>
-          <div class="painel-body p-1">
-            <div class="flex flex-wrap justify-between text-center mt-1 p-1">
-              <div>Contas a pagar</div>
-              <div v-if="totalCategoriaContasVuex">
-                {{ totalCategoriaContasVuex | money }}
+          <div
+            class="painel-body p-1"
+            v-for="(index, formaPagamento) in SomaFormaPagamento"
+            :key="index"
+          >
+            <div class="flex flex-wrap">
+              <div class="w-2/3">{{ formaPagamento }}</div>
+              <div class="w-1/3 text-right" v-if="formaPagamento">
+                {{ index | money }}
               </div>
               <div v-else class="w-1/4">0</div>
             </div>
           </div>
-          <div
-            class="painel-footer flex flez-wrap text-center justify-between border-t mt-1 p-1"
-          >
-            <div class="w-1/4">Total</div>
-            <div class="w-1/4">{{ totalCategoriaContasVuex | money }}</div>
+          <div class="painel-footer flex border-t mt-1 p-1">
+            <div class="w-2/3">Total</div>
+            <div class="w-1/3 text-right">
+              {{ totalCategoriaContasVuex | money }}
+            </div>
           </div>
         </div>
       </div>
@@ -64,7 +68,13 @@
       ...mapState({
         totalCategoriaContasVuex: (state) =>
           state.Financeiro.categoriaContas.TotalCategories,
+
+        SomaFormaPagamento: (state) =>
+          state.Financeiro.categoriaContas.SomaFormaPagamento,
       }),
+    },
+    beforeMount() {
+      console.log(this.SomaFormaPagamento);
     },
     filters: {
       money: function (value) {

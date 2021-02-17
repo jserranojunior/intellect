@@ -9,13 +9,13 @@ services:
     container_name: "goback"
     image: golang:1.15.7
     volumes:
-      - ../backgo/bin:/app
-      # - ../backgo:/app
-      # - "/home/alvitre/go:/go"
+      # - ../backgo/bin:/app
+      - ../backgo:/app
+      - "/home/alvitre/go:/go"
     networks:
       - internal
-    command: "/bin/sh -c 'cd /app && ls && ./server'" 
-    # command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'" 
+    # command: "/bin/sh -c 'cd /app && ls && ./server'" 
+    command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'" 
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.golang.rule=Host(`golang.localhost`)"
