@@ -1,0 +1,31 @@
+version: "2"
+
+networks:
+  internal:
+    driver: bridge
+services:
+  frontend_intellect:
+    container_name: "prod_front_intellect"
+    image: "webdevops/apache"
+    volumes:
+      - "../frontend/dist/spa:/app"
+    networks:
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontintellect.rule=Host(`frontintellect.alvitre.com.br`,`www.frontintellect.alvitre.com.br`)"
+      - "traefik.http.services.frontintellect.loadbalancer.server.port=80"
+
+  backend_intellect:
+    goback:
+      container_name: "goback"
+      image: golang:1.15.7
+      volumes:
+        - ../backgo/bin:/app
+      networks:
+        - internal
+      command: "/bin/sh -c 'cd /app && ls && ./server'" 
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.golang.rule=Host(`backintellect.localhost`)"
+        - "traefik.http.services.golang.loadbalancer.server.port=4000"

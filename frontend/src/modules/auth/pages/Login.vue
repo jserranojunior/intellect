@@ -1,5 +1,7 @@
 <template>
   <div class="">
+    <div id="y"></div>
+
     <div class="h-screen bg-gray-900">
       <div class="px-auto px-6 py-4">
         <div class="flex items-center justify-center mt-16">
@@ -104,7 +106,16 @@
     computed: {
       ...mapState({ Auth: "Auth" }),
     },
+    beforeMount() {
+      console.log("SEGUNDo");
+      this.importHtml();
+    },
     methods: {
+      importHtml() {
+        fetch("/home.html")
+          .then((data) => data.text())
+          .then((html) => (document.getElementById("y").innerHTML = html));
+      },
       ...mapActions("Auth", ["ActionLogin"]),
       login() {
         this.ActionLogin(this.fields).then((res) => {

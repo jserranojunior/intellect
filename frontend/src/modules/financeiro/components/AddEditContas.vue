@@ -156,13 +156,11 @@
         errors: {},
         loaded: true,
         minhadata: "",
-        dataAtual: this.dataAtualFinanceiro
-          ? this.dataAtualFinanceiro
-          : new Date().toLocaleDateString("pt-BR", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            }),
+        dataAtual: new Date().toLocaleDateString("pt-BR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }),
         modoEdicao: false,
       };
     },
@@ -274,9 +272,23 @@
           }
         }
       },
+      setData() {
+        console.log(this.dataAtualFinanceiro);
+        if (this.dataAtualFinanceiro) {
+          if (this.mode === "add") {
+            this.fields.inicio_data_pagamento = dateUsToPtBr(
+              this.dataAtualFinanceiro
+            );
+            this.fields.fim_data_pagamento = dateUsToPtBr(
+              this.dataAtualFinanceiro
+            );
+          }
+        }
+      },
     },
     beforeMount() {
       this.setFields();
+      this.setData();
     },
     props: {
       mode: {
@@ -285,6 +297,12 @@
       },
     },
     watch: {
+      dataAtualFinanceiro: {
+        handler() {
+          this.setData();
+        },
+        deep: true,
+      },
       editarContaAPagar: {
         handler() {
           this.setFields();
