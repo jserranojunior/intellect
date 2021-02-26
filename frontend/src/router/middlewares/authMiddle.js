@@ -15,10 +15,11 @@ function validationToken() {
 }
 
 async function auth(to, from, next) {
-  if (to.name !== "login" && validationToken() === false) {
-    next({ name: "login" });
+  console.log(to.name);
+  if (to.name !== "Login" && validationToken() === false) {
+    next({ name: "Login" });
   }
-  if (to.name === "login" && validationToken() === true) {
+  if (to.name === "Login" && validationToken() === true) {
     next({ name: "financeiro" });
   } else {
     next();

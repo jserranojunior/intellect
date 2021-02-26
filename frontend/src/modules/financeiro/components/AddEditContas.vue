@@ -127,9 +127,9 @@
         Cadastrar
       </div>
       <div v-else class="flex justify-between mt-1">
-        <router-link :to="{ name: 'financeiro' }">
-          <button class="btn-warning-tail-rounded">Voltar</button>
-        </router-link>
+        <!-- <router-link :to="{ name: 'financeiro' }"> -->
+        <button class="btn-warning-tail-rounded">Voltar</button>
+        <!-- </router-link> -->
         <button class="btn-primary-tail-rounded" @click="atualizar()">
           Atualizar
         </button>
