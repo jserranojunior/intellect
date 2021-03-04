@@ -1,140 +1,94 @@
-import axios from "axios";
-import ApiConnect from "./ApiConnect";
-const apiConnect = new ApiConnect();
+import { useApiConnect } from "@/modules/api/use/useApiConnect";
 
-const url = `${process.env.API_URL}`;
-const token = localStorage.getItem("token");
-export default class ApiFinancial {
-  async get(dataSelecionada) {
-    const link = `/financial/viewcategories/${dataSelecionada}`;
-    return await apiConnect.get(link);
+export const useHttpFinancial = () => {
+  async function get(dataSelecionada) {
+    const urlApi = `/financial/viewcategories/${dataSelecionada}`;
+    return useApiConnect()
+      .get(urlApi)
+      .then((response) => {
+        return response.data.data;
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err.response);
+      });
   }
 
-  store(data) {
-    return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: url,
-        timeout: 1000,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const link = "/financial/billstopay";
-      return axios
-        .post(link, data, options)
-        .then((result) => {
-          if (result) {
-            resolve(result);
-          } else {
-            reject(result);
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-          reject(error);
-        });
-    });
+  async function edit(id, dataSelecionada) {
+    const urlApi = `/financial/editbills/${id}/${dataSelecionada}`;
+    return useApiConnect()
+      .get(urlApi)
+      .then((response) => {
+        if (response.data.data[0]) {
+          return response.data.data[0];
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err.response);
+      });
   }
 
-  update(data) {
-    const token = localStorage.getItem("token");
-    return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: url,
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const link = `/financial/billstopay/${data.id}/${data.data_pagamento}`;
-      return axios
-        .put(link, data, options)
-        .then((result) => {
-          console.log(data);
-          console.log(result);
-          if (result) {
-            resolve(result);
-          } else {
-            reject(result);
-          }
-        })
-        .catch(function(error) {
-          reject(error);
-        });
-    });
+  async function store(data) {
+    const urlApi = `/financial/billstopay`;
+    return useApiConnect()
+      .post(urlApi, data)
+      .then((response) => {
+        if (response.data) {
+          return response.data;
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err.response);
+      });
   }
 
-  edit(data) {
-    const token = localStorage.getItem("token");
-    return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: url,
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const link = `/financial/editbills/${data.id}/${data.dataselecionada}`;
-      return axios
-        .get(link, options)
-        .then((result) => {
-          if (result.data.data[0]) {
-            resolve(result.data.data[0]);
-          } else {
-            reject(result);
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-          reject(error);
-        });
-    });
+  async function update(data) {
+    console.log(data.ValoresContasAPagar.data_pagamento);
+    const urlApi = `/financial/billstopay/${data.ID}/${data.ValoresContasAPagar.data_pagamento}`;
+    return useApiConnect()
+      .put(urlApi, data)
+      .then((response) => {
+        if (response.data) {
+          return response.data;
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err.response);
+      });
   }
 
-  storeContaPaga(data) {
-    return new Promise(async (resolve, reject) => {
-      const options = {
-        baseURL: url,
-        timeout: 1000,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const link = "/financial/paidbills";
-      return axios
-        .post(link, data, options)
-        .then((result) => {
-          if (result) {
-            console.log(result);
-            resolve(result);
-          } else {
-            reject(result);
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-          reject(false);
-        });
-    });
+  async function storePaidAccount(data) {
+    const urlApi = `/financial/paidbills`;
+    return useApiConnect()
+      .post(urlApi, data)
+      .then((response) => {
+        if (response) {
+          return response;
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err.response);
+      });
   }
 
-  deleteContaPaga(data) {
-    const options = {
-      baseURL: url,
-      timeout: 1000,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    return new Promise(async (resolve, reject) => {
-      const link = `${url}/financial/paidbills/${data}`;
-      return axios
-        .delete(link, options)
-        .then((result) => {
-          console.log(result);
-          resolve(result);
-        })
-        .catch(function(error) {
-          console.log(error);
-          reject(false);
-        });
-    });
+  async function deletePaidAccount(data) {
+    const urlApi = `/financial/paidbills/${data}`;
+    return useApiConnect()
+      .delet(urlApi, data)
+      .then((response) => {
+        if (response) {
+          return response;
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.log(err.response);
+      });
   }
-}
+
+  return { get, edit, store, update, storePaidAccount, deletePaidAccount };
+};

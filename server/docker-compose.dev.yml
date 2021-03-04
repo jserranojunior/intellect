@@ -44,13 +44,13 @@ services:
     image: "node:lts-alpine"
     working_dir: /app
     volumes:
-      - "../frontend:/app"
-    command: "yarn run dev"
-    ports:
-      - 2083:2083
+      - "../vue:/app"
+    command: "npm run serve"
     networks:
       - internal
+    ports:
+      - "8081:8080"
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.frontintellect.rule=Host(`frontintellect.localhost`)
-      - traefik.http.services.frontintellect.loadbalancer.server.port=2083
+      - traefik.http.services.frontintellect.loadbalancer.server.port=8080

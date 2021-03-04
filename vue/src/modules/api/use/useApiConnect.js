@@ -1,10 +1,7 @@
-import { useAuth } from "@/modules/auth/use/useAuth";
-
+const token = localStorage.getItem("token");
 import axios from "axios";
 
 export const useApiConnect = () => {
-  const { auth } = useAuth();
-
   var axiosImage = axios.create({
     baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
     headers: {
@@ -15,58 +12,29 @@ export const useApiConnect = () => {
   var axiosWithoutToken = axios.create({
     baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
   });
-
+  var axiosInstance = axios.create({
+    baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  });
   async function get(endpoint) {
-    var axiosInstance = axios.create({
-      baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
-      headers: {
-        Authorization: "Bearer " + auth.value.token,
-        "Content-Type": "application/json",
-      },
-    });
     return axiosInstance.get(endpoint);
   }
 
   async function post(endpoint, body) {
-    var axiosInstance = axios.create({
-      baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
-      headers: {
-        Authorization: "Bearer " + auth.value.token,
-        "Content-Type": "application/json",
-      },
-    });
     return axiosInstance.post(endpoint, body);
   }
 
   async function put(endpoint, body) {
-    var axiosInstance = axios.create({
-      baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
-      headers: {
-        Authorization: "Bearer " + auth.value.token,
-        "Content-Type": "application/json",
-      },
-    });
     return axiosInstance.put(endpoint, body);
   }
   async function patch(endpoint, body) {
-    var axiosInstance = axios.create({
-      baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
-      headers: {
-        Authorization: "Bearer " + auth.value.token,
-        "Content-Type": "application/json",
-      },
-    });
     return axiosInstance.patch(endpoint, body);
   }
 
   async function delet(endpoint) {
-    var axiosInstance = axios.create({
-      baseURL: `http://${process.env.VUE_APP_BACK_API_URL}`,
-      headers: {
-        Authorization: "Bearer " + auth.value.token,
-        "Content-Type": "application/json",
-      },
-    });
     return axiosInstance.delete(endpoint);
   }
 

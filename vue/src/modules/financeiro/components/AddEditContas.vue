@@ -1,6 +1,13 @@
 <template>
   <div class="flex justify-center mx-4">
     <div class="w-full sm:w-1/2 md:w-1/3 painel-tail my-4">
+      <div
+        v-if="err"
+        class="my-1 block text-sm text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 items-center p-2 rounded-lg"
+        role="alert"
+      >
+        {{ err }}
+      </div>
       <div class="p-2  rounded-sm shadow-sm bg-gray-800">
         <div class="flex flex-wrap">
           <!-- <label class="pb-2 text-gray-700 font-semibold">Favorecido</label> -->
@@ -150,7 +157,7 @@
 
 <script>
   /* eslint-disable */
-  import { onMounted, inject } from "vue";
+  import { onMounted, inject, watch } from "vue";
   import router from "@/router";
 
   // import { datePtBrToUs, dateUsToPtBr } from "../../../helpers/helpersDates";
@@ -165,22 +172,33 @@
         addBillsToPay,
         updateBillsToPay,
         ContaAPagar,
+        err,
       } = useFinancial;
-      onMounted(() => {
+
+      function setMode() {
         setEditAddMode(props.mode).then((res) => {
           if (res === "add") {
             addBillsToPay();
-          } else if (res === "edit" && !ContaAPagar.value.ID) {
-            router.push("/financeiro");
           }
+          //  else if (res === "edit" && !ContaAPagar.value.ID) {
+          //   router.push("/financeiro");
+          // }
         });
+      }
+      onMounted(() => {
+        setMode();
       });
+
+      // watch(props.mode, () => {
+      //   setMode();
+      // });
 
       return {
         storeBillsToPay,
 
         updateBillsToPay,
         ContaAPagar,
+        err,
       };
     },
     props: {

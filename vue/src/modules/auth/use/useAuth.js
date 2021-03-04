@@ -13,21 +13,24 @@ export const useAuth = () => {
       await useHttpAuth()
         .login(state.fields)
         .then((res) => {
-          setToken(res.data.token).then((response) => {
-            if (response) {
-              router.push({ name: "Financeiro" });
-            }
-          });
+          if (res && res.data) {
+            setToken(res.data.token).then((response) => {
+              if (response) {
+                router.push({ name: "Financeiro" });
+              }
+            });
+          } else {
+            state.auth.erro = "Erro ao fazer o login";
+          }
         });
     } else {
       state.auth.erro = "Campos Vazios";
-      setToken(null);
+      setToken("");
     }
   }
 
   async function isLogged() {
     if (localStorage.getItem("token") !== state.auth.token) {
-      console.log("entrou aquis");
       let token = "";
       if (
         localStorage.getItem("token") != "null" ||
@@ -53,6 +56,7 @@ export const useAuth = () => {
       state.auth.token == "" ||
       state.auth.token == undefined ||
       state.auth.token == "undefined" ||
+      state.auth.token == "null" ||
       state.auth.token == null ||
       state.auth.token.length == 0
     ) {

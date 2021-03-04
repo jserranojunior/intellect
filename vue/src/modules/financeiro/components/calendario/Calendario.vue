@@ -31,13 +31,13 @@
                 },
               }"
               :start-date="'2020-01-01'"
-              :selected-date="dataSelecionada"
-              @change="(v) => (dataSelecionada = v)"
+              :selected-date="selectedDate"
+              @change="(v) => (selectedDate = v)"
             >
               <input
                 class="cursor-pointer w-full bg-gray-600 appearance-none border-2 border-gray-600 rounded py-2 px-4 text-gray-100 leading-tight focus:outline-none focus:bg-gray-500 focus:border-purple-500"
                 type="date"
-                v-model="dataSelecionada"
+                v-model="selectedDate"
               />
             </VueTailwindPicker>
           </div>
@@ -66,11 +66,8 @@
 </template>
 
 <script>
-  /* eslint-disable */
-
   import VueTailwindPicker from "./VueTailwindPicker";
   import dayjs from "dayjs";
-  // import { mapActions } from "vuex";
   var updateLocale = require("dayjs/plugin/updateLocale");
   dayjs.extend(updateLocale);
 
@@ -115,79 +112,21 @@
     weekdaysShort: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
   });
 
-  function dateJstoUs(value) {
-    var d = new Date(value),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    return [year, month, day].join("-");
-  }
-
+  import { inject, watch, ref } from "vue";
   export default {
-    name: "Calendario",
-    methods: {
-      // ...mapActions(["ActionSetDataSelecionada"]),
-      changeMonth(type) {
-        let alterMonth;
-        let alterDays;
-        let atual = new Date(...this.dataSelecionada.split());
+    setup() {
+      const useFinancial = inject("financial");
+      const { setDataCalendario, Calendario } = useFinancial;
+      let selectedDate = ref(Calendario.value.selectedDate);
 
-        if (type == "previous") {
-          alterMonth = atual.getMonth() - 1;
-          alterDays = atual.getDate() + 1;
-        } else if (type == "next") {
-          alterMonth = atual.getMonth() + 1;
-          alterDays = atual.getDate() + 1;
-        }
-        atual = new Date(atual.setMonth(alterMonth));
-        atual = new Date(atual.setDate(alterDays));
-        this.dataSelecionada = atual.toLocaleDateString("fr-CA");
-      },
-    },
-    components: {
-      VueTailwindPicker,
-    },
-    data() {
-      return {
-        dataSelecionada: "",
-      };
-    },
-    beforeMount() {
-      this.dataSelecionada = new Date().toLocaleDateString("fr-CA");
-      //    this.dataSelecionada = this.calendarData.currentDate
-    },
-    watch: {
-      dataSelecionada() {
-        // this.ActionSetDataSelecionada(this.dataSelecionada);
-      },
-      // calendarData: {
-      //   handler: function () {
-      //     let mes = this.calendarData.currentDate.getMonth();
-      //     let mesEscrito = this.calendarConfigs.monthNames[mes];
-      //     let ano = this.calendarData.currentDate.getFullYear();
-      //     this.dataSelecionada = mesEscrito + " - " + ano;
-      //     let mesFormatado = mes;
-      //     if (mes < 10) {
-      //       mesFormatado = "0" + (mes + 1);
-      //     } else {
-      //       mesFormatado = mes + 1;
-      //     }
-      //     let dataAnoMes = ano + "-" + mesFormatado;
-      //     this.ActionSetDataSelecionada(dataAnoMes);
-      //     this.ActionGetCategoriasContasAPagar(dataAnoMes);
-      //   },
-      //   deep: true,
-      // },
+      watch(selectedDate, () => {
+        setDataCalendario(selectedDate.value);
+      });
+
+      function changeMonth(type) {
+        console.log(type);
+      }
+      return { changeMonth, VueTailwindPicker, selectedDate };
     },
   };
 </script>
-
-<style>
-  .none {
-    display: none;
-  }
-</style>

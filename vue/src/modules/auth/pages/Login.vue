@@ -8,14 +8,14 @@
             <span v-if="auth">
               <div
                 v-if="auth.erro"
-                class="my-1 block text-sm text-left text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 flex items-center p-2 rounded-sm"
+                class="my-1 block text-sm text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 items-center p-2 rounded-lg"
                 role="alert"
               >
                 {{ auth.erro }}
               </div>
               <div
                 v-if="auth.token"
-                class="my-1 block text-sm text-left text-gray-300 text-center bg-green-800 border border-green-900 h-8 flex items-center p-2 rounded-sm"
+                class="my-1 block text-sm  text-gray-300 text-center bg-green-800 border border-green-900 h-8  items-center p-2 rounded-sm"
                 role="alert"
               >
                 Logado com sucesso!
