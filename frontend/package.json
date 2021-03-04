@@ -20,7 +20,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "awesome-mask": "^1.1.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "birthdays": "git+https://github.com/jserranojunior/birthdays.git",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.35",
