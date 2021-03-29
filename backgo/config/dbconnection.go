@@ -1,4 +1,3 @@
-
 package config
 
 import (
@@ -12,10 +11,9 @@ const (
 	dbName = "intellect"
 	dbHost = "mysql_local"
 	dbUser = "root"
-	dbPass = "123"
+	dbPass = "@1Mysql"
 	dbPort = "3306"
 )
-
 
 //Connection export connection mysql
 func Connection() *gorm.DB {
@@ -24,5 +22,5 @@ func Connection() *gorm.DB {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	return db 
+	return db
 }
