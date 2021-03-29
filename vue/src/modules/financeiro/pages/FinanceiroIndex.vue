@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-900 p-1">
     <div class="flex flex-wrap justify-between">
-      <div class="w-full sm:w-full md:w-1/2 p-1">
+      <div class="w-full sm:w-full md:w-1/5 p-1">
         <Calendario></Calendario>
       </div>
       <div class="w-full sm:w-full md:w-1/2 text-right">
