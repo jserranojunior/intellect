@@ -1,8 +1,0 @@
-!aniversarios
-
-☐ Verificar se o formato Brasileiro funciona
-✔ Verificar se a data atual retorna verdadeiro @done(20-09-16 15:37)
-✔ Gerar data de inicio do mês e data final do mês @done(20-09-16 15:37)
-✔ Verificar se a data inserida está entre a data final e a data inicial @done(20-09-16 15:37)
-✔ Verificar se o segundo dia do mes funciona @done(20-09-16 15:57)
-✔ Verificar se o primeiro dia do mes funciona @done(20-09-16 15:57)

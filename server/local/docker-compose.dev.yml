@@ -19,19 +19,34 @@ services:
       - "traefik.http.routers.golang.rule=Host(`golang.localhost`)"
       - "traefik.http.services.golang.loadbalancer.server.port=4000"
         
-
-  intellect_vue:
-    container_name: "intellect_vue"
+  intellect_vite:
+    container_name: "intellect_vite"
     image: "node:lts-alpine"
     working_dir: /app
     volumes:
-      - "../../vue:/app"
-    command: "npm run serve"
+      - "../../vite:/app"
+    command: "npm run dev"
     networks:
       - internal
     ports:
-      - "8081:8080"
+      - "8081:3000"
     labels:
       - "traefik.enable=true"
       - traefik.http.routers.frontintellect.rule=Host(`frontintellect.localhost`)
-      - traefik.http.services.frontintellect.loadbalancer.server.port=8080
+      - traefik.http.services.frontintellect.loadbalancer.server.port=3000
+
+  # intellect_vue:
+  #   container_name: "intellect_vue"
+  #   image: "node:lts-alpine"
+  #   working_dir: /app
+  #   volumes:
+  #     - "../../vue:/app"
+  #   command: "npm run serve"
+  #   networks:
+  #     - internal
+  #   ports:
+  #     - "8081:8080"
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - traefik.http.routers.frontintellect.rule=Host(`frontintellect.localhost`)
+  #     - traefik.http.services.frontintellect.loadbalancer.server.port=8080
