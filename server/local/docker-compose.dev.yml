@@ -19,12 +19,12 @@ services:
       - "traefik.http.routers.golang.rule=Host(`golang.localhost`)"
       - "traefik.http.services.golang.loadbalancer.server.port=4000"
         
-  intellect_vite:
-    container_name: "intellect_vite"
+  intellect_front:
+    container_name: "intellect_front"
     image: "node:lts-alpine"
     working_dir: /app
     volumes:
-      - "../../vite:/app"
+      - "../../front:/app"
     command: "npm run dev"
     networks:
       - internal
