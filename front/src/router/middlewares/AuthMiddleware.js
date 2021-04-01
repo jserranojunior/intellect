@@ -4,6 +4,7 @@ export const AuthMiddleware = () => {
     return useAuth()
       .isLogged()
       .then((res) => {
+        console.log("Auth");
         if (to.name !== "Login" && res) {
           next();
         } else if (to.name !== "Login" && !res) {

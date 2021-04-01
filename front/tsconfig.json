@@ -16,6 +16,26 @@
     "types": ["vite/client"],
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules"]
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/router/middlewares/AuthMiddleware.js"
+  ],
+  "exclude": ["node_modules"],
+  "rules": {
+    // disable the rule for all files
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": ["error"]
+      }
+    }
+  ]
 }

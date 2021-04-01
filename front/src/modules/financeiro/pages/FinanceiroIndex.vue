@@ -2,7 +2,7 @@
   <div class="bg-gray-900 p-1">
     <div class="flex flex-wrap justify-between">
       <div class="w-full sm:w-full md:w-1/5 p-1">
-        <!-- <Calendario></Calendario> -->
+        <Calendario></Calendario>
       </div>
       <div class="w-full sm:w-full md:w-1/2 text-right">
         <router-link to="/financeiro/adicionarconta">
@@ -33,14 +33,14 @@
 // import AddEditContas from "../components/AddEditContas";
 import CategoriaContasAPagar from "../components/CategoriaContasAPagar.vue";
 import FeedbackFinanceiro from "../components/FeedbackFinanceiro.vue";
-// import Calendario from "../components/calendario/Calendario.vue";
+import Calendario from "../components/calendario/Calendario.vue";
 export default {
   setup() {},
   components: {
     CategoriaContasAPagar,
     // AddEditContas,
     FeedbackFinanceiro,
-    // Calendario,
+    Calendario,
   },
 };
 </script>

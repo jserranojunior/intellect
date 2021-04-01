@@ -23,7 +23,10 @@
           </div>
           <div class="painel-footer flex border-t mt-1 p-1">
             <div class="w-2/3">Total</div>
-            <div class="w-1/3 text-right text-sm">
+            <div
+              class="w-1/3 text-right text-sm"
+              v-if="categoriaContas && categoriaContas.TotalCategories"
+            >
               {{ money(categoriaContas.TotalCategories) }}
             </div>
           </div>
