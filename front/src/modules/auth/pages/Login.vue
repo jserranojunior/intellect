@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="h-screen ">
+    <div class="h-screen">
       <div class="px-auto px-6 py-4">
         <div class="flex items-center justify-center mt-16">
           <div class="p-6 max-w-sm w-full bg-gray-800 shadow rounded-md">
@@ -15,33 +15,37 @@
               </div>
               <div
                 v-if="auth.token"
-                class="my-1 block text-sm  text-gray-300 text-center bg-green-800 border border-green-900 h-8  items-center p-2 rounded-sm"
+                class="my-1 block text-sm text-gray-300 text-center bg-green-800 border border-green-900 h-8 items-center p-2 rounded-sm"
                 role="alert"
               >
                 Logado com sucesso!
               </div>
             </span>
             <div class="mt-2">
-              <label class="block">
-                <!-- <span class="text-white text-sm">E-Mail Address</span> -->
-                <input
-                  id="email"
-                  v-model="fields.email"
-                  type="email"
-                  class="form-tail"
-                  placeholder="Email"
-                />
-              </label>
-              <label class="block mt-2">
-                <!-- <span class="text-white text-sm">Password</span> -->
-                <input
-                  id="password"
-                  v-model="fields.password"
-                  type="password"
-                  class="form-tail"
-                  placeholder="Senha"
-                />
-              </label>
+              <form>
+                <label class="block">
+                  <!-- <span class="text-white text-sm">E-Mail Address</span> -->
+                  <input
+                    id="email"
+                    v-model="fields.email"
+                    type="email"
+                    class="form-tail"
+                    placeholder="Email"
+                  />
+                </label>
+                <label class="block mt-2">
+                  <!-- <span class="text-white text-sm">Password</span> -->
+                  <input
+                    id="password"
+                    v-model="fields.password"
+                    type="password"
+                    class="form-tail"
+                    placeholder="Senha"
+                    autocomplete="on"
+                  />
+                </label>
+              </form>
+
               <div class="flex justify-between items-center mt-4">
                 <div class="w-1/2">
                   <label class="">
@@ -90,13 +94,13 @@
 </template>
 
 <script>
-  import { inject } from "vue";
+import { inject } from "vue";
 
-  export default {
-    setup() {
-      const useAuth = inject("auth");
-      const { fields, auth, Login } = useAuth;
-      return { fields, auth, Login };
-    },
-  };
+export default {
+  setup() {
+    const useAuth = inject("auth");
+    const { fields, auth, Login } = useAuth;
+    return { fields, auth, Login };
+  },
+};
 </script>

@@ -64,7 +64,7 @@
 /* eslint-disable */
 import { inject } from "vue";
 
-import { money } from "@/helpers/filters.js";
+import { money } from "@/helpers/filters";
 
 export default {
   setup() {

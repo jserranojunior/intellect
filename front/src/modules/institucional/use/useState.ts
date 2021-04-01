@@ -1,4 +1,5 @@
 import { toRefs, reactive } from "vue";
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useState = () => {
   const state = reactive({
     logo: require("@/assets/imgs/logo.png"),

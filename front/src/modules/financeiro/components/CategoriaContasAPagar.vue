@@ -94,7 +94,7 @@
 <script>
 import router from "@/router/index";
 import { inject, onMounted } from "vue";
-import { money } from "@/helpers/filters.js";
+import { money } from "@/helpers/filters";
 export default {
   setup() {
     const useFinancial = inject("financial");

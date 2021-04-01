@@ -32,10 +32,11 @@
         </div>
 
         <div class="mt-1 flex flex-wrap pt-2">
-          <!-- <label class="pb-2 text-gray-700 font-semibold">Valor</label> -->
+          <label class="pb-2 text-gray-700 font-semibold">Valor</label>
+
           <input
             v-model="ContaAPagar.ValoresContasAPagar.valor"
-            type="text"
+            type="number"
             class="form-tail"
             name="valor"
             required
@@ -173,10 +174,9 @@ export default {
       setEditAddMode(props.mode).then((res) => {
         if (res === "add") {
           addBillsToPay();
+        } else if (res === "edit" && !ContaAPagar.value.ID) {
+          router.push("/financeiro");
         }
-        //  else if (res === "edit" && !ContaAPagar.value.ID) {
-        //   router.push("/financeiro");
-        // }
       });
     }
     onMounted(() => {

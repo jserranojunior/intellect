@@ -20,8 +20,6 @@ export default {
     Sidebar,
   },
   setup() {
-    console.log("abaixo");
-    console.log(import.meta.env.VITE_APP_BACK_API_URL);
     const useAuth = inject("auth");
     const { isLogged } = useAuth;
     isLogged();

@@ -1,10 +1,12 @@
-import { useAuth } from "@/modules/auth/use/useAuth.js";
+import { useAuth } from "@/modules/auth/use/useAuth";
+import {RouteLocationNormalized}  from "vue-router"
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const AuthMiddleware = () => {
-  async function auth(to, from, next) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  async function auth(to: RouteLocationNormalized, from:RouteLocationNormalized, next:Function) {
     return useAuth()
       .isLogged()
       .then((res) => {
-        console.log("Auth");
         if (to.name !== "Login" && res) {
           next();
         } else if (to.name !== "Login" && !res) {

@@ -1,28 +1,34 @@
-import { useHttpAuth } from "./useHttpAuth";
+import useHttpAuth from "./useHttpAuth";
 import { reactive, toRefs } from "vue";
 import router from "@/router/index";
+
+const HttpAuth = new useHttpAuth()
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useAuth = () => {
-  const state = reactive({
+  const state  = reactive({
     ola: "Ola",
-    fields: {},
-    auth: { erro: "", token: "" },
+    fields: {email: "", password: ""},
+    auth: {erro: "",  token: "" },
   });
 
   async function Login() {
     if (state.fields && state.fields.email && state.fields.password) {
-      await useHttpAuth()
-        .login(state.fields)
-        .then((res) => {
+      const Auth = HttpAuth.login(state.fields)
+        Auth.then((res) => {
+      
           if (res && res.data) {
             setToken(res.data.token).then((response) => {
               if (response) {
                 router.push({ name: "Financeiro" });
               }
             });
-          } else {
+          } else {    
             state.auth.erro = "Erro ao fazer o login";
           }
         });
+        Auth.catch(()=>{
+          state.auth.erro = "Erro ao fazer o login";
+        })
     } else {
       state.auth.erro = "Campos Vazios";
       setToken("");
@@ -31,18 +37,20 @@ export const useAuth = () => {
 
   async function isLogged() {
     if (localStorage.getItem("token") !== state.auth.token) {
-      let token = "";
+      let token: string;
       if (
         localStorage.getItem("token") != "null" ||
         localStorage.getItem("token") != "undefined" ||
         localStorage.getItem("token") != null ||
         localStorage.getItem("token") != undefined
       ) {
-        token = localStorage.getItem("token");
+        token = String(localStorage.getItem("token"));
+      }else{
+        token = ""
       }
 
       await setToken(token).then(() => {
-        if (!state.auth && !state.auth.token !== "") {
+        if (state.auth.token == "") {
           state.auth.erro = "Erro ao fazer login";
           return false;
         } else {
@@ -66,7 +74,7 @@ export const useAuth = () => {
     }
   }
 
-  async function setToken(value) {
+  async function setToken(value: string) {
     localStorage.setItem("token", value);
     state.auth.token = value;
     if (value) {

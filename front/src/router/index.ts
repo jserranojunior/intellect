@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { AuthMiddleware } from "./middlewares/AuthMiddleware.js";
+import { AuthMiddleware } from "./middlewares/AuthMiddleware";
 const { auth } = AuthMiddleware();
 
 import Home from "@/modules/institucional/home.vue";
