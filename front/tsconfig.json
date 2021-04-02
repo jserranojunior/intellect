@@ -13,7 +13,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost", "es6"],
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "@types/jest"],
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "paths": {
       "@/*": ["./src/*"]
@@ -28,7 +28,12 @@
 
     "src/modules/api/use/useApiConnect.ts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "**/**/*.spec.ts",
+    "**/*.test.ts"
+  ],
   "rules": {
     // disable the rule for all files
     "@typescript-eslint/explicit-module-boundary-types": "off"

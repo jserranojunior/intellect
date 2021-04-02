@@ -9,13 +9,13 @@ localVue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    Auth
-  }
+    Auth,
+  },
 });
 
 const wrapper = shallowMount(Login, {
   localVue,
-  store
+  store,
 });
 const vm = wrapper.vm;
 
