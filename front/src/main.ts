@@ -1,7 +1,11 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./assets/styles/tail.css";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 
-import  router from "./router/index";
+const oi = "ola";
+console.log(oi);
+
+import router from "./router/index";
 
 createApp(App).use(router).mount("#app");
