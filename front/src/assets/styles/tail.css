@@ -15,7 +15,7 @@
 }
 .form-tail {
   
-  @apply  border border-gray-800 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-gray-200 bg-gray-900 cursor-pointer  shadow
+  @apply  border border-gray-800 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-gray-100 bg-gray-700 cursor-pointer  shadow
 }
 
 .form-tail:focus {

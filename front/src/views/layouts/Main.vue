@@ -1,14 +1,18 @@
 <template>
-  <div class="bg-gray-900 min-h-screen">
-    <Navbar></Navbar>
+  <div class="p-2 bg-gray-700 min-h-screen">
+    <div class="rounded-2xl">
+      <Navbar></Navbar>
+    </div>
     <Sidebar></Sidebar>
-    <div class="">
-      <router-view />
+    <div class="rounded-2xl p-2 mt-2">
+      <div class="">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Navbar from "./Navbar.vue";
 import Sidebar from "./Sidebar.vue";
 import { inject } from "vue";
@@ -19,7 +23,7 @@ export default {
     Navbar,
     Sidebar,
   },
-  setup() {
+  setup(): void {
     const useAuth = inject("auth");
     const { isLogged } = useAuth;
     isLogged();
