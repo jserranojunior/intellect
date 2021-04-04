@@ -46,16 +46,8 @@
       "type": "chrome",
       "request": "launch",
       "url": "http://frontintellect.localhost",
-      "webRoot": "${workspaceFolder}/front/src",
       "userDataDir": true,
-
       "port": 9222
-    },
-    {
-      "name": "Launch Main.ts",
-      "type": "chrome",
-      "request": "launch",
-      "webRoot": "${workspaceFolder}/front/src/main.ts"
     }
   ]
 }
