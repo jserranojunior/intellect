@@ -1,20 +1,21 @@
 package routes
 
-import 	("github.com/gin-gonic/gin"
+import (
+	"../api/auth"
+	"../api/financial/billstopay"
 	"../api/financial/categoriesbillstopay"
-		"../api/financial/billstopay"
-		"../api/financial/financialviews"
-		"../api/financial/paidbills"
-		"../api/auth"
-		"../middlewares"
+	"../api/financial/financialviews"
+	"../api/financial/paidbills"
+	"../api/test"
+	"../middlewares"
+	"github.com/gin-gonic/gin"
 )
-
 
 //Routes return routes gin
 func Routes() *gin.Engine {
 	r := gin.Default()
-r.Use(middlewares.CORSMiddleware())
-r.Use()
+	r.Use(middlewares.CORSMiddleware())
+	r.Use()
 	// HOME
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -23,13 +24,14 @@ r.Use()
 	})
 
 	//  AUTH
-			r.POST("/login", auth.Login)
+	r.POST("/login", auth.Login)
 
-	
+	r.GET("/test", test.Index)
+
 	financial := r.Group("/financial/")
 	// AuthRequired()
 	financial.Use(middlewares.VerifyJwt(), middlewares.CORSMiddleware())
-	{		
+	{
 		financial.GET("/categorias", categoriesbillstopay.Select)
 		financial.GET("/categoriasall", categoriesbillstopay.SelectAll)
 		financial.GET("/viewcategories/:dataanomes", financialviews.GetCategoriesAndBillsMonth)

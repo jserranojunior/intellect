@@ -1,12 +1,14 @@
 import { reactive, toRefs } from "vue";
-import { datePtBrToUs } from "@/helpers/helpersDates";
-import { money } from "@/helpers/filters";
-import router from "@/router/index";
+import { datePtBrToUs } from "../../../helpers/dates/helpersDates";
+// import { money } from "@/helpers/filters/filters";
+import { useRouter } from 'vue-router'
+
 import useHttpFinancial from "./useHttpFinancial";
 const HttpFinancial = new useHttpFinancial();
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useFinancial = () => {
+   const router = useRouter()
 const state = reactive({
   categoriaContas: {},
   editarContaAPagar: {},
@@ -99,7 +101,6 @@ async function editBillsToPay(id: number) {
   if(state.Calendario.selectedDate){
       const Financial = HttpFinancial.edit(id, state.Calendario.selectedDate);
   Financial.then((res) => {
-    console.log(res)
     if(res){
  state.ContaAPagar = res.data.data[0];
     return true;

@@ -1,10 +1,13 @@
 import useHttpAuth from "./useHttpAuth";
 import { reactive, toRefs } from "vue";
-import router from "@/router/index";
+// import { useRouter } from 'vue-router'
+import  router from "@/router/index";
 
 const HttpAuth = new useHttpAuth()
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useAuth = () => {
+
+
   const state  = reactive({
     ola: "Ola",
     fields: {email: "", password: ""},
@@ -86,7 +89,7 @@ export const useAuth = () => {
   }
   function Logout() {
     setToken("");
-    router.push({ name: "Login" });
+    router.push({ name: "Login"});
   }
   return { ...toRefs(state), Logout, Login, isLogged };
 };

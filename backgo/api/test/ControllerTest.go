@@ -2,6 +2,7 @@ package test
 
 import (
 	config "../../config"
+	"github.com/gin-gonic/gin"
 )
 
 var conn = config.Connection()
@@ -12,4 +13,11 @@ func Insert() int64 {
 
 	result := conn.Create(&user)
 	return result.RowsAffected
+}
+
+// Index confirm tests
+func Index(c *gin.Context) {
+	c.JSON(401, gin.H{
+		"data": "It's work",
+	})
 }

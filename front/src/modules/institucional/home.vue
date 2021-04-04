@@ -6,8 +6,9 @@
 
 <script>
 export default {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setup() {
-    const msg = "Seja bem vindo a " + import.meta.env.VITE_APP_NAME;
+    const msg = `Seja bem vindo ao sistema ${process.env.VUE_APP_NAME}`;
     return { msg };
   },
 };

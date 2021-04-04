@@ -46,7 +46,7 @@
         <nav
           :class="
             'flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row ' +
-              { flex: open, hidden: !open }
+            { flex: open, hidden: !open }
           "
         >
           <router-link
@@ -55,7 +55,7 @@
             >Home
           </router-link>
           <router-link
-            v-if="!auth.token"
+            v-if="auth && !auth.token"
             :to="{ name: 'Login' }"
             class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
             href="#"
@@ -91,18 +91,18 @@
 </template>
 
 <script>
-  import { useLayouts } from "./use";
-  import { inject } from "vue";
+import { useLayouts } from "./use";
+import { inject } from "vue";
 
-  export default {
-    setup() {
-      const useAuth = inject("auth");
+export default {
+  setup() {
+    const useAuth = inject("auth");
 
-      const { closeSidebar, open } = useLayouts();
+    const { closeSidebar, open } = useLayouts();
 
-      const { Logout, auth, fields } = useAuth;
+    const { Logout, auth, fields } = useAuth;
 
-      return { Logout, auth, closeSidebar, open, fields };
-    },
-  };
+    return { Logout, auth, closeSidebar, open, fields };
+  },
+};
 </script>

@@ -92,9 +92,9 @@
 </template>
 
 <script>
-import router from "@/router/index";
+import router from "../../../router/index";
 import { inject, onMounted } from "vue";
-import { money } from "@/helpers/filters";
+import { money } from "../../../helpers/filters/filters";
 export default {
   setup() {
     const useFinancial = inject("financial");

@@ -1,8 +1,6 @@
 export function dateUStoJs(value:string): Date | undefined{
   if (value) {
-    const stringValue = String(value);
-    const data = stringValue.replace(/-/g, ",");
-    const date: Date = new Date(data);
+    const date: Date = new Date(value);
     return date;
   }
 }
