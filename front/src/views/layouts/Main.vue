@@ -4,7 +4,7 @@
       <Navbar></Navbar>
     </div>
     <Sidebar></Sidebar>
-    <div class="rounded-2xl p-2 mt-2">
+    <div class="rounded-2xl mt-2">
       <div class="">
         <router-view />
       </div>

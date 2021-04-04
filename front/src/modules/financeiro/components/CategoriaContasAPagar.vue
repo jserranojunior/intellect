@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-900">
+  <div class="flex">
     <div
       v-if="categoriaContas && categoriaContas.CategoriasContasAPagars"
       class="columns mt-1"
