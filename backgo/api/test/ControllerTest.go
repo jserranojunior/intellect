@@ -1,7 +1,7 @@
 package test
 
 import (
-	config "../../config"
+	config "alvitre.com.br/intellect/config"
 	"github.com/gin-gonic/gin"
 )
 

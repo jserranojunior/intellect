@@ -1,13 +1,13 @@
 package auth
 
 import (
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
+	gin "github.com/gin-gonic/gin"
+	bcrypt "golang.org/x/crypto/bcrypt"
 
 	// "net/http"
-	"../../config"
-	"../../middlewares"
-	"../users"
+	"alvitre.com.br/intellect/api/users"
+	"alvitre.com.br/intellect/config"
+	"alvitre.com.br/intellect/middlewares"
 	// "fmt"
 	// "encoding/json"
 )

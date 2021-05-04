@@ -1,18 +1,18 @@
 package db
 
 import (
-	"../api/financial/categoriesbillstopay"
-		"../api/financial/billstopay"
-		"../api/financial/valuesbillstopay"
+	"alvitre.com.br/intellect/api/financial/billstopay"
+	"alvitre.com.br/intellect/api/financial/categoriesbillstopay"
+	"alvitre.com.br/intellect/api/financial/valuesbillstopay"
 
-	"../api/users"
-config	"../config"
-	paidbills "../api/financial/paidbills"
+	paidbills "alvitre.com.br/intellect/api/financial/paidbills"
+	"alvitre.com.br/intellect/api/users"
+	config "alvitre.com.br/intellect/config"
 )
 
 //Migrate exec migrate
 func Migrate() {
 	connection := config.Connection()
 	connection.AutoMigrate(
-	categoriesbillstopay.CategoriasContasAPagars{},	 billstopay.ContasAPagars{}, valuesbillstopay.ValoresContasAPagars{}, paidbills.ContasPagas{}, users.Users{}	)
+		categoriesbillstopay.CategoriasContasAPagars{}, billstopay.ContasAPagars{}, valuesbillstopay.ValoresContasAPagars{}, paidbills.ContasPagas{}, users.Users{})
 }

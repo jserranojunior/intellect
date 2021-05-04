@@ -1,11 +1,9 @@
 package main
 
 import (
-
-		"./routes"
-	"./db"
+	"alvitre.com.br/intellect/db"
+	"alvitre.com.br/intellect/routes"
 	"github.com/gin-gonic/gin"
-	
 )
 
 func main() {
@@ -21,5 +19,3 @@ func Server() string {
 	server.Run(":4000")
 	return "Listen on 4000"
 }
-
-

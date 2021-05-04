@@ -1,6 +1,6 @@
 go get github.com/cespare/reflex &&
-go get -u github.com/gin-gonic/gin &&
-go get -u gorm.io/gorm &&
-go get -u gorm.io/driver/mysql &&
-go get -u github.com/gbrlsnchs/jwt
+go get  github.com/gin-gonic/gin &&
+go get  gorm.io/gorm &&
+go get  gorm.io/driver/mysql &&
+go get  github.com/gbrlsnchs/jwt
 

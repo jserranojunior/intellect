@@ -5,7 +5,7 @@ import (
 
 	"fmt"
 
-	"../../../config"
+	"alvitre.com.br/intellect/config"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,6 +25,7 @@ func StorePaidBills(c *gin.Context) {
 	})
 }
 
+// DeletePaidBills return Delete paid bills
 func DeletePaidBills(c *gin.Context) {
 	var paid ContasPagas
 	id := c.Param("id")
@@ -32,6 +33,7 @@ func DeletePaidBills(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": "Deleted"})
 }
 
+// EditPaidBills return edit paid bills
 func EditPaidBills(c *gin.Context) {
 	var paid ContasPagas
 	id := c.Param("id")

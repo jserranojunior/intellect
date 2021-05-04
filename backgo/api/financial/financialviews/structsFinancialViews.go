@@ -3,7 +3,7 @@ package financialviews
 import (
 	// "../billstopay"
 	// "gorm.io/gorm"
-	"../categoriesbillstopay"
+	"alvitre.com.br/intellect/api/financial/categoriesbillstopay"
 )
 
 //ViewCategoriesAndBillsMonth struct export

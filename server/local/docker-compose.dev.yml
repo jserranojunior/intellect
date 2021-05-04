@@ -7,18 +7,18 @@ networks:
 services:
   intellect_golang:
     container_name: "intellect_golang"
-    image: golang:1.15.7
+    image: golang:1.16.3
     volumes:
       - ../../backgo:/app
       - "/home/alvitre/go:/go"
     networks:
       - internal
-    command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'" 
+    command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.golang.rule=Host(`golang.localhost`)"
       - "traefik.http.services.golang.loadbalancer.server.port=4000"
-        
+
   intellect_front:
     container_name: "intellect_front"
     image: "node:lts-alpine"

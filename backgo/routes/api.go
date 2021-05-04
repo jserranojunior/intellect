@@ -1,14 +1,14 @@
 package routes
 
 import (
-	"../api/auth"
-	"../api/financial/billstopay"
-	"../api/financial/categoriesbillstopay"
-	"../api/financial/financialviews"
-	"../api/financial/paidbills"
-	"../api/test"
-	"../middlewares"
-	"github.com/gin-gonic/gin"
+	"alvitre.com.br/intellect/api/auth"
+	"alvitre.com.br/intellect/api/financial/billstopay"
+	"alvitre.com.br/intellect/api/financial/categoriesbillstopay"
+	"alvitre.com.br/intellect/api/financial/financialviews"
+	"alvitre.com.br/intellect/api/financial/paidbills"
+	"alvitre.com.br/intellect/api/test"
+	"alvitre.com.br/intellect/middlewares"
+	gin "github.com/gin-gonic/gin"
 )
 
 //Routes return routes gin

@@ -1,8 +1,8 @@
 package financialviews
 
 import (
-	db "../../../config"
-	"../categoriesbillstopay"
+	"alvitre.com.br/intellect/api/financial/categoriesbillstopay"
+	db "alvitre.com.br/intellect/config"
 	"github.com/gin-gonic/gin"
 )
 

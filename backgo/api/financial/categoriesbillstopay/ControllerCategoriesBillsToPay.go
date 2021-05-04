@@ -2,7 +2,8 @@ package categoriesbillstopay
 
 import (
 	"net/http"
-	"../../../config"
+
+	"alvitre.com.br/intellect/config"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,7 +22,3 @@ func SelectAll(c *gin.Context) {
 	db.Find(&categories)
 	c.JSON(http.StatusOK, gin.H{"data": categories})
 }
-
-
-
-

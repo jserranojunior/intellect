@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 
-	mysql "gorm.io/driver/mysql"
-	"gorm.io/gorm"
+ "gorm.io/driver/mysql"
+	 "gorm.io/gorm"
 )
 
 const (
