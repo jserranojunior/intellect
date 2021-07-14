@@ -1,9 +1,10 @@
+
 {
   "name": "front",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
     "test": "jest"
@@ -12,7 +13,8 @@
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "slifer": "github:jserranojunior/slifer#0.0.13"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",

@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  intellect_back:
+    image: golang:1.16.3
+    container_name: "intellect_back"
+    volumes:
+      - ${BACKPATH}:/app
+      - ${GOPATH}:/go
+    command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.golang.rule=Host(`golang.${DOMAIN}`)"
+      - "traefik.http.services.golang.loadbalancer.server.port=4000"
+
+  intellect_front:
+    container_name: "intellect_front"
+    image: "node:lts-alpine"
+    working_dir: /app
+    volumes:
+      - ${FRONTPATH}:/app
+    command: "npm run dev"
+    ports:
+      - "8081:3000"
+    labels:
+      - "traefik.enable=true"
+      - traefik.http.routers.frontintellect.rule=Host(`intellect.${DOMAIN}`)
+      - traefik.http.services.frontintellect.loadbalancer.server.port=3000

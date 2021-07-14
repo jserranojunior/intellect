@@ -23,24 +23,29 @@
           <form>
             <label class="block">
               <!-- <span class="text-white text-sm">E-Mail Address</span> -->
-              <input
+              <!-- MUDAR PARA EMAIL  -->
+
+              <SInputT v-model="fields.email" name="email" placeholder="Email" />
+              <!-- <input
                 id="email"
                 v-model="fields.email"
                 type="email"
                 class="form-tail"
                 placeholder="Email"
-              />
+              /> -->
             </label>
             <label class="block mt-2">
               <!-- <span class="text-white text-sm">Password</span> -->
-              <input
+              <!-- MUDAR PARA PASS  -->
+              <SInputT v-model="fields.password" name="password" placeholder="Senha" />
+              <!-- <input
                 id="password"
                 v-model="fields.password"
                 type="password"
                 class="form-tail"
                 placeholder="Senha"
                 autocomplete="on"
-              />
+              /> -->
             </label>
           </form>
 
