@@ -1,21 +1,29 @@
 version: "3"
 
+networks:
+  stack_ponte:
+    external: true
+
 services:
   frontend_intellect:
     container_name: "frontend_intellect"
     image: "webdevops/apache:latest"
+    networks:
+      - stack_ponte
     volumes:
       - "${FRONTPATH}/dist:/app"
     ports:
       - 4080:80
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`,`www.frontintellect.${DOMAIN}`)"
-      - "traefik.http.services.frontintellect.loadbalancer.server.port=80"
+      - "traefik.http.routers.intellect.rule=Host(`intellect.${DOMAIN}`,`www.intellect.${DOMAIN}`)"
+      - "traefik.http.services.intellect.loadbalancer.server.port=80"
 
   backend_intellect:
     container_name: "backend_intellect"
     image: golang:1.16.3
+    networks:
+      - stack_ponte
     volumes:
       - ${BACKPATH}/bin:/app
     ports:
@@ -23,5 +31,5 @@ services:
     command: "/bin/sh -c 'cd /app && ls && ./server'"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.golang.rule=Host(`backintellect.${DOMAIN}`)"
-      - "traefik.http.services.golang.loadbalancer.server.port=4000"
+      - "traefik.http.routers.apiintellect.rule=Host(`apiintellect.${DOMAIN}`)"
+      - "traefik.http.services.apiintellect.loadbalancer.server.port=4000"
