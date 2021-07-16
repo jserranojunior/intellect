@@ -25,7 +25,7 @@
               <!-- <span class="text-white text-sm">E-Mail Address</span> -->
               <!-- MUDAR PARA EMAIL  -->
 
-              <SInputT v-model="fields.email" name="email" placeholder="Email" />
+              <SInputE v-model="fields.email" name="email" placeholder="Email" />
               <!-- <input
                 id="email"
                 v-model="fields.email"
