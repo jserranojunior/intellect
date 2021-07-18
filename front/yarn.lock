@@ -5040,9 +5040,9 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-"slifer@github:jserranojunior/slifer#0.0.14":
+"slifer@github:jserranojunior/slifer#0.0.15":
   version "0.0.14"
-  resolved "https://codeload.github.com/jserranojunior/slifer/tar.gz/02942361ec681ded75e8482e6236aea872117603"
+  resolved "https://codeload.github.com/jserranojunior/slifer/tar.gz/7c51ec6d5ab006863eea3d3a2eb277725ff85288"
   dependencies:
     element-plus "*"
     vue "^3.0.5"

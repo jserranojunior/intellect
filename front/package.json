@@ -13,7 +13,7 @@
     "dayjs": "^1.10.4",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
-    "slifer": "github:jserranojunior/slifer#0.0.14"
+    "slifer": "github:jserranojunior/slifer#0.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",

@@ -8,6 +8,8 @@
         v-for="categoria in categoriaContas.CategoriasContasAPagars"
         :key="categoria.id"
         class="mb-1"
+        class-card="bg-gray-900"
+        class-header="bg-gray-200"
       >
         <template #header>
           <div
