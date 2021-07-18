@@ -16,10 +16,10 @@
 
   <div class="flex flex-wrap mt-1">
     <hr class="border-t border-gray-700 w-full mb-1" />
-    <div class="w-full sm:w-full md:w-full lg:w-4/5 bg-gray-600 p-2 rounded-xl">
+    <div class="w-full sm:w-full md:w-4/5 lg:w-4/5 bg-gray-600 p-2 rounded-xl">
       <CategoriaContasAPagar></CategoriaContasAPagar>
     </div>
-    <div class="w-full sm:w-full md:w-full lg:w-1/5border-l">
+    <div class="w-full sm:w-full md:w-1/5 lg:w-1/5 border-l">
       <FeedbackFinanceiro />
     </div>
   </div>

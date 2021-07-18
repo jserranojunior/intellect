@@ -37,7 +37,7 @@
             <label class="block mt-2">
               <!-- <span class="text-white text-sm">Password</span> -->
               <!-- MUDAR PARA PASS  -->
-              <SInputT v-model="fields.password" name="password" placeholder="Senha" />
+              <SInputP v-model="fields.password" name="password" placeholder="Senha" />
               <!-- <input
                 id="password"
                 v-model="fields.password"
