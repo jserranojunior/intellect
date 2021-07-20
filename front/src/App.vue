@@ -28,3 +28,6 @@ export default {
   },
 };
 </script>
+<style>
+@import "../node_modules/slifer/src/assets/styles/slifer-style.css";
+</style>

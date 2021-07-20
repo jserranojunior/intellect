@@ -1,35 +1,49 @@
 <template>
   <div class="flex flex-wrap">
     <div class="w-full sm:w-1/2 md:w-1/2 lg:w-full p-1">
-      <div class="painel mt-1 shadow-md text-white">
-        <div class="painel-header text-center p-1 rounded-lg text-white bg-red-500">
+      <SCard class="shadow-md">
+        <template #header>
           <p class="painel-title text-sm">TOTAIS</p>
-        </div>
-        <div v-if="categoriaContas && categoriaContas.SomaFormaPagamento">
-          <div
-            v-for="(index, formaPagamento) in categoriaContas.SomaFormaPagamento"
-            :key="index"
-            class="painel-body p-1"
-          >
-            <div class="flex flex-wrap">
-              <div class="w-2/3">{{ formaPagamento }}</div>
-              <div v-if="formaPagamento" class="w-1/3 text-right text-sm">
-                {{ money(index) }}
+        </template>
+        <template #body>
+          <div v-if="categoriaContas && categoriaContas.SomaFormaPagamento">
+            <div
+              v-for="(index, formaPagamento) in categoriaContas.SomaFormaPagamento"
+              :key="index"
+              class="painel-body p-1"
+            >
+              <div class="flex flex-wrap">
+                <div class="w-2/3">{{ formaPagamento }}</div>
+                <div v-if="formaPagamento" class="w-1/3 text-right text-sm">
+                  {{ money(index) }}
+                </div>
+                <div v-else class="w-1/4">{{ money("0") }}</div>
               </div>
-              <div v-else class="w-1/4">{{ money("0") }}</div>
             </div>
           </div>
-        </div>
-        <div class="painel-footer flex border-t mt-1 p-1">
-          <div class="w-2/3">Total</div>
-          <div
-            class="w-1/3 text-right text-sm"
-            v-if="categoriaContas && categoriaContas.TotalCategories"
-          >
-            {{ money(categoriaContas.TotalCategories) }}
+        </template>
+
+        <template #footer>
+          <div class="flex">
+            <div class="w-2/3">Total</div>
+            <div
+              v-if="categoriaContas && categoriaContas.TotalCategories"
+              class="w-1/3 text-right text-sm"
+            >
+              {{ money(categoriaContas.TotalCategories) }}
+            </div>
           </div>
+        </template>
+      </SCard>
+      <!-- <div class="painel mt-1 shadow-md text-white">
+        <div class="painel-header text-center p-1 rounded-lg text-white bg-red-500">
+          
         </div>
-      </div>
+        
+        <div class="painel-footer flex border-t mt-1 p-1">
+
+        </div>
+      </div> -->
     </div>
 
     <div class="w-full sm:w-1/2 md:w-1/2 lg:w-full p-1">

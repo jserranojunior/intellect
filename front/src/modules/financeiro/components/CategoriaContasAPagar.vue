@@ -7,13 +7,11 @@
       <SCard
         v-for="categoria in categoriaContas.CategoriasContasAPagars"
         :key="categoria.id"
-        class="mb-1"
-        class-card="bg-gray-900"
-        class-header="bg-gray-200"
+        class="mb-2 p-0"
       >
         <template #header>
           <div
-            class="categoria-header text-center p-1 rounded-lg w-full bg-gray-800"
+            class="font-bold text-center rounded-lg w-full bg-gray-800"
             :style="{ backgroundColor: categoria.cor }"
           >
             <p class="painel-title text-sm">{{ categoria.nome }}</p>
@@ -82,7 +80,7 @@
         </template>
         <template #footer>
           <div
-            class="painel-footer flex text-center text-sm justify-between px-2 py-1 text-gray-300 w-full border-t border-gray-700"
+            class="painel-footer flex text-center text-sm justify-between px-2 py-1 text-gray-300 w-full border-t border-gray-800"
           >
             <div class="w-full h-1">
               <div class="w-1/2 text-left">Total</div>

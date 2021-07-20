@@ -1,14 +1,10 @@
 @tailwind base;
 
 @tailwind components;
-
 @tailwind utilities;
 
-@layer components {
-  .card{
-    @apply bg-gray-800
-  }
-.toggle-checkbox:checked {
+ @layer components {
+/*.toggle-checkbox:checked {
   @apply: right-0 border-blue-500 bg-blue-400 r-0;
   right: 0;
 }
@@ -44,6 +40,6 @@
 
 .categoria-header{
   @apply text-white font-bold
-}
+} */
 }
 

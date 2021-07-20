@@ -1,15 +1,11 @@
 <template>
-  <div class="flex flex-wrap justify-between rounded-xl bg-gray-800 p-2">
+  <div class="flex flex-wrap justify-between rounded-xl bg-gray-800 p-1">
     <div class="w-full sm:w-1/2 md:w-1/5 lg:w-1/5 p-1">
       <Calendario></Calendario>
     </div>
-    <div class="w-full sm:w-1/2 md:w-1/2 text-right">
+    <div class="w-full sm:w-1/4 md:w-1/4 text-right align-middle">
       <router-link to="/financeiro/adicionarconta">
-        <button
-          class="mr-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 mt-1"
-        >
-          Adicionar Conta
-        </button>
+        <SBtn value="Adicionar Conta" color="blue"></SBtn>
       </router-link>
     </div>
   </div>
