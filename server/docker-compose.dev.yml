@@ -10,6 +10,8 @@ services:
     container_name: "intellect_back"
     networks:
       - stack_ponte
+    ports:
+      - "5080:8000"
     volumes:
       - ${BACKPATH}:/app
       - ${GOPATH}:/go
@@ -17,7 +19,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backintellect.rule=Host(`backintellect.${DOMAIN}`)"
-      - "traefik.http.services.backintellect.loadbalancer.server.port=4000"
+      - "traefik.http.services.backintellect.loadbalancer.server.port=8000"
 
   intellect_front:
     container_name: "intellect_front"

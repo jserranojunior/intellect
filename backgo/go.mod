@@ -1,24 +1,27 @@
-module alvitre.com.br/intellect
+module github.com/jserranojunior/intellect/backgo
+
+replace (
+	github.com/jserranojunior/intellect/backgo/config => ./config
+	github.com/jserranojunior/intellect/backgo/http => ./http
+	github.com/jserranojunior/intellect/backgo/http/handlers => ./http/handlers
+	github.com/jserranojunior/intellect/backgo/http/middlewares => ./http/middlewares
+	github.com/jserranojunior/intellect/backgo/models => ./models
+)
 
 go 1.16
 
 require (
-	github.com/gbrlsnchs/jwt/v3 v3.0.0
-	github.com/gin-gonic/gin v1.7.1
-	github.com/go-playground/validator/v10 v10.5.0 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/gbrlsnchs/jwt/v3 v3.0.1
+	github.com/gin-contrib/cors v1.3.1
+	github.com/gin-gonic/gin v1.7.3
+	github.com/go-playground/validator/v10 v10.8.0 // indirect
+	github.com/gocondor/core v1.4.3
+	github.com/joho/godotenv v1.3.0
 	github.com/json-iterator/go v1.1.11 // indirect
-	github.com/leodido/go-urn v1.2.1 // indirect
-	github.com/magefile/mage v1.11.0 // indirect
-	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
-	github.com/modern-go/reflect2 v1.0.1 // indirect
-	github.com/ogier/pflag v0.0.1
-	github.com/ugorji/go v1.2.5 // indirect
-	golang.org/x/crypto v0.0.0-20210503195802-e9a32991a82e
-	golang.org/x/sys v0.0.0-20210503173754-0981d6026fa6 // indirect
-	golang.org/x/text v0.3.6 // indirect
-	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gorm.io/driver/mysql v1.0.6
-	gorm.io/gorm v1.21.9
+	github.com/mattn/go-isatty v0.0.13 // indirect
+	github.com/ugorji/go v1.2.6 // indirect
+	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
+	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
+	google.golang.org/protobuf v1.27.1 // indirect
+	gorm.io/gorm v1.21.6
 )
