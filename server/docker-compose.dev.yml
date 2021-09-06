@@ -13,7 +13,7 @@ services:
     ports:
       - "5080:8000"
     volumes:
-      - ${BACKPATH}:/app
+      - ${PATHPESSOAL}/intellect/backgo:/app
       - ${GOPATH}:/go
     command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'"
     labels:
@@ -28,7 +28,7 @@ services:
     networks:
       - stack_ponte
     volumes:
-      - ${FRONTPATH}:/app
+      - ${PATHPESSOAL}/intellect/front:/app
     command: "npm run dev"
     ports:
       - "8081:3000"
