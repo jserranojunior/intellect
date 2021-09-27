@@ -27,9 +27,9 @@ services:
     volumes:
       - ${PATHPESSOAL}/intellect/backgo:/app
     ports:
-      - 4010:8000
+      - 4020:8000
     command: "/bin/sh -c 'cd /app && ls && ./main'"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apiintellect.rule=Host(`apiintellect.${DOMAIN}`)"
-      - "traefik.http.services.apiintellect.loadbalancer.server.port=4010"
+      - "traefik.http.services.apiintellect.loadbalancer.server.port=4020"
