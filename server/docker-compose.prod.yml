@@ -27,7 +27,7 @@ services:
     volumes:
       - ${PATHPESSOAL}/intellect/backgo:/app
     ports:
-      - 4010:4000
+      - 4010:8000
     command: "/bin/sh -c 'cd /app && ls && ./main'"
     labels:
       - "traefik.enable=true"
