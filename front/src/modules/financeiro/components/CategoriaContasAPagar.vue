@@ -1,48 +1,35 @@
 <template>
   <div class="flex">
-    <div
-      v-if="categoriaContas && categoriaContas.CategoriasContasAPagars"
-      class="columns mt-1"
-    >
-      <SCard
+    <div v-if="categoriaContas && categoriaContas.CategoriasContasAPagars" class="columns mt-1">
+      <div
+        class="card card-bordered mb-2 p-0 bg-base-100"
         v-for="categoria in categoriaContas.CategoriasContasAPagars"
         :key="categoria.id"
-        class="mb-2 p-0"
       >
-        <template #header>
-          <div
-            class="font-bold text-center rounded-lg w-full bg-gray-800"
+        <div class="card-body p-2">
+          <h2
+            class="card-title text-sm font-bold text-center rounded-lg text-gray-100"
             :style="{ backgroundColor: categoria.cor }"
-          >
-            <p class="painel-title text-sm">{{ categoria.nome }}</p>
-          </div>
-        </template>
-        <template #body>
+          >{{ categoria.nome }}</h2>
           <div
             v-for="contas in categoria.ContasAPagar"
             :key="contas.ID"
-            class="text-center cursor-pointer rounded-lg hover:bg-gray-700 bg-gray-800 text-gray-100 w-full shadow flex flex-wrap border border-gray-700 p-1 mt-1"
+            class="text-center cursor-pointer rounded-lg hover:bg-base-300 bg-base-200 bg-neutral w-full shadow flex flex-wrap border p-1 mt-1"
           >
             <div class="w-1/3">
               <div class="flex">
                 <div class="w-full text-left">
-                  <div
-                    v-if="contas.ContasPagas && contas.ContasPagas.ID > 0"
-                    class="relative"
-                  >
+                  <div v-if="contas.ContasPagas && contas.ContasPagas.ID > 0" class="relative">
                     <label
                       for="checked"
                       class="cursor-pointer"
                       @click="deleteBillPayment(contas.ContasPagas.ID)"
                     >
                       <span>
-                        <span
-                          class="block w-8 h-5 bg-blue-800 rounded-full shadow-inner"
-                        ></span>
+                        <span class="block w-8 h-5 bg-blue-800 rounded-full shadow-inner"></span>
                         <span
                           class="absolute block w-3 h-3 mt-1 ml-1 rounded-full shadow inset-y-0 left-0 focus-within:shadow-outline transition-transform duration-300 ease-in-out bg-blue-300 transform translate-x-full"
-                        >
-                        </span>
+                        ></span>
                       </span>
                     </label>
                   </div>
@@ -53,13 +40,10 @@
                       @click="makeBillPayment(contas.ID)"
                     >
                       <span>
-                        <span
-                          class="block w-8 h-5 bg-red-800 rounded-full shadow-inner"
-                        ></span>
+                        <span class="block w-8 h-5 bg-red-800 rounded-full shadow-inner"></span>
                         <span
                           class="absolute block w-3 h-3 mt-1 ml-1 rounded-full shadow inset-y-0 left-0 focus-within:shadow-outline transition-transform duration-300 ease-in-out bg-red-300"
-                        >
-                        </span>
+                        ></span>
                       </span>
                     </label>
                   </div>
@@ -68,32 +52,21 @@
             </div>
 
             <div class="w-2/3" @click="openEditBillsToPay(contas.ID)">
-              <div class="w-1/2 pointer text-sm">
-                {{ contas.favorecido }}
-              </div>
-              <div v-if="contas.ValoresContasAPagar" class="w-1/2 text-right text-sm">
-                {{ money(contas.ValoresContasAPagar.valor) }}
-              </div>
+              <div class="w-1/2 pointer text-sm">{{ contas.favorecido }}</div>
+              <div
+                v-if="contas.ValoresContasAPagar"
+                class="w-1/2 text-right text-sm"
+              >{{ money(contas.ValoresContasAPagar.valor) }}</div>
               <div v-else class="w-1/2">0</div>
             </div>
           </div>
-        </template>
-        <template #footer>
-          <div
-            class="painel-footer flex text-center text-sm justify-between px-2 py-1 text-gray-300 w-full border-t border-gray-800"
-          >
-            <div class="w-full h-1">
-              <div class="w-1/2 text-left">Total</div>
-              <div class="w-1/2 text-right">{{ money(categoria.Soma) }}</div>
-            </div>
-          </div>
-        </template>
-      </SCard>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import router from "../../../router/index";
 import { inject, onMounted } from "vue";
 import { money } from "../../../helpers/filters/filters";
@@ -142,3 +115,12 @@ div.columns div {
   display: inline-block;
 }
 </style>
+
+.columns {
+  column-width: 210px;
+  column-gap: 5px;
+}
+
+div.columns div {
+  display: inline-block;
+}

@@ -5,12 +5,12 @@
         v-model="selectedDate"
         type="date"
         name="calendario"
-        class="cursor-pointer w-full bg-gray-600 appearance-none border-2 border-gray-600 rounded py-1 px-2 text-gray-100 leading-tight focus:outline-none focus:bg-gray-500 focus:border-purple-500"
+        class="input input-bordered input-sm"
       />
     </form>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { inject, watch, ref } from "vue";
 export default {
   setup() {

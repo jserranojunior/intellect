@@ -1,21 +1,17 @@
 <template>
-  <div
-    id="sidebar"
-    class="left-0 z-10 font-sans w-64 bg-gray-800 border-r border-t border-gray-900 float-left"
-  >
-    <nav class="">
+  <div id="sidebar" class="left-0 z-10 font-sans w-64 bg-base-100 float-left">
+    <nav class>
       <div>
-        <div class="bg-gray-700">
+        <div class="bg-secondary-content">
           <router-link
             to="/"
-            class="py-2 px-16 block text-sm text-gray-100 hover:bg-blue-900 hover:text-white"
+            class="py-2 px-16 block text-sm text-neutral hover:bg-base-300 hover:text-bg-neutral border-b"
             href="#"
-            >Home</router-link
-          >
+          >Home</router-link>
         </div>
 
         <button
-          class="w-full flex justify-between items-center py-3 px-6 text-gray-100 cursor-pointer hover:bg-gray-900 hover:text-gray-100 focus:outline-none"
+          class="w-full flex justify-between items-center py-3 px-6 text-neutral cursor-pointer hover:bg-base-300 hover:text-bg-neutral focus:outline-none border-b"
         >
           <span class="flex items-center">
             <svg
@@ -30,7 +26,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></path>
+              />
             </svg>
 
             <span class="mx-4 font-medium">Dashboard</span>
@@ -50,25 +46,24 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 style="display: none"
-              ></path>
+              />
               <path
                 d="M19 9L12 16L5 9"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></path>
+              />
             </svg>
           </span>
         </button>
 
-        <div class="bg-gray-700">
+        <div class="bg-secondary-content">
           <router-link
             to="/financeiro"
-            class="py-2 px-16 block text-sm text-gray-100 hover:bg-blue-900 hover:text-white"
+            class="py-2 px-16 block text-sm text-neutral hover:bg-base-300 hover:text-bg-neutral border-b"
             href="#"
-            >Financeiro</router-link
-          >
+          >Financeiro</router-link>
         </div>
       </div>
     </nav>

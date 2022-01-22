@@ -1,58 +1,52 @@
 <template>
   <!-- <div class="flex flex-wrap justify-between"> -->
-  <div class="my-auto bg-blue-800 hover:bg-gray-800 rounded-full w-auto">
+  <div class="my-auto bg-base-100 rounded-full w-auto">
     <div class="p-4 cursor-pointer">
-      <svg viewBox="0 0 100 80" width="18" height="18" class="fill-current text-gray-300">
-        <rect width="100" height="20"></rect>
-        <rect y="30" width="100" height="20"></rect>
-        <rect y="60" width="100" height="20"></rect>
+      <svg viewBox="0 0 100 80" width="18" height="18" class="fill-current text-neutral">
+        <rect width="100" height="20" />
+        <rect y="30" width="100" height="20" />
+        <rect y="60" width="100" height="20" />
       </svg>
     </div>
   </div>
-  <div class="text-gray-700 bg-blue-900 rounded-xl w-11/12">
+  <div class="bg-base-200 text-neutral rounded-xl w-11/12">
     <!-- <div class="flex max-w-screen px-2 mx-auto"> -->
     <div class="p-2 flex flex-wrap justify-between my-auto items-center mx-2">
       <div>
-        <a href="#" class="text-lg font-semibold uppercase text-white">Intellect</a>
+        <a href="#" class="text-lg font-semibold uppercase">Intellect</a>
       </div>
 
-      <div class="">
+      <div class>
         <nav :class="'flex flex-wrap my-auto ' + { flex: open, hidden: !open }">
           <router-link
             :to="{ name: 'Home' }"
-            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
-            >Home
-          </router-link>
+            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-base-100 focus:bg-base-200 hover:text-neutral"
+          >Home</router-link>
           <router-link
             v-if="auth && !auth.token"
             :to="{ name: 'Login' }"
-            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-base-100 focus:bg-base-200 hover:text-neutral"
             href="#"
-            >Login
-          </router-link>
+          >Login</router-link>
           <router-link
             v-if="auth.token"
             :to="{ name: 'Cadastro' }"
-            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-base-200 hover:text-bg-gray-300"
             href="#"
-            >Cadastro
-          </router-link>
+          >Cadastro</router-link>
           <router-link
             v-if="auth.token"
             :to="{ name: 'Financeiro' }"
-            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-base-200 hover:text-bg-gray-300"
             href="#"
-          >
-            Financeiro</router-link
-          >
+          >Financeiro</router-link>
 
           <a
             v-if="auth.token"
-            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-gray-600 hover:text-bg-gray-300"
+            class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-gray-400 hover:bg-gray-900 focus:bg-base-200 hover:text-bg-gray-300"
             href="#"
             @click="Logout()"
-            >Sair
-          </a>
+          >Sair</a>
         </nav>
       </div>
       <!-- </div> -->
