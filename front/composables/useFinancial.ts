@@ -41,12 +41,23 @@ const state = reactive({
   err: "",
 });
 
+function  checkExistValueCategorie(categories){
+  
+    let newCategories =  categories.CategoriasContasAPagars.filter(element => {
+     if(element.ContasAPagar.length > 0){
+        return element       
+     } 
+  }); 
+  console.log(newCategories)
+state.categoriaContas.CategoriasContasAPagars = newCategories;
+}
 function getCategoriaContas() {
   if (state.Calendario.selectedDate) {
     const Financial = HttpFinancial.get(state.Calendario.selectedDate);
     Financial.then((res) => {
       if (res && res.data.data) {
-        state.categoriaContas = res.data.data;
+        checkExistValueCategorie(res.data.data)
+        // state.categoriaContas = res.data.data;
       }
     });
   }
@@ -182,6 +193,7 @@ async function setEditAddMode(mode: string) {
     addBillsToPay,
     updateBillsToPay,
     setEditAddMode,
+    checkExistValueCategorie
   };
 };
 

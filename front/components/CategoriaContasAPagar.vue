@@ -2,19 +2,19 @@
   <div class="flex">
     <div v-if="categoriaContas && categoriaContas.CategoriasContasAPagars" class="columns mt-1">
       <div
-        class="card card-bordered mb-2 p-0 bg-base-100"
+        class="card mb-2 bg-neutral-focus border border-gray-700"
         v-for="categoria in categoriaContas.CategoriasContasAPagars"
         :key="categoria.id"
       >
-        <div class="card-body p-2">
+        <div class="card-body p-1">
           <h2
-            class="card-title text-sm font-bold text-center rounded-lg text-gray-100"
+            class="py-1 px-2 w-full card-title text-sm font-bold text-center rounded-lg text-gray-100"
             :style="{ backgroundColor: categoria.cor }"
           >{{ categoria.nome }}</h2>
           <div
             v-for="contas in categoria.ContasAPagar"
             :key="contas.ID"
-            class="text-center cursor-pointer rounded-lg hover:bg-base-300 bg-neutral w-full shadow flex flex-wrap border p-1 mt-1"
+            class="text-center cursor-pointer rounded-lg hover:bg-base-300 bg-neutral w-full shadow flex flex-wrap border border-gray-700 p-1 mt-1"
           >
             <div class="w-1/3">
               <div class="flex">
@@ -50,7 +50,6 @@
                 </div>
               </div>
             </div>
-
             <div class="w-2/3" @click="openEditBillsToPay(contas.ID)">
               <div class="w-1/2 pointer text-sm">{{ contas.favorecido }}</div>
               <div
@@ -70,7 +69,6 @@
 import { defineComponent, onMounted } from "vue";
 import { money } from "@/helpers/filters/filters";
 export default defineComponent({
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setup() {
     const router = useRouter()
     const {
@@ -79,6 +77,7 @@ export default defineComponent({
       makeBillPayment,
       deleteBillPayment,
       editBillsToPay,
+
     } = useFinancial();
 
     async function openEditBillsToPay(id) {
@@ -98,11 +97,11 @@ export default defineComponent({
       makeBillPayment,
       deleteBillPayment,
       openEditBillsToPay,
+
     };
   },
 });
 </script>
-
 <style scoped>
 .columns {
   column-width: 210px;
@@ -112,9 +111,8 @@ export default defineComponent({
 div.columns div {
   display: inline-block;
 }
-</style>
 
-<!-- .columns {
+.columns {
   column-width: 210px;
   column-gap: 5px;
 }
@@ -122,4 +120,4 @@ div.columns div {
 div.columns div {
   display: inline-block;
 }
-</style> -->
+</style> 
