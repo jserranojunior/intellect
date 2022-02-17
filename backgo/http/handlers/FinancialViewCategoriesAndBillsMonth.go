@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"github.com/jserranojunior/intellect/backgo/models"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jserranojunior/intellect/backgo/models"
 )
 
 //GetCategoriesAndBillsMonth return Categories, Bills, Values, Paid
@@ -26,6 +27,7 @@ func GetCategoriesAndBillsMonth(c *gin.Context) {
 	queryContas := "SUBSTRING(inicio_data_pagamento,1,7) <= (?) AND SUBSTRING(fim_data_pagamento,1,7) >= (?)  AND user_id = ?		OR SUBSTRING(inicio_data_pagamento,1,7) <= (?) AND fim_data_pagamento IS NULL  AND user_id = ?	OR SUBSTRING(inicio_data_pagamento,1,7) <= (?) AND fim_data_pagamento = ''  AND user_id = ?"
 	DB.Preload("ContasAPagar", queryContas, dateStart, dateStart, tokenID, dateStart, tokenID, dateStart, tokenID).Preload("ContasAPagar.ValoresContasAPagar", queryValores, dateStart, dateStart).Preload("ContasAPagar.ContasPagas", queryPagas, dateStart, dateStart).Find(&categories)
 
+	fmt.Println(len(categories))
 	for indexCategories := 0; indexCategories < len(categories); indexCategories++ {
 		var somaValoresAPagar = 0.0
 		for indexContas := 0; indexContas < len(categories[indexCategories].ContasAPagar); indexContas++ {
@@ -48,6 +50,6 @@ func GetCategoriesAndBillsMonth(c *gin.Context) {
 
 	c.JSON(200, gin.H{
 		"data": &viewCategories,
-		// "data": ,
+		// "data": tokenID,
 	})
 }

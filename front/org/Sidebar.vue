@@ -1,17 +1,17 @@
 <template>
-  <div id="sidebar" class="left-0 z-10 font-sans w-64 bg-base-100 float-left">
+  <div id="sidebar" class="left-0 z-10 font-sans w-64 bg-neutral float-left">
     <nav class>
       <div>
-        <div class="bg-secondary-content">
+        <div class>
           <router-link
             to="/"
-            class="py-2 px-16 block text-sm text-neutral hover:bg-base-300 hover:text-bg-neutral border-b"
+            class="py-2 px-16 block text-sm text-neutral-content hover:bg-neutral-focus hover:text-bg-neutral border-b border-neutral"
             href="#"
           >Home</router-link>
         </div>
 
         <button
-          class="w-full flex justify-between items-center py-3 px-6 text-neutral cursor-pointer hover:bg-base-300 hover:text-bg-neutral focus:outline-none border-b"
+          class="w-full flex justify-between items-center py-3 px-6 text-neutral-content cursor-pointer hover:bg-neutral-focus hover:text-bg-neutral focus:outline-none border-b border-neutral"
         >
           <span class="flex items-center">
             <svg
@@ -58,10 +58,10 @@
           </span>
         </button>
 
-        <div class="bg-secondary-content">
+        <div class>
           <router-link
             to="/financeiro"
-            class="py-2 px-16 block text-sm text-neutral hover:bg-base-300 hover:text-bg-neutral border-b"
+            class="py-2 px-16 block text-sm text-neutral-content hover:bg-neutral-focus hover:text-bg-neutral border-b border-neutral"
             href="#"
           >Financeiro</router-link>
         </div>
@@ -70,14 +70,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { reactive, toRefs } from "vue"
+
 export default {
   name: "Sidebar",
-  data() {
-    return {
+  setup() {
+    const state = reactive({
       sidebarHeight: 0,
-    };
-  },
+    })
+    return { ...toRefs(state) }
+  }
   // beforeMount() {
   //   this.sidebarHeight = window.innerHeight - 60;
   // }

@@ -10,19 +10,15 @@
         </div>
         <div class="w-full md:w-7/12 text-center md:text-left p-4">
           <div class="text-6xl font-medium">404</div>
-          <div class="text-xl md:text-2xl font-medium mb-4">
-            Oops. Está pagina não existe.
-          </div>
-          <div class="text-lg mb-8">
-            Você pode ter cometido um erro ou está pagina foi removida.
-          </div>
+          <div class="text-xl md:text-2xl font-medium mb-4">Oops. Está pagina não existe.</div>
+          <div class="text-lg mb-8">Você pode ter cometido um erro ou está pagina foi removida.</div>
           <a href="/" class="border border-white rounded p-4">IR PARA A HOME</a>
         </div>
       </div>
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 export default {
   name: "NotFound",
 };
