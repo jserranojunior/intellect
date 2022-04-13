@@ -1,3 +1,4 @@
+import { onMounted } from 'vue';
 <template>
   <div>
     <Html>
@@ -18,6 +19,13 @@
 <script>
 export default {
   setup() {
+const {  isLogged, ola
+} = useAuth()
+onMounted(()=>{
+      isLogged()
+      console.log(ola.value)
+})
+    
     useMeta({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
@@ -33,6 +41,8 @@ export default {
         { rel: 'icon', href: '/favicon.svg' }
       ]
     })
+
+
   }
 
 }

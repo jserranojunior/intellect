@@ -1,101 +1,119 @@
-import { reactive, toRefs } from "vue";
-// import { useRouter } from 'vue-router'
-// import  router from "@/router/index";
-// import { useRoute } from '#imports'
-//  const router = useRoute()
-import { useRouter } from '#imports'
+
+import { useRouter, toRefs } from '#imports'
+import {  } from '#imports'
 const httpAuth = new useHttpAuth();
-
-
 const router = useRouter
+import { defineStore } from 'pinia'
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const useAuth = () => {
+const storeAuth = defineStore('auth', {
+state: () => ({
+    ola:  'Ola de dentro do pinia com composition sem sotre',
+    fields: {"email": "", "password": ""},
+    auth: {erro: "",  token:""}
+  })
+})
 
-  const state  = reactive({
-    ola: "Ola",
-    fields: {email: "", password: ""},
-    auth: {erro: "",  token: "" },
-  });
+ const useAuth = () => {
 
-  async function Login() {
-    if (state.fields && state.fields.email && state.fields.password) {
-      const Auth = httpAuth.login(state.fields)
-        Auth.then((res) => {
-      
-          if (res && res.data) {
-            setToken(res.data.token).then((response) => {
-              if (response) {
-                router().push("financeiro")
-              }
-            });
-          } else {    
-            state.auth.erro = "Erro ao fazer o login";
-          }
-        });
-        Auth.catch(()=>{
-          state.auth.erro = "Erro ao fazer o login";
-        })
-    } else {
-      state.auth.erro = "Campos Vazios";
-      setToken("");
-    }
+    const state  = storeAuth()
+
+  function setLocalStorageToken(token:string){
+    if(process.client){
+      localStorage.setItem("token", token);
+    }    
   }
+  function setStateToken(token:string){
+    state.auth.token = token;  
+  }
+  function setErrorToken(token:string){
+  if (token !== "") {
+    setStateAuthError("");    
+  } else {
+    setStateAuthError("Erro ao fazer login");
+  }
+  }
+  function setStateAuthError(erro:string){
+    state.auth.erro= erro;
+  }
+  function setToken(token: string) {
+    setLocalStorageToken(token)
+    setStateToken(token)
+    setErrorToken(token)
+  }
+  function Logout() {
+    setToken("");
+    setTokenEqualStorageState()
+        setErrorToken("")
 
-  async function isLogged() {
-    if (localStorage.getItem("token") !== state.auth.token) {
-      let token: string;
-      if (
-        localStorage.getItem("token") != "null" ||
-        localStorage.getItem("token") != "undefined" ||
-        localStorage.getItem("token") != null ||
-        localStorage.getItem("token") != undefined
-      ) {
-        token = String(localStorage.getItem("token"));
+    router().push("login");
+  }
+  function checkLocalstorageToken(){
+    if(process.client){
+      if(localStorage.getItem("token") != "null" ||
+      localStorage.getItem("token") != "undefined" ||
+      localStorage.getItem("token") != null ||
+      localStorage.getItem("token") != undefined){
+        return true
       }else{
-        token = ""
-      }
-
-      await setToken(token).then(() => {
-        if (state.auth.token == "") {
-          state.auth.erro = "Erro ao fazer login";
-          return false;
-        } else {
-          return true;
-        }
-      });
+        return false
     }
-    if (
-      !state.auth ||
+    }else{
+      false
+    }
+    
+  }
+  function checkStateToken(){
+    if(!state.auth ||
       !state.auth.token ||
       state.auth.token == "" ||
       state.auth.token == undefined ||
       state.auth.token == "undefined" ||
       state.auth.token == "null" ||
       state.auth.token == null ||
-      state.auth.token.length == 0
-    ) {
-      return false;
-    } else if (state.auth && state.auth.token !== "") {
-      return true;
+      state.auth.token.length == 0){
+        return false
+      }else{
+        return true
+      }
+  }
+  function setTokenEqualStorageState(){
+    if (process.client && checkLocalstorageToken() && localStorage.getItem("token") !== state.auth.token) {       
+        setToken(String(localStorage.getItem("token")));      
     }
+  }
+  async function isLogged() {
+    setTokenEqualStorageState()
+    return checkStateToken()
+
   }
 
-  async function setToken(value: string) {
-    localStorage.setItem("token", value);    
-    state.auth.token = value;
-    if (value) {
-      state.auth.erro = "";
-      return true;
+  async function Login() {
+    if (state.fields && state.fields.email && state.fields.email) {
+      const Auth = httpAuth.login(state.fields)
+        Auth.then((res) => {
+      
+          if (res && res.data) {
+            setToken(res.data.token)
+            if (res.data.token) {
+                router().push("Financeiro")
+              }
+          } else {    
+            setStateAuthError("Erro ao fazer o login");
+          }
+        });
+        Auth.catch(()=>{
+          state.auth.erro = "Erro ao fazer o login";
+        })
     } else {
-      return false;
+      setStateAuthError("Campos Vazios");
+      setToken("");
     }
   }
-  function Logout() {
-    setToken("");
-    const token = useCookie('token')
-    token.value = ""
-    router().push("login");
-  }
+ 
+
+
+
   return { ...toRefs(state), Logout, Login, isLogged };
 };
+
+export default useAuth

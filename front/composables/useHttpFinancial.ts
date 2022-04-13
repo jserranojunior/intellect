@@ -8,6 +8,7 @@ class httpFinancial {
     }).catch((err) => {
       // eslint-disable-next-line
       console.log(err);
+      console.log(err.response);
     });
   }
     async  edit(id: number, dataSelecionada: string){

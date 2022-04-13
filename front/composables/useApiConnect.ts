@@ -60,25 +60,31 @@ class apiConnect {
     });
 
       
-          this.axiosInstance = this.axios.create({
+
+    
+
+
+  }
+async checkTokenStorage(){ 
+
+if(process.client){
+  this.token = localStorage.getItem("token")
+}else{
+  this.token = ""
+}
+  console.log("CHECANDO")
+  console.log(this.token)
+}
+  async get(endpoint: string): Promise<void | AxiosResponse> {
+              
+               this.checkTokenStorage()
+              this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
         "Content-Type": "application/json",
       },
     });
-    
-
-
-  }
-async checkTokenStorage(){ 
-if(process.client){
-  this.token = localStorage.getItem("token")
-}else{
-  this.token = ""
-}
-}
-  async get(endpoint: string): Promise<void | AxiosResponse> {
     return this.axiosInstance.get(endpoint);
   }
 
@@ -86,6 +92,14 @@ if(process.client){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
+               this.checkTokenStorage()
+              this.axiosInstance = this.axios.create({
+      baseURL: this.backApiUrl,
+      headers: {
+        Authorization: "Bearer " + this.token,
+        "Content-Type": "application/json",
+      },
+    });
     return this.axiosInstance.post(endpoint, body);
   }
 
@@ -93,16 +107,40 @@ if(process.client){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
+               this.checkTokenStorage()
+              this.axiosInstance = this.axios.create({
+      baseURL: this.backApiUrl,
+      headers: {
+        Authorization: "Bearer " + this.token,
+        "Content-Type": "application/json",
+      },
+    });
     return this.axiosInstance.put(endpoint, body);
   }
   async patch(
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
+               this.checkTokenStorage()
+              this.axiosInstance = this.axios.create({
+      baseURL: this.backApiUrl,
+      headers: {
+        Authorization: "Bearer " + this.token,
+        "Content-Type": "application/json",
+      },
+    });
     return this.axiosInstance.patch(endpoint, body);
   }
 
   async delet(endpoint: string): Promise<void | AxiosResponse> {
+               this.checkTokenStorage()
+              this.axiosInstance = this.axios.create({
+      baseURL: this.backApiUrl,
+      headers: {
+        Authorization: "Bearer " + this.token,
+        "Content-Type": "application/json",
+      },
+    });
     return this.axiosInstance.delete(endpoint);
   }
 
@@ -110,6 +148,14 @@ if(process.client){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
+               this.checkTokenStorage()
+              this.axiosInstance = this.axios.create({
+      baseURL: this.backApiUrl,
+      headers: {
+        Authorization: "Bearer " + this.token,
+        "Content-Type": "application/json",
+      },
+    });
     return this.axiosImage.post(endpoint, body);
   }
 

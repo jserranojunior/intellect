@@ -4,7 +4,9 @@
       <template #header>
         <Navbar />
       </template>
-      <template #sidebar>SIDEBAR</template>
+      <template #sidebar>
+        <Sidebar/>
+      </template>
       <template #mainpage>
         <slot />
       </template>

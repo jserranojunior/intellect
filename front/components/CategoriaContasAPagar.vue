@@ -2,11 +2,11 @@
   <div class="flex">
     <div v-if="categoriaContas && categoriaContas.CategoriasContasAPagars" class="columns mt-1">
       <div
-        class="card mb-2 bg-neutral-focus border border-gray-700"
+        class="card mb-2 bg-neutral border border-gray-600 "
         v-for="categoria in categoriaContas.CategoriasContasAPagars"
         :key="categoria.id"
       >
-        <div class="card-body p-1">
+        <div class="card-body p-1 text-gray-50">
           <h2
             class="py-1 px-2 w-full card-title text-sm font-bold text-center rounded-lg text-gray-100"
             :style="{ backgroundColor: categoria.cor }"
@@ -14,7 +14,7 @@
           <div
             v-for="contas in categoria.ContasAPagar"
             :key="contas.ID"
-            class="text-center cursor-pointer rounded-lg hover:bg-base-300 bg-neutral w-full shadow flex flex-wrap border border-gray-700 p-1 mt-1"
+            class="text-center cursor-pointer rounded-lg hover:bg-neutral-focus  bg-neutral w-full shadow flex flex-wrap border border-gray-700 p-1 mt-1"
           >
             <div class="w-1/3">
               <div class="flex">
@@ -70,6 +70,9 @@ import { defineComponent, onMounted } from "vue";
 import { money } from "@/helpers/filters/filters";
 export default defineComponent({
   setup() {
+    const { fields, auth, Logout, ola } = useAuth();
+
+
     const router = useRouter()
     const {
       categoriaContas,

@@ -5,20 +5,33 @@
     >
       <slot name="header"></slot>
     </nav>
-    <div
+    <!-- <div
       class="flex w-full h-screen bg-neutral text-neutral-content dark:bg-gray-700 dark:text-gray-100"
-    >
-      <div
-        class="sidebar w-64 bg-neutral text-neutral-content rounded p-1 shadow-lg dark:bg-gray-700 dark:text-gray-100"
-      >
-        <div class="flex flex-wrap items-center p-1 text-sm">
-          <slot name="sidebar"></slot>
-        </div>
-      </div>
-      <!-- sm:w-8/12 md:w-10/12 lg:w-11/12 xl:w-11/12  -->
-      <div class="w-full p-2 bg-neutral-focus dark:bg-gray-600 dark:text-gray-100">
-        <slot name="mainpage"></slot>
-      </div>
+    > -->
+
+    <div class="drawer  bg-neutral-focus dark:bg-gray-700 dark:text-gray-100 min-h-screen">
+  <input id="my-drawer" type="checkbox" class="drawer-toggle">
+  <div class="drawer-content">
+
+<slot name="mainpage"></slot>
+  </div> 
+  <div class="drawer-side">
+    <label for="my-drawer" class="drawer-overlay"></label>
+     <slot name="sidebar"></slot>
+    <!-- <ul class="menu p-4 overflow-y-auto w-80 bg-neutral text-neutral-content">
+
+      <li><a>Sidebar Item 1</a></li>
+      <li><a>Sidebar Item 2</a></li>
+    
+    </ul> -->
+  <!-- </div> -->
+</div>
+
+
+         
+      <!-- <div class="w-full p-2 bg-neutral-focus dark:bg-gray-600 dark:text-gray-100">
+        
+      </div> -->
     </div>
   </div>
 </template>
