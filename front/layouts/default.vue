@@ -5,7 +5,7 @@
         <Navbar />
       </template>
       <template #sidebar>
-        <Sidebar/>
+        <Sidebar />
       </template>
       <template #mainpage>
         <slot />
@@ -18,7 +18,6 @@
 
 
 <script>
-// This will also work in `<script setup>`
 definePageMeta({
   layout: "custom",
 });
