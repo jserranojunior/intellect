@@ -10,7 +10,8 @@
   "dependencies": {
     "daisyui": "^2.15.2",
     "vite-plugin-env-compatible": "^1.1.1",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

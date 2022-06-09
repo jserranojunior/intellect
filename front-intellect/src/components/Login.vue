@@ -82,12 +82,11 @@
 </template> -->
 
 <template>
-  <div>
-      FUNCIONANDO
-  </div>
+  <div>FUNCIONANDO {{ ola }} --</div>
 </template>
-<script setup>
-
-const { fields, auth, Login, ola } = useAuth();
-
+<script setup lang="ts">
+//const { fields, auth, Login, ola } = useAuth();
+import { useAuth } from "../composables/useAuth";
+const { ola, returnTrue } = useAuth();
+console.log(returnTrue, "RRR");
 </script>

@@ -1,16 +1,11 @@
+import { reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
 
-import { useRouter, toRefs } from '#imports'
-import {  } from '#imports'
+
 // const httpAuth = new useHttpAuth();
-const router = useRouter
-// import { defineStore } from 'pinia'
 
-// const storeAuth = defineStore('auth', {
-
-
- const useAuth = () => {
-
-    // const state  = storeAuth()
+ export function useAuth() {
+   const router = useRouter
 const state = reactive({
     ola:  'Ola de dentro do pinia com composition sem sotre',
     fields: {"email": "", "password": ""},
@@ -19,9 +14,9 @@ const state = reactive({
 // })
 
   function setLocalStorageToken(token:string){
-    if(process.client){
-      localStorage.setItem("token", token);
-    }    
+   // if(process.client){
+   //   localStorage.setItem("token", token);
+  //  }    
   }
   function setStateToken(token:string){
     state.auth.token = token;  
@@ -49,18 +44,18 @@ const state = reactive({
     router().push("login");
   }
   function checkLocalstorageToken(){
-    if(process.client){
-      if(localStorage.getItem("token") != "null" ||
-      localStorage.getItem("token") != "undefined" ||
-      localStorage.getItem("token") != null ||
-      localStorage.getItem("token") != undefined){
-        return true
-      }else{
-        return false
-    }
-    }else{
-      false
-    }
+   // if(process.client){
+   //   if(localStorage.getItem("token") != "null" ||
+    //  localStorage.getItem("token") != "undefined" ||
+    //  localStorage.getItem("token") != null ||
+   //   localStorage.getItem("token") != undefined){
+     //   return true
+    //  }else{
+    //    return false
+   // }
+  //  }else{
+   //   false
+   // }
     
   }
   function checkStateToken(){
@@ -78,9 +73,9 @@ const state = reactive({
       }
   }
   function setTokenEqualStorageState(){
-    if (process.client && checkLocalstorageToken() && localStorage.getItem("token") !== state.auth.token) {       
-        setToken(String(localStorage.getItem("token")));      
-    }
+  //  if (process.client && checkLocalstorageToken() && localStorage.getItem("token") !== state.auth.token) {       
+   //     setToken(String(localStorage.getItem("token")));      
+   // }
   }
   async function isLogged() {
     setTokenEqualStorageState()
@@ -110,11 +105,11 @@ const state = reactive({
       setToken("");
     }
   }
- 
+ function returnTrue(){
+   console.log("tru")
+ }
 
 
 
-  return { ...toRefs(state), Logout, Login, isLogged };
+  return { ...toRefs(state), returnTrue, Logout, Login, isLogged };
 };
-
-export default useAuth
