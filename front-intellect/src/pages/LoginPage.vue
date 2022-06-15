@@ -1,11 +1,7 @@
 <template>
   <Login></Login>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+// @ts-ignore
 import Login from "../components/Login.vue";
-export default {
-  components: {
-    Login,
-  },
-};
 </script>

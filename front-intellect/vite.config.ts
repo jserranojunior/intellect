@@ -24,7 +24,7 @@ export default ({ command }) => {
       },
       server: {
         host: "0.0.0.0",
-        hmr: { clientPort: 80 },
+        hmr: { clientPort: 3000 },
       },
     };
   } else if (command === "build") {

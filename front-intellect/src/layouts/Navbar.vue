@@ -12,85 +12,12 @@
           <rect y="30" width="100" height="20" />
           <rect y="60" width="100" height="20" /></svg
       ></label>
-
       <div class>
         <nav :class="'flex flex-wrap my-auto'">
-          <!--  <NuxtLink
-            to="/"
-            class="
-              px-4
-              py-2
-              text-sm
-              font-semibold
-              rounded-lg
-              focus:shadow-outline
-              mx-1
-              md:mt-0
-              text-neutral-content
-              hover:bg-neutral-focus
-              focus:bg-neutral-focus
-            "
-          >
-            Home</NuxtLink
-          >
-          <NuxtLink
-            v-if="auth && !auth.token"
-            to="/LoginPage"
-            class="
-              px-4
-              py-2
-              text-sm
-              font-semibold
-              rounded-lg
-              focus:shadow-outline
-              mx-1
-              md:mt-0
-              text-neutral-content
-              hover:bg-neutral-focus
-              focus:bg-neutral-focus
-            "
-          >
-            Login</NuxtLink
-          >
-          <NuxtLink
-            v-if="auth.token"
-            to="/financeiro"
-            class="
-              px-4
-              py-2
-              text-sm
-              font-semibold
-              rounded-lg
-              focus:shadow-outline
-              mx-1
-              md:mt-0
-              text-neutral-content
-              hover:bg-neutral-focus
-              focus:bg-neutral-focus
-            "
-          >
-            Financeiro</NuxtLink
-          >
-       
-          <a
-            v-if="auth.token"
-            class="
-              px-4
-              py-2
-              text-sm
-              font-semibold
-              rounded-lg
-              focus:shadow-outline
-              mx-1
-              md:mt-0
-              text-neutral-content
-              focus:bg-neutral-focus
-              hover:text-bg-gray-300
-            "
-            href="#"
-            @click="Logout()"
-            >Sair</a
-          >   -->
+        <router-link   class="btn  btn-sm mx-1" :to="'/'">Home</router-link>
+        <router-link   class="btn  btn-sm mx-1" :to="'/login'">Login</router-link>
+         <router-link   class="btn  btn-sm mx-1" :to="'/financeiro'">Financeiro</router-link>
+
         </nav>
       </div>
     </div>

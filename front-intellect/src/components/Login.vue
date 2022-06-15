@@ -1,9 +1,12 @@
-<!-- <template>
-  <div class="px-auto my-auto">
-    <div class="flex items-center justify-center my-4">
-      <div class="p-6 max-w-sm w-full bg-gray-800 shadow rounded-md">
-        <h3 class="text-white text-xl text-center">Login</h3>
-        <span v-if="auth">
+<template>
+  <div>
+    <div class="context">
+ <div class="flex items-center justify-center my-4">
+  <div class="px-auto my-auto ">
+    <div class="card w-96 shadow-xl mt-12 ">
+  <div class="card-body bg-base-300">
+    <h2 class="card-title">Login</h2>
+            <span v-if="auth">
           <div
             v-if="auth.erro"
             class="my-1 block text-sm text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 items-center p-2 rounded-lg"
@@ -15,14 +18,14 @@
             role="alert"
           >Logado com sucesso!</div>
         </span>
-        <div class="mt-2">
-          <form class="form-control">
+
+         <form class="form-control">
             <label class="block">
               <input
                 id="email"
                 v-model="fields.email"
                 type="email"
-                class="input input-sm input-bordered w-full max-w-xs text-black bg-gray-300"
+                class="input input-sm w-full max-w-xs input-bordered"
                 placeholder="Email"
               />
             </label>
@@ -31,13 +34,12 @@
                 id="password"
                 v-model="fields.password"
                 type="password"
-                class="input input-sm input-bordered w-full max-w-xs text-black bg-gray-300"
+                class="input input-sm w-full max-w-xs input-bordered"
                 placeholder="Senha"
                 autocomplete="on"
               />
             </label>
           </form>
-
           <div class="flex justify-between items-center mt-4">
             <div class="w-1/2">
               <label class>
@@ -46,7 +48,7 @@
             </div>
             <div class="w-1/2">
               <button
-                class="w-full py-2 px-4 text-center bg-blue-800 rounded-md text-white text-sm hover:bg-blue-800 focus:outline-none"
+                class="w-full py-2 px-4  rounded-md btn btn-sm"
                 @click="Login()"
               >LOGAR</button>
             </div>
@@ -55,7 +57,7 @@
           <div class="mt-2 border-t">
             <div class="social-auth-links text-center my-3">
 
-              <div class="flex justify-between">
+              <!-- <div class="flex justify-between">
                 <div class="w-1/2 text-left">
                   <a
                     href="#"
@@ -72,21 +74,23 @@
                     <i class="fab fa-google-plus"></i>Google+
                   </a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template> -->
 
-<template>
-  <div>FUNCIONANDO {{ ola }} --</div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<efectCircles></efectCircles>
+  </div>
 </template>
+
 <script setup lang="ts">
-//const { fields, auth, Login, ola } = useAuth();
-import { useAuth } from "../composables/useAuth";
-const { ola, returnTrue } = useAuth();
-console.log(returnTrue, "RRR");
+import efectCircles from "../components/efectCircles.vue"
+import { useAuth, } from "../composables/useAuth";
+
+const { auth, fields, returnTrue } = useAuth();
+
 </script>

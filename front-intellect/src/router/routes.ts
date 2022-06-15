@@ -1,6 +1,4 @@
-import { RouteRecordRaw } from 'vue-router';
-
-const routes: RouteRecordRaw[] = [
+const routes  = [
   {
     path: '/',
     component: () => import('../pages/IndexPage.vue')
@@ -8,14 +6,15 @@ const routes: RouteRecordRaw[] = [
    {
     path: '/login',
     component: () => import('../pages/LoginPage.vue')
-          },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  //{
-  //  path: '/:catchAll(.*)*',
-  //  component: () => import('pages/ErrorNotFound.vue'),
-  //},
+   },
+      {
+    path: '/financeiro',
+    component: () => import('../pages/Financeiro.vue')
+   },
+  {
+    path: '/:catchAll(.*)*',
+    component: () => import('../pages/ErrorNotFound.vue'),
+  },
 ];
 
 export default routes;

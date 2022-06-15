@@ -1,10 +1,15 @@
 <template>
   <ul class="menu p-4 overflow-y-auto w-80 bg-neutral text-neutral-content">
-    asd
+    <li>
+      <router-link   class="font-bold btn-sm m-1" :to="'/'">Home</router-link>
+    </li>
+        <li>
+      <router-link   class="font-bold btn-sm m-1" :to="'/login'">Login</router-link>
+    </li>
     <!--
     <li>
       <NuxtLink to="/"
-        class="px-4 py-2 text-sm font-semibold rounded-lg focus:shadow-outline mx-1 md:mt-0 text-neutral-content hover:bg-neutral-focus focus:bg-neutral-focus">
+        class="">
         Home</NuxtLink>
     </li>
     <li v-if="auth && !auth.token">
