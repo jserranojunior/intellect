@@ -1,10 +1,10 @@
 <template>
   <ul class="menu p-4 overflow-y-auto w-80 bg-neutral text-neutral-content">
     <li>
-      <router-link   class="font-bold btn-sm m-1" :to="'/'">Home</router-link>
+      <router-link   class=" btn-sm m-1 btn btn-primary" :to="'/'">Home</router-link>
     </li>
         <li>
-      <router-link   class="font-bold btn-sm m-1" :to="'/login'">Login</router-link>
+      <router-link   class=" btn-sm m-1 btn btn-primary" :to="'/login'">Login</router-link>
     </li>
     <!--
     <li>

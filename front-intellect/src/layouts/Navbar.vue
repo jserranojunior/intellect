@@ -14,9 +14,9 @@
       ></label>
       <div class>
         <nav :class="'flex flex-wrap my-auto'">
-        <router-link   class="btn  btn-sm mx-1" :to="'/'">Home</router-link>
-        <router-link   class="btn  btn-sm mx-1" :to="'/login'">Login</router-link>
-         <router-link   class="btn  btn-sm mx-1" :to="'/financeiro'">Financeiro</router-link>
+        <router-link   class="  btn-sm mx-1 btn btn-primary" :to="'/'">Home</router-link>
+        <router-link   class="  btn-sm mx-1 btn btn-primary" :to="'/login'">Login</router-link>
+         <router-link   class="  btn-sm mx-1 btn btn-primary" :to="'/financeiro'">Financeiro</router-link>
 
         </nav>
       </div>

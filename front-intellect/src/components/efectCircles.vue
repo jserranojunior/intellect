@@ -67,6 +67,7 @@ body {
   animation: animate 25s linear infinite;
   bottom: -150px;
 }
+  /*  */
 
 .circles li:nth-child(1) {
   left: 25%;

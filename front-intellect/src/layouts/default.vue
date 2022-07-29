@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-neutral-content">
+  <div class="bg-base-100">
     <nav
       class="
         font-sans
@@ -22,8 +22,6 @@
     <div
       class="
         drawer
-        bg-neutral-focus
-        dark:bg-gray-700 dark:text-gray-100
         min-h-screen
       "
     >

@@ -5,8 +5,8 @@
         <!-- <Calendario /> -->
       </div>
       <div class="w-full sm:w-1/4 md:w-1/4 text-right p-1">
-        <button class="btn btn-sm btn-active btn-primary hover:bg-blue-400">
-
+        <button class="btn btn-accent btn-xs">
+            Nova conta
         </button>
       </div>
     </div>

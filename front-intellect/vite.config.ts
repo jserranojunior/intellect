@@ -23,8 +23,9 @@ export default ({ command }) => {
         alias: [{ find: "@", replacement: "/src" }],
       },
       server: {
-        host: "0.0.0.0",
-        hmr: { clientPort: 3000 },
+        host: true,
+        port: 3000,
+        hmr: { clientPort: 80 },
       },
     };
   } else if (command === "build") {
@@ -53,7 +54,7 @@ export default ({ command }) => {
         host: "0.0.0.0",
         port: 5000,
         https: true,
-        hmr: { host: "http://intellect.localhost", port: 443 },
+        hmr: { host: "http://frontintellect.localhost", port: 443 },
       },
       build: {
         chunkSizeWarningLimit: 2000,

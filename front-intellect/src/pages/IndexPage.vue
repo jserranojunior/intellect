@@ -11,5 +11,5 @@
 import { ref } from 'vue'
 import efectCircles from "../components/efectCircles.vue"
 
-const msg = ref(`Seja bem vindo ao sistema intellect!`);
+const msg = ref(`Bem vindo ao futuro da organização financeira!`);
 </script >
