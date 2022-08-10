@@ -28,7 +28,9 @@ export default ({ command }) => {
         hmr: { clientPort: 80 },
       },
     };
-  } else if (command === "build") {
+  
+  }
+  else if (command === "build") {
     return {
       plugins: [vue(), envCompatible()],
       resolve: {

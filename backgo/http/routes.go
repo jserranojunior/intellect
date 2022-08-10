@@ -18,7 +18,11 @@ func RegisterRoutes() {
 	router.Get("/user", handlers.UserCreate)
 	router.Get("/", handlers.HomeShow)
 
-	router.Post("/login", handlers.AuthLogin)
+	
+			router.Post("/login", middlewares.CORSMiddleware, handlers.AuthLogin)
+	
+
+	
 
 	financial := router.Group("/financial/")
 	// financial.Use(middlewares.VerifyJwt, middlewares.CORSMiddleware())
