@@ -1,29 +1,33 @@
 
-const ApiConnect = new useApiConnect();
-class httpAuth { 
-  async login(data: Record<string, unknown>){
+import ClassUseApiConnect from "./useApiConnect"
+const  ApiConnect = new ClassUseApiConnect()
+
+ export function useHttpAuth() {
+ async function login(data: Record<string, unknown>){
+  console.log("LOGIN SENDO FEITO")
     const urlApi = "/login";
-    return await ApiConnect.postWithoutToken(urlApi, data)
-      .then((response) => {
+     return await ApiConnect.postWithoutToken(urlApi, data)
+      .then((response:any) => {
         return response;
       })
-      .catch((err) => {
+      .catch((err:any) => {
         // eslint-disable-next-line
         console.log(err);
-      });
+      }); 
   }
 
-  async register(data: Record<string, unknown>) {
-    const urlApi = "/user";
+async  function register(data: Record<string, unknown>) {
+   const urlApi = "/user";
     return await ApiConnect.postWithoutToken(urlApi, data)
-      .then((response) => {
+      .then((response:any) => {
         return response;
       })
-      .catch((err) => {
+      .catch((err:any) => {
         // eslint-disable-next-line
         console.log(err);
-      });
+      }); 
   }
-}
 
-export default httpAuth;
+
+return {login, register};
+ }

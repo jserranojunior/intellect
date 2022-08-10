@@ -59,11 +59,6 @@ class apiConnect {
       baseURL: this.backApiUrl,
     });
 
-      
-
-    
-
-
   }
 async checkTokenStorage(){ 
 

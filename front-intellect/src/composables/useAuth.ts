@@ -1,8 +1,7 @@
 import { reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
-
-
-// const httpAuth = new useHttpAuth();
+import {useHttpAuth} from "./useHttpAuth"
+const {login, register} = useHttpAuth()
 
  export function useAuth() {
    const router = useRouter
@@ -84,10 +83,11 @@ const state = reactive({
   }
 
   async function Login() {
-    if (state.fields && state.fields.email && state.fields.email) {
-      const Auth = httpAuth.login(state.fields)
+    console.log(state.fields)
+     if (state.fields && state.fields.email) {
+   const Auth = useHttpAuth.login(state.fields)
         Auth.then((res) => {
-      
+            console.log(res)
           if (res && res.data) {
             setToken(res.data.token)
             if (res.data.token) {
@@ -103,7 +103,7 @@ const state = reactive({
     } else {
       setStateAuthError("Campos Vazios");
       setToken("");
-    }
+    } 
   }
  function returnTrue(){
    console.log("tru")
