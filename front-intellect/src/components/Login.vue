@@ -32,7 +32,7 @@
                   </label>
                 </div>
                 <div class="w-1/2">
-                  <button class="w-full py-2 px-4  rounded-md btn btn-sm" @click="Login()">LOGAR</button>
+                  <button class="w-full py-2 px-4  rounded-md btn btn-sm" @click="logar()">LOGAR</button>
                 </div>
               </div>
 
@@ -70,13 +70,24 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+  const router = useRouter()
 
 import { onMounted } from "vue";
 import { useAuth, } from "../composables/useAuth";
+  function redirectPageTo(url:string){ 
+    console.log("Redirecionando")
+    router.push({ path: url })              
+  }
+  function logar(){
+    Login().then(()=>{
+         redirectPageTo("/financeiro")
+      })
+  }
 onMounted(() => {
   document.addEventListener('keyup', function (event) {
     if (event.key == "Enter") {
-      Login();
+      logar();
     }
   });
 

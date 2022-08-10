@@ -35,7 +35,7 @@ class apiConnect {
   public token: any;
   public axiosImage: AxiosInstance;
   public axiosWithoutToken: AxiosInstance;
-  public axiosInstance: AxiosInstance;
+  public axiosInstance: AxiosInstance | undefined;
   public backApiUrl: string;
   public axios: AxiosStatic
 
@@ -60,16 +60,24 @@ class apiConnect {
     });
 
   }
+  
 async checkTokenStorage(){ 
 
-if(process.client){
+if(this.checkOnBrowser()){
   this.token = localStorage.getItem("token")
 }else{
   this.token = ""
 }
-  console.log("CHECANDO")
-  console.log(this.token)
+
 }
+ checkOnBrowser(){
+  if (typeof window !== 'undefined') {  
+ return true
+} else {
+  
+  return false
+}
+  }
   async get(endpoint: string): Promise<void | AxiosResponse> {
               
                this.checkTokenStorage()
@@ -87,8 +95,8 @@ if(process.client){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-               this.checkTokenStorage()
-              this.axiosInstance = this.axios.create({
+      this.checkTokenStorage()
+      this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -162,7 +170,6 @@ if(process.client){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-
     return this.axiosWithoutToken.post(endpoint, body)
   }
 

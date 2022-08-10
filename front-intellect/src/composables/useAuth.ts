@@ -1,62 +1,68 @@
 import { reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
 import {useHttpAuth} from "./useHttpAuth"
 const {login, register} = useHttpAuth()
 
  export function useAuth() {
-   const router = useRouter
-const state = reactive({
-    ola:  'Ola de dentro do pinia com composition sem sotre',
-    fields: {"email": "", "password": ""},
+  const state = reactive({
+    ola:  'Ola de dentro do useAuth com composition sem store',
+    fields: {email: "", password: ""},
     auth: {erro: "",  token:""}
   })
-// })
 
-  function setLocalStorageToken(token:string){
-   // if(process.client){
-   //   localStorage.setItem("token", token);
-  //  }    
+  function getOla(){
+    return state.ola
   }
   function setStateToken(token:string){
     state.auth.token = token;  
   }
-  function setErrorToken(token:string){
-  if (token !== "") {
-    setStateAuthError("");    
-  } else {
-    setStateAuthError("Erro ao fazer login");
+   function setStateAuthError(erro:string){
+    state.auth.erro = erro;
   }
+  function setLocalStorageToken(token:string){
+    if(checkOnBrowser()){
+      localStorage.setItem("token", token);
+    }    
   }
-  function setStateAuthError(erro:string){
-    state.auth.erro= erro;
-  }
-  function setToken(token: string) {
-    setLocalStorageToken(token)
-    setStateToken(token)
-    setErrorToken(token)
-  }
-  function Logout() {
-    setToken("");
-    setTokenEqualStorageState()
-        setErrorToken("")
-
-    router().push("login");
+  function checkTokenIsEmpty(token:string){
+    if (token !== "") {
+      setStateAuthError("");    
+    } else {
+      setStateAuthError("Erro ao fazer login");
+    }
   }
   function checkLocalstorageToken(){
-   // if(process.client){
-   //   if(localStorage.getItem("token") != "null" ||
-    //  localStorage.getItem("token") != "undefined" ||
-    //  localStorage.getItem("token") != null ||
-   //   localStorage.getItem("token") != undefined){
-     //   return true
-    //  }else{
-    //    return false
-   // }
-  //  }else{
-   //   false
-   // }
+    if(checkOnBrowser()){
+      if(localStorage.getItem("token") != "null" ||
+     localStorage.getItem("token") != "undefined" ||
+     localStorage.getItem("token") != null ||
+      localStorage.getItem("token") != undefined){
+      return true
+     }else{
+       return false
+    }
+    }else{
+     return false
+   }
     
   }
+  function checkOnBrowser(){
+    if (typeof window !== 'undefined') {  
+       return true
+      } else {  
+        return false
+      }
+  }
+  function setToken(token: string) {
+    setStateAuthError("")
+    setLocalStorageToken(token)
+    setStateToken(token)
+  }
+    function Logout() {
+    setStateAuthError("")
+    setToken("")
+            /* redirectPageTo("financeiro") */
+
+  } 
   function checkStateToken(){
     if(!state.auth ||
       !state.auth.token ||
@@ -71,45 +77,62 @@ const state = reactive({
         return true
       }
   }
-  function setTokenEqualStorageState(){
-  //  if (process.client && checkLocalstorageToken() && localStorage.getItem("token") !== state.auth.token) {       
-   //     setToken(String(localStorage.getItem("token")));      
-   // }
+ function setTokenEqualStorageState(){
+    if (checkOnBrowser() && checkLocalstorageToken() && localStorage.getItem("token") !== state.auth.token) {       
+        setToken(String(localStorage.getItem("token")));      
+    }
   }
-  async function isLogged() {
-    setTokenEqualStorageState()
-    return checkStateToken()
-
+  function isLogged() {
+   setTokenEqualStorageState()
+   console.log(state.auth.token, "ha")
+  const checked = checkStateToken()
+  return checked
+ 
+   
   }
-
-  async function Login() {
-    console.log(state.fields)
-     if (state.fields && state.fields.email) {
-   const Auth = useHttpAuth.login(state.fields)
-        Auth.then((res) => {
-            console.log(res)
-          if (res && res.data) {
-            setToken(res.data.token)
-            if (res.data.token) {
-                router().push("Financeiro")
-              }
-          } else {    
-            setStateAuthError("Erro ao fazer o login");
-          }
-        });
-        Auth.catch(()=>{
-          state.auth.erro = "Erro ao fazer o login";
-        })
-    } else {
+  function checkFieldsIsValid(){
+    if(state.fields && state.fields.email && state.fields.password){
+      return true
+    }else{
       setStateAuthError("Campos Vazios");
       setToken("");
-    } 
+      return false
+    }
   }
- function returnTrue(){
-   console.log("tru")
- }
+  function setStateFields(fields: { email: string; password: string; }){
+    state.fields = fields
+  }
+
+    async function Login() {
+     if (checkFieldsIsValid()) {
+    return  await login(state.fields).then((res)=>{
+       if(res && res.data && res.data.token) {
+          setToken(res.data.token)
+          return true
+        }else{
+          setStateAuthError("Login invalido");
+          console.log(state.fields)
+          console.log("Adicionar o erro de acosto com o res")
+          console.log(res)
+             console.log(res.response.data);
+      console.log(res.response.status);
+      console.log(res.response.headers);
+          return false
+        }                  
+          /* redirectPageTo("financeiro") */
+      }).catch((res)=>{          
+          state.auth.erro = res.response.message;
+          return false
+        })
+    } else{
+      setStateAuthError("Campos Vazios");
+      return false      
+    }
+  }
+//not validate
+  
 
 
-
-  return { ...toRefs(state), returnTrue, Logout, Login, isLogged };
+ 
+  return { ...toRefs(state),checkOnBrowser,setToken,checkStateToken,checkFieldsIsValid,setStateFields, setLocalStorageToken,setStateToken, getOla,checkLocalstorageToken, setStateAuthError, checkTokenIsEmpty,  Logout, Login, isLogged };
 };
