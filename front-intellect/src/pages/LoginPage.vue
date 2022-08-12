@@ -3,5 +3,5 @@
 </template>
 <script lang="ts" setup>
 // @ts-ignore
-import Login from "../components/Login.vue";
+import Login from "../mods/auth/Login.vue";
 </script>

@@ -55,7 +55,7 @@
 import { onMounted, ref } from "vue";
 // import { money } from "../helpers/filters/filters";
 import { useRouter } from "vue-router";
-import { useAuth } from "../composables/useAuth";
+import { useAuth } from "../mods/auth/composables/useAuth";
 import { useFinancial } from "../composables/useFinancial";
 const counts = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 const { fields, auth, Logout, ola } = useAuth();

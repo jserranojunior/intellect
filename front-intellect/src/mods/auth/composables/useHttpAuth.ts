@@ -1,16 +1,16 @@
 
-import ClassUseApiConnect from "./useApiConnect"
+import ClassUseApiConnect from "../../../helpers/http/useApiConnect"
 const  ApiConnect = new ClassUseApiConnect()
 
  export function useHttpAuth() {
  async function login(data: Record<string, unknown>){
     const urlApi = "/login";
      return await ApiConnect.postWithoutToken(urlApi, data)
-      .then((response:any) => {
-        return response;
+      .then((res:any) => {        
+          return res;        
       })
-      .catch((err:any) => {
-        return err
+      .catch((res:any) => {          
+        return res
       }); 
   }
 

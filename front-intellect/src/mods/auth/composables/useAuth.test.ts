@@ -20,10 +20,6 @@ const {
   setStateFields,
 } = useAuth() 
 
-test('Return message useAuth', () => {
-  expect(getOla()).toBe("Ola de dentro do useAuth com composition sem store");
-});
-
 test('setStateAuthError check set erro', () => {
   setStateAuthError("Falha ao conectar")
   expect(auth.value.erro).toBe("Falha ao conectar");
@@ -44,12 +40,17 @@ test('setLocalStorageToken empty', () => {
 });
 test('checkLocalstorageToken', () => {  
   expect(checkLocalstorageToken()).toBe(false);
+}); 
+test('Return message useAuth', () => {
+  expect(getOla()).toBe("ola de dentro do reactive");
 });
+
 test('setToken', () => {  
   setToken("abc")
     expect(auth.value.erro).toBe("");
     expect(auth.value.token).toBe("abc");
 });
+
 test('Logout', () => {  
   Logout()
     expect(auth.value.erro).toBe("");
@@ -71,24 +72,24 @@ test('isLogged false', () => {
     expect(isLogged()).toBe(true);
 });
 
-test('checkFieldsIsValid',()=>{
+test('checkFieldsIsValid  false',()=>{
   expect(checkFieldsIsValid()).toBe(false)
-})
-
-test('checkFieldsIsValid',()=>{
-  setStateFields({email:"jorgeserranojunior@gmail.com", password:"123"})
-  expect(checkFieldsIsValid()).toBe(true)
 })
 test('setStateFields',()=>{
   setStateFields({email:"jorgeserranojunior@gmail.com", password:"123"})
   expect(fields.value.email == "jorgeserranojunior@gmail.com" && fields.value.password == "123").toBe(true)
 })
+test('checkFieldsIsValid  true',()=>{
+  setStateFields({email:"jorgeserranojunior@gmail.com", password:"123"})
+  expect(checkFieldsIsValid()).toBe(true)
+})
+
 
 test('Login false',async()=>{
   setStateFields({email:"jorgeserranojunior@gmail.com", password:"12"})
   const login = await Login()
    expect(login).toBe(false)  
-})
+}) 
 
 test('Login true',async()=>{
   setStateFields({email:"jorgeserranojunior@gmail.com", password:"123"})
@@ -96,8 +97,10 @@ test('Login true',async()=>{
    expect(login).toBe(true)  
 })
 
+test('Login altara token',async()=>{
+  setStateFields({email:"jorgeserranojunior@gmail.com", password:"123"})
+  const login = await Login()
+   expect(auth.value.token).toBeTruthy()
+}) 
 
-/* test('Login true',()=>{
-  setStateFields({email:"jorgeserranojunior@gmail.com", password:"12"})  
-  expect(Login()).toBe(true)
-}) */
+
