@@ -1,13 +1,13 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  ola: "ola de dentro do reactive",
   fields: {
+    name: "",
     email: "",
     password: "",
+    cellphone: "",
   },
-  auth: {
-    erro: "",
-    token: "",
-  },
+  phoneCode: "+55",
+  confirmPassword: "",
+  erro: "",
 });

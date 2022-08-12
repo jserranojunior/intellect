@@ -25,6 +25,7 @@
                     class="input input-sm w-full max-w-xs input-bordered" placeholder="Senha" autocomplete="on" />
                 </label>
               </form>
+              <div class="mt-2 border-t"></div>
               <div class="flex justify-between items-center mt-4">
                 <div class="w-1/2">
                   <label class>
@@ -36,7 +37,7 @@
                 </div>
               </div>
 
-              <div class="mt-2 border-t">
+              <div class="">
                 <div class="social-auth-links text-center my-3">
 
                   <!-- <div class="flex justify-between">

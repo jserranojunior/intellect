@@ -1,9 +1,9 @@
 import ClassUseApiConnect from "../../../helpers/http/useApiConnect";
 const ApiConnect = new ClassUseApiConnect();
 
-export function useHttpAuth() {
-  async function login(data: Record<string, unknown>) {
-    const urlApi = "/login";
+export function useHttpRegister() {
+  async function register(data: Record<string, unknown>) {
+    const urlApi = "/user";
     return await ApiConnect.postWithoutToken(urlApi, data)
       .then((res: any) => {
         return res;
@@ -13,5 +13,5 @@ export function useHttpAuth() {
       });
   }
 
-  return { login };
+  return { register };
 }

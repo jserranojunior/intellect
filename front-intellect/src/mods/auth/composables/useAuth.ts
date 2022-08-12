@@ -1,7 +1,7 @@
 import { reactive, toRefs, ref } from "vue";
 import { useHttpAuth } from "./useHttpAuth";
 import { store } from "./storeAuth";
-const { login, register } = useHttpAuth();
+const { login } = useHttpAuth();
 
 export function useAuth() {
   function getOla() {
@@ -100,12 +100,14 @@ export function useAuth() {
       return false;
     }
   }
+
   function setStateFields(dataFields: { email: string; password: string }) {
     store.fields.email = dataFields.email;
     store.fields.password = dataFields.password;
   }
 
   async function Login() {
+    setStateAuthError("");
     if (checkFieldsIsValid()) {
       return await login(store.fields).then((res) => {
         if (res && res.data && res.data.token) {
