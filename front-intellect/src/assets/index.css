@@ -2,17 +2,15 @@
 @tailwind components;
 
 @layer base {
-  .btn-nav {
-    @apply px-4 py-2 text-sm font-semibold rounded-lg mx-1 md:mt-0 text-neutral-content bg-neutral-focus
-  }
-
-  .btn-nav:hover {
-    @apply bg-neutral-focus
-  }
-
-  .btn-nav:focus {
-    @apply  bg-neutral-focus
-  }
+  
 }
 
 @tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgb(31, 36, 41) inset !important;
+      -webkit-text-fill-color: white !important;
+}

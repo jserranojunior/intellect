@@ -52,7 +52,6 @@ export function useAuth() {
     }
   }
   function setToken(token: string) {
-    setStateAuthError("");
     setLocalStorageToken(token);
     setStateToken(token);
   }
@@ -120,18 +119,14 @@ export function useAuth() {
             res.response.data &&
             res.response.data.message
           ) {
-            console.log(res.response.data.message);
             setStateAuthError(res.response.data.message);
           } else if (res && res.response && res.response.data) {
             setStateAuthError(
               "Erro ao fazer login, contate o administrador do sistema"
             );
             console.log("Servidor offline");
-            console.log(res.response.data);
           } else if (res && res.response) {
             setStateAuthError("Erro, contate o administrador do sistema");
-            console.log("Servidor offline");
-            console.log(res.response);
           } else if (res) {
             console.log(res);
           }

@@ -1,20 +1,10 @@
 <template>
   <div class="bg-base-100">
+
     <nav
       class="
-        font-sans
-        flex flex-wrap
-        justify-between
-        sm:text-left sm:justify-between
-        py-0
-        px-0
-        bg-neutral
-        sm:items-baseline
-        w-full
-        dark:bg-gray-800 dark:text-gray-100
-        shadow-md
-        border-b border-neutral-focus
-        dark:border-gray-700
+      navbar  
+       border-b border-neutral     
       "
     >
       <slot name="header"></slot>

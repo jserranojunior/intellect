@@ -30,7 +30,7 @@ body {
 
 .centered{
   position: absolute;
-  top: 50vh;
+  top: 25vh;
 }
 
 .context h1 {

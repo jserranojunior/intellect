@@ -46,7 +46,6 @@ test("Return message useAuth", () => {
 
 test("setToken", () => {
   setToken("abc");
-  expect(auth.value.erro).toBe("");
   expect(auth.value.token).toBe("abc");
 });
 
