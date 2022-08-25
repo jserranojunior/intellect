@@ -1,6 +1,6 @@
 import { store } from "./storeRoutes";
 import { createRouter, createWebHistory } from "vue-router";
-import { useAcl } from "../acl/useAcl";
+import { useAcl } from "../acl/composables/useAcl";
 
 let { checkIfExisteRoutes, getUserAcl, generateRoutesEnableWithUserAcls } =
   useAcl();
@@ -9,7 +9,7 @@ const router = createRouter({
   routes: store.routes,
 });
 
-await getUserAcl().then(() => {
+await getUserAcl(1).then(() => {
   generateRoutesEnableWithUserAcls();
 });
 
@@ -18,7 +18,8 @@ router.beforeEach((to, from) => {
     if (checkIfExisteRoutes(to.meta.id)) {
       return true;
     } else {
-      return { path: "/" };
+      return false;
+      /* { path: "/" }; */
     }
   }
 });

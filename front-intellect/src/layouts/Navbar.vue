@@ -12,11 +12,13 @@
       </div>
       <div class="flex-none">
         <nav :class="'flex flex-wrap my-auto'">
-          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " v-if="checkIfExisteRoutes(1)" :to="'/'">Home</router-link>
-                    <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " :to="'/login'" v-if="checkIfExisteRoutes(2) && auth && auth.auth && !auth.auth.token">Login</router-link>
+          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " v-if="acl.checkIfExisteRoutes(1)" :to="'/'">Home</router-link>
+                    <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " :to="'/login'" v-if="acl.checkIfExisteRoutes(2) && auth && auth.auth && !auth.auth.token">Login</router-link>
 
-          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary "  :to="'/cadastro'" v-if="checkIfExisteRoutes(3) && auth && auth.auth && !auth.auth.token">Cadastro</router-link>
-          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " :to="'/financeiro'" v-if="checkIfExisteRoutes(4) && auth && auth.auth.token">Financeiro
+          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary "  :to="'/cadastro'" v-if="acl.checkIfExisteRoutes(3) && auth && auth.auth && !auth.auth.token">Cadastro</router-link>
+          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " :to="'/financeiro'" v-if="acl.checkIfExisteRoutes(4) && auth && auth.auth.token">Financeiro
+          </router-link>
+          <router-link class="btn-sm mx-1 btn btn-outline btn-secondary " :to="'/usuarios'" v-if="acl.checkIfExisteRoutes(5)">Usuários
           </router-link>
           <div class="btn-sm mx-1 btn btn-primary"  @click="sair()" v-if="auth && auth.auth && auth.auth.token">Sair
           </div>       
@@ -29,12 +31,10 @@
 <script lang="ts" setup>
 import { onBeforeMount, watch } from "@vue/runtime-core";
 import useStore from "../helpers/stores/store"
-import { useAcl } from "../../src/mods/acl/useAcl";
-let { checkIfExisteRoutes } = useAcl();
 
-let {auth, router} = useStore()
+
+let {auth, router, acl} = useStore()
 function redirectPageTo(url:string){ 
-    console.log("Redirecionando")
     router.push({ path: url })              
   }
  function sair(){

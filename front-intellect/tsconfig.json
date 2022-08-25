@@ -13,11 +13,22 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": false
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/**/**/*.ts",
+    "src/**/**/**/*.test.ts",
+    "src/**/**/**/**/*.test.ts",
+    "src/**/**/*.test.ts",
+    "src/**/**/**/**/**/*.test.ts",
+    "src/**/*.test.ts",
+    "src/**/**/*.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
   "checkJs": false,
-  "vetur.validation.script": false,
+  "vetur.validation.script": false
 }
- 

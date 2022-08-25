@@ -1,10 +1,7 @@
 <template>
-  <div class="">
-      
-     
+  <div>
     <div class="context centered">
-      <img src="../assets/logo.png" class="mx-auto object-cover h-48 w-96 mb-4"/>
-
+      <img src="../assets/logo.jpg" class="mx-auto object-cover h-48 w-96 mb-4"/>
       <h1>{{ msg }}</h1>
     </div>
     <efectCircles></efectCircles>
