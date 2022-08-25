@@ -72,15 +72,20 @@
 import useStore from "../../helpers/stores/store"
 import { onMounted, inject, reactive } from "vue";
 
-let {auth, router} = useStore()
+
+let {auth, router, acl} = useStore()
 
   function redirectPageTo(url:string){ 
     router.push({ path: url })              
   }
   function logar(){
-    auth.Login().then((res:boolean)=>{
+    auth.Login().then(async (res:boolean)=>{
          if(res){
-          redirectPageTo("/financeiro")
+          await acl.getUserAcl().then(() => {
+          acl.generateRoutesEnableWithUserAcls();
+        }).then(()=>{
+          redirectPageTo("/")
+        });
          }
       })
   }

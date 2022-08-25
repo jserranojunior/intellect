@@ -1,10 +1,10 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  rotasEnableServidor: [0, 1, 2, 3] as number[],
+  rotasEnableServidor: [] as number[],
   publicRoutes: [
     {
-      ID: 1,
+      ID: 0,
       Name: "Public",
       Routes: [0, 1, 2, 3],
     },

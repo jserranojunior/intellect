@@ -20,17 +20,12 @@ func RegisterRoutes() {
 	router.Get("/admin/users", middlewares.CORSMiddleware,  handlers.GetAllUsers)
 	router.Put("/admin/users/:id", middlewares.CORSMiddleware, middlewares.VerifyJwt, handlers.UserUpdate)
 
-	router.Get("/admin/useracl/:id", middlewares.CORSMiddleware, handlers.GetUserAcl)
+	router.Get("/useracl", middlewares.CORSMiddleware, middlewares.VerifyJwt, handlers.GetUserAcl)
 
 		router.Get("/admin/aclroutes/:id", middlewares.CORSMiddleware, handlers.GetAclRoutes)
-
-
-
 	router.Get("/", handlers.HomeShow)
-
-	
 			router.Post("/login", middlewares.CORSMiddleware, handlers.AuthLogin)
-	
+
 
 	
 

@@ -1,5 +1,5 @@
 export const httpAcl = () => {
-  async function getUserAcl(ID: any) {
+  async function getUserAcl() {
     const data = {
       data: [
         {

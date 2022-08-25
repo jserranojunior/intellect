@@ -14,28 +14,29 @@ export const useAcl = () => {
     if (store.userAcl && store.userAcl[0]) {
       store.userAcl.unshift(store.publicRoutes[0]);
     } else {
-      store.userAcl = store.publicRoutes[0];
+      store.userAcl = store.publicRoutes;
     }
   }
 
-  async function getUserAcl(id: any, FuncHttpAcl = httpAcl) {
-    let useHttpAcl = await FuncHttpAcl().getUserAcl(id);
+  async function getUserAcl(FuncHttpAcl = httpAcl) {
+    let useHttpAcl = await FuncHttpAcl().getUserAcl();
     store.userAcl = useHttpAcl.data;
   }
 
+  function clearRoutesEnableWithUserAcls() {
+    store.rotasEnableServidor = [];
+    store.userAcl = [];
+    generateRoutesEnableWithUserAcls();
+  }
   function generateRoutesEnableWithUserAcls() {
-    const routesEnable = store.rotasEnableServidor;
-    if (store.userAcl && store.userAcl[0]) {
-      store.userAcl.forEach((acl: any) => {
-        acl.Routes.forEach((rota: any) => {
-          if (!routesEnable.includes(rota)) {
-            routesEnable.push(rota);
-          }
-        });
-        store.rotasEnableServidor = routesEnable;
-      });
-    }
     joinAclPublic();
+    store.userAcl.forEach((acl: any) => {
+      acl.Routes.forEach((rota: any) => {
+        if (!store.rotasEnableServidor.includes(rota)) {
+          store.rotasEnableServidor.push(rota);
+        }
+      });
+    });
   }
 
   return {
@@ -44,5 +45,6 @@ export const useAcl = () => {
     generateRoutesEnableWithUserAcls,
     getUserAcl,
     joinAclPublic,
+    clearRoutesEnableWithUserAcls,
   };
 };

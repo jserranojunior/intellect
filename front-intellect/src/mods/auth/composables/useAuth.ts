@@ -85,7 +85,7 @@ export function useAuth() {
       setToken(String(localStorage.getItem("token")));
     }
   }
-  function isLogged() {
+  async function isLogged() {
     setTokenEqualStorageState();
     const checked = checkStateToken();
     return checked;

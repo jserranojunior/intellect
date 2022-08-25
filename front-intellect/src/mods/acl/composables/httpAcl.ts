@@ -2,9 +2,9 @@ import ClassUseApiConnect from "../../../helpers/http/useApiConnect";
 const ApiConnect = new ClassUseApiConnect();
 
 export const httpAcl = () => {
-  async function getUserAcl(id: any) {
-    const urlApi = `/admin/useracl/${id}`;
-    return await ApiConnect.getWithoutToken(urlApi)
+  async function getUserAcl() {
+    const urlApi = `/useracl`;
+    return await ApiConnect.get(urlApi)
       .then((res: any) => {
         return res.data;
       })

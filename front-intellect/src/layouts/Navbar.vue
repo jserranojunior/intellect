@@ -39,6 +39,7 @@ function redirectPageTo(url:string){
   }
  function sair(){
       auth.Logout()
+      acl.clearRoutesEnableWithUserAcls()
       redirectPageTo("/login")
   }
   watch(auth.fields,()=>{

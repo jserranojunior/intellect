@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { onBeforeMount, watch } from "@vue/runtime-core";
 import useStore from "../helpers/stores/store"
-let {auth, router} = useStore()
+let {auth, router,acl} = useStore()
 function redirectPageTo(url:string){ 
     console.log("Redirecionando")
     router.push({ path: url })              
@@ -22,10 +22,12 @@ function redirectPageTo(url:string){
       auth.Logout()
       redirectPageTo("/login")
   }
-  watch(auth.fields,()=>{
-    console.log("mudou")
+
+onBeforeMount(async ()=>{
+  await auth.isLogged().then(async()=>{
+    await acl.getUserAcl().then(() => {
+          acl.generateRoutesEnableWithUserAcls();
+        })
   })
-onBeforeMount(()=>{
-  auth.isLogged()
 })
 </script>

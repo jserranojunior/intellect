@@ -39,13 +39,15 @@ type UserAclRoutes struct {
 
 // GetUserAcl return edit userAcl bills
 func GetUserAcl(c *gin.Context) {
+		tokenID := c.GetUint("id")
+
 	var joinUserAcl []models.Acl
 	var userAclRoutes []UserAclRoutes
  	var newJoin  []uint
  var userAcl []models.UserAcl
 
-	id := c.Param("id")
-	DB.Preload("AclRef.RouteRef").Where("user_id", id).Find(&userAcl)
+
+	DB.Preload("AclRef.RouteRef").Where("user_id", tokenID).Find(&userAcl)
 		for indexUserAcl := 0; indexUserAcl < len(userAcl); indexUserAcl++ {
 			joinUserAcl = append(joinUserAcl, userAcl[indexUserAcl].AclRef)
 			for indexJoinUserAcl := 0; indexJoinUserAcl < len(joinUserAcl[indexUserAcl].RouteRef); indexJoinUserAcl++ {
