@@ -42,9 +42,7 @@ function redirectPageTo(url:string){
       acl.clearRoutesEnableWithUserAcls()
       redirectPageTo("/login")
   }
-  watch(auth.fields,()=>{
-    console.log("mudou")
-  })
+
 onBeforeMount(()=>{
   auth.isLogged()
 })

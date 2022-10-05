@@ -1,6 +1,5 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosStatic } from "axios";
 
-
 export interface ClassUseApiConnect {
   get: (endpoint: string) => Promise<void | AxiosResponse>;
   post: (
@@ -20,7 +19,10 @@ export interface ClassUseApiConnect {
     endpoint: string,
     body: Record<string, unknown>
   ) => Promise<void | AxiosResponse>;
-  getWithoutToken: (endpoint: string, body: Record<string, unknown>) => Promise<void | AxiosResponse> ;
+  getWithoutToken: (
+    endpoint: string,
+    body: Record<string, unknown>
+  ) => Promise<void | AxiosResponse>;
   postWithoutToken: (
     endpoint: string,
     body: Record<string, unknown>
@@ -36,17 +38,13 @@ class apiConnect {
   public axiosImage: AxiosInstance;
   public axiosWithoutToken: AxiosInstance;
   public axiosInstance: AxiosInstance | undefined;
-  public backApiUrl: string;
-  public axios: AxiosStatic
+  public backApiUrl: string | undefined;
+  public axios: AxiosStatic;
 
-  // token: string | null | undefined, axiosImage: AxiosInstance, axiosWithoutToken: AxiosInstance, backApiUrl: string
   constructor() {
-  
-      // this.backApiUrl = `http://${process.env.VUE_APP_BACK_API_URL}`;  
-
-      this.checkTokenStorage()
-      this.backApiUrl =  "http://backintellect.localhost" 
-      this.axios = axios
+    this.checkTokenStorage();
+    this.backApiUrl = import.meta.env.VITE_BUILD_URL;
+    this.axios = axios;
     this.axiosImage = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
@@ -58,30 +56,25 @@ class apiConnect {
     this.axiosWithoutToken = this.axios.create({
       baseURL: this.backApiUrl,
     });
-
   }
-  
-async checkTokenStorage(){ 
 
-if(this.checkOnBrowser()){
-  this.token = localStorage.getItem("token")
-}else{
-  this.token = ""
-}
-
-}
- checkOnBrowser(){
-  if (typeof window !== 'undefined') {  
- return true
-} else {
-  
-  return false
-}
+  async checkTokenStorage() {
+    if (this.checkOnBrowser()) {
+      this.token = localStorage.getItem("token");
+    } else {
+      this.token = "";
+    }
+  }
+  checkOnBrowser() {
+    if (typeof window !== "undefined") {
+      return true;
+    } else {
+      return false;
+    }
   }
   async get(endpoint: string): Promise<void | AxiosResponse> {
-              
-               this.checkTokenStorage()
-              this.axiosInstance = this.axios.create({
+    this.checkTokenStorage();
+    this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -95,8 +88,8 @@ if(this.checkOnBrowser()){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-      this.checkTokenStorage()
-      this.axiosInstance = this.axios.create({
+    this.checkTokenStorage();
+    this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -110,8 +103,8 @@ if(this.checkOnBrowser()){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-               this.checkTokenStorage()
-              this.axiosInstance = this.axios.create({
+    this.checkTokenStorage();
+    this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -124,8 +117,8 @@ if(this.checkOnBrowser()){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-               this.checkTokenStorage()
-              this.axiosInstance = this.axios.create({
+    this.checkTokenStorage();
+    this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -136,8 +129,8 @@ if(this.checkOnBrowser()){
   }
 
   async delet(endpoint: string): Promise<void | AxiosResponse> {
-               this.checkTokenStorage()
-              this.axiosInstance = this.axios.create({
+    this.checkTokenStorage();
+    this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -151,8 +144,8 @@ if(this.checkOnBrowser()){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-               this.checkTokenStorage()
-              this.axiosInstance = this.axios.create({
+    this.checkTokenStorage();
+    this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {
         Authorization: "Bearer " + this.token,
@@ -162,7 +155,7 @@ if(this.checkOnBrowser()){
     return this.axiosImage.post(endpoint, body);
   }
 
-  async getWithoutToken(endpoint: string): Promise<void | AxiosResponse>  {
+  async getWithoutToken(endpoint: string): Promise<void | AxiosResponse> {
     return this.axiosWithoutToken.get(endpoint);
   }
 
@@ -170,7 +163,7 @@ if(this.checkOnBrowser()){
     endpoint: string,
     body: Record<string, unknown>
   ): Promise<void | AxiosResponse> {
-    return this.axiosWithoutToken.post(endpoint, body)
+    return this.axiosWithoutToken.post(endpoint, body);
   }
 
   async putWithoutToken(

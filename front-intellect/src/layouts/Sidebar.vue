@@ -20,8 +20,11 @@ function redirectPageTo(url:string){
   }
  function sair(){
       auth.Logout()
+      acl.clearRoutesEnableWithUserAcls()
       redirectPageTo("/login")
   }
+
+  
 
 onBeforeMount(async ()=>{
   await auth.isLogged().then(async()=>{

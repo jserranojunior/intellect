@@ -15,9 +15,9 @@ func MigrateDB() {
 	db.AutoMigrate(&ValoresContasAPagars{})
 	db.AutoMigrate(&ContasPagas{})
 	db.AutoMigrate(&CategoriasContasAPagars{})
-		db.AutoMigrate(&Acl{})
-				db.AutoMigrate(&UserAcl{})
-								db.AutoMigrate(&AclRoutes{})
+	db.AutoMigrate(&Acl{})
+	db.AutoMigrate(&UserAcl{})
+	db.AutoMigrate(&AclRoutes{})
 
 
 

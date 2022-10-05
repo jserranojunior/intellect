@@ -1,9 +1,10 @@
 import { store } from "./storeRoutes";
+import { it, expect } from "vitest";
 
-test("Testando se existe rota", () => {
+it("itando se existe rota", () => {
   expect(store.routes[0]).toBeTruthy();
 });
 
-test("Testando se existe rota /", () => {
+it("itando se existe rota /", () => {
   expect(store.routes[1].path == "/").toBeTruthy();
 });

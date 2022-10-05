@@ -1,4 +1,5 @@
 import { useAuth } from "./useAuth";
+import { it, expect } from "vitest";
 
 const {
   getOla,
@@ -19,86 +20,87 @@ const {
   setStateFields,
 } = useAuth();
 
-test("setStateAuthError check set erro", () => {
+it("setStateAuthError check set erro", () => {
   setStateAuthError("Falha ao conectar");
   expect(auth.value.erro).toBe("Falha ao conectar");
 });
-test("setStateToken set state token", () => {
+it("setStateToken set state token", () => {
   setStateToken("tokensetstring");
   expect(auth.value.token).toBe("tokensetstring");
 });
-test("checkTokenIsEmpty check set erro", () => {
+it("checkTokenIsEmpty check set erro", () => {
   checkTokenIsEmpty("");
   expect(auth.value.erro).toBe("Erro ao fazer login");
 });
-test("checkOnBrowser check is browser", () => {
+it("checkOnBrowser check is browser", () => {
   expect(checkOnBrowser()).toBe(false);
 });
-test("setLocalStorageToken empty", () => {
+it("setLocalStorageToken empty", () => {
   expect(setLocalStorageToken("")).toBe(undefined);
 });
-test("checkLocalstorageToken", () => {
+it("checkLocalstorageToken", () => {
   expect(checkLocalstorageToken()).toBe(false);
 });
-test("Return message useAuth", () => {
+it("Return message useAuth", () => {
   expect(getOla()).toBe("ola de dentro do reactive");
 });
 
-test("setToken", () => {
+it("setToken", () => {
   setToken("abc");
   expect(auth.value.token).toBe("abc");
 });
 
-test("Logout", () => {
+it("Logout", () => {
   Logout();
   expect(auth.value.erro).toBe("");
   expect(auth.value.token).toBe("");
 });
-test("checkStateToken false", () => {
+it("checkStateToken false", () => {
   expect(checkStateToken()).toBe(false);
 });
-test("checkStateToken true", () => {
+it("checkStateToken true", () => {
   setStateToken("tokenset");
   expect(checkStateToken()).toBe(true);
 });
-test("isLogged false", () => {
+it("isLogged false", async () => {
   setStateToken("");
-  expect(isLogged()).toBe(false);
+  expect(await isLogged()).toBe(false);
 });
-test("isLogged false", () => {
+it("isLogged true", async () => {
   setToken("abc");
-  expect(isLogged()).toBe(true);
+  expect(await isLogged()).toBe(true);
 });
 
-test("checkFieldsIsValid  false", () => {
+it("checkFieldsIsValid  false", () => {
   expect(checkFieldsIsValid()).toBe(false);
 });
-test("setStateFields", () => {
+it("setStateFields", () => {
   setStateFields({ email: "jorgeserranojunior@gmail.com", password: "123" });
   expect(
     fields.value.email == "jorgeserranojunior@gmail.com" &&
       fields.value.password == "123"
   ).toBe(true);
 });
-test("checkFieldsIsValid  true", () => {
+it("checkFieldsIsValid  true", () => {
   setStateFields({ email: "jorgeserranojunior@gmail.com", password: "123" });
   expect(checkFieldsIsValid()).toBe(true);
 });
 
-test("Login false", async () => {
+it("Login false", async () => {
   setStateFields({ email: "jorgeserranojunior@gmail.com", password: "12" });
   const login = await Login();
   expect(login).toBe(false);
 });
 
-test("Login true", async () => {
+it("Login true", async () => {
   setStateFields({ email: "jorgeserranojunior@gmail.com", password: "123" });
   const login = await Login();
   expect(login).toBe(true);
 });
 
-test("Login altera token", async () => {
+it("Login altera token", async () => {
   setStateFields({ email: "jorgeserranojunior@gmail.com", password: "123" });
-  const login = await Login();
-  expect(auth.value.token).toBeTruthy();
+  const login = await Login().then(() => {
+    expect(auth.value.token).toBeTruthy();
+  });
 });

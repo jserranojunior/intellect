@@ -1,8 +1,9 @@
 import { useUsers } from "../useUsers";
 let { users, getAllUsers } = useUsers();
 import { httpUsers } from "./MockHttpUsers";
+import { it, expect } from "vitest";
 
-test("users", () => {
+it("users", () => {
   expect(users.value).toEqual([
     {
       ID: -0,
@@ -13,7 +14,7 @@ test("users", () => {
   ]);
 });
 
-test("getAllUsers", async () => {
+it("getAllUsers", async () => {
   await getAllUsers(httpUsers).then(() => {
     expect(users.value).toEqual([
       {

@@ -1,5 +1,7 @@
 import { useAcl } from "../useAcl";
 import { httpAcl } from "./mockHttpAcl";
+import { it, expect } from "vitest";
+
 let {
   generateRoutesEnableWithUserAcls,
   getUserAcl,
@@ -10,14 +12,14 @@ let {
   clearRoutesEnableWithUserAcls,
 } = useAcl();
 
-test("rotasEnableServidor value", () => {
+it("rotasEnableServidor value", () => {
   expect(rotasEnableServidor.value).toStrictEqual([]);
 });
-test("userAcl value", () => {
+it("userAcl value", () => {
   expect(userAcl.value).toStrictEqual([]);
 });
 
-test("joinAclPublic", () => {
+it("joinAclPublic", () => {
   joinAclPublic();
   expect(userAcl.value).toStrictEqual([
     {
@@ -28,7 +30,7 @@ test("joinAclPublic", () => {
   ]);
 });
 
-test("getUserAcl", () => {
+it("getUserAcl", () => {
   getUserAcl(httpAcl).then(async () => {
     expect(userAcl.value).toStrictEqual([
       {
@@ -45,19 +47,19 @@ test("getUserAcl", () => {
   });
 });
 
-test("checkIfExisteRoutes Public notFound", () => {
+it("checkIfExisteRoutes Public notFound", () => {
   generateRoutesEnableWithUserAcls();
   expect(checkIfExisteRoutes(0)).toBe(true);
 });
 
-test("generateRoutesEnableWithUserAcls", async () => {
+it("generateRoutesEnableWithUserAcls", async () => {
   await getUserAcl(httpAcl).then(() => {
     generateRoutesEnableWithUserAcls();
     expect(rotasEnableServidor.value).toStrictEqual([0, 1, 2, 3, 4, 5]);
   });
 });
 
-test("clearRoutesEnable", async () => {
+it("clearRoutesEnable", async () => {
   await getUserAcl(httpAcl).then(() => {
     clearRoutesEnableWithUserAcls();
     expect(rotasEnableServidor.value).toStrictEqual([0, 1, 2, 3]);
