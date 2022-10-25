@@ -12,7 +12,8 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "checkJs": false
+    "checkJs": false,
+    "types": ["vite/client"]
   },
   "include": [
     "src/**/*.ts",

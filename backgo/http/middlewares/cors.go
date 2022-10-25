@@ -2,6 +2,7 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
+
 )
 
 // CORSMiddleware enable router another domain

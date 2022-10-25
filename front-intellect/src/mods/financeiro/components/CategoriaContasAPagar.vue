@@ -2,7 +2,8 @@
 
   <div class="flex flex-wrap">
 
-    <div class=" card  shadow-xl w-1/5 p-1" v-for="categoria in categoriaContas.CategoriasContasAPagars"
+
+    <div class=" card  shadow-xl w-1/5 p-1" v-for="categoria in financeiro.categoriaContas.CategoriasContasAPagars"
       :key="categoria.id">
       <div class="card-body  p-1 
               border-gray-700 bg-base-300">
@@ -24,9 +25,9 @@
               <div class="w-full text-left">
                 <input type="checkbox " class="toggle toggle-sm toggle-primary"
                   v-if="contas.ContasPagas && contas.ContasPagas.ID > 0"
-                  @click="deleteBillPayment(contas.ContasPagas.ID)" />
+                  @click="financeiro.deleteBillPayment(contas.ContasPagas.ID)" />
                 <input type="checkbox " class="toggle toggle-sm toggle-secondary" v-else
-                  @click="makeBillPayment(contas.ID)" />
+                  @click="financeiro.makeBillPayment(contas.ID)" />
               </div>
             </div>
           </div>
@@ -49,40 +50,35 @@
     </div>
 
   </div>
+
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
-// import { money } from "../helpers/filters/filters";
-import { useRouter } from "vue-router";
-import { useAuth } from "../mods/auth/composables/useAuth";
-import { useFinancial } from "../composables/useFinancial";
+import { onBeforeMount } from '@vue/runtime-core';
+import useStore from "../../../helpers/stores/store"
+let {financeiro, router} = useStore()
+
+
+
 const counts = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-const { fields, auth, Logout, ola } = useAuth();
-const router = useRouter();
-const {
-  categoriaContas } = useFinancial();
-/* const {
-  categoriaContas,
-  getCategoriaContas,
-  makeBillPayment,
-  deleteBillPayment,
-  setCategoriaTest,
-  editBillsToPay,
-} = useFinancial(); */
+
+
 function money(value: any) {
   return value;
 }
-/* async function openEditBillsToPay(id: any) {
-  await editBillsToPay(id).then(() => {
+async function openEditBillsToPay(id: any) {
+ /*  await financeiro.editBillsToPay(id).then(() => {
     router.push("/financeiro/editarconta");
-  });
-} */
+  }); */
+} 
 
-/* onMounted(() => {
-  getCategoriaContas();
-  setCategoriaTest();
-}); */
+onBeforeMount(async() => {
+  await   financeiro.getSetCategoriasContas().then(()=>{
+    console.log(financeiro.categoriaContas)
+  });
+   /* financeiro.setCategoriaTest(); */
+});
 </script>
 <!-- <style scoped>
 .columns {

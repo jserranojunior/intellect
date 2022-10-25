@@ -3,11 +3,14 @@
     <div class="text-neutral rounded-xl w-full z-10 px-2 flex flex-wrap justify-between my-1 items-center mx-2">
       <div class="flex-1">
       <label for="my-drawer" class="btn btn-sm drawer-button cursor-pointer">
-        <svg viewBox="0 0 100 80" width="18" height="18" class="fill-current text-neutral-content">
+      <Icon icon="ic:sharp-menu" width="24" height="24"></Icon>
+      
+        <!-- <svg viewBox="0 0 100 80" width="18" height="18" class="fill-current text-neutral-content">
           <rect width="100" height="20" />
           <rect y="30" width="100" height="20" />
           <rect y="60" width="100" height="20" />
-        </svg></label>
+        </svg> -->
+        </label>
          <slot name="title"></slot>
       </div>
       <div class="flex-none">

@@ -29,11 +29,17 @@
               <div class="flex justify-between items-center mt-4">
                 <div class="w-1/2">
                   <label class>
-                    <span class="text-gray-200 text-sm">Esqueci a senha</span>
+                   
+                                      <Icon icon="fluent:password-16-filled" />
+
+ <span class="text-gray-200 text-sm">Esqueci a senha</span>
                   </label>
                 </div>
                 <div class="w-1/2">
-                  <button class="w-full py-2 px-4  rounded-md btn btn-sm" @click="logar()">LOGAR</button>
+                  <button class="w-full py-2 px-4  rounded-md btn btn-sm" @click="logar()">
+                  <span class="px-2">LOGAR</span>                 
+                   <Icon icon="ri:login-circle-line" />
+                   </button>
                 </div>
               </div>
 

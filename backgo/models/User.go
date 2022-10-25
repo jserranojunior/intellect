@@ -14,4 +14,6 @@ type User struct {
 	Name     string `gorm:"size:255; not null" json:"name"`
 	Email    string `gorm:"size:255; not null; unique;" json:"email"`
 	Password string `gorm:"size:255; not null;" json:"password"`
+	Cpf string `gorm:"size:15; not null;" json:"cpf"`
 }
+/* $2a$10$cHuvzhAaDDt6n8MeIRp9UuCkKzW.y7FaBT0KOxN3Pu8t6UIoIl6hm */ 

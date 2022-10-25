@@ -2,30 +2,30 @@
   <div class="flex justify-center mx-4">
     <div class="w-full sm:w-1/2 md:w-1/3 painel-tail my-4">
       <div
-        v-if="err"
+        v-if="financeiro.err"
         class="my-1 block text-sm text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 items-center p-2 rounded-lg"
         role="alert"
-      >{{ err }}</div>
+      >{{ financeiro.err }}</div>
       <div class="p-2 rounded-sm shadow-sm bg-gray-800">
         <div class="flex flex-wrap">
           <!-- <label class="pb-2 text-gray-700 font-semibold">Favorecido</label> -->
-          <input
-            v-model="ContaAPagar.favorecido"
+          <input            
             type="text"
             class="form-tail w-full"
             name="favorecido"
-            required
             placeholder="Favorecido"
+            v-model="financeiro.ContaAPagar.favorecido"
           />
         </div>
         <div class="mt-1 flex flex-wrap pt-2">
           <!-- <label class="pb-2 text-gray-700 font-semibold"  >Descrição</label> -->
           <input
-            v-model="ContaAPagar.descricao"
             type="text"
             class="form-tail"
             name="descricao"
             placeholder="Descrição"
+                        v-model="financeiro.ContaAPagar.descricao"
+
           />
         </div>
 
@@ -33,7 +33,7 @@
           <label class="pb-2 text-gray-700 font-semibold">Valor</label>
 
           <input
-            v-model="ContaAPagar.ValoresContasAPagar.valor"
+            v-model="financeiro.ContaAPagar.ValoresContasAPagar.valor"
             type="number"
             class="form-tail"
             name="valor"
@@ -49,7 +49,7 @@
           >Inicio Pagamento</label>
 
           <input
-            v-model="ContaAPagar.inicio_data_pagamento"
+            v-model="financeiro.ContaAPagar.inicio_data_pagamento"
             type="date"
             class="form-tail"
             placeholder="dd/mm/aaaa"
@@ -60,7 +60,7 @@
         <div class="mt-1 flex flex-wrap pt-2">
           <label for="fim_data_pagamento" class="pb-2 text-gray-700 font-semibold">Fim Pagamento</label>
           <input
-            v-model="ContaAPagar.fim_data_pagamento"
+            v-model="financeiro.ContaAPagar.fim_data_pagamento"
             type="date"
             class="form-tail"
             placeholder="dd/mm/aaaa"
@@ -68,7 +68,7 @@
         </div>
         <div class="mt-1 flex flex-wrap pt-2">
           <select
-            v-model="ContaAPagar.categorias_contas_a_pagar_id"
+            v-model="financeiro.ContaAPagar.categorias_contas_a_pagar_id"
             name="categorias_contas_a_pagar_id"
             required
             class="form-tail"
@@ -87,7 +87,7 @@
         </div>
 
         <div class="mt-1 flex flex-wrap pt-2">
-          <select v-model="ContaAPagar.tipo_conta" name="tipo_conta" required class="form-tail">
+          <select v-model="financeiro.ContaAPagar.tipo_conta" name="tipo_conta" required class="form-tail">
             <option disabled selected value="Tipo de Conta">Tipo de Conta</option>
             <option value="Extra">Extra</option>
             <option value="Fixa">Fixa</option>
@@ -97,7 +97,7 @@
 
         <div class="mt-1 flex flex-wrap pt-2">
           <select
-            v-model="ContaAPagar.forma_pagamento"
+            v-model="financeiro.ContaAPagar.forma_pagamento"
             name="forma_pagamento"
             required
             class="form-tail"
@@ -119,11 +119,11 @@
           </div>
           <div class="w-1/2 text-right">
             <button
-              v-if="mode === 'add'"
+              v-if="financeiro.mode === 'add'"
               class="btn-primary-tail-rounded"
-              @click="storeBillsToPay()"
+              @click="financeiro.storeBillsToPay()"
             >Cadastrar</button>
-            <button v-else class="btn-primary-tail-rounded" @click="updateBillsToPay()">Atualizar</button>
+            <button v-else class="btn-primary-tail-rounded" @click="financeiro.updateBillsToPay()">Atualizar</button>
           </div>
         </div>
       </div>
@@ -131,54 +131,29 @@
   </div>
 </template>
 
-<script>
-import { onMounted, inject, watch } from "vue";
-// import { datePtBrToUs, dateUsToPtBr } from "../../../helpers/dates/helpersDates";
+<script lang="ts" setup>
 
-// import AwesomeMask from "awesome-mask";
-export default {
-  props: {
-    mode: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const router = useRouter()
-    const {
-      storeBillsToPay,
-      setEditAddMode,
-      addBillsToPay,
-      updateBillsToPay,
-      ContaAPagar,
-      err,
-    } = useFinancial();
+import { onMounted } from "vue";
+        import useStore from "../../../helpers/stores/store"
+import { onBeforeMount } from '@vue/runtime-core';
+        let {router, financeiro} = useStore()
+
+
 
     function setMode() {
-      setEditAddMode(props.mode).then((res) => {
+      financeiro.setEditAddMode(financeiro.mode).then((res) => {
         if (res === "add") {
-          addBillsToPay();
-        } else if (res === "edit" && !ContaAPagar.value.ID) {
+          financeiro.setEditAddMode("add");
+        } else if (res === "edit" && !financeiro.ContaAPagar.ID) {
           router.push("/financeiro");
         }
       });
     }
-    onMounted(() => {
+    onBeforeMount(() => {
       setMode();
     });
-
-    // watch(props.mode, () => {
-    //   setMode();
-    // });
-
-    return {
-      storeBillsToPay,
-
-      updateBillsToPay,
-      ContaAPagar,
-      err,
-    };
-  },
+   
+  
   // watch: {
   //   dataAtualFinanceiro: {
   //     handler() {
@@ -186,7 +161,7 @@ export default {
   //     },
   //     deep: true,
   //   },
-  //   editarContaAPagar: {
+  //   editarfinanceiro.ContaAPagar: {
   //     handler() {
   //       this.setFields();
   //     },
@@ -194,18 +169,18 @@ export default {
   //   },
 
   //   categorias_contas_a_pagar_id: function() {
-  //     this.ContaAPagar.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
+  //     this.financeiro.ContaAPagar.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
   //   },
   // },
   // computed: {
   //   ...mapState({
   //     dataAtualFinanceiro: (state) => state.Financeiro.dataSelecionada,
-  //     editarContaAPagar: (state) => state.Financeiro.editarContaAPagar,
+  //     editarfinanceiro.ContaAPagar: (state) => state.Financeiro.editarfinanceiro.ContaAPagar,
   //   }),
   // },
 
   // directives: {
   // mask: AwesomeMask,
   // },
-};
+
 </script>

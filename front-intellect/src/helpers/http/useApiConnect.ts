@@ -74,6 +74,7 @@ class apiConnect {
   }
   async get(endpoint: string): Promise<void | AxiosResponse> {
     this.checkTokenStorage();
+    console.log(this.backApiUrl, "this.backApiUrl GET");
     this.axiosInstance = this.axios.create({
       baseURL: this.backApiUrl,
       headers: {

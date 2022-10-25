@@ -13,6 +13,7 @@ import (
 // RegisterRoutes to register your routes
 func RegisterRoutes() {
 	router := routing.Resolve()
+	
 
 	//Define your routes here
 	router.Post("/user", middlewares.CORSMiddleware, handlers.UserCreate)
@@ -27,22 +28,21 @@ func RegisterRoutes() {
 			router.Post("/login", middlewares.CORSMiddleware, handlers.AuthLogin)
 
 
-	
+
+		router.Get("/financial/viewcategories/:dataanomes", middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.GetCategoriesAndBillsMonth)
 
 	financial := router.Group("/financial/")
-	// financial.Use(middlewares.VerifyJwt, middlewares.CORSMiddleware())
 	{
-		financial.Get("/categorias", middlewares.VerifyJwt, handlers.SelectCategoriesBilsToPay)
-		financial.Get("/categoriasall", middlewares.VerifyJwt, handlers.SelectAllCategoriesBillsToPay)
-		financial.Get("/viewcategories/:dataanomes", middlewares.VerifyJwt, handlers.GetCategoriesAndBillsMonth)
+		financial.Get("/categorias", middlewares.CORSMiddleware, middlewares.VerifyJwt, handlers.SelectCategoriesBilsToPay)
+		financial.Get("/categoriasall",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.SelectAllCategoriesBillsToPay)
 		// Bills to pay
-		financial.Get("/contasall", middlewares.VerifyJwt, handlers.SelectAllBillsToPay)
-		financial.Get("/editbills/:id/:dataanomes", middlewares.VerifyJwt, handlers.EditBillsToPayMonth)
-		financial.Post("/billstopay", middlewares.VerifyJwt, handlers.StoreBillsToPay)
-		financial.Put("/billstopay/:id/:dataanomes", middlewares.VerifyJwt, handlers.UpdateBillsToPay)
-		financial.Post("/paidbills", middlewares.VerifyJwt, handlers.StorePaidBills)
-		financial.Delete("/paidbills/:id", middlewares.VerifyJwt, handlers.DeletePaidBills)
-		financial.Get("/paidbills/:id", middlewares.VerifyJwt, handlers.EditPaidBills)
+		financial.Get("/contasall",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.SelectAllBillsToPay)
+		financial.Get("/editbills/:id/:dataanomes",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.EditBillsToPayMonth)
+		financial.Post("/billstopay",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.StoreBillsToPay)
+		financial.Put("/billstopay/:id/:dataanomes",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.UpdateBillsToPay)
+		financial.Post("/paidbills",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.StorePaidBills)
+		financial.Delete("/paidbills/:id",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.DeletePaidBills)
+		financial.Get("/paidbills/:id",middlewares.CORSMiddleware,  middlewares.VerifyJwt, handlers.EditPaidBills)
 	}
 
 }

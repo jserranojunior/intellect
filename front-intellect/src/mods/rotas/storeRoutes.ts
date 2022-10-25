@@ -43,6 +43,14 @@ export const store = reactive({
       component: () => import("../../pages/Financeiro.vue"),
     },
     {
+      name: "financeiroaddconta",
+      path: "/financeiroaddconta",
+      meta: {
+        id: 4,
+      },
+      component: () => import("../../pages/AdicionarConta.vue"),
+    },
+    {
       name: "usuarios",
       path: "/usuarios",
       meta: {
