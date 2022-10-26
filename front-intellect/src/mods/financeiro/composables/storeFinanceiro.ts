@@ -9,7 +9,6 @@ export const store = reactive({
       Cartão: 0,
       Dinheiro: 0,
       Débito: 0,
-      "Débito Automatico": 0,
     },
   } as any,
   editarContaAPagar: {},
@@ -27,8 +26,8 @@ export const store = reactive({
     ValoresContasAPagar: { valor: 0, data_pagamento: "" },
     categorias_contas_a_pagar_id: 0,
     favorecido: "" as string,
-    inicio_data_pagamento: "",
-    fim_data_pagamento: "",
+    inicio_data_pagamento: new Date(),
+    fim_data_pagamento: new Date(),
     forma_pagamento: "",
     tipo_conta: "",
     descricao: "",
@@ -41,6 +40,8 @@ export const store = reactive({
       day: "2-digit",
     })
   ),
+  inicioDataPagamentoWithouFormated: "",
+  fimDataPagamentoWithouFormated: "",
   err: "",
   mode: "",
 });

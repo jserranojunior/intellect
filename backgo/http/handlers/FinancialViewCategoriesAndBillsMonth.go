@@ -29,7 +29,7 @@ func GetCategoriesAndBillsMonth(c *gin.Context) {
 
 	fmt.Println(len(categories))
 	for indexCategories := 0; indexCategories < len(categories); indexCategories++ {
-		var somaValoresAPagar = 0.0
+		somaValoresAPagar := 0.0
 		for indexContas := 0; indexContas < len(categories[indexCategories].ContasAPagar); indexContas++ {
 			somaValoresAPagar += float64(categories[indexCategories].ContasAPagar[indexContas].ValoresContasAPagar.Valor)
 
@@ -46,6 +46,8 @@ func GetCategoriesAndBillsMonth(c *gin.Context) {
 	}
 	viewCategories.CategoriasContasAPagars = categories
 	viewCategories.TotalCategories = totalCategories
+		
+
 	viewCategories.SomaFormaPagamento = somaFormaPagamento
 
 	c.JSON(200, gin.H{

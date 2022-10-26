@@ -2,27 +2,28 @@
   <div>
     <form class="hover:cursor-pointer">
       <input
-        v-model="selectedDate"
+        v-model="financeiro.Calendario.selectedDate"
         type="date"
         name="calendario"
-        class="input input-sm input-primary w-full text-primary-content max-w-xs bg-neutral hover:cursor-pointer"
+        class="input input-sm w-full max-w-xs hover:cursor-pointer"
       />
     </form>
   </div>
 </template>
-<script lang="ts">
-import { watch, ref, defineComponent } from "vue";
-export default defineComponent({
-  setup() {
-    const { setDataCalendario, Calendario } = useFinancial();
-    let selectedDate = ref(Calendario.value.selectedDate);
+<script lang="ts" setup>
+import { watch } from "vue";
 
-    watch(selectedDate, () => {
-      setDataCalendario(selectedDate.value);
+    import useStore from "../helpers/stores/store"
+        let {financeiro} = useStore()
+/*     let selectedDate = ref(Calendario.value.selectedDate)
+
+ */
+    watch(() => financeiro.Calendario.selectedDate, async () => {
+      financeiro.setDataCalendario(financeiro.Calendario.selectedDate);
+        await   financeiro.getSetCategoriasContas()
+
     });
 
+ 
 
-    return { selectedDate };
-  },
-});
 </script>

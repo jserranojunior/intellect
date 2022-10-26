@@ -13,6 +13,8 @@ import (
 	"errors"
 )
 
+
+
 func EditBillsToPayMonth(c *gin.Context) {
 	id := c.Param("id")
 	dateyearmonth := c.Param("dataanomes")
@@ -27,12 +29,15 @@ func EditBillsToPayMonth(c *gin.Context) {
 func StoreBillsToPay(c *gin.Context) {
 	tokenID := c.GetUint("id")
 	var contas models.ContasAPagars
+
+	
 	if err := c.Bind(&contas); err != nil {
 		fmt.Println(err)
 		c.JSON(400, gin.H{
 			"erro": err,
 		})
 	}
+
 	contas.UserId = tokenID
 	DB.Create(&contas)
 	c.JSON(http.StatusCreated, gin.H{"data": contas})

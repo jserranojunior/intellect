@@ -3,6 +3,9 @@ import { useRouter } from "vue-router";
 import { store } from "./storeFinanceiro";
 
 import { useHttpResources } from "../../../helpers/http/useHttpResources";
+import { dateUStoJsFull } from "../../../../node_modules/alvitre-obelisk/src/convertDates/js/convertDateToJs";
+import { datePtBrToUs } from "../../../helpers/dates/helpersDates";
+import { dateJstoUs } from "alvitre-obelisk";
 
 export const useFinancial = () => {
   const router = useRouter();
@@ -1153,8 +1156,8 @@ export const useFinancial = () => {
       ValoresContasAPagar: { valor: 27, data_pagamento: "10/06/2022" },
       categorias_contas_a_pagar_id: 1,
       favorecido: "Jorge",
-      inicio_data_pagamento: "2022-01-01",
-      fim_data_pagamento: "2023-02-01",
+      inicio_data_pagamento: new Date(2023, 2, 1),
+      fim_data_pagamento: new Date(2023, 2, 1),
       forma_pagamento: "",
       tipo_conta: "",
       descricao: "",
@@ -1176,6 +1179,17 @@ export const useFinancial = () => {
     if (store.Calendario.selectedDate) {
       bills.ValoresContasAPagar.data_pagamento = store.Calendario.selectedDate;
     }
+    if (store.inicioDataPagamentoWithouFormated) {
+      store.ContaAPagar.inicio_data_pagamento = dateUStoJsFull(
+        store.inicioDataPagamentoWithouFormated
+      );
+    }
+    if (store.fimDataPagamentoWithouFormated) {
+      store.ContaAPagar.fim_data_pagamento = dateUStoJsFull(
+        store.fimDataPagamentoWithouFormated
+      );
+    }
+
     return bills;
   }
 
@@ -1199,6 +1213,7 @@ export const useFinancial = () => {
       store.err = "Campos Vazios";
     } else {
       const billsFormated = formaterBillsToPay(data);
+      console.info(data);
       return await useHttpFinanceiro
         .store(url, billsFormated)
         .then((res: any) => {
@@ -1244,9 +1259,9 @@ export const useFinancial = () => {
   }
 
   async function setValuesFormBillsToPay() {
-    let setDate = "";
+    let setDate = new Date();
     if (store.dataAtual) {
-      setDate = store.dataAtual;
+      setDate = dateUStoJsFull(store.dataAtual);
     }
     store.ContaAPagar = {
       ID: -0,
@@ -1259,6 +1274,7 @@ export const useFinancial = () => {
       tipo_conta: "Extra",
       descricao: "",
     };
+    store.inicioDataPagamentoWithouFormated = dateJstoUs(setDate);
   }
 
   async function makeBillPayment(
@@ -1281,8 +1297,7 @@ export const useFinancial = () => {
    */
 
   function setExistValueCategorie(categories: any) {
-    store.categoriaContas.CategoriasContasAPagars =
-      categories.CategoriasContasAPagars;
+    store.categoriaContas = categories;
 
     /*     if (categories && categories.data && categories.data.data) {
       let newCategories = categories.data.data.CategoriasContasAPagars.filter(

@@ -1,13 +1,14 @@
 <template>
 
-  <div class="flex flex-wrap">
+  <div class="gap-2 columns-3 lg:columns-4 ">
 
 
-    <div class=" card  shadow-xl w-1/5 p-1" v-for="categoria in financeiro.categoriaContas.CategoriasContasAPagars"
+    <div class=" card  shadow-xl w-full p-1" v-for="categoria in financeiro.categoriaContas.CategoriasContasAPagars"
       :key="categoria.id">
-      <div class="card-body  p-1 
+      <div class="card-body border rounded-lg p-1 
               border-gray-700 bg-base-300">
-        <h2 class="card-title"> {{ categoria.nome }}</h2>
+                        <div class="btn btn-outline btn-sm w-full ">
+ {{ categoria.nome }}</div>
         <div class="
               text-center
               cursor-pointer
@@ -45,10 +46,17 @@
               <div v-else class="w-1/2">0</div>
             </div>
           </div>
+         
+        </div> 
+        <div class="flex flex-wrap justify-between" >
+        <div clas="w-1/2">Total</div>
+                <div clas="w-1/2">{{money(categoria.Soma)}}</div>
+              
+
         </div>
       </div>
     </div>
-
+  
   </div>
 
 </template>
@@ -57,6 +65,7 @@
 import { onMounted, ref } from "vue";
 import { onBeforeMount } from '@vue/runtime-core';
 import useStore from "../../../helpers/stores/store"
+import {money} from "../../../helpers/filters/filters"
 let {financeiro, router} = useStore()
 
 
@@ -64,21 +73,14 @@ let {financeiro, router} = useStore()
 const counts = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 
-function money(value: any) {
-  return value;
-}
+
 async function openEditBillsToPay(id: any) {
  /*  await financeiro.editBillsToPay(id).then(() => {
     router.push("/financeiro/editarconta");
   }); */
 } 
 
-onBeforeMount(async() => {
-  await   financeiro.getSetCategoriasContas().then(()=>{
-    console.log(financeiro.categoriaContas)
-  });
-   /* financeiro.setCategoriaTest(); */
-});
+
 </script>
 <!-- <style scoped>
 .columns {

@@ -10,6 +10,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "alvitre-obelisk": "^1.2.0",
     "axios": "^1.0.0",
     "daisyui": "^2.15.2",
     "maska": "^1.5.0",
