@@ -83,6 +83,8 @@ export function useAuth() {
       localStorage.getItem("token") !== store.auth.token
     ) {
       setToken(String(localStorage.getItem("token")));
+    } else {
+      setToken("");
     }
   }
   async function isLogged() {
