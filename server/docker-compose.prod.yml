@@ -11,7 +11,7 @@ services:
     networks:
       - stack_ponte
     volumes:
-      - "${PATHPESSOAL}/intellect/front/dist:/app"
+      - "${PATHPESSOAL}/intellect/front-intellect/dist:/app"
     ports:
       - 4080:80
     labels:
