@@ -9,6 +9,7 @@ frontend/"
 front/.env
 .env
 /front/.env
+./front/env
 server/.env
 
 frontend/package-lock.json
