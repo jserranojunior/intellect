@@ -6,7 +6,9 @@ backgo/go_modules
 frontend/.env
 frontend/node_modules
 frontend/"
-
+front/.env
+.env
+/front/.env
 server/.env
 
 frontend/package-lock.json
