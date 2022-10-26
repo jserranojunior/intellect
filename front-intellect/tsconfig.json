@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "esnext",
+    "checkJs": false,
     "useDefineForClassFields": true,
-    "module": "ES2022",
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["esnext", "dom"],
     "skipLibCheck": true,
-    "checkJs": false,
-    "types": ["vite/client"]
+    "forceConsistentCasingInFileNames": false,
+    "allowJs": true
   },
   "include": [
     "src/**/*.ts",
@@ -28,6 +29,20 @@
     "src/**/*.test.ts",
     "src/**/**/*.ts"
   ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/**/*.test.ts",
+    "**/*.test.ts",
+    "*.test.ts",
+    "**/**/**/*.test.ts",
+    "**/**/**/**/*.test.ts",
+    "**/**/**/**/**/**/*.test.ts",
+    "**/**/**/**/**/**/**/*.test.ts",
+    "node_modules",
+
+    "./node_modules"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
+  "checkJs": false,
   "vetur.validation.script": false
 }
