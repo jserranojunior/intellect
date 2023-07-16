@@ -1,38 +1,35 @@
 version: "3"
 
 networks:
-  stack_ponte:
+  stack_dev:
     external: true
 
 services:
   intellect_back:
-    image: golang:1.16.3
+    image: golang:1.19.4
     container_name: "intellect_back"
     networks:
-      - stack_ponte
+      - stack_dev
     ports:
       - "5080:8000"
     volumes:
-      - ${PATHPESSOAL}/intellect/backgo:/app
-      - ${GOPATH}:/go
+      - ${DEVPATHCLIENTES}/intellect/back:/app
+      - ${DEVPATHCLIENTES}/intellect/server/cespare:/go/pkg/mod/github.com/cespare
+      - ${DEVPATHCLIENTES}/intellect/server/reflex:/go/bin/reflex
     command: "/bin/sh -c 'cd /app && reflex -c /app/reflex.conf'"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backintellect.rule=Host(`backintellect.${DOMAIN}`)"
-      - "traefik.http.services.backintellect.loadbalancer.server.port=8000"
 
   intellect_front:
     container_name: "intellect_front"
     image: "node:lts-alpine"
     working_dir: /app
     networks:
-      - stack_ponte
+      - stack_dev
     volumes:
-      - ${PATHPESSOAL}/intellect/front:/app
+      - ${DEVPATHCLIENTES}/intellect/front:/app
     command: "npm run dev"
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
     ports:
       - "8081:3000"
-    labels:
-      - "traefik.enable=true"
-      - traefik.http.routers.frontintellect.rule=Host(`frontintellect.${DOMAIN}`)
-      - traefik.http.services.frontintellect.loadbalancer.server.port=3000
