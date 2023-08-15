@@ -1,9 +1,8 @@
 import { store } from "./storeFinanceiro";
-import useStore from "../../../helpers/stores/store";
 import { useHttpResources } from "./mockUseHttpResources";
 import { datePtBrToUs } from "../../../helpers/dates/helpersDates";
 
-let { financeiro } = useStore();
+import Financial from "./Financial"
 
 import { it, expect } from "vitest";
 
@@ -40,38 +39,37 @@ it("set store setContasAPagar", () => {
       data_pagamento: "2021-02-15",
     },
   };
-  financeiro.setContasAPagar(data);
-  expect(store.ContaAPagar).toStrictEqual(data);
+  Financial.setContasAPagar(data);
+  expect(Financial.store.ContaAPagar).toStrictEqual(data);
 });
 
 it("check store contains categoriaContas", () => {
-  expect(store.categoriaContas).toBeTruthy();
+  expect(Financial.store.categoriaContas).toBeTruthy();
 });
 
 it("check store contains categoriaContas TotalCategories", () => {
-  expect(store.categoriaContas.TotalCategories == 0).toBeTruthy();
+  expect(Financial.store.categoriaContas.TotalCategories == 0).toBeTruthy();
 });
 
 it("check store contains categoriaContas", () => {
-  expect(store.categoriaContas).toBeTruthy();
+  expect(Financial.store.categoriaContas).toBeTruthy();
 });
 
 it("check store contains categoriaContas", () => {
-  expect(store.categoriaContas).toBeTruthy();
+  expect(Financial.store.categoriaContas).toBeTruthy();
 });
 it("set setCategoriaTest", () => {
-  financeiro.setCategoriaTest();
-  expect(store.ContaAPagar.favorecido == "Jorge").toBeTruthy();
+  Financial.setCategoriaTest();
+  expect(Financial.store.ContaAPagar.favorecido == "Jorge").toBeTruthy();
 });
 
 it("check store contains setCategoriaTest", () => {
-  financeiro.setCategoriaTest();
-  expect(store.categoriaContas.TotalCategories == 1516).toBeTruthy();
+  Financial.setCategoriaTest();
+  expect(Financial.store.categoriaContas.TotalCategories == 1516).toBeTruthy();
 });
 
 it("check get mock getCategoriaContas return date 2022-10-06", async () => {
-  return await financeiro
-    .getCategoriaContas("2022-10-06", useHttpResources)
+  return await Financial.getCategoriaContas("2022-10-06", useHttpResources)
     .then((res) => {
       const data = {
         ID: 1,
@@ -122,8 +120,7 @@ it("check get mock getCategoriaContas return date 2022-10-06", async () => {
 });
 
 it("check edit mock getContaAPagar", async () => {
-  return await financeiro
-    .GetEditBillsToPay(92, useHttpResources)
+  return await Financial.GetEditBillsToPay(92, useHttpResources)
     .then((res) => {
       const data = {
         ID: 92,
@@ -194,7 +191,7 @@ it("check formaterBillsToPay", () => {
       data_pagamento: "2021-02-15",
     },
   };
-  const fomatingData = financeiro.formaterBillsToPay(data);
+  const fomatingData = Financial.formaterBillsToPay(data);
 
   const dataFormated = {
     ID: 92,
@@ -239,8 +236,8 @@ it("check formaterBillsToPay", () => {
 
 it("set setDataCalendario", () => {
   const date = "2022-10-08";
-  financeiro.setDataCalendario(date);
-  expect(store.Calendario.selectedDate).toStrictEqual(date);
+  Financial.setDataCalendario(date);
+  expect(Financial.store.Calendario.selectedDate).toStrictEqual(date);
 });
 
 it("set storeBillsToPay", async () => {
@@ -296,7 +293,7 @@ it("set storeBillsToPay", async () => {
       UpdatedAt: "2021-02-03T05:29:19.491Z",
       DeletedAt: null,
       contas_a_pagar_id: 92,
-      data_pagamento: store.Calendario.selectedDate,
+      data_pagamento: Financial.store.Calendario.selectedDate,
       valor: 95,
     },
     ContasPagas: {
@@ -308,21 +305,20 @@ it("set storeBillsToPay", async () => {
       data_pagamento: "2021-02-15",
     },
   };
-  return await financeiro
-    .storeBillsToPay(dataBillsToPay, useHttpResources)
+  return await Financial.storeBillsToPay(dataBillsToPay, useHttpResources)
     .then((res: any) => {
       expect(res).toStrictEqual(dataToReturn);
     });
 });
 
 it("set deleteBillPayment", async () => {
-  const confirmDelete = await financeiro.deleteBillPayment(1);
+  const confirmDelete = await Financial.deleteBillPayment(1);
   expect(confirmDelete).toBe(true);
 });
 
 it("set deleteBillPayment", () => {
-  financeiro.setEditAddMode("edit");
-  expect(store.editAddMode.mode).toBe("edit");
+  Financial.setEditAddMode("edit");
+  expect(Financial.store.editAddMode.mode).toBe("edit");
 });
 
 it("set store updateBillsToPay", async () => {
@@ -334,8 +330,8 @@ it("set store updateBillsToPay", async () => {
     user_id: 49,
     categorias_contas_a_pagar_id: 1,
     favorecido: "Telefone",
-    inicio_data_pagamento: "2020-11-14",
-    fim_data_pagamento: "",
+    inicio_data_pagamento: new Date(),
+    fim_data_pagamento: new Date(),
     descricao: "",
     forma_pagamento: "Débito",
     tipo_conta: "Extra",
@@ -358,8 +354,7 @@ it("set store updateBillsToPay", async () => {
       data_pagamento: "2021-02-15",
     },
   };
-  return await financeiro
-    .updateBillsToPay(data, useHttpResources)
+  return await Financial.updateBillsToPay(data, useHttpResources)
     .then((res) => {
       expect(res).toStrictEqual(data);
     });
@@ -383,8 +378,8 @@ it("set setDataCalendario", async () => {
     forma_pagamento: "Cartão",
     tipo_conta: "Extra",
   };
-  return await financeiro.setValuesFormBillsToPay().then(() => {
-    expect(store.ContaAPagar).toStrictEqual(data);
+  return await Financial.setValuesFormBillsToPay().then(() => {
+    expect(Financial.store.ContaAPagar).toStrictEqual(data);
   });
 });
 
@@ -399,15 +394,14 @@ it("set makeBillPayment", async () => {
       })
     ) as string,
   };
-  return await financeiro
-    .makeBillPayment(15, data.data_pagamento, useHttpResources)
+  return await Financial.makeBillPayment(15, data.data_pagamento, useHttpResources)
     .then((res: any) => {
       expect(res).toStrictEqual(data);
     });
 });
 
 /* it("check get mock getSetCategoriasContas", async () => {
-  return await financeiro.getSetCategoriasContas().then(() => {
+  return await Financial.getSetCategoriasContas().then(() => {
     const data = {
       ID: 1,
       CreatedAt: "2022-10-06T15:37:12Z",
@@ -452,7 +446,7 @@ it("set makeBillPayment", async () => {
       ],
       Soma: 175,
     };
-    expect(store.categoriaContas).toStrictEqual(data);
+    expect(Financial.store.categoriaContas).toStrictEqual(data);
   });
 }); */
 

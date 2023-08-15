@@ -13,10 +13,10 @@
 
     <div class="flex flex-wrap mt-1">
       <hr class="border-t border-gray-600 bg-neutral w-full mb-1" />
-      <div class="w-full sm:w-full md:w-2/3 lg:w-4/5  bg-neutral p-2 rounded-xl">
+      <div class="w-full sm:w-full md:w-1/6  bg-neutral p-2 rounded-xl">
         <CategoriaContasAPagar />
       </div>
-      <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 border-l border-gray-600">
+      <div class="w-full sm:w-full md:w-1/6  border-l border-gray-600">
         <FeedbackFinanceiro />
       </div>
     </div>
@@ -25,20 +25,22 @@
 
         <!-- <router-link to="/financeiro/adicionarconta">Adicionar Conta</router-link> -->
 <script lang="ts" setup>
-import Calendario from "../components/Calendario.vue"
-import CategoriaContasAPagar from "../mods/financeiro//components/CategoriaContasAPagar.vue"
-import FeedbackFinanceiro from "../mods/financeiro//components/FeedbackFinanceiro.vue"
+import Calendario from "../../../components/Calendario.vue"
+import CategoriaContasAPagar from "../../../mods/financeiro//components/CategoriaContasAPagar.vue"
+import FeedbackFinanceiro from "../../../mods/financeiro//components/FeedbackFinanceiro.vue"
+import Financial from "../../../mods/financeiro/composables/Financial"
 
-import useStore from "../helpers/stores/store"
+import useStore from "../../../helpers/stores/store"
 import { onBeforeMount } from "vue";
-let { financeiro, router } = useStore()
+let { router } = useStore()
 
 onBeforeMount(async () => {
-  await financeiro.getSetCategoriasContas()
+  await Financial.getSetCategoriasContas()
   /* financeiro.setCategoriaTest(); */
 });
 
 function openModalAddBillsToPay() {
-  router.push("financeiroaddconta")
+  Financial.store.mode = "add"
+  router.push("/financeiroaddconta")
 }
-</script>../mods/financeiro/components/CategoriaContasAPagar.vue../mods/financeiro/components/FeedbackFinanceiro.vue
+</script>

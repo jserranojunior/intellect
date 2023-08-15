@@ -1,15 +1,14 @@
 import { store } from "./storeRoutes";
 import { createRouter, createWebHistory } from "vue-router";
-import { useAcl } from "../acl/composables/useAcl";
+import UseAcl from "../acl/composables/UseAcl";
 
-let { checkIfExisteRoutes } = useAcl();
 const router = createRouter({
   history: createWebHistory(),
   routes: store.routes,
 });
 router.beforeResolve((to, from) => {
   if (typeof to.meta.id == "number") {
-    if (checkIfExisteRoutes(to.meta.id)) {
+    if (UseAcl.checkIncludeRoute(to.meta.id)) {
       return true;
     } else {
       router.push("login");

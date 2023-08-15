@@ -1,20 +1,16 @@
 <template>
   <div class="bg-base-100">
 
-    <nav
-      class="
+    <nav class="
       navbar  
        border-b border-neutral     
-      "
-    >
+      ">
       <slot name="header"></slot>
     </nav>
-    <div
-      class="
+    <div class="
         drawer
         min-h-screen
-      "
-    >
+      ">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content">
         <slot name="mainpage"></slot>

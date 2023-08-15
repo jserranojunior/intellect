@@ -1,7 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosStatic } from "axios";
 export const useHttpResources = () => {
   async function get(url: string) {
-    console.log(url);
     let dataToReturn = {
       ID: 1,
       CreatedAt: "2022-10-06T15:37:12Z",

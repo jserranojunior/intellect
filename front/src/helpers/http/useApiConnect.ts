@@ -75,7 +75,6 @@ class apiConnect {
   async get(endpoint: string): Promise<void | AxiosResponse> {
     this.checkTokenStorage();
     if (this.token) {
-      console.log(this.backApiUrl, "this.backApiUrl GET ", this.token, "TOKEN");
       this.axiosInstance = this.axios.create({
         baseURL: this.backApiUrl,
         headers: {
@@ -83,9 +82,18 @@ class apiConnect {
           "Content-Type": "application/json",
         },
       });
-      return this.axiosInstance.get(endpoint);
+      return await this.axiosInstance
+        .get(endpoint)
+        .then((res: any) => {
+          console.info("dock", res.data);
+          return res.data;
+        })
+        .catch((res: any) => {
+          console.error("erro", res);
+          return res;
+        });
     } else {
-      console.log("SEM TOKEN");
+      console.error("SEM TOKEN");
     }
   }
 
@@ -104,7 +112,7 @@ class apiConnect {
       });
       return this.axiosInstance.post(endpoint, body);
     } else {
-      console.log("SEM TOKEN");
+      console.error("SEM TOKEN");
     }
   }
 

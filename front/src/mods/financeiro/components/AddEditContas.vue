@@ -2,10 +2,10 @@
   <div class="flex justify-center mx-4">
     <div class="w-full sm:w-1/2 md:w-1/3 card  shadow-xl my-4">
       <div
-        v-if="financeiro.err"
+        v-if="Financial.store.err"
         class="my-1 block text-sm text-gray-300 text-center bg-yellow-800 border border-yellow-900 h-8 items-center p-2 rounded-lg"
         role="alert"
-      >{{ financeiro.err }}</div>
+      >{{ Financial.store.err }}</div>
       <div class="p-2 rounded-sm shadow-sm bg-neutral">
         <div class="flex flex-wrap">
           <!-- <label class="pb-2 text-gray-700 font-semibold">Favorecido</label> -->
@@ -14,7 +14,7 @@
             class="input input-sm w-full"
             name="favorecido"
             placeholder="Favorecido"
-            v-model="financeiro.ContaAPagar.favorecido"
+            v-model="Financial.store.ContaAPagar.favorecido"
           />
         </div>
         <div class="mt-1 flex flex-wrap pt-2">
@@ -24,7 +24,7 @@
             class="input input-sm w-full"
             name="descricao"
             placeholder="Descrição"
-                        v-model="financeiro.ContaAPagar.descricao"
+                        v-model="Financial.store.ContaAPagar.descricao"
 
           />
         </div>
@@ -37,7 +37,7 @@
             name="valor"
             required
             placeholder="Valor"
-            v-model="financeiro.ContaAPagar.ValoresContasAPagar.valor"
+            v-model="Financial.store.ContaAPagar.ValoresContasAPagar.valor"
           />
         </div>
 
@@ -46,9 +46,8 @@
             for="inicio_data_pagamento"
             class="pb-2 label label-text"
           >Inicio Pagamento</label>
-
           <input
-            v-model="financeiro.inicioDataPagamentoWithouFormated"
+            v-model="Financial.store.inicioDataPagamentoWithouFormated"
             type="date"
             class="input input-sm w-full"
             placeholder="dd/mm/aaaa"
@@ -59,7 +58,7 @@
         <div class="flex flex-wrap">
           <label for="fim_data_pagamento" class="pb-2 label label-text">Fim Pagamento</label>
           <input
-            v-model="financeiro.fimDataPagamentoWithouFormated"
+            v-model="Financial.store.fimDataPagamentoWithouFormated"
             type="date"
             class="input input-sm w-full"
             placeholder="dd/mm/aaaa"
@@ -67,7 +66,7 @@
         </div>
         <div class="mt-1 flex flex-wrap pt-2">
           <select
-            v-model="financeiro.ContaAPagar.categorias_contas_a_pagar_id"
+            v-model="Financial.store.ContaAPagar.categorias_contas_a_pagar_id"
             name="categorias_contas_a_pagar_id"
             required
             class="select select-sm w-full"
@@ -86,7 +85,7 @@
         </div>
 
         <div class="mt-1 flex flex-wrap pt-2">
-          <select v-model="financeiro.ContaAPagar.tipo_conta" name="tipo_conta" required class="select  select-sm w-full">
+          <select v-model="Financial.store.ContaAPagar.tipo_conta" name="tipo_conta" required class="select  select-sm w-full">
             <option disabled selected value="Tipo de Conta">Tipo de Conta</option>
             <option value="Extra">Extra</option>
             <option value="Fixa">Fixa</option>
@@ -96,7 +95,7 @@
 
         <div class="mt-1 flex flex-wrap pt-2">
           <select
-            v-model="financeiro.ContaAPagar.forma_pagamento"
+            v-model="Financial.store.ContaAPagar.forma_pagamento"
             name="forma_pagamento"
             required
             class="select  select-sm w-full"
@@ -118,11 +117,11 @@
           </div>
           <div class="w-1/2 text-right">
             <button
-              v-if="financeiro.mode === 'add'"
+              v-if="Financial.store.mode === 'add'"
               class="btn btn-primary btn-sm"
-              @click="financeiro.storeBillsToPay()"
+              @click="addBills()"
             >Cadastrar</button>
-            <button v-else class="btn btn-sm btn-primary" @click="financeiro.updateBillsToPay()">Atualizar</button>
+            <button v-else class="btn btn-sm btn-primary" @click="updateBill">Atualizar</button>
           </div>
         </div>
       </div>
@@ -134,53 +133,36 @@
 
 import { onMounted } from "vue";
         import useStore from "../../../helpers/stores/store"
+        import Financial from "../composables/Financial"
+
 import { onBeforeMount } from '@vue/runtime-core';
-        let {router, financeiro} = useStore()
-
-
+        let {router} = useStore()
 
     function setMode() {
-      financeiro.setEditAddMode(financeiro.mode).then((res) => {
+      Financial.setEditAddMode(Financial.store.mode).then((res) => {
         if (res === "add") {
-          financeiro.setEditAddMode("add");
-          financeiro.setValuesFormBillsToPay()
-        } else if (res === "edit" && !financeiro.ContaAPagar.ID) {
-          router.push("/financeiro");
+          Financial.setEditAddMode("add");
+          Financial.setValuesFormBillsToPay()
         }
       });
     }
+
+    function addBills(){
+      Financial.storeBillsToPay().then(()=>{
+        router.push("/financeiro")
+      })
+      
+    }
+
+    function updateBill(){
+      Financial.updateBillsToPay().then(()=>{
+        router.push("/financeiro")
+      })
+      
+    }
+
     onBeforeMount(() => {
       setMode();
     });
-   
-  
-  // watch: {
-  //   dataAtualFinanceiro: {
-  //     handler() {
-  //       this.setData();
-  //     },
-  //     deep: true,
-  //   },
-  //   editarfinanceiro.ContaAPagar: {
-  //     handler() {
-  //       this.setFields();
-  //     },
-  //     deep: true,
-  //   },
-
-  //   categorias_contas_a_pagar_id: function() {
-  //     this.financeiro.ContaAPagar.categorias_contas_a_pagar_id = this.categorias_contas_a_pagar_id;
-  //   },
-  // },
-  // computed: {
-  //   ...mapState({
-  //     dataAtualFinanceiro: (state) => state.Financeiro.dataSelecionada,
-  //     editarfinanceiro.ContaAPagar: (state) => state.Financeiro.editarfinanceiro.ContaAPagar,
-  //   }),
-  // },
-
-  // directives: {
-  // mask: AwesomeMask,
-  // },
 
 </script>

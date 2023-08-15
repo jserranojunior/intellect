@@ -126,7 +126,7 @@
 </template>
 <script setup lang="ts">
 import useStore from "../../helpers/stores/store";
-import { onMounted, inject, reactive } from "vue";
+import { onMounted } from "vue";
 import phoneMask from '../../helpers/mask/phoneMask';
 
 let { register, router, auth } = useStore();

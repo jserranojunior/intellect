@@ -1,5 +1,6 @@
-export const httpAcl = () => {
-  async function getUserAcl() {
+class apiConnect {
+  async get(url:string) {
+    
     const data = {
       data: [
         {
@@ -16,5 +17,5 @@ export const httpAcl = () => {
     };
     return data;
   }
-  return { getUserAcl };
-};
+}
+export default apiConnect;

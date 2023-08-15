@@ -5,13 +5,15 @@ export const useHttpResources = () => {
   async function get(url: string) {
     return await ApiConnect.get(url)
       .then((response) => {
-        if (response && response.data && response.data.data) {
-          return response.data.data;
+        if (response && response.data) {
+          return response.data;
+        }else{
+          return response
         }
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response);
+        console.error(err);
+        console.error(err.response);
       });
   }
 
@@ -22,8 +24,8 @@ export const useHttpResources = () => {
         return response;
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response);
+        console.error(err);
+        console.error(err.response);
       });
   }
   async function store(url: string, data: any) {
@@ -32,8 +34,8 @@ export const useHttpResources = () => {
         return response;
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response);
+        console.error(err);
+        console.error(err.response);
       });
   }
   async function update(url: string, data: any) {
@@ -43,19 +45,19 @@ export const useHttpResources = () => {
         return response;
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response);
+        console.error(err);
+        console.error(err.response);
       });
   }
-  async function delet(url: string, data: number) {
-    const urlApi = `${url}${data}`;
+  async function delet(url: string) {
+    const urlApi = `${url}`;
     return await ApiConnect.delet(urlApi)
       .then((response) => {
         return response;
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response);
+        console.error(err);
+        console.error(err.response);
       });
   }
   return {

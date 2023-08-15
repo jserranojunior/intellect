@@ -1,6 +1,5 @@
 export function dateUStoJs(value: string): Date | string {
   const validation = value.slice(-3, 1);
-  console.log(validation);
   if (value && validation === "-") {
     const date: Date = new Date(value);
     return date;

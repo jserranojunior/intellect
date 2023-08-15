@@ -22,20 +22,20 @@ export function useRegister() {
             res.response.data &&
             res.response.data.message
           ) {
-            console.log(res.response.data.message);
+            
             setStoreError(res.response.data.message);
           } else if (res && res.response && res.response.data) {
             setStoreError(
               "Erro ao fazer cadastro, contate o administrador do sistema"
             );
-            console.log("Servidor offline");
-            console.log(res.response.data);
+            console.error("Servidor offline");
+            console.error(res.response.data);
           } else if (res && res.response) {
             setStoreError("Erro, contate o administrador do sistema");
-            console.log("Servidor offline");
-            console.log(res.response);
+            console.error("Servidor offline");
+            console.error(res.response);
           } else if (res) {
-            console.log(res);
+            console.error(res);
           }
           return false;
         }
