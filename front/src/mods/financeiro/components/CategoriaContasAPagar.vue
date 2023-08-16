@@ -1,13 +1,18 @@
 <template>
 
 
-  <div class=" flex flex-wrap">
-  <div v-for="categoria in Financial.store.categoriaContas.CategoriasContasAPagars" :key="categoria.id" class="w-full p-2">
-    <div class="bg-white rounded-lg shadow-xl p-4">
+  <div class=" flex flex-wrap ">
+    <div class="btn btn-primary btn-sm w-full bg-yellow-600 border-green-400 text-white">
+         CONTAS A PAGAR
+        </div>
+  <div v-for="categoria in Financial.store.categoriaContas.CategoriasContasAPagars" :key="categoria.id" class="w-full">
+    <div class=" py-1" v-if="categoria.ContasAPagar[0]">
+      <div class="bg-base-300 rounded-lg shadow-xl p-2" >
       <div class="text-lg font-semibold">{{ categoria.nome }}</div>
-      <div class="mt-2">
-        <div v-for="contas in categoria.ContasAPagar" :key="contas.ID" class="bg-gray-100 p-2 rounded-lg shadow mb-2 flex">
-          <div class="w-1/4 flex items-center">
+      <div class="mt-1">
+      
+        <div v-for="contas in categoria.ContasAPagar" :key="contas.ID" class="bg-base-200 p-2 rounded-lg shadow mb-1 flex">
+          <div class="w-1/4 flex items-center" >
          
             <input
               type="checkbox"
@@ -32,10 +37,11 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-between mt-2">
+      <div class="flex justify-between mt-2  p-1  border-t pt-2">
         <div class="font-semibold">Total</div>
         <div class="font-semibold">{{ money(categoria.Soma) }}</div>
       </div>
+    </div>
     </div>
   </div>
 
