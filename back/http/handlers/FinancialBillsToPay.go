@@ -13,8 +13,6 @@ import (
 	"errors"
 )
 
-
-
 func EditBillsToPayMonth(c *gin.Context) {
 	id := c.Param("id")
 	dateyearmonth := c.Param("dataanomes")
@@ -23,6 +21,11 @@ func EditBillsToPayMonth(c *gin.Context) {
 	queryValores := "SUBSTRING(data_pagamento,1,7) = (?)  OR SUBSTRING(data_pagamento,1,7) < ?"
 	var contas []models.ContasAPagars
 	DB.Where("id", id).Preload("ValoresContasAPagar", queryValores, dateStart, dateStart).Find(&contas)
+
+	for indexContas := 0; indexContas < len(contas); indexContas++ {
+		contas[indexContas].ValoresContasAPagar = GetValuesBillsToPay(int(contas[indexContas].ID), dateStart)
+	}
+
 	c.JSON(http.StatusOK, gin.H{"data": contas})
 }
 
@@ -30,7 +33,6 @@ func StoreBillsToPay(c *gin.Context) {
 	tokenID := c.GetUint("id")
 	var contas models.ContasAPagars
 
-	
 	if err := c.Bind(&contas); err != nil {
 		fmt.Println(err)
 		c.JSON(400, gin.H{
@@ -43,7 +45,7 @@ func StoreBillsToPay(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"data": contas})
 }
 
-//SelectAll return BillsToPay
+// SelectAll return BillsToPay
 func SelectAllBillsToPay(c *gin.Context) {
 	var contas []models.ContasAPagars
 	DB.Find(&contas)
@@ -64,27 +66,25 @@ func UpdateBillsToPay(c *gin.Context) {
 	id := helpers.StringToUint(c.Params.ByName("id"))
 
 	DB.Where("id", id).Find(&contas)
+
 	if errContas := c.BindJSON(&contas); errContas != nil {
 		fmt.Println(errContas)
 		c.JSON(400, gin.H{
 			"erro": errContas,
 		})
 	}
-	result := DB.Where("SUBSTRING(data_pagamento,1,7) = (?)", dateStart).Where("contas_a_pagar_id", id).First(&valores).Error
+	result := DB.Where("SUBSTRING(data_pagamento,1,7) = (?)", dateStart).Where("contas_a_pagar_id = ?", id).First(&valores).Error
 	fmt.Println(errors.Is(result, gorm.ErrRecordNotFound))
-
+	fmt.Println("dateyearmonth", dateyearmonth)
 	if result != nil {
-
-		fmt.Println("CONTEM ERRO")
 		contas.ValoresContasAPagar.DataPagamento = dateyearmonth
 		valores.Valor = contas.ValoresContasAPagar.Valor
 		valores.DataPagamento = dateyearmonth
 		valores.ContasAPagarId = id
 		DB.Create(&valores)
 	} else {
-		fmt.Println("NAO CONTEM ERRO")
-
-		DB.Model(&valores).Where("contas_a_pagar_id", id).Updates(contas.ValoresContasAPagar)
+		fmt.Println("dateStart", dateStart)
+		DB.Model(&valores).Where("SUBSTRING(data_pagamento, 1, 7) = ?", dateStart).Where("contas_a_pagar_id = ?", id).Updates(&valores)
 		DB.Save(&valores)
 	}
 	DB.Omit("ValoresContasAPagar").Save(&contas)

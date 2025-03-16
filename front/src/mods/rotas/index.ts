@@ -7,15 +7,16 @@ const router = createRouter({
   routes: store.routes,
 });
 router.beforeResolve((to, from) => {
+
   if (typeof to.meta.id == "number") {
+
     if (UseAcl.checkIncludeRoute(to.meta.id)) {
       return true;
     } else {
-      router.push("login");
-
-      return false;
+/*       router.push("login");
+ */      return false;
     }
-  }
+  } 
 });
 
 export default router;

@@ -1,5 +1,7 @@
+import { reactive } from "vue";
+
 class StoreAuth {
-  public store = {
+  public store = reactive({
     ola: "ola de dentro do reactive",
     fields: {
       email: "",
@@ -9,7 +11,7 @@ class StoreAuth {
       erro: "",
       token: "",
     },
-  };
+  });
 
   getOla() {
     return this.store.ola;

@@ -24,8 +24,11 @@ export const store = reactive({
       meta: {
         id: 2,
       },
-      component: () => import("../../pages/LoginPage.vue"),
-    },
+/*       component: () => import("../../pages/LoginPage.vue"),
+ */    
+component: () => import("../auth/Login.vue"),
+
+},
     {
       name: "cadastro",
       path: "/cadastro",
@@ -57,6 +60,14 @@ export const store = reactive({
         id: 5,
       },
       component: () => import("../../pages/UsersPage.vue"),
+    },
+    {
+      name: "contasapagar",
+      path: "/contasapagar",
+      meta: {
+        id: 6,
+      },
+      component: () => import("../financeiro/pages/ContasAPagar.vue"),
     },
   ],
 });

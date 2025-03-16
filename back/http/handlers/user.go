@@ -3,20 +3,17 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-		"golang.org/x/crypto/bcrypt"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jserranojunior/intellect/backgo/models"
 )
 
-
-
-
-
 func GetUser(c *gin.Context) {
 	var user models.User
 	tokenID := c.GetUint("id")
-	fmt.Println(tokenID)
+
 	res := DB.Where("ID", tokenID).Find(&user)
 
 	if res.Error != nil {
@@ -33,7 +30,7 @@ func GetUser(c *gin.Context) {
 	})
 }
 
-//Select return user
+// Select return user
 func UserUpdate(c *gin.Context) {
 	var user models.User
 	DB.Where("id", c.Param("id")).Find(&user)
@@ -48,7 +45,7 @@ func UserUpdate(c *gin.Context) {
 	})
 }
 
-//  Getting all users registers
+// Getting all users registers
 func GetAllUsers(c *gin.Context) {
 	var user []models.User
 	res := DB.Find(&user)
@@ -108,7 +105,6 @@ func UserCreate(c *gin.Context) {
 	})
 	// user.BirthDate, _ = time.Parse("2006-01-02", user.BirthDate)
 }
-
 
 // hashPassword hashs passwords
 func hashPassword(password string) (string, error) {

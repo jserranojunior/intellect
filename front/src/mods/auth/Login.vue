@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="context">
       <div class="flex items-center justify-center my-4">
         <div class="px-auto my-auto ">
@@ -30,16 +31,15 @@
                 <div class="w-1/2">
                   <label class>
 
-                    <Icon icon="fluent:password-16-filled" />
 
                     <span class="text-gray-200 text-sm">Esqueci a senha</span>
                   </label>
                 </div>
                 <div class="w-1/2">
                   <button class="w-full py-2 px-4  rounded-md btn btn-sm" @click="logar()">
-    <span class="px-2">LOGAR</span>
-    <Icon icon="ri:login-circle-line" />
-  </button>
+                    <span class="px-2">LOGAR</span>
+                    <Icon icon="ri:login-circle-line" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -51,13 +51,17 @@
 </template>
 <script setup lang="ts">
 import Auth from "./composables/Auth"
-import { onMounted } from "vue";
-import router from "../rotas/index";
+import StoreAuth from "./composables/StoreAuth";
+import { onMounted, watch } from "vue";
+ import router from "../rotas/index"; 
 
 function logar() {
-  Auth.logar().then(() => {
+  Auth.Logar().then(res =>{
     router.push("/");
+  }).catch((err)=>{
+    console.error(err)
   })
+   
 }
 onMounted(() => {
   Auth.LogginWithEnterButton();

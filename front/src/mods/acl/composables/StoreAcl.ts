@@ -10,6 +10,7 @@ interface StoreState {
   rotasEnableServidor: number[];
   publicRoutes: Route[];
   userAcl: Route[];
+  loggedRoutes: Route[];
 }
 
 class StoreAcl {
@@ -20,6 +21,13 @@ class StoreAcl {
         ID: 0,
         Name: "Public",
         Routes: [0, 1, 2, 3],
+      },
+    ],
+    loggedRoutes: [
+      {
+        ID: 1,
+        Name: "Logged",
+        Routes: [0, 1],
       },
     ],
     userAcl: [],
@@ -39,6 +47,10 @@ class StoreAcl {
 
   getRotasEnableServidor(): number[] {
     return this.store.rotasEnableServidor;
+  }
+
+  getLoggedRoutes(): Route[] {
+    return this.store.loggedRoutes;
   }
 
   getPublicRoutes(): Route[] {

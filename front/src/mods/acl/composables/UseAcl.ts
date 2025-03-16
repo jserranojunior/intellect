@@ -16,7 +16,17 @@ class UseAcl {
     } else {
       StoreAcl.setUserAcl(StoreAcl.getPublicRoutes());
     }
+  
   }
+  joinAclLogged() {
+    const userAcl = StoreAcl.getUserAcl();
+    if (userAcl && userAcl[0]) {
+      userAcl.unshift(StoreAcl.getLoggedRoutes()[0]);
+    } else {
+      StoreAcl.setUserAcl(StoreAcl.getLoggedRoutes());
+    }
+  }
+    
 
 
   async fetchUserAclFromApi(apiConnect:any = ApiConnect) {
@@ -35,14 +45,21 @@ class UseAcl {
   }
 
   clearRoutesEnableWithUserAcls() {
-    StoreAcl.setRotasEnableServidor([0, 1, 2, 3]);
+    
     StoreAcl.setUserAcl([]);
-    this.generateRoutesEnableWithUserAcls();
+    this.generateRoutesEnableWithUserAcls(false);
+
   }
 
-  generateRoutesEnableWithUserAcls() {
-    this.joinAclPublic();
+  generateRoutesEnableWithUserAcls(logged:boolean) {
+    if(logged){
+      this.joinAclLogged()
+    }else{
+      this.joinAclPublic();
+    }
+   
     const userAcl = StoreAcl.getUserAcl();
+
     userAcl.forEach((acl) => {
       acl.Routes.forEach((rota) => {
         const rotasEnableServidor = StoreAcl.getRotasEnableServidor();
