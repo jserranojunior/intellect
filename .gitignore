@@ -11,5 +11,7 @@ front/.env
 /front/.env
 ./front/env
 server/.env
+target/
+
 
 frontend/package-lock.json

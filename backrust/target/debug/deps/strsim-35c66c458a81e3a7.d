@@ -1,7 +1,0 @@
-/mnt/bufalo/dev/intellect/backrust/target/debug/deps/libstrsim-35c66c458a81e3a7.rmeta: /home/jorge/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/strsim-0.11.1/src/lib.rs
-
-/mnt/bufalo/dev/intellect/backrust/target/debug/deps/libstrsim-35c66c458a81e3a7.rlib: /home/jorge/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/strsim-0.11.1/src/lib.rs
-
-/mnt/bufalo/dev/intellect/backrust/target/debug/deps/strsim-35c66c458a81e3a7.d: /home/jorge/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/strsim-0.11.1/src/lib.rs
-
-/home/jorge/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/strsim-0.11.1/src/lib.rs:

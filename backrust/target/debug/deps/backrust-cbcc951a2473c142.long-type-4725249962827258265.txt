@@ -1,1 +1,0 @@
-(diesel::sql_types::Integer, Text, Text, Text, diesel::sql_types::Nullable<diesel::sql_types::Timestamp>, diesel::sql_types::Nullable<diesel::sql_types::Timestamp>, diesel::sql_types::Nullable<diesel::sql_types::Timestamp>, diesel::sql_types::Nullable<diesel::sql_types::Double>)
