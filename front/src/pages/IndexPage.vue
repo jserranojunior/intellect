@@ -1,16 +1,18 @@
 <template>
   <div>
-    <div class="context centered">
-      <img src="../assets/logo.jpg" class="mx-auto object-cover h-48 w-96 mb-4" />
-      <h1>{{ msg }}</h1>
-    </div>
-    <efectCircles></efectCircles>
+    <efectCircles>
+      <div class="absolute top-[25vh] w-full z-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold font-sans">Bem vindo!</h1>
+        <p class="text-lg mt-2 font-light">
+          Gerencie suas finanças com praticidade e um controle inteligente,
+          simples e eficiente.
+        </p>
+      </div>
+    </efectCircles>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
 import efectCircles from "../components/efectCircles.vue";
-
-const msg = ref(`Bem vindo ao futuro da organização financeira!`);
 </script>

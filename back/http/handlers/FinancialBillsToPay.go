@@ -13,6 +13,44 @@ import (
 	"errors"
 )
 
+// GetCategoriesAndBillsMonth return Categories, Bills, Values, Paid
+func GetBillsMonth(c *gin.Context) {
+	tokenID := c.GetUint("id")
+	if tokenID == 0 {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuário não autenticado"})
+		return
+	}
+
+	dateandname := c.Param("date")
+	if len(dateandname) < 7 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "data inválida"})
+		return
+	}
+	dateStart := dateandname[:7]
+
+	queryPagas := "SUBSTRING(data_pagamento,1,7) = ? AND data_pagamento > ''"
+	queryValores := "SUBSTRING(data_pagamento,1,7) = (?)  OR SUBSTRING(data_pagamento,1,7) < ?"
+
+	queryContas := `
+	(
+		(SUBSTRING(inicio_data_pagamento,1,7) <= ? AND SUBSTRING(fim_data_pagamento,1,7) >= ? AND user_id = ?) OR
+		(SUBSTRING(inicio_data_pagamento,1,7) <= ? AND fim_data_pagamento IS NULL AND user_id = ?) OR
+		(SUBSTRING(inicio_data_pagamento,1,7) <= ? AND fim_data_pagamento = '' AND user_id = ?)
+	)
+`
+
+	var contasapagar []models.ContasAPagars
+
+	DB.Where(queryContas, dateStart, dateStart, tokenID, dateStart, tokenID, dateStart, tokenID).
+		Preload("ContasPagas", queryPagas, dateStart).
+		Preload("ValoresContasAPagar", queryValores, dateStart, dateStart).
+		Find(&contasapagar)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": contasapagar,
+	})
+}
+
 func EditBillsToPayMonth(c *gin.Context) {
 	id := c.Param("id")
 	dateyearmonth := c.Param("dataanomes")

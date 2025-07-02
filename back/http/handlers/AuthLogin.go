@@ -1,51 +1,85 @@
 package handlers
 
 import (
+	"errors"
+	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
+
 	"github.com/jserranojunior/intellect/backgo/http/middlewares"
 	"github.com/jserranojunior/intellect/backgo/models"
-	"golang.org/x/crypto/bcrypt"
 )
 
-// AuthLogin a user controllers
-func AuthLogin(c *gin.Context) {
-	var user models.User
-	c.Bind(&user)
-	email := user.Email
-	password := user.Password
-
-	if email == "" || password == "" {
-		c.JSON(401, gin.H{
-			"message": "Erro ao tentar fazer login email ou senha em branco",
-		})
-	} else {
-		var user models.User
-		result := DB.Select("id", "password").Where("email = ?", email).First(&user)
-		if result.RowsAffected == 0 {
-			c.JSON(401, gin.H{
-				"message": "Email ou senha incorretos",
-			})
-		} else {
-			if compareBcrypt(user.Password, password) {
-				user.Password = ""
-				token := middlewares.GenerateJwt(user.ID)
-				c.JSON(200, gin.H{
-					"token": &token,
-				})
-			} else {
-				c.JSON(401, gin.H{
-				"message": "Email ou senha incorretos",
-				})
-			}
-		}
-	}
+// ----------------------------------------------------------------------------
+// Auxiliar: compara senha usando bcrypt
+// ----------------------------------------------------------------------------
+func compareBcrypt(hashedPassword, plainPassword string) bool {
+	return bcrypt.CompareHashAndPassword(
+		[]byte(hashedPassword),
+		[]byte(plainPassword),
+	) == nil
 }
 
-func compareBcrypt(hashedPassword string, password string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
-	if err == nil {
-		return true
-	} else {
-		return false
+// ----------------------------------------------------------------------------
+// POST /auth/login
+// ----------------------------------------------------------------------------
+func AuthLogin(c *gin.Context) {
+	//----------------------------------------------------------------------
+	// 1. Leitura e validação do corpo JSON
+	//----------------------------------------------------------------------
+	var payload struct {
+		Email    string `json:"email"    binding:"required,email"`
+		Password string `json:"password" binding:"required"`
 	}
+	if err := c.ShouldBindJSON(&payload); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Dados de login inválidos",
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	//----------------------------------------------------------------------
+	// 2. Busca do usuário no banco (somente id e hash da senha)
+	//----------------------------------------------------------------------
+	var dbUser models.User
+	if err := DB.Select("id", "password").
+		Where("email = ?", payload.Email).
+		First(&dbUser).Error; err != nil {
+
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"message": "E-mail ou senha incorretos",
+			})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"message": "Erro ao buscar usuário",
+				"error":   err.Error(),
+			})
+		}
+		return
+	}
+
+	//----------------------------------------------------------------------
+	// 3. Compara o hash
+	//----------------------------------------------------------------------
+	if !compareBcrypt(dbUser.Password, payload.Password) {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "E-mail ou senha incorretos",
+		})
+		return
+	}
+
+	//----------------------------------------------------------------------
+	// 4. Gera e devolve o JWT
+	//----------------------------------------------------------------------
+	token := middlewares.GenerateJwt(dbUser.ID)
+	fmt.Println("Token gerado:", token)
+
+	c.JSON(http.StatusOK, gin.H{
+		"token": token,
+	})
 }

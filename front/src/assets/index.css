@@ -1,21 +1,5 @@
-@tailwind base;
-@tailwind components;
-
-@layer base {
-  .a-btn-primary {
-    @apply text-white bg-blue-700  focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
-  }
-  .a-btn-primary:hover{
-    @apply bg-blue-800
-  }
-}
-
-@tailwind utilities;
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px rgb(31, 36, 41) inset !important;
-      -webkit-text-fill-color: white !important;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, business, fantasy, wireframe,
+    autumn, corporate, cupcake, cyberpunk, dracula, garden, synthwave, retro;
 }

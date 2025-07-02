@@ -15,10 +15,10 @@ export const useFinancial = () => {
     FuncHttpFinanceiro: any = useHttpResources
   ) {
     let useHttpFinanceiro = FuncHttpFinanceiro();
-    console.log("AQUI FPRA")
+    console.log("AQUI FPRA");
     if (store.Calendario.selectedDate) {
       const url = `/financial/editbills/${id}/${store.Calendario.selectedDate}`;
-      console.log(url, "########")
+      console.log(url, "########");
       return await useHttpFinanceiro.edit(url).then((res: any) => {
         return res;
       });
@@ -1295,21 +1295,18 @@ export const useFinancial = () => {
     });
   }
 
-
   function setExistValueCategorie(categories: any) {
     store.categoriaContas = categories;
-
-
   }
 
   async function getSetCategoriasContas() {
-    console.log("getSetCategoriasContas")
+    console.log("getSetCategoriasContas");
     await getCategoriaContas(store.Calendario.selectedDate).then((res) => {
       setExistValueCategorie(res);
     });
   }
 
-/*   async function getSetContasAPagar(id: number) {
+  /*   async function getSetContasAPagar(id: number) {
     console.log("getSetContasAPagar")
     await GetEditBillsToPay(id).then((res) => {
       setContasAPagar(res);
@@ -1320,9 +1317,7 @@ export const useFinancial = () => {
     store.mode = mode;
   }
 
-
   return {
- 
     ...toRefs(store),
     setMode,
     getCategoriaContas,
@@ -1337,7 +1332,7 @@ export const useFinancial = () => {
     setExistValueCategorie,
     setCategoriaTest,
     getSetCategoriasContas,
- /*    getSetContasAPagar, */
+    /*    getSetContasAPagar, */
     setContasAPagar,
     formaterBillsToPay,
   };

@@ -1,21 +1,7 @@
-// import { defineConfig } from 'vite'
-// import vue from '@vitejs/plugin-vue'
-
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [vue()]
-// })
-
-// import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import envCompatible from "vite-plugin-env-compatible";
 
-// // https://vitejs.dev/config/
-// export default defineConfig({
-
-// });
-
-export default ({ command }) => {
+export default ({ command }: any) => {
   if (command === "serve") {
     return {
       plugins: [vue(), envCompatible()],
@@ -23,25 +9,13 @@ export default ({ command }) => {
         alias: [{ find: "@", replacement: "/src" }],
       },
       server: {
-        host: true,
+        host: true, // aceita conexões externas
         port: 3000,
-        hmr: { clientPort: 8081 },
-      },
-    };
-  } else if (command === "build") {
-    return {
-      plugins: [vue(), envCompatible()],
-      resolve: {
-        alias: [{ find: "@", replacement: "/src" }],
-      },
-      server: {
-        host: "0.0.0.0",
-        port: 5000,
-        https: true,
-        hmr: { host: "https://intellect.alvitre.com.br", port: 443 },
-      },
-      build: {
-        chunkSizeWarningLimit: 2000,
+        hmr: {
+          host: "intellect.alvitre.com.br", // domínio para o HMR websocket
+          port: 443, // porta do websocket (443 para HTTPS)
+          protocol: "wss", // websocket seguro (HTTPS)
+        },
       },
     };
   } else if (command === "testbuild") {

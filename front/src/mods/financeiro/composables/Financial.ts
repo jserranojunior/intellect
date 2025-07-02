@@ -7,12 +7,21 @@ import { dateUStoJsFull } from "alvitre-obelisk/src/convertDates/js/dateFormatJs
 import { dateUsToPtBr } from "../../../helpers/dates/helpersDates";
 import { dateFormatUs } from "alvitre-obelisk";
 
-class Financial{
-    public store
-    constructor(){
-        this.store = reactive(StoreFinancial.store);
-    }
+class Financial {
+  public store;
+  constructor() {
+    this.store = reactive(StoreFinancial.store);
+  }
 
+  async GetBillsMonth(id: number, FuncHttpFinanceiro: any = useHttpResources) {
+    let useHttpFinanceiro = FuncHttpFinanceiro();
+    if (this.store.Calendario.selectedDate) {
+      const url = `/financial/billsmonth/${id}/${this.store.Calendario.selectedDate}`;
+      return await useHttpFinanceiro.get(url).then((res: any) => {
+        this.store.BillsToPay = res;
+      });
+    }
+  }
 
   async GetEditBillsToPay(
     id: number,
@@ -23,11 +32,12 @@ class Financial{
       const url = `/financial/editbills/${id}/${this.store.Calendario.selectedDate}`;
 
       return await useHttpFinanceiro.edit(url).then((res: any) => {
-        return res;
+        this.store.ContaAPagar = res;
       });
     }
   }
-   setContasAPagar(res: any) {
+
+  setContasAPagar(res: any) {
     if (res) {
       this.store.ContaAPagar = res;
     }
@@ -41,14 +51,15 @@ class Financial{
     return await FuncHttpFinanceiro()
       .get(url)
       .then((res: any) => {
-        console.log(res)
+        console.log(res);
         return res;
-      }).catch((err:any) =>  {
-        console.error(err)
       })
+      .catch((err: any) => {
+        console.error(err);
+      });
   }
 
-   setCategoriaTest() {
+  setCategoriaTest() {
     this.store.categoriaContas = {
       CategoriasContasAPagars: [
         {
@@ -1172,7 +1183,7 @@ class Financial{
     };
   }
 
-   formaterBillsToPay(bills: any) {
+  formaterBillsToPay(bills: any) {
     if (typeof bills.categorias_contas_a_pagar_id == "string") {
       bills.categorias_contas_a_pagar_id = parseInt(
         bills.categorias_contas_a_pagar_id
@@ -1185,11 +1196,12 @@ class Financial{
       );
     }
     if (this.store.Calendario.selectedDate) {
-      bills.ValoresContasAPagar.data_pagamento = this.store.Calendario.selectedDate;
+      bills.ValoresContasAPagar.data_pagamento =
+        this.store.Calendario.selectedDate;
     }
     if (this.store.inicioDataPagamentoWithouFormated) {
       this.store.ContaAPagar.inicio_data_pagamento = dateUStoJsFull(
-          this.store.inicioDataPagamentoWithouFormated
+        this.store.inicioDataPagamentoWithouFormated
       );
     }
     if (this.store.fimDataPagamentoWithouFormated) {
@@ -1201,7 +1213,7 @@ class Financial{
     return bills;
   }
 
-   setDataCalendario(data: string) {
+  setDataCalendario(data: string) {
     if (data) {
       this.store.Calendario.selectedDate = data;
     }
@@ -1221,7 +1233,6 @@ class Financial{
       this.store.err = "Campos Vazios";
     } else {
       const billsFormated = this.formaterBillsToPay(data);
-   
 
       return await useHttpFinanceiro
         .store(url, billsFormated)
@@ -1238,8 +1249,7 @@ class Financial{
     let useHttpFinanceiro = FuncHttpFinanceiro();
 
     const url = "/financial/paidbills/" + id;
-    return await useHttpFinanceiro.delet(url).then((res:any) => {
-
+    return await useHttpFinanceiro.delet(url).then((res: any) => {
       return true;
     });
   }
@@ -1255,15 +1265,15 @@ class Financial{
   ) {
     const urlApi = `/financial/billstopay/${contasAPagar.ID}/${this.store.Calendario.selectedDate}`;
 
-    let useHttpFinanceiro = FuncHttpFinanceiro(); 
+    let useHttpFinanceiro = FuncHttpFinanceiro();
 
     if (!contasAPagar.favorecido || !contasAPagar.inicio_data_pagamento) {
       this.store.err = "Campos Vazios";
     } else {
       const billsFormated = this.formaterBillsToPay(contasAPagar);
-      console.info(billsFormated.fim_data_pagamento,"FIM");
-      console.info(billsFormated.inicio_data_pagamento,"INICIO");
-   
+      console.info(billsFormated.fim_data_pagamento, "FIM");
+      console.info(billsFormated.inicio_data_pagamento, "INICIO");
+
       return await useHttpFinanceiro
         .update(urlApi, billsFormated)
         .then((res: any) => {
@@ -1296,7 +1306,6 @@ class Financial{
     data_pagamento: any = this.store.Calendario.selectedDate,
     FuncHttpFinanceiro: any = useHttpResources
   ) {
-
     let useHttpFinanceiro = FuncHttpFinanceiro();
     const data = {
       contas_a_pagar_id: id,
@@ -1305,44 +1314,44 @@ class Financial{
     const url = `/financial/paidbills`;
     return await useHttpFinanceiro.store(url, data).then((res: any) => {
       return res;
-    }); 
+    });
   }
 
-
-   setExistValueCategorie(categories: any) {
+  setExistValueCategorie(categories: any) {
     this.store.categoriaContas = categories;
-
-  } 
+  }
 
   async getSetCategoriasContas() {
-    await this.getCategoriaContas(this.store.Calendario.selectedDate).then((res) => {
-      this.setExistValueCategorie(res);
-    });
+    await this.getCategoriaContas(this.store.Calendario.selectedDate).then(
+      (res) => {
+        this.setExistValueCategorie(res);
+      }
+    );
   }
 
   async getSetContasAPagar(id: number) {
     await this.GetEditBillsToPay(id).then((res) => {
-      if(res.data[0].inicio_data_pagamento){
-        this.store.inicioDataPagamentoWithouFormated = dateFormatUs(res.data[0].inicio_data_pagamento)
+      if (res.data[0].inicio_data_pagamento) {
+        this.store.inicioDataPagamentoWithouFormated = dateFormatUs(
+          res.data[0].inicio_data_pagamento
+        );
       }
-      if(res.data[0].fim_data_pagamento){
-        this.store.fimDataPagamentoWithouFormated = dateFormatUs(res.data[0].fim_data_pagamento)
-
+      if (res.data[0].fim_data_pagamento) {
+        this.store.fimDataPagamentoWithouFormated = dateFormatUs(
+          res.data[0].fim_data_pagamento
+        );
       }
       this.setContasAPagar(res.data[0]);
     });
   }
 
-   setMode(mode: string) {
+  setMode(mode: string) {
     this.store.mode = mode;
   }
 
-   localStore = {
-    countCategorie: 1
-  }
-
-
+  localStore = {
+    countCategorie: 1,
+  };
 }
 
-export default new Financial()
-
+export default new Financial();
