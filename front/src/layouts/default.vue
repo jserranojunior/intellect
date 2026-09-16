@@ -1,6 +1,6 @@
 <template>
   <div class="bg-base-100">
-    <nav class="navbar border-b border-neutral">
+    <nav class="navbar border-b border-base-200">
       <slot name="header"></slot>
     </nav>
     <div class="drawer min-h-screen">

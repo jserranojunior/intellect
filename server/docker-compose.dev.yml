@@ -6,7 +6,7 @@ networks:
 
 services:
   intellect_back:
-    image: golang:1.19.4
+    image: golang:1.24.4
     container_name: "intellect_back"
     networks:
       - stack_dev
@@ -20,7 +20,7 @@ services:
 
   intellect_front:
     container_name: "intellect_front"
-    image: "node:lts-alpine"
+    image: "node:lts"
     working_dir: /app
     networks:
       - stack_dev
@@ -33,3 +33,4 @@ services:
           memory: 1000M
     ports:
       - "8081:3000"
+

@@ -48,10 +48,11 @@
         </router-link> -->
         <router-link
           class="btn-sm mx-1 btn btn-outline btn-secondary"
-          :to="'/ticker'"
-          v-if="nameRoutesEnable.includes('ticker')"
-          >Tickers
+          :to="'/dashboard'"
+          v-if="nameRoutesEnable.includes('dashboard')"
+          >Dashboard
         </router-link>
+
         <div
           class="btn-sm mx-1 btn btn-primary"
           @click="Logout()"
